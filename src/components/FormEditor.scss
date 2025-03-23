@@ -1,0 +1,48 @@
+@use './variables';
+
+.config-editor {
+  padding-top: 0px;
+
+  h2 {
+    color: variables.$headerColor;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-size: medium;
+    font-weight: bold;
+    line-height: 150%;
+  }
+
+  h3 {
+    color: rgba(variables.$headerColor, 0.8);
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    font-size: small;
+    line-height: 150%;
+  }
+
+  .editor-footer {
+    padding: 20px;
+    border-top: 1px solid variables.$borderColor;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .editor-status {
+    display: flex;
+    flex-direction: row-reverse;
+    height: 20px;
+    padding-top: 5px;
+    margin-bottom: -25px;
+
+    .info {
+      background-color: var(--themed-status-info-background);
+      color: var(--themed-status-info-text);
+      height: 28px;
+      font-weight: 500;
+      border-radius: 6px;
+      padding: 5px 5px 3px;
+    }
+  }
+}

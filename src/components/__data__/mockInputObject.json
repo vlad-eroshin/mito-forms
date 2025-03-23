@@ -1,0 +1,42 @@
+{
+  "path": {
+    "to": {
+      "fieldsetData": {
+        "label": "Label Text",
+        "value": "Value Text"
+      }
+    }
+  },
+  "other": {
+    "numericValue1": 10,
+    "textValue": "textValue123"
+  },
+
+  "otherPath": {
+    "to": {
+      "values": {
+        "numericValue": 12,
+        "textValue": "Text Value"
+      }
+    }
+  },
+  "someData": {
+    "to": {
+      "listOfOptions": [
+        { "label": "Label Text 1", "value": 1 },
+        { "label": "Label Text 2", "value": 2 },
+        { "label": "Label Text 3", "value": 3 }
+      ],
+      "checkListOfOptions": [
+        { "label": "Check Option one", "value": 1 },
+        { "label": "Check Option two", "value": 2 },
+        { "label": "Check Option three", "value": 3 }
+      ],
+      "switchListOfOptions": [
+        { "label": "Switch Option one", "value": 1 },
+        { "label": "Switch Option two", "value": 2 },
+        { "label": "Switch Option three", "value": 3 }
+      ]
+    }
+  }
+}

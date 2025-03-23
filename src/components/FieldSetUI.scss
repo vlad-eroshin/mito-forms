@@ -1,0 +1,45 @@
+@use './variables.scss';
+
+.fieldset {
+  margin-top: 8px;
+  box-sizing: border-box;
+  width: 100%;
+
+  .title {
+    h3 {
+      margin-top: 8px;
+    }
+
+    .collapse-trigger {
+      padding-left: 0;
+
+      &:hover {
+        background-color: var(--themed-reusable-background-row-hover);
+        border-color: var(--themed-reusable-background-row-hover);
+      }
+    }
+  }
+
+  .fieldset-content {
+    padding-left: 0;
+  }
+
+  label {
+    margin-bottom: 8px;
+    line-height: 16px;
+  }
+
+  > div {
+    margin-bottom: 0px;
+    margin-top: 16px;
+  }
+
+  &.indented {
+    padding: 0 24px;
+  }
+
+  .fields-row {
+    align-items: baseline;
+    gap: 8px;
+  }
+}

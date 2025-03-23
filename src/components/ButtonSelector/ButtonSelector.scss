@@ -1,0 +1,9 @@
+.button-selector {
+  display: flex;
+  border-radius: 6px;
+  background-color: var(--fallback-gray15);
+  .selected {
+    color: var(--fallback-blue50);
+    stroke: var(--fallback-blue50);
+  }
+}

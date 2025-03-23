@@ -1,0 +1,26 @@
+.config-editor-story {
+  .toolbar {
+    .dataset-selector {
+      padding-bottom: 10px;
+    }
+  }
+  .story-container {
+    display: flex;
+    flex-direction: row;
+    column-gap: 5px;
+    .editor-preview {
+      padding: 3px;
+    }
+    .editor-state-preview {
+      height: 450px;
+      width: 40%;
+      padding: 3px;
+      textarea {
+        height: 80%;
+        width: 100%;
+        box-sizing: border-box;
+        border: 1px solid #d5d5d5;
+      }
+    }
+  }
+}
