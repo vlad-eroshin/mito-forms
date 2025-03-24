@@ -26,4 +26,4 @@ jobs:
       run: |
         npm install
         npm run build
-        nom run test
+        npm run test
