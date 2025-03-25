@@ -21,8 +21,6 @@ export type FormInputFieldProps = {
   onChange: (paramsMap: ParamsMap) => void;
   options?: string[] | InputOption[] | undefined;
   status?: DataStatus | undefined;
-  // When used as formElement the input field will be wrapped into core-ui `FormElementRow`
-  // When the ussage is `element` the input field is rendered out as any component with label
   renderAsFormElement?: boolean;
   fieldIndex?: number;
 };

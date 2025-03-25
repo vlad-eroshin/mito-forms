@@ -21,8 +21,8 @@ export const SwitchInput: React.FunctionComponent<FormInputFieldProps> = ({
   const handleChange = useCheckedHandler(fieldConfig, onChange);
 
   return <FormGroup title={config.label}>
-    {optionsList.map((opt) => {
-      return <FormControlLabel required={!!fieldConfig.required} control={
+    {optionsList.map((opt, i) => {
+      return <FormControlLabel key={`${config.name}-opt-${i}`} required={!!fieldConfig.required} control={
         <Switch value={opt.value} checked={opt.checked} onChange={handleChange} />
       } label={opt.label || opt.value as string} />;
     })}

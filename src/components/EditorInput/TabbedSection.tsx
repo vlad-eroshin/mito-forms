@@ -46,13 +46,14 @@ export function TabbedSection(props: TabbedSectionProps) {
     <Box>
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={selected} onChange={handleChange}>
-          {tabs.map((tp) =>
-            (<Tab title={tp.label} label={tp.label} value={tp.id}></Tab>)
+          {tabs.map((tp, index) =>
+            (<Tab key={`tab-${index}`} title={tp.label} label={tp.label} value={tp.id}></Tab>)
           )}
         </Tabs>
       </Box>
       {tabs.map((tp, index) =>
-        (<CustomTabPanel index={index} value={tp.id === selected ? index : -1}>{tp.content}</CustomTabPanel>)
+        (<CustomTabPanel key={`tabpanel-${index}`} index={index}
+                         value={tp.id === selected ? index : -1}>{tp.content}</CustomTabPanel>)
       )}
     </Box>);
 }
