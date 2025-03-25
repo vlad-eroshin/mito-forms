@@ -1,6 +1,6 @@
 [![Mito Forms CI](https://github.com/vlad-eroshin/mito-forms/actions/workflows/webpack.yml/badge.svg)](https://github.com/vlad-eroshin/mito-forms/actions/workflows/webpack.yml)
 
-# Mito Forms - Declarative Editors frameworks
+# Mito Forms - Declarative Editors framework
 
 Mito Forms is the tool to build Form editors declaratively. The idea is to define UI form inputs in JSON and capture data from it. No need to write custom form components and come up with your own state management mechanism for caturing form data.
 
