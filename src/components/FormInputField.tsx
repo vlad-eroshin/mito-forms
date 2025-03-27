@@ -10,7 +10,6 @@ import type {
 } from '../types';
 import EditorContext from './EditorContext';
 import './FormInputField.scss';
-import { Stack, Typography } from '@mui/material';
 
 /**
  * Wrapper around most of the form input types supported.
@@ -40,38 +39,19 @@ export function FormInputField<T>({
     UnsupportedInputComponent;
 
   return renderAsFormElement ? (
-    <Stack direction={'row'}>
-      {config.label && <Typography variant="body2">{config.label}</Typography>}
+    <div className={'input-container'}>
       <InputCMP config={config} value={value} onChange={onChange} options={options} />
-    </Stack>
-    // <FormControl
-    //   data-testid={`elementrow-${config.type}-${config.name}`}
-    //   label={config.type === 'switch' && !config.options ? undefined : (config.label as string)}
-    //   element={}
-    //   formElementID={`${config.type}-${config.name}-${fieldIndex || 0}`}
-    //   required={config.required}
-    // />
+    </div>
   ) : (
-    <Stack direction={'column'}>
-      {config.label && <Typography variant="body2">{config.label}</Typography>}
-      {/*<Label*/}
-      {/*  htmlFor={`${config.type}-${(config as InputField).name}-${fieldIndex || 0}`}*/}
-      {/*  display="block"*/}
-      {/*  height={0}*/}
-      {/*  color="transparent"*/}
-      {/*>*/}
-      {/*  {config.label}*/}
-      {/*</Label>*/}
-      <InputCMP
-        renderAsFormElement={false}
-        fieldIndex={fieldIndex}
-        config={config}
-        value={value}
-        onChange={onChange}
-        options={options}
-        status={status}
-      />
-    </Stack>
+    <InputCMP
+      renderAsFormElement={false}
+      fieldIndex={fieldIndex}
+      config={config}
+      value={value}
+      onChange={onChange}
+      options={options}
+      status={status}
+    />
   );
 }
 
@@ -81,7 +61,9 @@ const UnsupportedInputComponent: React.FunctionComponent<Pick<FormInputFieldProp
                                                                                                    config
                                                                                                  }) => {
   return (
-    <span className="unsupported-input">{`[Unsupported Input Component type (${config.type})]`}</span>
+    <div className="unsupported-input">
+      {`[Unsupported Input Component type (${config.type}): name: (${config.name})]`}
+    </div>
   );
 };
 

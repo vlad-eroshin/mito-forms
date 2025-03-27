@@ -12,8 +12,9 @@ export const Basic = {
   args: {
     config: {
       name: 'basicInput',
-      label: 'Basic Input',
-      value: 'Basic Value'
-    }
+      label: 'Basic Input'
+
+    },
+    value: 'Basic Value'
   }
 };

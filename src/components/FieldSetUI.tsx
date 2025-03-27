@@ -17,9 +17,9 @@ import { FormDivider } from './FormDivider';
 import { FormInputField } from './FormInputField';
 import { EditableRow } from './ListEditor/EditableTableRow';
 import { accessAndTransformData, evaluateLogicInContext } from './data';
-import { retrieveInputOptions } from './utils';
+import { generateReactKey, retrieveInputOptions } from './utils';
 import { getValidatorFunction } from './validators';
-import { Button, Stack } from '@mui/material';
+import { Box, Button, Stack } from '@mui/material';
 import { ExpandMore, UnfoldLess } from '@mui/icons-material';
 
 /**
@@ -120,7 +120,7 @@ export function FieldSetUI<T>({
     return fields.map((field: InputField | FormDividerConfig, fieldIndex) => {
       let componentDataStatus: DataStatus = DataStatus.Loaded;
       if (field.type === 'divider') {
-        return <FormDivider key={`field-${fieldIndex}`} config={field as FormDividerConfig} />;
+        return <FormDivider key={generateReactKey('divider', `${fieldIndex}`)} config={field as FormDividerConfig} />;
       }
 
       const options = retrieveInputOptions(field, inputData as object);
@@ -153,7 +153,7 @@ export function FieldSetUI<T>({
       }
       return (
         <FormInputField<T>
-          key={`field-${field.name}-${rowIndex}-${fieldIndex}`}
+          key={generateReactKey(config.name, field.type, field.name)}
           value={value}
           options={genericInputFieldConfig.options as InputOption[] | string[]}
           config={genericInputFieldConfig as InputField}
@@ -186,16 +186,11 @@ export function FieldSetUI<T>({
     <div data-testid={`fieldset-${config.name}`} className="fieldset">
       {renderTitle(config)}
       {!collapsed && (
-        arrangeFields === 'column' ? <Stack>
-          {renderFields(visibleFormFields)}
-        </Stack> : <Stack alignItems={'row'}>{renderFields(visibleFormFields)}</Stack>
-        // <FormLayout className="fieldset-content" layout={config.fieldLayout || 'compact'}>
-        //   {arrangeFields === 'column' ? (
-        //     renderFields(visibleFormFields)
-        //   ) : (
-        //     <Stack className="fields-row">{renderFields(visibleFormFields)}</Stack>
-        //   )}
-        // </FormLayout>
+        arrangeFields === 'column' ?
+          <Box component={'form'}>
+            {renderFields(visibleFormFields)}
+          </Box> :
+          <Stack alignItems={'row'}>{renderFields(visibleFormFields)}</Stack>
       )}
     </div>
   ) : (

@@ -11,6 +11,7 @@ import EditorContext from './EditorContext';
 import { FieldSetUI } from './FieldSetUI';
 import { ListEditor } from './ListEditor/ListEditor';
 import { evaluateLogicInContext } from './data';
+import { generateReactKey } from './utils';
 
 /**
  *  Input form  (think about it one input form)
@@ -78,7 +79,7 @@ export function InputForm<T>({ config, onChange, showTitle }: InputFormProps) {
           const listEditorConfig = fieldSetEntry as ListEditorMetadata;
           return (
             <ListEditor
-              key={`${fieldSetEntry.name}-${i}`}
+              key={generateReactKey(config.id, fieldSetEntry.name, fieldSetEntry.type as string)}
               rowFieldset={listEditorConfig.rowFieldset}
               data={(fieldSetData.data as ParamsMap) || []}
               canDeleteRows={listEditorConfig.canDeleteOrAddRows}
@@ -90,7 +91,7 @@ export function InputForm<T>({ config, onChange, showTitle }: InputFormProps) {
         } else
           return (
             <FieldSetUI<T>
-              key={`fieldSet${i}`}
+              key={generateReactKey(config.id, fieldSetEntry.name, fieldSetEntry.type as string)}
               config={fieldSetEntry as FieldSetMetadata}
               inputData={(fieldSetData.data as ParamsMap) || {}}
               onChange={(newfieldSetData, isValid) =>

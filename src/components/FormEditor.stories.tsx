@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TestInputFieldsConfigsMap } from './__metadata__/mockGenericFields';
 import type { FormEditorStoryProps } from './__stories__/FormEditorStory';
 import { FormEditorStory } from './__stories__/FormEditorStory';
-import { ValidatorResult } from '../types';
+
 
 const meta: Meta<typeof FormEditorStory> = {
   title: 'Form Editor',
@@ -13,6 +13,7 @@ const meta: Meta<typeof FormEditorStory> = {
 export default meta;
 
 type Story = StoryObj<typeof FormEditorStory>;
+
 
 const AllFieldTypesEditor: FormEditorStoryProps = {
   editorMetadata: {
@@ -137,10 +138,7 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
       }
     ],
     reducersMap: {},
-    activeForm: '',
-    resultValidator: function(data: object): ValidatorResult {
-      throw new Error('Function not implemented.');
-    }
+    activeForm: ''
   },
   throttleChange: false,
   initialData: {}

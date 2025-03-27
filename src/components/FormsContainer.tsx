@@ -2,6 +2,7 @@ import React, { useCallback, useState } from 'react';
 import type { FormDataState, FormMetadata } from '../types';
 import { InputForm } from './InputForm';
 import { TabbedSection } from './EditorInput/TabbedSection';
+import { generateReactKey } from './utils';
 
 /**
  * Component controls how Forms are rendered either as tabs on one page
@@ -35,7 +36,8 @@ export function FormsContainer<T>({
         id: formConfig.id,
         label: formConfig.title,
         content: (
-          <InputForm<T> key={`configForm${i}`} config={formConfig} onChange={onFormChange} />
+          <InputForm<T> key={generateReactKey('configForm', formConfig.id)} config={formConfig}
+                        onChange={onFormChange} />
         )
       };
     });
@@ -49,7 +51,7 @@ export function FormsContainer<T>({
         {forms.map((formConfig, i) => {
           return (
             <InputForm<T>
-              key={`configForm${i}`}
+              key={generateReactKey('configForm', formConfig.id)}
               showTitle={formConfig.showTitle}
               config={formConfig}
               onChange={onFormChange}

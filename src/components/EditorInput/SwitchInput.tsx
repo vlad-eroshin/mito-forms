@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 import type { FormInputFieldProps } from '../FormInputField';
-import { buildCheckedValues, convertInputOptions } from '../utils';
+import { buildCheckedValues, convertInputOptions, generateReactKey, getFieldId } from '../utils';
 import { useCheckedHandler } from './useCheckedHandler';
 import { InputField } from '../../types';
-import { FormControlLabel, FormGroup, Switch } from '@mui/material';
+import { FormControl, FormControlLabel, FormGroup, FormLabel, Switch } from '@mui/material';
 
 export const SwitchInput: React.FunctionComponent<FormInputFieldProps> = ({
                                                                             config,
@@ -19,14 +19,17 @@ export const SwitchInput: React.FunctionComponent<FormInputFieldProps> = ({
   // TODO: refresh why this one needed here const
   // handleOptionsChange = useChecklistHandler(fieldConfig, optionsList, onChange);
   const handleChange = useCheckedHandler(fieldConfig, onChange);
-
-  return <FormGroup title={config.label}>
-    {optionsList.map((opt, i) => {
-      return <FormControlLabel key={`${config.name}-opt-${i}`} required={!!fieldConfig.required} control={
-        <Switch value={opt.value} checked={opt.checked} onChange={handleChange} />
-      } label={opt.label || opt.value as string} />;
-    })}
-  </FormGroup>;
+  const inputId = getFieldId(config);
+  return <FormControl required={!!fieldConfig.required} variant={'outlined'} sx={{ minWidth: 194 }}>
+    <FormLabel htmlFor={inputId} focused={false}>{config.label}</FormLabel>
+    <FormGroup id={inputId} title={config.label}>
+      {optionsList.map((opt, i) => {
+        return <FormControlLabel key={generateReactKey(config.name, `${opt.value}`, opt.label)}
+                                 required={!!fieldConfig.required} control={
+          <Switch value={opt.value} checked={opt.checked} onChange={handleChange} />
+        } label={opt.label || opt.value as string} />;
+      })}
+    </FormGroup></FormControl>;
 };
 
 SwitchInput.displayName = 'SwitchInput';

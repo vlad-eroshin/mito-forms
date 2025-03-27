@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 import type { FormInputFieldProps } from '../FormInputField';
-import { buildCheckedValues, convertInputOptions } from '../utils/fieldUtils';
+import { buildCheckedValues, convertInputOptions, generateReactKey, getFieldId } from '../utils/fieldUtils';
 import { useChecklistHandler } from './useChecklistHandler';
-import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
+import { Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel } from '@mui/material';
 import { InputField } from '../../types';
 
 export const ChecklistInput: React.FunctionComponent<FormInputFieldProps> = ({
@@ -15,15 +15,16 @@ export const ChecklistInput: React.FunctionComponent<FormInputFieldProps> = ({
   const checkedValues = useMemo(() => buildCheckedValues(value), [value]);
   const convertedOptions = options ? convertInputOptions(options, checkedValues) : [];
   const handleChange = useChecklistHandler(fieldConfig, convertedOptions, onChange);
-
-  return (
-    <FormGroup title={config.label}>
+  const inputId = getFieldId(config);
+  return (<FormControl required={!!fieldConfig.required} variant={'outlined'}>
+      <FormLabel htmlFor={inputId} focused={false}>{config.label}</FormLabel> <FormGroup title={config.label}>
       {convertedOptions.map((opt) => {
-        return <FormControlLabel required={!!fieldConfig.required} control={
+        return <FormControlLabel key={generateReactKey(config.name, `${opt.value}`, opt.label)} control={
           <Checkbox value={opt.value} checked={opt.checked} onChange={handleChange} />
         } label={opt.label || opt.value as string} />;
       })}
     </FormGroup>
+    </FormControl>
   );
 };
 

@@ -17,6 +17,7 @@
 
     td,
     th {
+      font-family: var(--mf-font-family);
       border: 1px solid variables.$borderColor;
       padding: 8px;
     }

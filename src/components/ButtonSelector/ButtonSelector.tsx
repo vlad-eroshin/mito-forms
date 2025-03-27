@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { convertInputOptions } from '../utils';
+import { convertInputOptions, generateReactKey } from '../utils';
 import './ButtonSelector.scss';
 import { InputOption } from '../../types';
 import { Box, Button } from '@mui/material';
@@ -36,7 +36,7 @@ export const ButtonSelector: React.FunctionComponent<ButtonSelectorProps> = ({
           const useVal = opt.checked ? 'default' : 'text';
           return (
             <Button
-              key={`buttonOpt-${index}`}
+              key={generateReactKey(opt.value as string, opt.label)}
               data-testid={`buttonOpt-${opt.value}-${index}`}
               className={className}
               disabled={opt.checked}

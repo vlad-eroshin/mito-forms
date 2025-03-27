@@ -1,8 +1,19 @@
-// variables.scss
-$brandFont: 'Inter';
-$brandColor: #2ab4e8;
-$borderColor: var(--themed-reusable-border-default);
-$headerColor: var(--themed-reusable-text-secondary);
-$secondaryTextColor: #ccc; //TODO: var(--themed-reusable-text-secondary);
-$inputErrorColor: var(--input-error-color);
-$fontSize: var(--base-dimension-text-small);
+
+:root {
+  --mf-border-color: #bbb;
+  --mf-header-color: var(--mui-palette-text-primary);
+  --mf-secondary-text-color: var(--mui-palette-text-secondary);
+  --mf-input-error-color: var(--mui-palette-error-main);
+  --mf-font-size: var(--base-dimension-text-small);
+  --mf-min-form-control-width: 194px;
+  --mf-spacing: var(--mui-spacing);
+  --mf-font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+}
+
+$fontFamily: var(--mf-font-family);
+$borderColor: var(--mf-border-color);
+$headerColor: var(--mf-header-color);
+$secondaryTextColor: var(--mf-secondary-text-color);
+$inputErrorColor: var(--mf-input-error-color);
+$fontSize: var(--mf-font-size);
+$spacing: var(--mf-spacing);

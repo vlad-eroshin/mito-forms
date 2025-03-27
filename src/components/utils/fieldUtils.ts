@@ -11,6 +11,7 @@ import type {
   ParamValue,
   RecordsArray
 } from '../../types';
+import uuidByString from 'uuid-by-string';
 
 /**
  * This expression matches strings like `{$.json.path}` this is used because there is a need to pickup list of options
@@ -237,3 +238,17 @@ export const retrieveInputOptions = (
     return rawOptions;
   }
 };
+
+
+export function getFieldId(fieldConfig: InputField, fieldIndex?: number) {
+  return `${fieldConfig.type}-${fieldConfig.name}-${fieldIndex || 0}`;
+}
+
+/**
+ * Generate react key
+ *
+ * @param seedValues
+ */
+export function generateReactKey(...seedValues: string[]): string {
+  return uuidByString(seedValues.join('-'));
+}

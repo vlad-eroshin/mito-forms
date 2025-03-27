@@ -11,7 +11,7 @@ export const Basic = {
   args: {
     config: {
       name: 'switchList',
-      label: 'Selector'
+      label: 'Selector Label'
     },
     value: ['1'],
     options: [

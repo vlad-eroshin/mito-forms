@@ -1,5 +1,13 @@
 @use './variables.scss';
 
-.unsupported-input {
-  color: variables.$inputErrorColor;
+.input-container {
+  margin-bottom: calc(var(--mf-spacing) * 3);
+  margin-top: calc(var(--mf-spacing) * 2);;
+
+  .unsupported-input {
+    margin-bottom: calc(var(--mf-spacing) * 3);
+    margin-top: calc(var(--mf-spacing) * 3);
+    color: variables.$inputErrorColor;
+  }
 }
+

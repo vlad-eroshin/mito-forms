@@ -1,8 +1,8 @@
 import React from 'react';
 import type { FormInputFieldProps } from '../FormInputField';
-import { convertInputOptions } from '../utils/fieldUtils';
+import { convertInputOptions, getFieldId } from '../utils/fieldUtils';
 import { useOptionsChangeHandler } from './useOptionsChangeHandler';
-import { MenuItem, Select } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 import { InputField, InputOption } from '../../types';
 
 export const SelectInput: React.FunctionComponent<FormInputFieldProps> = ({
@@ -18,22 +18,27 @@ export const SelectInput: React.FunctionComponent<FormInputFieldProps> = ({
     convertedOptions as InputOption[],
     onChange
   );
-  return <Select
-    labelId="demo-multiple-name-label"
-    id="demo-multiple-name"
-    multiple={false}
-    value={value}
-    onChange={handleChange}
-    //    input={<OutlinedInput label="Name" />}
-  >
-    {convertedOptions.map((opt, i) => (
-      <MenuItem
-        key={`opt-${fieldConfig.name}-${i}`}
-        value={opt.value as (string | number)}
-      >{opt.label}
-      </MenuItem>
-    ))}
-  </Select>;
+  const inputId = getFieldId(config);
+  return <FormControl required={!!fieldConfig.required} sx={{ minWidth: 200 }}>
+    <InputLabel htmlFor={inputId}>{config.label}</InputLabel>
+    <Select
+      id={inputId}
+      multiple={false}
+      value={value}
+      onChange={handleChange}
+      label={config.label}
+      size={'small'}
+    >
+      {convertedOptions.map((opt, i) => (
+        <MenuItem
+          key={`opt-${fieldConfig.name}-${i}`}
+          value={opt.value as (string | number)}
+        >{opt.label}
+        </MenuItem>
+      ))}
+    </Select>
+  </FormControl>
+    ;
 };
 
 SelectInput.displayName = 'SelectInput';

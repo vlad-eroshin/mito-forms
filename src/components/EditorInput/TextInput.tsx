@@ -3,6 +3,7 @@ import { useChangeHandler } from './useChangeHandler';
 import { InputField } from '../../types';
 import React from 'react';
 import { TextField } from '@mui/material';
+import { getFieldId } from '../utils';
 
 export const TextInput: React.FunctionComponent<FormInputFieldProps> = ({
                                                                           config,
@@ -12,17 +13,19 @@ export const TextInput: React.FunctionComponent<FormInputFieldProps> = ({
                                                                         }) => {
   const fieldConfig = config as InputField;
   const handleChange = useChangeHandler(fieldConfig, onChange);
+  const inputId = getFieldId(config, fieldIndex);
   return (
     <TextField
-      id={`${fieldConfig.type}-${fieldConfig.name}-${fieldIndex || 0}`}
-      data-testid={`${fieldConfig.type}-${fieldConfig.name}-${fieldIndex || 0}`}
+      id={inputId}
+      data-testid={inputId}
       area-label={fieldConfig.label}
       value={(value as string) ?? ''}
-      type={fieldConfig.valueType || 'text'}
-      placeholder={fieldConfig.placeHolderText}
+      placeholder={fieldConfig.placeHolderText ?? 'Place holder'}
       required={fieldConfig.required}
       onChange={handleChange}
+      size={'small'}
       label={config.label}
+      slotProps={{ inputLabel: { shrink: true } }}
     />
   );
 };

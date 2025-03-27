@@ -1,6 +1,6 @@
 import { useIntl } from 'react-intl';
 import { FormInputField } from '../FormInputField';
-import { retrieveInputOptions } from '../utils';
+import { generateReactKey, retrieveInputOptions } from '../utils';
 import React from 'react';
 import { DataRecord, InputField, ParamsMap } from '../../types';
 import { Button } from '@mui/material';
@@ -27,7 +27,7 @@ export const EditableRow: React.FunctionComponent<EditableRowProps> = ({
       {fields.map((field) => {
         const options = retrieveInputOptions(field, values);
         return (
-          <td key={`list-item-${field.name}`}>
+          <td key={generateReactKey('list-item', field.name)}>
             <FormInputField
               renderAsFormElement={false}
               config={field}

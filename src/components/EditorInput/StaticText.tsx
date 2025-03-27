@@ -8,11 +8,18 @@ export const StaticText: React.FunctionComponent<FormInputFieldProps> = ({ confi
   return <TextField
     label={fieldConfig.label}
     placeholder={fieldConfig.placeHolderText}
-    multiline={true}
-    variant="filled"
+    multiline={false}
     value={value}
+    variant={'outlined'}
+    size={'small'}
+    sx={{ minWidth: 194, display: 'block' }}
+    slotProps={{
+      inputLabel: { shrink: true },
+      input: {
+        readOnly: true
+      }
+    }}
   />;
-  //return <Text label={fieldConfig.label}>{value as string}</Text>;
 };
 
 StaticText.displayName = 'StaticText';

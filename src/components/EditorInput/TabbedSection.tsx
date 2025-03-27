@@ -1,5 +1,6 @@
 import { Box, Tab, Tabs } from '@mui/material';
 import React, { ReactNode, useCallback } from 'react';
+import { generateReactKey } from '../utils';
 
 export type TabProps = {
   id: string;
@@ -47,12 +48,13 @@ export function TabbedSection(props: TabbedSectionProps) {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={selected} onChange={handleChange}>
           {tabs.map((tp, index) =>
-            (<Tab key={`tab-${index}`} title={tp.label} label={tp.label} value={tp.id}></Tab>)
+            (<Tab key={generateReactKey('formeditortab', tp.label, `${tp.id}`)} title={tp.label} label={tp.label}
+                  value={tp.id}></Tab>)
           )}
         </Tabs>
       </Box>
       {tabs.map((tp, index) =>
-        (<CustomTabPanel key={`tabpanel-${index}`} index={index}
+        (<CustomTabPanel key={generateReactKey('formeditortabpanel', tp.label, `${tp.id}`)} index={index}
                          value={tp.id === selected ? index : -1}>{tp.content}</CustomTabPanel>)
       )}
     </Box>);
