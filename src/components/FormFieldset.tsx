@@ -12,15 +12,13 @@ import type {
 } from '../types';
 import { DataStatus } from '../types';
 import EditorContext from './EditorContext';
-import './FieldSetUI.scss';
+import './FormFieldset.scss';
 import { FormDivider } from './FormDivider';
 import { FormInputField } from './FormInputField';
 import { EditableRow } from './ListEditor/EditableTableRow';
 import { accessAndTransformData, evaluateLogicInContext } from './data';
 import { generateReactKey, retrieveInputOptions } from './utils';
 import { getValidatorFunction } from './validators';
-import { Box, Button, Stack } from '@mui/material';
-import { ExpandMore, UnfoldLess } from '@mui/icons-material';
 
 /**
  * Component representing fieldset UI.
@@ -34,13 +32,13 @@ export type FieldSetUIProps = {
   rowIndex?: number;
 };
 
-export function FieldSetUI<T>({
-                                config,
-                                inputData,
-                                onChange,
-                                rowIndex = -1,
-                                onRowDelete
-                              }: FieldSetUIProps) {
+export function FormFieldset<T>({
+                                  config,
+                                  inputData,
+                                  onChange,
+                                  rowIndex = -1,
+                                  onRowDelete
+                                }: FieldSetUIProps) {
   const arrangeFields = config.arrangeFields || 'column';
 
   const editorContextData = useContext<EditorContextProps>(EditorContext) as EditorContextProps<T>;
@@ -50,6 +48,7 @@ export function FieldSetUI<T>({
   const [visibleFormFields, setVisibleFormFields] = useState<(InputField | FormDividerConfig)[]>(
     []
   );
+  const FieldsetCmp = editorContextData.utilityComponentRegistry.fieldset;
   const [collapsed, setCollapsed] = useState<boolean>(!!config.collapsible && !!config.collapsed);
   const getVisibleFormFields = useCallback(
     (editorState: EditorState<T>) => {
@@ -163,36 +162,16 @@ export function FieldSetUI<T>({
       );
     });
   };
-  const renderTitle = (fieldSetConfig: FieldSetMetadata) => {
-    const titleMarkup = fieldSetConfig.showTitle ? (
-      <h3 className={collapsed ? 'collapsed' : ''}>{fieldSetConfig.title}</h3>
-    ) : (
-      <></>
-    );
-    if (fieldSetConfig.collapsible && fieldSetConfig.showTitle) {
-      return (
-        <div className="title">
-          <Button className="collapse-trigger" variant="text" onClick={handleCollapsExpand}>
-            {collapsed ? <ExpandMore /> : <UnfoldLess />}
-            {/*<Icon icon={collapsed ? 'chevrons-expand' : 'chevrons-collapse'} />*/}
-            {titleMarkup}
-          </Button>
-        </div>
-      );
-    }
-    return titleMarkup;
-  };
   return arrangeFields !== 'tableRow' ? (
-    <div data-testid={`fieldset-${config.name}`} className="fieldset">
-      {renderTitle(config)}
+    <FieldsetCmp onCollapse={handleCollapsExpand} legend={config.title} collapsible={config.collapsible}
+                 collapsed={collapsed}>
       {!collapsed && (
         arrangeFields === 'column' ?
-          <Box component={'form'}>
-            {renderFields(visibleFormFields)}
-          </Box> :
-          <Stack alignItems={'row'}>{renderFields(visibleFormFields)}</Stack>
+          <>{renderFields(visibleFormFields)}</>
+          :
+          <div className={'mf-row-layout'}>{renderFields(visibleFormFields)}</div>
       )}
-    </div>
+    </FieldsetCmp>
   ) : (
     <EditableRow
       rowIndex={rowIndex}
@@ -204,4 +183,4 @@ export function FieldSetUI<T>({
   );
 }
 
-FieldSetUI.displayName = 'FieldSetUI';
+FormFieldset.displayName = 'FieldSetUI';

@@ -1,8 +1,8 @@
 @use './variables.scss';
 
-.input-container {
-  margin-bottom: calc(var(--mf-spacing) * 3);
-  margin-top: calc(var(--mf-spacing) * 2);;
+.mf-input-field {
+  //margin-bottom: calc(var(--mf-spacing) * 3);
+  //margin-top: calc(var(--mf-spacing) * 2);;
 
   .unsupported-input {
     margin-bottom: calc(var(--mf-spacing) * 3);

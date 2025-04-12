@@ -8,7 +8,7 @@ import type {
   ParamsMap
 } from '../types';
 import EditorContext from './EditorContext';
-import { FieldSetUI } from './FieldSetUI';
+import { FormFieldset } from './FormFieldset';
 import { ListEditor } from './ListEditor/ListEditor';
 import { evaluateLogicInContext } from './data';
 import { generateReactKey } from './utils';
@@ -90,7 +90,7 @@ export function InputForm<T>({ config, onChange, showTitle }: InputFormProps) {
           );
         } else
           return (
-            <FieldSetUI<T>
+            <FormFieldset<T>
               key={generateReactKey(config.id, fieldSetEntry.name, fieldSetEntry.type as string)}
               config={fieldSetEntry as FieldSetMetadata}
               inputData={(fieldSetData.data as ParamsMap) || {}}

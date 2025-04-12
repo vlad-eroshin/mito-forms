@@ -39,9 +39,7 @@ export function FormInputField<T>({
     UnsupportedInputComponent;
 
   return renderAsFormElement ? (
-    <div className={'input-container'}>
-      <InputCMP config={config} value={value} onChange={onChange} options={options} />
-    </div>
+    <InputCMP config={config} value={value} onChange={onChange} options={options} />
   ) : (
     <InputCMP
       renderAsFormElement={false}

@@ -12,6 +12,7 @@ const config = {
     '@storybook/addon-onboarding',
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
+    '@storybook/addon-themes',
     {
       name: '@storybook/addon-styling-webpack',
       options: {

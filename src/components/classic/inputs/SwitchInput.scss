@@ -1,0 +1,72 @@
+@use '../../variables';
+
+$switchHeight: calc(var(--mf-spacing) * 2px + 1px);
+$switchWidth: calc($switchHeight * 2);
+.mf-switch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.mf-switch-input {
+  position: relative;
+  display: inline-block;
+  width: $switchWidth;
+  height: $switchHeight;
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+
+    &:before {
+      position: absolute;
+      content: "";
+      height: calc($switchHeight - 4px);
+      width: calc($switchHeight - 4px);
+      left: 2px;
+      bottom: 2px;
+      background-color: white;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    &.round {
+      border-radius: calc($switchHeight / 2);
+
+      &:before {
+        border-radius: 50%;
+      }
+    }
+  }
+
+  input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+
+
+    &:checked + .slider {
+      background-color: #2196F3;
+
+      &:before {
+        -webkit-transform: translateX($switchHeight);
+        -ms-transform: translateX($switchHeight);
+        transform: translateX($switchHeight);
+      }
+    }
+
+    :focus + .slider {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+  }
+
+
+}

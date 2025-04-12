@@ -1,4 +1,5 @@
 import type { EditorMetadata } from '../../types';
+import * as R from 'ramda';
 
 export const staticTextEditor: EditorMetadata = {
   activeForm: 'widgetParams',
@@ -14,28 +15,45 @@ export const staticTextEditor: EditorMetadata = {
             {
               type: 'text',
               name: 'label',
-              label: 'Label',
+              label: 'Label'
             },
             {
               type: 'text',
               name: 'text',
-              label: 'Value',
-            },
-          ],
-        },
-      ],
-    },
+              label: 'Value'
+            }
+          ]
+        }
+      ]
+    }
   ],
   reducersMap: {
     widgetParams: {
-      widgetParams: (editorData: object, fieldSetData: object) => {
-        return {
-          ...editorData,
-          widgetParams: {
-            ...fieldSetData,
-          },
+      widgetParams: (editorData: { widgetParams: unknown; }, fieldSetData: { label: string; text: string; }) => {
+        const setLabel = (label: string) => {
+          return function(data: { widgetParams: unknown; }) {
+            return {
+              ...data,
+              widgetParams: {
+                ...data.widgetParams as object,
+                label
+              }
+            };
+          };
         };
-      },
-    },
-  },
+        const setText = (text: string) => {
+          return function(data: { widgetParams: unknown; }) {
+            return {
+              ...data,
+              widgetParams: {
+                ...data.widgetParams as object,
+                text
+              }
+            };
+          };
+        };
+        return R.compose(setLabel(fieldSetData.label), setText(fieldSetData.text))(editorData);
+      }
+    }
+  }
 };

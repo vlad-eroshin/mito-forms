@@ -7,14 +7,14 @@ import type {
   FormChangePayload,
   FormDataState,
   InputFieldRegistry,
-  ParamsMap
+  ParamsMap,
+  UtilityComponentRegistry
 } from '../types';
 import EditorContext from './EditorContext';
-import { CORE_UI_INPUTS } from './EditorInput';
 import './FormEditor.scss';
 import { buildFormStatesFromData, editorStateReducer } from './FormEditorReducer';
 import { FormsContainer } from './FormsContainer';
-import { CircularProgress } from '@mui/material';
+import { CLASSIC_INPUTS, DEFAULT_UTILITY_REGISTRY } from './classic';
 
 /**
  * Generic UI component for form editor UI that allows modification of any object that requires modification of JSON Objects
@@ -59,7 +59,12 @@ export type FormEditorProps<T = object> = {
   /**
    * Registry of the input field components. By default Core UI components are used but in theory can be swapped with anything else.
    */
-  inputFieldRegistry?: InputFieldRegistry | undefined;
+  inputFieldRegistry?: InputFieldRegistry;
+
+  /**
+   *
+   */
+  utilityComponentRegistry?: UtilityComponentRegistry;
 
   contextParams?: ParamsMap;
 };
@@ -71,7 +76,8 @@ export function FormEditor<T>({
                                 dataSourceStates,
                                 throttleChange,
                                 changeInterval = 1000,
-                                inputFieldRegistry = CORE_UI_INPUTS,
+                                inputFieldRegistry = CLASSIC_INPUTS,
+                                utilityComponentRegistry = DEFAULT_UTILITY_REGISTRY,
                                 contextParams
                               }: FormEditorProps<T>) {
   const statesOfForms = buildFormStatesFromData<T>(editorMetadata, initialData);
@@ -92,12 +98,13 @@ export function FormEditor<T>({
     () => ({
       dataSources: dataSourceStates || {},
       inputFieldRegistry,
+      utilityComponentRegistry,
       editorState,
       contextParams
     }),
     [dataSourceStates, editorState, inputFieldRegistry, contextParams]
   );
-
+  const LoadingComponent = utilityComponentRegistry['loading'];
   //Handler for certain form change
   const handleFormChange = useCallback(
     (freshFormData: FormDataState, formName: string, fieldSetName: string, isFormValid?: boolean) => {
@@ -166,7 +173,7 @@ export function FormEditor<T>({
       <div className="editor-status">
         {changeTimeout && (
           <div className="info">
-            <CircularProgress /> // TODO: Replace with component from registry
+            <LoadingComponent />
             <span>Applying Changes...</span>
           </div>
         )}

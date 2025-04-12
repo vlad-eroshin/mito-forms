@@ -2,7 +2,6 @@ import React, { useCallback } from 'react';
 import { convertInputOptions, generateReactKey } from '../utils';
 import './ButtonSelector.scss';
 import { InputOption } from '../../types';
-import { Box, Button } from '@mui/material';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 
@@ -28,14 +27,14 @@ export const ButtonSelector: React.FunctionComponent<ButtonSelectorProps> = ({
   );
 
   return (
-    <Box display="flex">
-      <Box className="button-selector">
+    <div className="mf-layout-row">
+      <div className="mf-button-selector">
         {convertedOptions.map((opt, index) => {
           const icon = opt.params?.icon;
           const className = opt.checked ? 'selected' : '';
           const useVal = opt.checked ? 'default' : 'text';
           return (
-            <Button
+            <button
               key={generateReactKey(opt.value as string, opt.label)}
               data-testid={`buttonOpt-${opt.value}-${index}`}
               className={className}
@@ -50,11 +49,11 @@ export const ButtonSelector: React.FunctionComponent<ButtonSelectorProps> = ({
                 <></>
               )}
               {opt.label}
-            </Button>
+            </button>
           );
         })}
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 };
 

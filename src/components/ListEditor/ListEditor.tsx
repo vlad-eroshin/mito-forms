@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
-import { FieldSetUI } from '../FieldSetUI';
+import { FormFieldset } from '../FormFieldset';
 import { fetchJsonPath, getFieldValues } from '../utils';
 import './ListEditor.scss';
 import { DataRecord, FieldSetMetadata, InputField, ParamsMap, RecordsArray } from '../../types';
@@ -84,7 +84,7 @@ export const ListEditor: React.FC<ListInputProps> = ({
         const fieldValues = getFieldValues(itemData, rowFieldset);
 
         return (
-          <FieldSetUI
+          <FormFieldset
             key={`list-item-row-${i}`}
             config={{ ...rowFieldset, arrangeFields: 'tableRow' }}
             rowIndex={i}

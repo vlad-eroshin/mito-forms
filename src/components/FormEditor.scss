@@ -7,8 +7,8 @@
   h2 {
     color: variables.$headerColor;
     text-transform: uppercase;
-    margin-bottom: calc(var(--mf-spacing) * 3);
-    font-size: medium;
+    margin-bottom: calc(var(--mf-spacing) * 3px);
+    font-size: variables.$fontSizeLarge;
     font-weight: bold;
     line-height: 150%;
     font-family: variables.$fontFamily;

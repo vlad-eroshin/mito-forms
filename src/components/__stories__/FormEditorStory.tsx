@@ -4,7 +4,6 @@ import type { EditorMetadata } from '../../types';
 import type { FormEditorProps } from '../FormEditor';
 import { FormEditor } from '../FormEditor';
 import './FormEditorStory.scss';
-import { Box, createTheme, ThemeProvider, Typography } from '@mui/material';
 import { IntlProvider } from 'react-intl';
 
 export type FormEditorStoryProps = Omit<FormEditorProps, 'onChange'> & {
@@ -13,9 +12,6 @@ export type FormEditorStoryProps = Omit<FormEditorProps, 'onChange'> & {
   inputDataMap?: { [key: string]: object };
   activeData?: string;
 };
-const theme = createTheme({
-  cssVariables: true
-});
 
 export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
                                                                                  initialData,
@@ -31,39 +27,36 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
     setEditorResult(result);
   }, []);
   return (
-    <ThemeProvider theme={theme}>
-
-      <IntlProvider locale="en" messages={{}}>
-        <div className="config-editor-story">
-          <div className="story-container">
-            <Box className="editor-preview" width={showStatePreview ? '60%' : '100%'}>
-              <FormEditor
-                editorMetadata={editorMetadata}
-                initialData={initialData}
-                onChange={changeHandler}
-                throttleChange={throttleChange}
-                changeInterval={changeInterval}
-                dataSourceStates={dataSourceStates}
-                inputFieldRegistry={inputFieldRegistry}
-              />
-            </Box>
-            {showStatePreview ? (
-              <Box className="editor-state-preview">
-                <Typography>Editor Result</Typography>
-                <textarea
-                  id="editorResult"
-                  aria-label="Editor Result"
-                  readOnly={true}
-                  rows={40}
-                  value={JSON.stringify(editorResult, null, 2)}
-                />
-              </Box>
-            ) : (
-              <></>
-            )}
+    <IntlProvider locale="en" messages={{}}>
+      <div className="config-editor-story">
+        <div className="story-container">
+          <div className="editor-preview" style={{ width: showStatePreview ? '60%' : '100%' }}>
+            <FormEditor
+              editorMetadata={editorMetadata}
+              initialData={initialData}
+              onChange={changeHandler}
+              throttleChange={throttleChange}
+              changeInterval={changeInterval}
+              dataSourceStates={dataSourceStates}
+              inputFieldRegistry={inputFieldRegistry}
+            />
           </div>
+          {showStatePreview ? (
+            <div className="editor-state-preview">
+              <p>Editor Result</p>
+              <textarea
+                id="editorResult"
+                aria-label="Editor Result"
+                readOnly={true}
+                rows={40}
+                value={JSON.stringify(editorResult, null, 2)}
+              />
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
-      </IntlProvider>
-    </ThemeProvider>
+      </div>
+    </IntlProvider>
   );
 };

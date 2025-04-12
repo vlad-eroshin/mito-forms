@@ -1,16 +1,17 @@
 import React, { useMemo } from 'react';
 import EditorContext from '../EditorContext';
-import { CORE_UI_INPUTS } from '../EditorInput';
 import type { ListInputProps } from '../ListEditor/ListEditor';
 import { ListEditor } from '../ListEditor/ListEditor';
 import { IntlProvider } from 'react-intl';
+import { CLASSIC_INPUTS, DEFAULT_UTILITY_REGISTRY } from '../classic';
 
 export const ListEditorWrapper: React.FunctionComponent<ListInputProps> = (props) => {
   const contextVal = useMemo(
     () => ({
       dataSources: {},
       contextParams: {},
-      inputFieldRegistry: CORE_UI_INPUTS,
+      inputFieldRegistry: CLASSIC_INPUTS,
+      utilityComponentRegistry: DEFAULT_UTILITY_REGISTRY,
       editorState: {
         formStates: {},
         editorResult: {}

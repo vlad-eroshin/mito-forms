@@ -1,8 +1,8 @@
-import React, { useCallback, useState } from 'react';
-import type { FormDataState, FormMetadata } from '../types';
+import React, { useCallback, useContext, useState } from 'react';
+import type { EditorContextProps, FormDataState, FormMetadata } from '../types';
 import { InputForm } from './InputForm';
-import { TabbedSection } from './EditorInput/TabbedSection';
 import { generateReactKey } from './utils';
+import EditorContext from './EditorContext';
 
 /**
  * Component controls how Forms are rendered either as tabs on one page
@@ -27,6 +27,9 @@ export function FormsContainer<T>({
                                     activeForm
                                   }: FormListProps) {
   const [activeTab, setActiveTab] = useState<string>(activeForm);
+  const editorContextData = useContext<EditorContextProps>(EditorContext) as EditorContextProps<T>;
+  const TabbedSection = editorContextData.utilityComponentRegistry.tabbedSection;
+
   const handleSwitchTab = useCallback((tabId: string) => {
     setActiveTab(tabId);
   }, []);

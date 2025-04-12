@@ -1,13 +1,22 @@
+@use "bulma/sass/base";
+@use "bulma/sass/themes";
+@use "@fortawesome/fontawesome";
+@use "@fortawesome/fontawesome-svg-core";
+
 
 :root {
   --mf-border-color: #bbb;
-  --mf-header-color: var(--mui-palette-text-primary);
-  --mf-secondary-text-color: var(--mui-palette-text-secondary);
-  --mf-input-error-color: var(--mui-palette-error-main);
-  --mf-font-size: var(--base-dimension-text-small);
+  --mf-header-color: var(--bulma-card-header-color);
+  --mf-secondary-text-color: var(--bulma-tabs-link-color);
+  --mf-input-error-color: var(--bulma-danger);
+  --mf-font-size-small: var(--bulma-size-small);
+  --mf-font-size-normal: var(--bulma-size-normal);
+  --mf-font-size-medium: var(--bulma-size-medium);
+  --mf-font-size-large: var(--bulma-size-large);
   --mf-min-form-control-width: 194px;
-  --mf-spacing: var(--mui-spacing);
+  --mf-spacing: 8;
   --mf-font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  --mf-input-thumb-size: 13;
 }
 
 $fontFamily: var(--mf-font-family);
@@ -15,5 +24,9 @@ $borderColor: var(--mf-border-color);
 $headerColor: var(--mf-header-color);
 $secondaryTextColor: var(--mf-secondary-text-color);
 $inputErrorColor: var(--mf-input-error-color);
-$fontSize: var(--mf-font-size);
+$fontSize: var(--mf-font-size-normal);
+$fontSizeSmall: var(--mf-font-size-small);
+$fontSizeMedium: var(--mf-font-size-medium);
+$fontSizeLarge: var(--mf-font-size-large);
+
 $spacing: var(--mf-spacing);

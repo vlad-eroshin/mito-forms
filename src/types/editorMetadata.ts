@@ -1,6 +1,7 @@
 import type { FormInputFieldProps } from '../components/FormInputField';
 import type { ConditionInfo, ParamsMap, ParamValue, RecordsArray } from './common';
 import type { DataSourceBinding, DataSourceConfig, DataSourceState } from './dataSource';
+import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 export type ValidationFunctionType<T> = (value: ParamValue) => boolean | T | T[];
 
@@ -147,6 +148,7 @@ export type ValueAccessorFn = (context: ParamsMap) => void;
 
 export type InputFieldType =
   | 'text'
+  | 'fileupload'
   | 'checkbox'
   | 'select'
   | 'radio'
@@ -278,9 +280,58 @@ export type InputFieldRegistry = {
   [key in InputFieldType]: React.FunctionComponent<FormInputFieldProps>;
 };
 
+export type LoadingComponentProps = {
+  className?: string;
+  loadingText?: string;
+}
+export type BlockComponentProps = {
+  className?: string;
+  children?: ReactElement | ReactElement [];
+}
+
+export type FieldsetProps = {
+  legend?: string;
+  children: React.ReactNode;
+  collapsible?: boolean;
+  collapsed?: boolean;
+  onCollapse?: () => void;
+
+}
+
+export type UtilityComponentRegistry = {
+  loading: FunctionComponent<LoadingComponentProps>;
+  block: FunctionComponent<BlockComponentProps>;
+  tabbedSection: FunctionComponent<TabbedSectionProps>;
+  fieldset: FunctionComponent<FieldsetProps>;
+}
+
 export type EditorContextProps<T = object> = {
   dataSources: { [key: string]: DataSourceState };
   inputFieldRegistry: InputFieldRegistry;
+  utilityComponentRegistry: UtilityComponentRegistry;
   editorState: EditorState<T>;
   contextParams?: { [key: string]: unknown } | undefined; // Context params that maybe necessary in reducers
+
 };
+
+export type TabProps = {
+  id: string;
+  label: string;
+  disabled?: boolean;
+  selected?: boolean;
+  content: ReactNode;
+}
+
+export type TabbedSectionProps = {
+  selected: string | number,
+  onTab: (tabId: string | number) => void,
+  tabs: (Omit<TabProps, 'onClick' | 'selected'>) []
+}
+
+
+export type TabPanelProps = {
+  children?: React.ReactNode;
+  index: number;
+  value: number | string;
+}
+

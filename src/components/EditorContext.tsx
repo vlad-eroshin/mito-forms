@@ -1,20 +1,17 @@
 import { createContext } from 'react';
-import type { EditorContextProps, InputFieldRegistry } from '../types';
+import type { EditorContextProps } from '../types';
+import { CLASSIC_INPUTS, DEFAULT_UTILITY_REGISTRY } from './classic';
 
-/**
- * Editor context is used to share editor state across all child components.
- *
- */
-const EMPTY_REGISTRY: unknown = {};
 
 const EditorContext = createContext<EditorContextProps>({
   dataSources: {},
   contextParams: {},
-  inputFieldRegistry: EMPTY_REGISTRY as InputFieldRegistry,
+  inputFieldRegistry: CLASSIC_INPUTS,
+  utilityComponentRegistry: DEFAULT_UTILITY_REGISTRY,
   editorState: {
     formStates: {},
-    editorResult: {},
-  },
+    editorResult: {}
+  }
 } as EditorContextProps<object>);
 
 export default EditorContext;

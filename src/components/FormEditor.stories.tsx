@@ -97,6 +97,11 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
                 label: 'Text Box'
               },
               {
+                type: 'fileupload',
+                name: 'fileUpload',
+                label: 'Upload File'
+              },
+              {
                 name: 'optionSwitch',
                 ...TestInputFieldsConfigsMap['switch']
               },

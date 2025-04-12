@@ -1,11 +1,23 @@
 @use './variables.scss';
 
-.fieldset {
+.mf-fieldset {
   margin-top: var(--mf-spacing);
+  margin-bottom: calc(var(--mf-spacing) * 2px);
   box-sizing: border-box;
   width: 100%;
 
-  .title {
+  .unsupported-input {
+    margin-bottom: calc(var(--mf-spacing) * 3);
+    margin-top: calc(var(--mf-spacing) * 3);
+    color: variables.$inputErrorColor;
+  }
+
+  .mf-legend {
+    font-weight: bolder;
+    font-size: variables.$fontSizeMedium;
+  }
+
+  .mf-title {
     h3 {
       margin-top: 0;
       margin-bottom: 0;
@@ -31,8 +43,8 @@
   }
 
   label {
-    margin-bottom: 8px;
-    line-height: 16px;
+    font-size: variables.$fontSize;
+    margin-bottom: var(--mf-spacing);
   }
 
   > div {

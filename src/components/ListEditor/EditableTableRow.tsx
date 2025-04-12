@@ -3,8 +3,6 @@ import { FormInputField } from '../FormInputField';
 import { generateReactKey, retrieveInputOptions } from '../utils';
 import React from 'react';
 import { DataRecord, InputField, ParamsMap } from '../../types';
-import { Button } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
 
 type EditableRowProps = {
   values: ParamsMap;
@@ -41,13 +39,13 @@ export const EditableRow: React.FunctionComponent<EditableRowProps> = ({
       })}
       {onDelete && (
         <td className="controls-col">
-          <Button
+          <button
             data-testid={`list-editor-delete-row-${rowIndex}`}
             onClick={onDelete}
             aria-label={formatMessage({ id: 'Delete' })}
           >
-            <DeleteIcon />
-          </Button>
+            {/*<DeleteIcon />*/}
+          </button>
         </td>
       )}
     </tr>
