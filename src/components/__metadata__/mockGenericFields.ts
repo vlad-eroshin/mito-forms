@@ -46,5 +46,10 @@ export const TestInputFieldsConfigsMap: { [key in InputFieldType]: InputField | 
   textbox: {
     name: 'textBoxInput',
     type: 'textbox'
+  },
+  fileupload: {
+    name: 'fileUpload',
+    label: 'File Upload',
+    type: 'fileupload'
   }
 };

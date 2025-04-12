@@ -16,7 +16,7 @@ export const RadioList: FunctionComponent<FormInputFieldProps> = ({
   const convertedOptions = options ? convertInputOptions(options, [value as (string | number)]) : [];
   const inputId = getFieldId(config);
   return <div className={'field'}>
-    <label className={'label'} htmlFor={inputId}>{config.label}</label>
+    {fieldConfig.label && <label className={'label'} htmlFor={inputId}>{fieldConfig.label}</label>}
     <div className={'control radios is-flex-direction-column'} id={inputId}>
       {convertedOptions.map((opt) => {
         const optId = generateReactKey(config.name, opt.label);

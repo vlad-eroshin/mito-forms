@@ -1,4 +1,3 @@
-import equal from 'fast-deep-equal';
 import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import type {
   DataSourceState,
@@ -149,7 +148,7 @@ export function FormEditor<T>({
       onChange(editorResult, isValid, editorState.validatorMessage);
       return;
     }
-    if (editorResult === initialData || equal(editorResult, initialData)) {
+    if (editorResult === initialData /*|| equal(editorResult, initialData)*/) {
       return;
     }
     if (throttleChange) {

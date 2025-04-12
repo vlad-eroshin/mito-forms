@@ -68,6 +68,13 @@ export const getInitialFieldSetData = (
       if (typeof fieldConf.value === 'function') {
         const rawValue = fieldConf.value(inputData);
         fetchedValue = !isNullOrUndefined(rawValue) ? rawValue : fieldConf.default;
+      } else if (isJsonPathExp(fieldConf.value)) {
+        const valueJsonPath = extractJsonPathString(fieldConf.value);
+        const rawValue =
+          fetchJsonPath(inputData as object, valueJsonPath) || inputData[fieldConf.name];
+        fetchedValue = !isNullOrUndefined(rawValue)
+          ? rawValue
+          : fieldConf.default;
       } else if (fieldConf.jsonPath) {
         const rawValue =
           fetchJsonPath(inputData as object, fieldConf.jsonPath) || inputData[fieldConf.name];
@@ -82,9 +89,7 @@ export const getInitialFieldSetData = (
           : fieldConf.value || fieldConf.default;
       }
       if (
-        fieldConf.options &&
-        typeof fieldConf.options === 'string' &&
-        RX_JSON_PATH.test(fieldConf.options)
+        isJsonPathExp(fieldConf.options)
       ) {
         const matchRes = (fieldConf.options as string).match(RX_JSON_PATH) as string[];
         const optionsRes =

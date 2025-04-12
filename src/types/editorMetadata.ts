@@ -170,8 +170,7 @@ export type InputField = {
   isSelectable?: boolean;
   default?: ParamValue;
   disabled?: boolean;
-  value?: ParamValue | InputOption | ValueAccessorFn;
-  jsonPath?: string;
+  value?: ParamValue | InputOption | ValueAccessorFn; // Can also be JSON path expression specified as {$.path.of.some.kind}
   dataBindings?: DataSourceBinding[];
   validator?: ValidatorType | ValidationFunctionType<string>;
   showIf?: ConditionInfo | ConditionInfo[];

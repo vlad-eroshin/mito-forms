@@ -22,7 +22,7 @@ export const TextArea: React.FunctionComponent<FormInputFieldProps> = ({
   const inputId = getFieldId(config, fieldIndex);
   return (
     <div className={'field'}>
-      <label className="label mt-input-label" htmlFor={inputId}>{config.label}</label>
+      {fieldConfig.label && <label className="label mt-input-label" htmlFor={inputId}>{fieldConfig.label}</label>}
       <div className={'control'}>
                 <textarea
                   id={inputId}

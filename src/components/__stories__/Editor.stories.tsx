@@ -163,3 +163,77 @@ export const WithListEditor: Story = {
     }
   }
 };
+
+export const SwitchComponent: Story = {
+  args: {
+    editorMetadata: {
+      displayAs: 'tabSet',
+      activeForm: 'form',
+      forms: [
+        {
+          id: 'form',
+          title: 'Form Tab',
+          showTitle: true,
+          fieldSets: [
+            {
+              title: 'Some Fieldset Title',
+              name: 'fieldsetWithSwitchList',
+              showTitle: true,
+              fieldLayout: 'twoColumn',
+              fields: [
+                {
+                  type: 'switch',
+                  name: 'switchList',
+                  label: 'Switch List',
+                  options: [
+                    { label: 'Switch One', value: 'one' },
+                    { label: 'Switch Two', value: 'two' },
+                    { label: 'Switch Three', value: 'three' },
+                    { label: 'Switch Four', value: 'four' }
+                  ],
+                  value: '{$.objectOfSomeKind.switchValues}'
+                },
+                {
+                  type: 'checkbox',
+                  name: 'checkList',
+                  label: 'Check List',
+                  options: [
+                    { label: 'Check One', value: 1 },
+                    { label: 'Check Two', value: 2 },
+                    { label: 'Check Three', value: 3 },
+                    { label: 'Check Four', value: 4 }
+                  ],
+                  value: '{$.objectOfSomeKind.checkValues}'
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      reducersMap: {
+        form: {
+          fieldsetWithSwitchList: (editorData: { objectOfSomeKind: object; }, newData: {
+            switchList: string [], checkList: number[];
+          }, contextParams: any) => {
+
+            return {
+              ...editorData,
+              objectOfSomeKind: {
+                ...editorData.objectOfSomeKind,
+                switchValues: newData.switchList,
+                checkValues: newData.checkList
+              }
+            };
+          }
+        }
+      }
+    },
+    initialData: {
+      objectOfSomeKind: {
+        switchValues: ['two', 'three'],
+        checkValues: [2, 4]
+      }
+
+    }
+  }
+};

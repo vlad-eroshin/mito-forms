@@ -13,7 +13,7 @@ const Fieldset: React.FC<FieldsetProps> = ({ legend, children, collapsible, coll
 
   return (
     <fieldset className={'mf-fieldset'}>
-      <legend className="mf-legend">{trigger}{legend}</legend>
+      {(legend || collapsible) && <legend className="mf-legend">{trigger}{legend}</legend>}
       <div className="fieldset-content">
         {children}
       </div>

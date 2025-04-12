@@ -15,7 +15,7 @@ export const SwitchList: FunctionComponent<FormInputFieldProps> = ({
   const fieldConfig = config as InputField;
   const hasOptions = options && options.length > 0;
   const checkedValues = useMemo(() => hasOptions ? buildCheckedValues(value) : value ? [config.name] : [], [value, hasOptions]);
-  const convertedOptions = hasOptions ? convertInputOptions(options, [value as (string | number)]) : [{
+  const convertedOptions = hasOptions ? convertInputOptions(options, checkedValues) : [{
     label: config.label,
     value: config.name,
     checked: `${value}`
@@ -27,7 +27,7 @@ export const SwitchList: FunctionComponent<FormInputFieldProps> = ({
   }, [onChange, config]);
   const inputId = getFieldId(config);
   return <div className={'field'}>
-    {hasOptions && <label className={'label'} htmlFor={inputId}>{config.label}</label>}
+    {hasOptions && fieldConfig.label && <label className={'label'} htmlFor={inputId}>{fieldConfig.label}</label>}
     <div className={'control is-flex is-flex-direction-column'} id={inputId}>
       {convertedOptions.map((opt) => {
         const optId = generateReactKey(config.name, opt.label);

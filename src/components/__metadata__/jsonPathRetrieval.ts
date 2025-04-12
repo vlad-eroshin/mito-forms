@@ -18,14 +18,14 @@ export const editorWithJsonPath: EditorMetadata = {
             {
               type: 'staticText',
               label: 'Label',
-              name: 'label',
+              name: 'label'
             },
             {
               type: 'text',
               label: 'Value',
-              name: 'value',
-            },
-          ],
+              name: 'value'
+            }
+          ]
         },
         {
           title: 'Access data per field',
@@ -37,46 +37,46 @@ export const editorWithJsonPath: EditorMetadata = {
               type: 'staticText',
               label: 'Access numeric value ($.other.numericValue1)',
               name: 'numericValue',
-              jsonPath: '$.other.numericValue1',
+              value: '{$.other.numericValue1}'
             },
             {
               type: 'text',
               label: 'Text Value ($.other.textValue)',
               name: 'textValue',
-              jsonPath: '$.other.textValue',
+              value: '{$.other.textValue}'
             },
             {
               type: 'select',
               name: 'selector',
               label: 'Selector retrieves options from ($.someData.to.listOfOptions)',
               options: '{$.someData.to.listOfOptions}',
-              value: 1,
+              value: 1
             },
             {
               type: 'checkbox',
               name: 'checkboxList',
               label: 'Check List retrieves options from ($.someData.to.listOfOptions)',
               options: '{$.someData.to.listOfOptions}',
-              value: 1,
+              value: 1
             },
             {
               type: 'radio',
               name: 'radioList',
               label: 'Radio buttons retrieves options from ($.someData.to.listOfOptions)',
               options: '{$.someData.to.listOfOptions}',
-              value: 1,
+              value: 1
             },
             {
               type: 'switch',
               name: 'switchList',
               label: 'Switch List retrieves options from ($.someData.to.switchListOfOptions)',
               options: '{$.someData.to.switchListOfOptions}',
-              value: 1,
-            },
-          ],
-        },
-      ],
-    },
+              value: 1
+            }
+          ]
+        }
+      ]
+    }
   ],
-  reducersMap: {},
+  reducersMap: {}
 };

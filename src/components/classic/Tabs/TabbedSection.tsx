@@ -20,7 +20,7 @@ export const TabbedSection: FunctionComponent<TabbedSectionProps> = ({ selected,
       <div className={'tabs mf-tabs-container'}>
         <ul>
           {tabs.map((tp, index) => {
-            return <Tab id={tp.id} selected={tp.id === selected} label={tp.label}
+            return <Tab key={`tab-${tp.id}`} id={tp.id} selected={tp.id === selected} label={tp.label}
                         onTab={handleChange}></Tab>;
           })}
         </ul>

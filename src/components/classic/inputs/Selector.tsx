@@ -15,7 +15,7 @@ export const Selector: FunctionComponent<FormInputFieldProps> = ({
   const convertedOptions = options ? convertInputOptions(options, [value as (string | number)]) : [];
   const inputId = getFieldId(config);
   return <div className={'field'}>
-    <label className={'label'} htmlFor={inputId}>{config.label}</label>
+    {fieldConfig.label && <label className={'label'} htmlFor={inputId}>{fieldConfig.label}</label>}
     <div className={'select'}>
       <select className={'mf-select'} id={inputId} onChange={handleChange}>
         {convertedOptions.map((opt) => {

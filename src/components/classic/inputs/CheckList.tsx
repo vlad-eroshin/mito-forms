@@ -16,7 +16,7 @@ export const CheckList: FunctionComponent<FormInputFieldProps> = ({
   const handleChange = useChecklistHandler(fieldConfig, convertedOptions, onChange);
   const inputId = getFieldId(config);
   return <div className={'field'}>
-    <label className={'label'} htmlFor={inputId}>{config.label}</label>
+    {fieldConfig.label && <label className={'label'} htmlFor={inputId}>{fieldConfig.label}</label>}
     <div className="control" id={inputId}>
       {convertedOptions.map((opt) => {
         const optId = generateReactKey(config.name, opt.label);
