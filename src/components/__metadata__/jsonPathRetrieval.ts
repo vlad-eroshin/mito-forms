@@ -13,7 +13,7 @@ export const editorWithJsonPath: EditorMetadata = {
           name: 'jsonPathFieldset',
           jsonPath: '$.path.to.fieldsetData',
           showTitle: true,
-          fieldLayout: 'twoColumn',
+          fieldsLayout: 'twoColumn',
           fields: [
             {
               type: 'staticText',
@@ -31,7 +31,7 @@ export const editorWithJsonPath: EditorMetadata = {
           title: 'Access data per field',
           name: 'jsonPathPerField',
           showTitle: true,
-          fieldLayout: 'twoColumn',
+          fieldsLayout: 'twoColumn',
           fields: [
             {
               type: 'staticText',
