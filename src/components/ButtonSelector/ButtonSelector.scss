@@ -1,9 +1,44 @@
-.button-selector {
+@use '../variables.scss';
+
+.button-selector-group {
   display: flex;
-  border-radius: 6px;
-  background-color: var(--fallback-gray15);
-  .selected {
-    color: var(--fallback-blue50);
-    stroke: var(--fallback-blue50);
+  flex-direction: row;
+  align-items: center;
+
+  .control {
+    flex: 0 0 auto;
+    margin: 0 !important;
+    padding: 0 !important;
+
+    &:not(:last-child) {
+      margin-right: 0 !important;
+    }
   }
-}
+
+  .button {
+    border-radius: 0;
+    margin: 0 !important;
+    border-right-width: 0;
+
+    &.is-selected {
+      background-color: variables.$selectedBackgroundColor;
+      color: var(--bulma-button-border-color);
+      opacity: 1;
+      cursor: auto;
+    }
+
+    &:first-child {
+      border-top-left-radius: variables.$controlRadius;
+      border-bottom-left-radius: variables.$controlRadius;
+    }
+
+    &:last-child {
+      border-top-right-radius: variables.$controlRadius;
+      border-bottom-right-radius: variables.$controlRadius;
+    }
+
+    &:not(:first-child):not(:last-child) {
+      border-radius: 0px;
+    }
+  }
+} 

@@ -1,7 +1,26 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from '@storybook/test';
 
-import { ButtonSelectorWrapper } from '../../src/components/__stories__/ButtonSelectorWrapper';
+import { ButtonSelector, ButtonSelectorProps } from './ButtonSelector';
+import React, { useState } from 'react';
+
+export const ButtonSelectorWrapper: React.FC<ButtonSelectorProps> = ({
+                                                                       value,
+                                                                       options,
+                                                                       buttonSize
+                                                                     }) => {
+  const [selValue, setSelValue] = useState(value);
+  return (
+    <ButtonSelector
+      options={options}
+      value={selValue}
+      buttonSize={buttonSize}
+      onChange={(val) => {
+        setSelValue(val as string | number);
+      }}
+    />
+  );
+};
 
 const meta: Meta<typeof ButtonSelectorWrapper> = {
   title: 'Form Editor/Button Selector',
@@ -30,8 +49,8 @@ export const Icon: Story = {
   args: {
     value: 'table',
     options: [
-      { label: 'Table', value: 'table', params: { icon: 'dashboards-bold' } },
-      { label: 'Chart', value: 'chart', params: { icon: 'activity-bold' } },
+      { label: 'Table', value: 'table', params: { icon: 'faTable' } },
+      { label: 'Chart', value: 'chart', params: { icon: 'faChartSimple' } },
       { label: 'Other', value: 'other', params: { icon: 'folder-bold' } }
     ]
   }
@@ -42,9 +61,9 @@ export const IconSmall: Story = {
     value: 'table',
     buttonSize: 'small',
     options: [
-      { label: 'Table', value: 'table', params: { icon: 'dashboards-bold' } },
-      { label: 'Chart', value: 'chart', params: { icon: 'activity-bold' } },
-      { label: 'Other', value: 'other', params: { icon: 'folder-bold' } }
+      { label: 'Table', value: 'table', params: { icon: 'faTable' } },
+      { label: 'Chart', value: 'chart', params: { icon: 'faChartSimple' } },
+      { label: 'Other', value: 'other', params: { icon: 'fas folder-bold' } }
     ]
   }
 };
