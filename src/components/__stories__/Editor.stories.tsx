@@ -180,7 +180,7 @@ export const SwitchComponent: Story = {
               title: 'Some Fieldset Title',
               name: 'fieldsetWithSwitchList',
               showTitle: true,
-              fieldLayout: 'twoColumn',
+              fieldsLayout: 'twoColumn',
               fields: [
                 {
                   type: 'switch',

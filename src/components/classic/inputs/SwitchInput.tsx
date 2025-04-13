@@ -3,7 +3,7 @@ import './SwitchInput.scss';
 
 type SwitchInputProps = {
   name?: string;
-  value?: string;
+  value?: string | boolean;
   checked?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -21,7 +21,7 @@ export const SwitchInput: FunctionComponent<SwitchInputProps> = ({ checked, name
   }, [checked, onChange]);
 
   return <div className="mf-switch-input">
-    <input ref={inputRef} type="checkbox" role="switch" value={value} name={name} checked={checked}
+    <input ref={inputRef} type="checkbox" role="switch" value={value as string} name={name} checked={checked}
            onChange={onChange} />
     <span className="slider round" onClick={handleClick}></span>
   </div>;

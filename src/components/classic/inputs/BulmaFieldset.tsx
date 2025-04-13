@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import 'bulma/bulma.scss';
 
-const Fieldset: React.FC<FieldsetProps> = ({ legend, children, collapsible, collapsed, onCollapse }) => {
+export const BulmaFieldset: React.FC<FieldsetProps> = ({ legend, children, collapsible, collapsed, onCollapse }) => {
   const trigger = useMemo(() => {
     return collapsible ? <a onClick={onCollapse} className="icon">
       {collapsed ? <FontAwesomeIcon icon={faAngleRight} /> : <FontAwesomeIcon icon={faAngleDown} />}
@@ -20,5 +20,3 @@ const Fieldset: React.FC<FieldsetProps> = ({ legend, children, collapsible, coll
     </fieldset>
   );
 };
-
-export default Fieldset;

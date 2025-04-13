@@ -5,6 +5,7 @@ import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 export type ValidationFunctionType<T> = (value: ParamValue) => boolean | T | T[];
 
+export type FieldsLayout = 'twoColumn' | 'compact' | 'twoColumnJustified';
 /**
  * Editor UI Metadata. Used to describe editor UI.
  */
@@ -13,6 +14,11 @@ export type EditorMetadata<T = object> = {
    * List of forms in the editor
    */
   forms: FormMetadata[];
+
+  /**
+   * Global setting for fields layout - if not specified it uses 'compact'
+   */
+  fieldsLayout?: FieldsLayout;
 
   /**
    * Reducer map. Maps field set name to the function that will be modifying when any of the fieldset is changed.
@@ -89,11 +95,15 @@ export type FieldSetMetadata = {
    * List of input fields
    */
   fields: (InputField | FormDividerConfig)[];
-  /**
-   *
-   */
-  fieldLayout?: 'twoColumn' | 'compact' | 'twoColumnJustified';
 
+  /**
+   *  Configures field layout overrides layout on the level of fieldset
+   */
+  fieldsLayout?: FieldsLayout;
+
+  /**
+   * Used for list editor component configures how the fieldset is displayed
+   */
   arrangeFields?: 'column' | 'row' | 'tableRow';
   /**
    * Field set title
@@ -104,7 +114,7 @@ export type FieldSetMetadata = {
    */
   showIf?: ConditionInfo | ConditionInfo[];
   /**
-   * TODO: Not implemented yet but if allows the user to collapse fieldset.
+   * allows collapse expand fieldset.
    */
   collapsible?: boolean;
   collapsed?: boolean;
@@ -142,19 +152,24 @@ export type FormMetadata = {
   jsonPath?: string;
   showTitle?: boolean;
 };
-export type ValidatorType = 'number' | 'string' | 'email' | 'emailMultiline';
+export type ValidatorType = 'number' | 'string' | 'email' | 'emailMultiline' | 'required';
 
 export type ValueAccessorFn = (context: ParamsMap) => void;
 
 export type InputFieldType =
   | 'text'
-  | 'fileupload'
+  | 'fileUpload'
   | 'checkbox'
+  | 'checkList'
   | 'select'
   | 'radio'
   | 'switch'
+  | 'switchList'
   | 'staticText'
-  | 'textbox';
+  | 'textbox'
+  | 'password'
+  | 'progress'
+  | 'buttonSelector';
 
 /**
  * Metadata about individual field
@@ -228,6 +243,7 @@ export type EditorState<T = object> = {
    * Validation Message
    */
   validatorMessage?: string | undefined;
+
 };
 
 /**
@@ -294,7 +310,7 @@ export type FieldsetProps = {
   collapsible?: boolean;
   collapsed?: boolean;
   onCollapse?: () => void;
-
+  layout?: FieldsLayout;
 }
 
 export type UtilityComponentRegistry = {
@@ -310,7 +326,7 @@ export type EditorContextProps<T = object> = {
   utilityComponentRegistry: UtilityComponentRegistry;
   editorState: EditorState<T>;
   contextParams?: { [key: string]: unknown } | undefined; // Context params that maybe necessary in reducers
-
+  fieldsLayout?: FieldsLayout;
 };
 
 export type TabProps = {

@@ -6,7 +6,7 @@ import { getFieldId } from '../../utils';
 import 'bulma/bulma.scss';
 import { BulmaField } from './BulmaField';
 
-export const TextField: React.FunctionComponent<FormInputFieldProps> = (props) => {
+export const PasswordField: React.FunctionComponent<FormInputFieldProps> = (props) => {
   const {
     config,
     onChange,
@@ -26,7 +26,7 @@ export const TextField: React.FunctionComponent<FormInputFieldProps> = (props) =
       <input
         id={inputId}
         className={`input mt-input-text-field ${!isValid ? 'is-danger' : ''}`}
-        type="text"
+        type="password"
         data-testid={inputId}
         area-label={fieldConfig.label}
         value={(value as string) ?? ''}
@@ -38,3 +38,4 @@ export const TextField: React.FunctionComponent<FormInputFieldProps> = (props) =
     validationErrors={validationErrors}
     isValid={isValid} />;
 };
+

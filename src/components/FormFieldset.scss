@@ -6,6 +6,17 @@
   box-sizing: border-box;
   width: 100%;
 
+  .field {
+    &.mf-required-field {
+
+      label::before {
+        color: variables.$inputErrorColor;
+        font-weight: bold;
+        content: '* ';
+      }
+    }
+  }
+
   .unsupported-input {
     margin-bottom: calc(var(--mf-spacing) * 3);
     margin-top: calc(var(--mf-spacing) * 3);

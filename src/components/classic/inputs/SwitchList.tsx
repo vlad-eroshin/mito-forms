@@ -5,13 +5,15 @@ import { useChecklistHandler } from '../../hooks';
 import { buildCheckedValues, convertInputOptions, generateReactKey, getFieldId } from '../../utils';
 import './SwitchInput.scss';
 import { SwitchInput } from './SwitchInput';
+import { BulmaField } from './BulmaField';
 
-export const SwitchList: FunctionComponent<FormInputFieldProps> = ({
-                                                                     config,
-                                                                     onChange,
-                                                                     value,
-                                                                     options
-                                                                   }) => {
+export const SwitchList: FunctionComponent<FormInputFieldProps> = (props) => {
+  const {
+    config,
+    onChange,
+    value,
+    options
+  } = props;
   const fieldConfig = config as InputField;
   const hasOptions = options && options.length > 0;
   const checkedValues = useMemo(() => hasOptions ? buildCheckedValues(value) : value ? [config.name] : [], [value, hasOptions]);
@@ -26,9 +28,12 @@ export const SwitchList: FunctionComponent<FormInputFieldProps> = ({
     }
   }, [onChange, config]);
   const inputId = getFieldId(config);
-  return <div className={'field'}>
-    {hasOptions && fieldConfig.label && <label className={'label'} htmlFor={inputId}>{fieldConfig.label}</label>}
-    <div className={'control is-flex is-flex-direction-column'} id={inputId}>
+
+  return (<BulmaField
+    {...props}
+    id={inputId}
+    config={fieldConfig}
+    control={<div className={'is-flex is-flex-direction-column'} id={inputId}>
       {convertedOptions.map((opt) => {
         const optId = generateReactKey(config.name, opt.label);
         const strValue = `${opt.value}`;
@@ -38,6 +43,7 @@ export const SwitchList: FunctionComponent<FormInputFieldProps> = ({
           &nbsp;{opt.label}
         </label>;
       })}
-    </div>
-  </div>;
+    </div>}
+  />);
+
 };

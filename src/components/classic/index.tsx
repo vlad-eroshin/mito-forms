@@ -5,21 +5,31 @@ import { TabbedSection } from './Tabs/TabbedSection';
 import { RadioList } from './inputs/RadioList';
 import { CheckList } from './inputs/CheckList';
 import { Selector } from './inputs/Selector';
-import Fieldset from './inputs/Fieldset';
+import { BulmaFieldset } from './inputs/BulmaFieldset';
 import { SwitchList } from './inputs/SwitchList';
 import { TextArea } from './inputs/TextArea';
 import { StaticText } from './inputs/StaticText';
 import { FileUpload } from './inputs/FileUpload';
+import { ButtonSelectorField } from './inputs/ButtonSelectorField';
+import { CheckBox } from './inputs/CheckBox';
+import { PasswordField } from './inputs/PasswordField';
+import { SwitchField } from './inputs/SwitchField';
+import { ProgressBar } from './inputs/ProgressBar';
 
 export const CLASSIC_INPUTS: InputFieldRegistry = {
-  checkbox: CheckList,
+  progress: ProgressBar,
+  password: PasswordField,
+  buttonSelector: ButtonSelectorField,
+  checkList: CheckList,
+  switchList: SwitchList,
+  checkbox: CheckBox,
   radio: RadioList,
   select: Selector,
   staticText: StaticText,
-  switch: SwitchList,
+  switch: SwitchField,
   text: TextField,
   textbox: TextArea,
-  fileupload: FileUpload
+  fileUpload: FileUpload
 };
 
 
@@ -29,5 +39,5 @@ export const DEFAULT_UTILITY_REGISTRY: UtilityComponentRegistry = {
   },
   block: props => <div className={`box ${props.className}`}>{props.children}</div>,
   tabbedSection: TabbedSection,
-  fieldset: Fieldset
+  fieldset: BulmaFieldset
 };

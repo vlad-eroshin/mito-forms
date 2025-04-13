@@ -6,7 +6,7 @@ import { userEvent } from '@testing-library/user-event';
 
 const rowFieldset: FieldSetMetadata = {
   name: 'testFieldSet',
-  fieldLayout: 'compact',
+  fieldsLayout: 'compact',
   arrangeFields: 'row',
   fields: [
     {

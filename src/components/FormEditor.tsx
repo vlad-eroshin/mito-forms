@@ -99,7 +99,8 @@ export function FormEditor<T>({
       inputFieldRegistry,
       utilityComponentRegistry,
       editorState,
-      contextParams
+      contextParams,
+      fieldsLayout: editorMetadata.fieldsLayout || 'compact'
     }),
     [dataSourceStates, editorState, inputFieldRegistry, contextParams]
   );

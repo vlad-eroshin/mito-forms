@@ -3,21 +3,24 @@ import { FormInputFieldProps } from '../../FormInputField';
 import { InputField } from '../../../types';
 import { useChecklistHandler } from '../../hooks';
 import { buildCheckedValues, convertInputOptions, generateReactKey, getFieldId } from '../../utils';
+import { BulmaField } from './BulmaField';
 
-export const CheckList: FunctionComponent<FormInputFieldProps> = ({
-                                                                    config,
-                                                                    onChange,
-                                                                    value,
-                                                                    options
-                                                                  }) => {
+export const CheckList: FunctionComponent<FormInputFieldProps> = (props) => {
+  const {
+    config,
+    onChange,
+    value,
+    options
+  } = props;
   const fieldConfig = config as InputField;
   const checkedValues = useMemo(() => buildCheckedValues(value), [value]);
   const convertedOptions = options ? convertInputOptions(options, checkedValues) : [];
   const handleChange = useChecklistHandler(fieldConfig, convertedOptions, onChange);
   const inputId = getFieldId(config);
-  return <div className={'field'}>
-    {fieldConfig.label && <label className={'label'} htmlFor={inputId}>{fieldConfig.label}</label>}
-    <div className="control" id={inputId}>
+  return (
+    <BulmaField
+      {...props}
+      id={inputId} config={fieldConfig} control={<>
       {convertedOptions.map((opt) => {
         const optId = generateReactKey(config.name, opt.label);
         const optValue = `${opt.value}`;
@@ -27,6 +30,5 @@ export const CheckList: FunctionComponent<FormInputFieldProps> = ({
           &nbsp;<label htmlFor={optId}>{opt.label}</label>
         </div>;
       })}
-    </div>
-  </div>;
+    </>} />);
 };

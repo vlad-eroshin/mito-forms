@@ -41,6 +41,18 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
                 value: 'Some Text'
               },
               {
+                ...TestInputFieldsConfigsMap['password']
+              },
+              {
+                ...TestInputFieldsConfigsMap['checkbox']
+              },
+              {
+                ...TestInputFieldsConfigsMap['switchList']
+              },
+              {
+                ...TestInputFieldsConfigsMap['buttonSelector']
+              },
+              {
                 type: 'select',
                 name: 'select',
                 label: 'Value Selector',
@@ -52,7 +64,7 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
                 value: 1
               },
               {
-                type: 'checkbox',
+                type: 'checkList',
                 name: 'checkboxList',
                 label: 'Checkbox List',
                 options: [
@@ -60,25 +72,13 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
                   { label: 'Option Two', value: 2 },
                   { label: 'Option Three', value: 3 }
                 ],
-                value: 1
+                value: [1, 3]
               },
               {
                 type: 'switch',
                 name: 'switch',
-                label: 'Switch',
-                value: 1
-              },
-              {
-                type: 'switch',
-                name: 'switchList',
-                label: 'Switch List',
-                value: 1,
-                options: [
-                  { label: 'Switch Option One', value: 1 },
-                  { label: 'Switch Option Two', value: 2 },
-                  { label: 'Switch Option Three', value: 3 },
-                  { label: 'Switch Option Four', value: 4 }
-                ]
+                label: 'Switch ON or OFF',
+                value: true
               },
               {
                 type: 'radio',
@@ -97,9 +97,13 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
                 label: 'Text Box'
               },
               {
-                type: 'fileupload',
+                type: 'fileUpload',
                 name: 'fileUpload',
                 label: 'Upload File'
+              },
+              {
+                name: 'ProgressBar',
+                ...TestInputFieldsConfigsMap['progress']
               },
               {
                 name: 'optionSwitch',

@@ -4,20 +4,23 @@ import { InputField, InputOption } from '../../../types';
 import { useOptionsChangeHandler } from '../../hooks';
 import { convertInputOptions, generateReactKey, getFieldId } from '../../utils';
 import './RadioList.scss';
+import { BulmaField } from './BulmaField';
 
-export const RadioList: FunctionComponent<FormInputFieldProps> = ({
-                                                                    config,
-                                                                    onChange,
-                                                                    value,
-                                                                    options
-                                                                  }) => {
+export const RadioList: FunctionComponent<FormInputFieldProps> = (props) => {
+  const {
+    config,
+    onChange,
+    value,
+    options
+  } = props;
   const fieldConfig = config as InputField;
   const handleChange = useOptionsChangeHandler(fieldConfig, options as InputOption[], onChange);
   const convertedOptions = options ? convertInputOptions(options, [value as (string | number)]) : [];
   const inputId = getFieldId(config);
-  return <div className={'field'}>
-    {fieldConfig.label && <label className={'label'} htmlFor={inputId}>{fieldConfig.label}</label>}
-    <div className={'control radios is-flex-direction-column'} id={inputId}>
+  return (
+    <BulmaField
+      {...props}
+      id={inputId} config={fieldConfig} control={<div className={'radios is-flex-direction-column'}>
       {convertedOptions.map((opt) => {
         const optId = generateReactKey(config.name, opt.label);
         return <label key={`${opt.value}`} className={'radio mf-radio'} htmlFor={optId}>
@@ -26,6 +29,6 @@ export const RadioList: FunctionComponent<FormInputFieldProps> = ({
           &nbsp;{opt.label}
         </label>;
       })}
-    </div>
-  </div>;
+    </div>} />);
+
 };

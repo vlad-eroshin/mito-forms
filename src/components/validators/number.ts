@@ -24,6 +24,15 @@ export const validateNumberField = (value: string | null, min?: number, max?: nu
   return true;
 };
 
+export const validateRequiredField = (value: unknown, errorMessage?: string): boolean | string[] => {
+  if (typeof value === 'boolean') {
+    return true;
+  } else if (!value) {
+    return [errorMessage || 'This field is required'];
+  }
+  return true;
+};
+
 /**
  * Checks if the string is integer
  * @param value inpiut string

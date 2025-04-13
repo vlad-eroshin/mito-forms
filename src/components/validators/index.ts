@@ -1,17 +1,22 @@
-import type {InputField, ValidationFunctionType, ValidatorType} from '../../types';
+import type { InputField, ValidationFunctionType, ValidatorType } from '../../types';
 import { validateSimpleEmail } from './email';
-import { validateNumberField } from './number';
+import { validateNumberField, validateRequiredField } from './number';
 
 
 export const getValidatorFunction = (
   typeOrFn: ValidatorType | ValidationFunctionType<string>,
-  field?: InputField,
+  field?: InputField
 ): ValidationFunctionType<string> => {
   if (typeof typeOrFn === 'function') {
     return typeOrFn as ValidationFunctionType<string>;
   }
   const validatorType = typeOrFn as ValidatorType;
   switch (validatorType) {
+    case 'required': {
+      return (value) => {
+        return validateRequiredField(value);
+      };
+    }
     case 'number':
       return ((value: string | null) => {
         return validateNumberField(value, field?.minValue, field?.maxValue);

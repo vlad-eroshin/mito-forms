@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import type {
   DataStatus,
   EditorContextProps,
+  FieldsLayout,
   InputField,
   InputFieldType,
   InputOption,
@@ -22,6 +23,9 @@ export type FormInputFieldProps = {
   status?: DataStatus | undefined;
   renderAsFormElement?: boolean;
   fieldIndex?: number;
+  isValid?: boolean;
+  validationErrors?: string[];
+  fieldLayout?: FieldsLayout;
 };
 
 export function FormInputField<T>({
@@ -31,7 +35,10 @@ export function FormInputField<T>({
                                     options,
                                     status,
                                     renderAsFormElement = true,
-                                    fieldIndex = 0
+                                    fieldIndex = 0,
+                                    isValid = true,
+                                    validationErrors,
+                                    fieldLayout
                                   }: FormInputFieldProps) {
   const editorContextData = useContext<EditorContextProps>(EditorContext) as EditorContextProps<T>;
   const InputCMP =
@@ -39,7 +46,8 @@ export function FormInputField<T>({
     UnsupportedInputComponent;
 
   return renderAsFormElement ? (
-    <InputCMP config={config} value={value} onChange={onChange} options={options} />
+    <InputCMP config={config} value={value} onChange={onChange} options={options} isValid={isValid}
+              validationErrors={validationErrors} fieldLayout={fieldLayout} fieldIndex={fieldIndex} />
   ) : (
     <InputCMP
       renderAsFormElement={false}
@@ -49,6 +57,8 @@ export function FormInputField<T>({
       onChange={onChange}
       options={options}
       status={status}
+      isValid={isValid}
+      validationErrors={validationErrors}
     />
   );
 }

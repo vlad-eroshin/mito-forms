@@ -1,11 +1,10 @@
-import React from 'react';
 import { FormInputFieldProps } from '../../FormInputField';
+import React from 'react';
 import { InputField } from '../../../types';
 import { getFieldId } from '../../utils';
-import 'bulma/bulma.scss';
 import { BulmaField } from './BulmaField';
 
-export const StaticText: React.FunctionComponent<FormInputFieldProps> = (props) => {
+export const ProgressBar: React.FunctionComponent<FormInputFieldProps> = (props) => {
   const {
     config,
     value,
@@ -18,12 +17,7 @@ export const StaticText: React.FunctionComponent<FormInputFieldProps> = (props) 
     id={inputId}
     config={fieldConfig}
     control={
-      <div
-        id={inputId}
-        className="mt-static-text"
-        data-testid={inputId}
-        area-label={fieldConfig.label}
-      >{`${value}`}</div>
+      <progress className="progress is-link" value={value as number} max={100} />
     }
   />;
 };

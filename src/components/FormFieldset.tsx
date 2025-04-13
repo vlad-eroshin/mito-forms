@@ -31,6 +31,7 @@ export type FieldSetUIProps = {
   onRowDelete?: (() => void) | undefined;
   rowIndex?: number;
 };
+type FieldValidationStates = { [key: string]: { isValid: boolean; validationErrors: string[] } };
 
 export function FormFieldset<T>({
                                   config,
@@ -40,8 +41,10 @@ export function FormFieldset<T>({
                                   onRowDelete
                                 }: FieldSetUIProps) {
   const arrangeFields = config.arrangeFields || 'column';
+  const [fieldsValidationState, setFieldValidationState] = useState<FieldValidationStates>({});
 
   const editorContextData = useContext<EditorContextProps>(EditorContext) as EditorContextProps<T>;
+  const fieldsLayout = config.fieldsLayout || editorContextData.fieldsLayout;
   const dataSourceStates = editorContextData.dataSources;
   const allEditorState = editorContextData.editorState;
   const fieldSetValues = inputData;
@@ -69,28 +72,45 @@ export function FormFieldset<T>({
     [config.fields, editorContextData.contextParams, inputData]
   );
 
+
   const isFieldSetValid = useCallback(
     (fieldsData: ParamsMap): boolean => {
+      const tmpValidationStates: FieldValidationStates = {};
       for (let i = 0; i < visibleFormFields.length; i++) {
         const field = visibleFormFields[i];
         if (field.type === 'divider') {
           continue;
         }
         const value = fieldsData[field.name];
-        if (field.required && !value) {
-          return false;
+        if (field.required) {
+          const validatorFn = getValidatorFunction('required', field);
+          const validationRes = validatorFn(value);
+          if (validationRes !== true) {
+            tmpValidationStates[field.name] = {
+              isValid: false,
+              validationErrors: validationRes as string[]
+            };
+            setFieldValidationState(tmpValidationStates);
+            return false;
+          }
         }
         if (field.validator) {
           const validatorFn = getValidatorFunction(field.validator, field);
           const validationRes = validatorFn(value as string);
           if (validationRes !== true) {
+            tmpValidationStates[field.name] = {
+              isValid: false,
+              validationErrors: validationRes as string[]
+            };
+            setFieldValidationState(tmpValidationStates);
             return false;
           }
         }
       }
+      setFieldValidationState(tmpValidationStates);
       return true;
     },
-    [visibleFormFields]
+    [visibleFormFields, fieldsValidationState]
   );
 
   const handleCollapsExpand = useCallback(() => {
@@ -150,6 +170,8 @@ export function FormFieldset<T>({
           }
         });
       }
+      const validationResult = fieldsValidationState[field.name];
+      const isValidField = validationResult ? validationResult.isValid : true;
       return (
         <FormInputField<T>
           key={generateReactKey(config.name, field.type, field.name)}
@@ -158,6 +180,9 @@ export function FormFieldset<T>({
           config={genericInputFieldConfig as InputField}
           onChange={handleFieldChange}
           status={componentDataStatus}
+          isValid={isValidField}
+          validationErrors={validationResult?.validationErrors || []}
+          fieldLayout={fieldsLayout}
         />
       );
     });

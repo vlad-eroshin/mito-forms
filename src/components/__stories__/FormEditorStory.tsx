@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
 import React, { useCallback, useState } from 'react';
-import type { EditorMetadata } from '../../types';
+import type { EditorMetadata, FieldsLayout } from '../../types';
 import type { FormEditorProps } from '../FormEditor';
 import { FormEditor } from '../FormEditor';
 import './FormEditorStory.scss';
@@ -22,23 +22,34 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
                                                                                  changeInterval
                                                                                }) => {
   const [editorResult, setEditorResult] = useState<object>(initialData);
+  const [fieldsLayout, setFieldsLayout] = useState<FieldsLayout>('compact');
+
   const showStatePreview = true;
   const changeHandler = useCallback((result: object, _isValid?: boolean) => {
     setEditorResult(result);
+  }, []);
+  const handleLayoutChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
+    setFieldsLayout(event.target.value as FieldsLayout);
   }, []);
   return (
     <IntlProvider locale="en" messages={{}}>
       <div className="config-editor-story">
         <div className="story-container">
+          <div>
+            <select value={fieldsLayout || 'compact'} onChange={handleLayoutChange}>
+              <option value={'compact'}>Compact</option>
+              <option value={'twoColumn'}>Two Column</option>
+            </select>
+          </div>
           <div className="editor-preview" style={{ width: showStatePreview ? '60%' : '100%' }}>
-            <FormEditor
-              editorMetadata={editorMetadata}
-              initialData={initialData}
-              onChange={changeHandler}
-              throttleChange={throttleChange}
-              changeInterval={changeInterval}
-              dataSourceStates={dataSourceStates}
-              inputFieldRegistry={inputFieldRegistry}
+            <FormEditor key={`formEditor-${fieldsLayout}`}
+                        editorMetadata={{ ...editorMetadata, fieldsLayout }}
+                        initialData={initialData}
+                        onChange={changeHandler}
+                        throttleChange={throttleChange}
+                        changeInterval={changeInterval}
+                        dataSourceStates={dataSourceStates}
+                        inputFieldRegistry={inputFieldRegistry}
             />
           </div>
           {showStatePreview ? (
