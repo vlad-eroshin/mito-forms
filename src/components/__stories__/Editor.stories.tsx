@@ -10,6 +10,7 @@ import { tabbedLayout } from '../__metadata__/tabbedLayout';
 import { withListEditor } from '../__metadata__/withListEditor';
 import { FormEditorStory } from './FormEditorStory';
 import { CLASSIC_INPUTS } from '../classic';
+import { chartEditorMetadata } from '../__metadata__/chartEditor';
 
 const meta: Meta<typeof FormEditorStory> = {
   title: 'Form Editor/Usage',
@@ -237,3 +238,11 @@ export const SwitchComponent: Story = {
     }
   }
 };
+
+export const ChartEditor: Story = {
+  args: {
+    editorMetadata: chartEditorMetadata,
+    initialData: {}
+  }
+};
+

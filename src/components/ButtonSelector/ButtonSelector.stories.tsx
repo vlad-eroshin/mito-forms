@@ -4,11 +4,11 @@ import { expect, userEvent, within } from '@storybook/test';
 import { ButtonSelector, ButtonSelectorProps } from './ButtonSelector';
 import React, { useState } from 'react';
 
-export const ButtonSelectorWrapper: React.FC<ButtonSelectorProps> = ({
-                                                                       value,
-                                                                       options,
-                                                                       buttonSize
-                                                                     }) => {
+const ButtonSelectorWrapper: React.FC<ButtonSelectorProps> = ({
+                                                                value,
+                                                                options,
+                                                                buttonSize
+                                                              }) => {
   const [selValue, setSelValue] = useState(value);
   return (
     <ButtonSelector

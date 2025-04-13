@@ -75,12 +75,6 @@ export const getInitialFieldSetData = (
         fetchedValue = !isNullOrUndefined(rawValue)
           ? rawValue
           : fieldConf.default;
-      } else if (fieldConf.jsonPath) {
-        const rawValue =
-          fetchJsonPath(inputData as object, fieldConf.jsonPath) || inputData[fieldConf.name];
-        fetchedValue = !isNullOrUndefined(rawValue)
-          ? rawValue
-          : fieldConf.value || fieldConf.default;
       } else {
         const rawValue = inputData[fieldConf.name];
 

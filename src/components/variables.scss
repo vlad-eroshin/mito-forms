@@ -19,6 +19,7 @@
   --mf-input-thumb-size: 13;
   --mf-control-radius: var(--bulma-control-radius);
   --mf-selected-bg-color: var(--bulma-link);
+  --mf-static-color: var(--bulma-button-static-background-color);
 }
 
 $fontFamily: var(--mf-font-family);
@@ -32,5 +33,6 @@ $fontSizeMedium: var(--mf-font-size-medium);
 $fontSizeLarge: var(--mf-font-size-large);
 $controlRadius: var(--mf-control-radius);
 $selectedBackgroundColor: var(--mf-selected-bg-color);
+$staticColor: var(--mf-static-color);
 
 $spacing: var(--mf-spacing);
