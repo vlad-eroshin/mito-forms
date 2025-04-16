@@ -15,6 +15,8 @@ import { CheckBox } from './inputs/CheckBox';
 import { PasswordField } from './inputs/PasswordField';
 import { SwitchField } from './inputs/SwitchField';
 import { ProgressBar } from './inputs/ProgressBar';
+import { DeleteRowButton } from './inputs/DeleteRowButton';
+import { LoadingIndicator } from './LoadingIndicator';
 
 export const CLASSIC_INPUTS: InputFieldRegistry = {
   progress: ProgressBar,
@@ -34,10 +36,9 @@ export const CLASSIC_INPUTS: InputFieldRegistry = {
 
 
 export const DEFAULT_UTILITY_REGISTRY: UtilityComponentRegistry = {
-  loading: props => {
-    return <div className={props.className}>{props.loadingText || 'Loading...'}</div>;
-  },
+  loading: LoadingIndicator,
   block: props => <div className={`box ${props.className}`}>{props.children}</div>,
   tabbedSection: TabbedSection,
-  fieldset: BulmaFieldset
+  fieldset: BulmaFieldset,
+  deleteRowButton: DeleteRowButton
 };

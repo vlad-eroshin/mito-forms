@@ -19,6 +19,7 @@ export type FormInputFieldProps = {
   config: InputField;
   value: ParamValue;
   onChange: (paramsMap: ParamsMap) => void;
+  label?: string;
   options?: string[] | InputOption[] | undefined;
   status?: DataStatus | undefined;
   renderAsFormElement?: boolean;
@@ -33,6 +34,7 @@ export function FormInputField<T>({
                                     value,
                                     onChange,
                                     options,
+                                    label,
                                     status,
                                     renderAsFormElement = true,
                                     fieldIndex = 0,
@@ -46,7 +48,7 @@ export function FormInputField<T>({
     UnsupportedInputComponent;
 
   return renderAsFormElement ? (
-    <InputCMP config={config} value={value} onChange={onChange} options={options} isValid={isValid}
+    <InputCMP config={config} value={value} label={label} onChange={onChange} options={options} isValid={isValid}
               validationErrors={validationErrors} fieldLayout={fieldLayout} fieldIndex={fieldIndex} />
   ) : (
     <InputCMP
@@ -54,6 +56,7 @@ export function FormInputField<T>({
       fieldIndex={fieldIndex}
       config={config}
       value={value}
+      label={label}
       onChange={onChange}
       options={options}
       status={status}

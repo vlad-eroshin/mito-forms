@@ -1,4 +1,4 @@
-@use '../variables.scss';
+@use '../../bulma-theme' as theme;
 
 .button-selector-group {
   display: flex;
@@ -21,20 +21,20 @@
     border-right-width: 0;
 
     &.is-selected {
-      background-color: variables.$selectedBackgroundColor;
-      color: var(--bulma-button-border-color);
+      background-color: theme.$selectedBackgroundColor;
+      color: theme.$borderColor;
       opacity: 1;
       cursor: auto;
     }
 
     &:first-child {
-      border-top-left-radius: variables.$controlRadius;
-      border-bottom-left-radius: variables.$controlRadius;
+      border-top-left-radius: theme.$controlRadius;
+      border-bottom-left-radius: theme.$controlRadius;
     }
 
     &:last-child {
-      border-top-right-radius: variables.$controlRadius;
-      border-bottom-right-radius: variables.$controlRadius;
+      border-top-right-radius: theme.$controlRadius;
+      border-bottom-right-radius: theme.$controlRadius;
     }
 
     &:not(:first-child):not(:last-child) {

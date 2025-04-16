@@ -87,6 +87,7 @@ export const ListEditor: React.FC<ListInputProps> = ({
           <FormFieldset
             key={`list-item-row-${i}`}
             config={{ ...rowFieldset, arrangeFields: 'tableRow' }}
+            showFieldLabels={!showHeader}
             rowIndex={i}
             inputData={fieldValues as ParamsMap}
             onChange={(fieldsetValues: ParamsMap, isFieldsetValid) =>

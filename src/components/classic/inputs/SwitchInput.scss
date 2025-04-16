@@ -1,4 +1,4 @@
-@use '../../variables';
+@use '../bulma-theme' as theme;
 
 $switchHeight: calc(var(--mf-spacing) * 2px + 1px);
 $switchWidth: calc($switchHeight * 2);
@@ -21,7 +21,7 @@ $switchWidth: calc($switchHeight * 2);
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: variables.$borderColor;
+    background-color: theme.$borderColor;
     -webkit-transition: .4s;
     transition: .4s;
 
@@ -53,7 +53,7 @@ $switchWidth: calc($switchHeight * 2);
 
 
     &:checked + .slider {
-      background-color: variables.$selectedBackgroundColor;
+      background-color: theme.$selectedBackgroundColor;
 
       &:before {
         -webkit-transform: translateX($switchHeight);

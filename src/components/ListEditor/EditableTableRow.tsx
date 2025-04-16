@@ -1,8 +1,8 @@
-import { useIntl } from 'react-intl';
 import { FormInputField } from '../FormInputField';
 import { generateReactKey, retrieveInputOptions } from '../utils';
 import React from 'react';
-import { DataRecord, InputField, ParamsMap } from '../../types';
+import { DataRecord, DeleteRowButtonProps, InputField, ParamsMap } from '../../types';
+import { useUtilComponent } from '../hooks';
 
 type EditableRowProps = {
   values: ParamsMap;
@@ -10,6 +10,7 @@ type EditableRowProps = {
   rowIndex: number;
   onDelete?: (() => void) | undefined;
   onChange: (record: DataRecord, isValid?: boolean) => void;
+  showFieldLabels?: boolean;
 };
 
 export const EditableRow: React.FunctionComponent<EditableRowProps> = ({
@@ -17,9 +18,10 @@ export const EditableRow: React.FunctionComponent<EditableRowProps> = ({
                                                                          values,
                                                                          fields,
                                                                          onChange,
-                                                                         rowIndex
+                                                                         rowIndex,
+                                                                         showFieldLabels = true
                                                                        }) => {
-  const { formatMessage } = useIntl();
+  const DeleteRowButton = useUtilComponent<DeleteRowButtonProps>('deleteRowButton');
   return (
     <tr>
       {fields.map((field) => {
@@ -29,9 +31,11 @@ export const EditableRow: React.FunctionComponent<EditableRowProps> = ({
             <FormInputField
               renderAsFormElement={false}
               config={field}
+              label={showFieldLabels ? field.label : undefined}
               value={values ? values[field.name] : null}
               options={options}
               onChange={onChange}
+
               fieldIndex={rowIndex}
             />
           </td>
@@ -39,13 +43,7 @@ export const EditableRow: React.FunctionComponent<EditableRowProps> = ({
       })}
       {onDelete && (
         <td className="controls-col">
-          <button
-            data-testid={`list-editor-delete-row-${rowIndex}`}
-            onClick={onDelete}
-            aria-label={formatMessage({ id: 'Delete' })}
-          >
-            {/*<DeleteIcon />*/}
-          </button>
+          <DeleteRowButton showIcon={true} onClick={onDelete} />
         </td>
       )}
     </tr>

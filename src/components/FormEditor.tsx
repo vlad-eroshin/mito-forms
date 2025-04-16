@@ -104,7 +104,7 @@ export function FormEditor<T>({
     }),
     [dataSourceStates, editorState, inputFieldRegistry, contextParams]
   );
-  const LoadingComponent = utilityComponentRegistry['loading'];
+  const LoadingComponent = utilityComponentRegistry.loading;
   //Handler for certain form change
   const handleFormChange = useCallback(
     (freshFormData: FormDataState, formName: string, fieldSetName: string, isFormValid?: boolean) => {
@@ -173,8 +173,7 @@ export function FormEditor<T>({
       <div className="editor-status">
         {changeTimeout && (
           <div className="info">
-            <LoadingComponent />
-            <span>Applying Changes...</span>
+            <LoadingComponent loadingText={'Applying changes...'} />
           </div>
         )}
       </div>

@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
-import { convertInputOptions, generateReactKey } from '../utils';
-import { InputOption } from '../../types';
+import { convertInputOptions, generateReactKey } from '../../../utils';
+import { InputOption } from '../../../../types';
 import 'bulma/bulma.scss';
 import './ButtonSelector.scss';
 import * as faIcons from '@fortawesome/free-solid-svg-icons';

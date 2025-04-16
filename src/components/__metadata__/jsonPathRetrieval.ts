@@ -13,7 +13,6 @@ export const editorWithJsonPath: EditorMetadata = {
           name: 'jsonPathFieldset',
           jsonPath: '$.path.to.fieldsetData',
           showTitle: true,
-          fieldsLayout: 'twoColumn',
           fields: [
             {
               type: 'staticText',
@@ -31,45 +30,50 @@ export const editorWithJsonPath: EditorMetadata = {
           title: 'Access data per field',
           name: 'jsonPathPerField',
           showTitle: true,
-          fieldsLayout: 'twoColumn',
           fields: [
             {
               type: 'staticText',
-              label: 'Access numeric value ($.other.numericValue1)',
+              label: 'Access numeric value',
+              helpText: `$.other.numericValue1`,
               name: 'numericValue',
               value: '{$.other.numericValue1}'
             },
             {
               type: 'text',
-              label: 'Text Value ($.other.textValue)',
+              label: 'Text Value',
+              helpText: 'Json path $.other.textValue',
               name: 'textValue',
               value: '{$.other.textValue}'
             },
             {
               type: 'select',
               name: 'selector',
-              label: 'Selector retrieves options from ($.someData.to.listOfOptions)',
+              label: 'Selector ',
+              helpText: 'Retrieves options from $.someData.to.listOfOptions',
               options: '{$.someData.to.listOfOptions}',
               value: 1
             },
             {
               type: 'checkbox',
               name: 'checkboxList',
-              label: 'Check List retrieves options from ($.someData.to.listOfOptions)',
+              label: 'Check List',
+              helpText: 'Options loaded from $.someData.to.listOfOptions',
               options: '{$.someData.to.listOfOptions}',
               value: 1
             },
             {
               type: 'radio',
               name: 'radioList',
-              label: 'Radio buttons retrieves options from ($.someData.to.listOfOptions)',
+              label: 'Radio buttons',
+              helpText: 'Retrieves options from ($.someData.to.listOfOptions)',
               options: '{$.someData.to.listOfOptions}',
               value: 1
             },
             {
               type: 'switch',
               name: 'switchList',
-              label: 'Switch List retrieves options from ($.someData.to.switchListOfOptions)',
+              label: 'Switch List',
+              helpText: 'Retrieves options from ($.someData.to.switchListOfOptions)',
               options: '{$.someData.to.switchListOfOptions}',
               value: 1
             }

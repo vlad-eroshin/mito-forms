@@ -35,12 +35,6 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
     <IntlProvider locale="en" messages={{}}>
       <div className="config-editor-story">
         <div className="story-container">
-          <div>
-            <select value={fieldsLayout || 'compact'} onChange={handleLayoutChange}>
-              <option value={'compact'}>Compact</option>
-              <option value={'twoColumn'}>Two Column</option>
-            </select>
-          </div>
           <div className="editor-preview" style={{ width: showStatePreview ? '60%' : '100%' }}>
             <FormEditor key={`formEditor-${fieldsLayout}`}
                         editorMetadata={{ ...editorMetadata, fieldsLayout }}
@@ -54,6 +48,13 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
           </div>
           {showStatePreview ? (
             <div className="editor-state-preview">
+              <p>Fields Layout</p>
+              <div>
+                <select value={fieldsLayout || 'compact'} onChange={handleLayoutChange}>
+                  <option value={'compact'}>Compact</option>
+                  <option value={'twoColumn'}>Two Column</option>
+                </select>
+              </div>
               <p>Editor Result</p>
               <textarea
                 id="editorResult"

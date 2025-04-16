@@ -4,6 +4,7 @@ import type {
   EditorContextProps,
   EditorState,
   FieldSetMetadata,
+  FieldsetProps,
   FormDividerConfig,
   InputField,
   InputOption,
@@ -19,6 +20,7 @@ import { EditableRow } from './ListEditor/EditableTableRow';
 import { accessAndTransformData, evaluateLogicInContext } from './data';
 import { generateReactKey, retrieveInputOptions } from './utils';
 import { getValidatorFunction } from './validators';
+import { useUtilComponent } from './hooks';
 
 /**
  * Component representing fieldset UI.
@@ -30,6 +32,7 @@ export type FieldSetUIProps = {
   onChange: (data: ParamsMap, isValid?: boolean) => void;
   onRowDelete?: (() => void) | undefined;
   rowIndex?: number;
+  showFieldLabels?: boolean;
 };
 type FieldValidationStates = { [key: string]: { isValid: boolean; validationErrors: string[] } };
 
@@ -38,7 +41,8 @@ export function FormFieldset<T>({
                                   inputData,
                                   onChange,
                                   rowIndex = -1,
-                                  onRowDelete
+                                  onRowDelete,
+                                  showFieldLabels = true
                                 }: FieldSetUIProps) {
   const arrangeFields = config.arrangeFields || 'column';
   const [fieldsValidationState, setFieldValidationState] = useState<FieldValidationStates>({});
@@ -51,7 +55,7 @@ export function FormFieldset<T>({
   const [visibleFormFields, setVisibleFormFields] = useState<(InputField | FormDividerConfig)[]>(
     []
   );
-  const FieldsetCmp = editorContextData.utilityComponentRegistry.fieldset;
+  const FieldsetCmp = useUtilComponent<FieldsetProps>('fieldset');
   const [collapsed, setCollapsed] = useState<boolean>(!!config.collapsible && !!config.collapsed);
   const getVisibleFormFields = useCallback(
     (editorState: EditorState<T>) => {
@@ -176,6 +180,7 @@ export function FormFieldset<T>({
         <FormInputField<T>
           key={generateReactKey(config.name, field.type, field.name)}
           value={value}
+          label={field.label}
           options={genericInputFieldConfig.options as InputOption[] | string[]}
           config={genericInputFieldConfig as InputField}
           onChange={handleFieldChange}
@@ -188,8 +193,11 @@ export function FormFieldset<T>({
     });
   };
   return arrangeFields !== 'tableRow' ? (
-    <FieldsetCmp onCollapse={handleCollapsExpand} legend={config.title} collapsible={config.collapsible}
-                 collapsed={collapsed}>
+    <FieldsetCmp
+      onCollapse={handleCollapsExpand}
+      legend={config.title}
+      collapsible={config.collapsible}
+      collapsed={collapsed}>
       {!collapsed && (
         arrangeFields === 'column' ?
           <>{renderFields(visibleFormFields)}</>
@@ -204,6 +212,7 @@ export function FormFieldset<T>({
       values={fieldSetValues as ParamsMap}
       onChange={handleFieldChange}
       onDelete={onRowDelete}
+      showFieldLabels={showFieldLabels}
     />
   );
 }

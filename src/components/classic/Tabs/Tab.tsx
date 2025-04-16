@@ -1,6 +1,5 @@
 import React, { FunctionComponent, MouseEvent, useCallback } from 'react';
 import { TabProps } from '../../../types';
-import './TabbedSection.scss';
 
 type TabPropsExt = Omit<TabProps, 'content'> & {
   onTab: (id: string, event: MouseEvent) => void;

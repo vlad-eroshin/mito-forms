@@ -178,6 +178,7 @@ export type InputField = {
   name: string;
   label?: string;
   placeHolderText?: string;
+  helpText?: string;
   type: InputFieldType | 'divider';
   valueType?: 'text' | 'email' | 'password' | 'url' | 'search';
   required?: boolean;
@@ -298,6 +299,7 @@ export type InputFieldRegistry = {
 export type LoadingComponentProps = {
   className?: string;
   loadingText?: string;
+  size?: 'small' | 'medium' | 'large';
 }
 export type BlockComponentProps = {
   className?: string;
@@ -313,11 +315,18 @@ export type FieldsetProps = {
   layout?: FieldsLayout;
 }
 
+export type DeleteRowButtonProps = {
+  text?: string;
+  showIcon?: boolean;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+}
+
 export type UtilityComponentRegistry = {
   loading: FunctionComponent<LoadingComponentProps>;
   block: FunctionComponent<BlockComponentProps>;
   tabbedSection: FunctionComponent<TabbedSectionProps>;
   fieldset: FunctionComponent<FieldsetProps>;
+  deleteRowButton: FunctionComponent<DeleteRowButtonProps>;
 }
 
 export type EditorContextProps<T = object> = {

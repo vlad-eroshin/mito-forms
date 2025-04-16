@@ -4,7 +4,7 @@ import { InputField } from '../../../types';
 import { convertInputOptions, getFieldId } from '../../utils';
 import './RadioList.scss';
 import { BulmaField } from './BulmaField';
-import { ButtonSelector } from '../../ButtonSelector/ButtonSelector';
+import { ButtonSelector } from './ButtonSelector/ButtonSelector';
 
 export const ButtonSelectorField: FunctionComponent<FormInputFieldProps> = (props) => {
   const {

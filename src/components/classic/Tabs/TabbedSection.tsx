@@ -2,7 +2,6 @@ import React, { FunctionComponent, useCallback, useMemo } from 'react';
 import { TabbedSectionProps } from '../../../types';
 import { generateReactKey } from '../../utils';
 import { TabPanel } from './TabPanel';
-import './TabbedSection.scss';
 import { Tab } from './Tab';
 
 export const TabbedSection: FunctionComponent<TabbedSectionProps> = ({ selected, tabs, onTab }) => {
