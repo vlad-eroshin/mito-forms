@@ -3,15 +3,14 @@ import EditorContext from '../EditorContext';
 import type { ListInputProps } from '../ListEditor/ListEditor';
 import { ListEditor } from '../ListEditor/ListEditor';
 import { IntlProvider } from 'react-intl';
-import { CLASSIC_INPUTS, DEFAULT_UTILITY_REGISTRY } from '../classic';
+import { BULMA_REGISTRY } from '../impl/bulma';
 
 export const ListEditorWrapper: React.FunctionComponent<ListInputProps> = (props) => {
   const contextVal = useMemo(
     () => ({
       dataSources: {},
       contextParams: {},
-      inputFieldRegistry: CLASSIC_INPUTS,
-      utilityComponentRegistry: DEFAULT_UTILITY_REGISTRY,
+      componentRegistry: BULMA_REGISTRY,
       editorState: {
         formStates: {},
         editorResult: {}

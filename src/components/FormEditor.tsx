@@ -1,19 +1,17 @@
 import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
 import type {
+  ComponentRegistry,
   DataSourceState,
   EditorContextProps,
   EditorMetadata,
   FormChangePayload,
   FormDataState,
-  InputFieldRegistry,
-  ParamsMap,
-  UtilityComponentRegistry
+  ParamsMap
 } from '../types';
 import EditorContext from './EditorContext';
 import './FormEditor.scss';
 import { buildFormStatesFromData, editorStateReducer } from './FormEditorReducer';
 import { FormsContainer } from './FormsContainer';
-import { CLASSIC_INPUTS, DEFAULT_UTILITY_REGISTRY } from './classic';
 
 /**
  * Generic UI component for form editor UI that allows modification of any object that requires modification of JSON Objects
@@ -58,13 +56,11 @@ export type FormEditorProps<T = object> = {
   /**
    * Registry of the input field components. By default Core UI components are used but in theory can be swapped with anything else.
    */
-  inputFieldRegistry?: InputFieldRegistry;
+  componentRegistry: ComponentRegistry;
 
   /**
-   *
+   * Additional Context Params
    */
-  utilityComponentRegistry?: UtilityComponentRegistry;
-
   contextParams?: ParamsMap;
 };
 
@@ -75,8 +71,7 @@ export function FormEditor<T>({
                                 dataSourceStates,
                                 throttleChange,
                                 changeInterval = 1000,
-                                inputFieldRegistry = CLASSIC_INPUTS,
-                                utilityComponentRegistry = DEFAULT_UTILITY_REGISTRY,
+                                componentRegistry,
                                 contextParams
                               }: FormEditorProps<T>) {
   const statesOfForms = buildFormStatesFromData<T>(editorMetadata, initialData);
@@ -96,15 +91,15 @@ export function FormEditor<T>({
   const editorContextData: EditorContextProps<T> = useMemo(
     () => ({
       dataSources: dataSourceStates || {},
-      inputFieldRegistry,
-      utilityComponentRegistry,
+      componentRegistry,
       editorState,
       contextParams,
       fieldsLayout: editorMetadata.fieldsLayout || 'compact'
     }),
-    [dataSourceStates, editorState, inputFieldRegistry, contextParams]
+    [dataSourceStates, editorState, componentRegistry, contextParams]
   );
-  const LoadingComponent = utilityComponentRegistry.loading;
+  const LoadingComponent =
+    componentRegistry.utilityComponents.loading;
   //Handler for certain form change
   const handleFormChange = useCallback(
     (freshFormData: FormDataState, formName: string, fieldSetName: string, isFormValid?: boolean) => {

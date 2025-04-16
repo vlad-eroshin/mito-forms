@@ -1,13 +1,14 @@
 import { createContext } from 'react';
 import type { EditorContextProps } from '../types';
-import { CLASSIC_INPUTS, DEFAULT_UTILITY_REGISTRY } from './classic';
 
 
 const EditorContext = createContext<EditorContextProps>({
   dataSources: {},
   contextParams: {},
-  inputFieldRegistry: CLASSIC_INPUTS,
-  utilityComponentRegistry: DEFAULT_UTILITY_REGISTRY,
+  componentRegistry: {
+    inputFields: {},
+    utilityComponents: {}
+  },
   editorState: {
     formStates: {},
     editorResult: {}

@@ -321,6 +321,11 @@ export type DeleteRowButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
 
+export type ComponentRegistry = {
+  inputFields: InputFieldRegistry;
+  utilityComponents: UtilityComponentRegistry;
+}
+
 export type UtilityComponentRegistry = {
   loading: FunctionComponent<LoadingComponentProps>;
   block: FunctionComponent<BlockComponentProps>;
@@ -331,8 +336,7 @@ export type UtilityComponentRegistry = {
 
 export type EditorContextProps<T = object> = {
   dataSources: { [key: string]: DataSourceState };
-  inputFieldRegistry: InputFieldRegistry;
-  utilityComponentRegistry: UtilityComponentRegistry;
+  componentRegistry: ComponentRegistry;
   editorState: EditorState<T>;
   contextParams?: { [key: string]: unknown } | undefined; // Context params that maybe necessary in reducers
   fieldsLayout?: FieldsLayout;

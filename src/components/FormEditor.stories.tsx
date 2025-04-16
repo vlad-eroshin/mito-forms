@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { TestInputFieldsConfigsMap } from './__metadata__/mockGenericFields';
 import type { FormEditorStoryProps } from './__stories__/FormEditorStory';
 import { FormEditorStory } from './__stories__/FormEditorStory';
+import { BULMA_REGISTRY } from './impl/bulma';
 
 
 const meta: Meta<typeof FormEditorStory> = {
@@ -150,7 +151,8 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
     activeForm: ''
   },
   throttleChange: false,
-  initialData: {}
+  initialData: {},
+  componentRegistry: BULMA_REGISTRY
 };
 
 export const AllFieldTypes: Story = {

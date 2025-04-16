@@ -17,7 +17,7 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
                                                                                  initialData,
                                                                                  editorMetadata,
                                                                                  dataSourceStates,
-                                                                                 inputFieldRegistry,
+                                                                                 componentRegistry,
                                                                                  throttleChange,
                                                                                  changeInterval
                                                                                }) => {
@@ -43,7 +43,7 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
                         throttleChange={throttleChange}
                         changeInterval={changeInterval}
                         dataSourceStates={dataSourceStates}
-                        inputFieldRegistry={inputFieldRegistry}
+                        componentRegistry={componentRegistry}
             />
           </div>
           {showStatePreview ? (

@@ -2,6 +2,7 @@ import React from 'react';
 import { FormEditor } from './FormEditor';
 import { editorWithConditions } from './__metadata__/editorWithConditions';
 import { render, screen } from '@testing-library/react';
+import { BULMA_REGISTRY } from './impl/bulma';
 
 describe('Config Editor Tests', () => {
   it('test basic editor', async () => {
@@ -12,6 +13,7 @@ describe('Config Editor Tests', () => {
         initialData={{}}
         editorMetadata={editorWithConditions}
         onChange={mockChangeHandler}
+        componentRegistry={BULMA_REGISTRY}
       />
     );
 

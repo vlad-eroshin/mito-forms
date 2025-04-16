@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import type {
   DataStatus,
-  EditorContextProps,
   FieldsLayout,
   InputField,
   InputFieldType,
@@ -9,8 +8,8 @@ import type {
   ParamsMap,
   ParamValue
 } from '../types';
-import EditorContext from './EditorContext';
 import './FormInputField.scss';
+import { useInputFieldComponent } from './hooks/context/useInputFieldComponent';
 
 /**
  * Wrapper around most of the form input types supported.
@@ -42,10 +41,7 @@ export function FormInputField<T>({
                                     validationErrors,
                                     fieldLayout
                                   }: FormInputFieldProps) {
-  const editorContextData = useContext<EditorContextProps>(EditorContext) as EditorContextProps<T>;
-  const InputCMP =
-    editorContextData.inputFieldRegistry[config.type as InputFieldType] ||
-    UnsupportedInputComponent;
+  const InputCMP = useInputFieldComponent(config.type as InputFieldType);
 
   return renderAsFormElement ? (
     <InputCMP config={config} value={value} label={label} onChange={onChange} options={options} isValid={isValid}
@@ -66,16 +62,4 @@ export function FormInputField<T>({
   );
 }
 
-FormInputField.displayName = 'FormInputField';
 
-const UnsupportedInputComponent: React.FunctionComponent<Pick<FormInputFieldProps, 'config'>> = ({
-                                                                                                   config
-                                                                                                 }) => {
-  return (
-    <div className="unsupported-input">
-      {`[Unsupported Input Component type (${config.type}): name: (${config.name})]`}
-    </div>
-  );
-};
-
-UnsupportedInputComponent.displayName = 'UnsupportedInputComponent';
