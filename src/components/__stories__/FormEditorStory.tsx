@@ -14,13 +14,13 @@ export type FormEditorStoryProps = Omit<FormEditorProps, 'onChange'> & {
 };
 
 export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
-                                                                                 initialData,
-                                                                                 editorMetadata,
-                                                                                 dataSourceStates,
-                                                                                 componentRegistry,
-                                                                                 throttleChange,
-                                                                                 changeInterval
-                                                                               }) => {
+  initialData,
+  editorMetadata,
+  dataSourceStates,
+  componentRegistry,
+  throttleChange,
+  changeInterval,
+}) => {
   const [editorResult, setEditorResult] = useState<object>(initialData);
   const [fieldsLayout, setFieldsLayout] = useState<FieldsLayout>('compact');
 
@@ -36,14 +36,15 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
       <div className="config-editor-story">
         <div className="story-container">
           <div className="editor-preview" style={{ width: showStatePreview ? '60%' : '100%' }}>
-            <FormEditor key={`formEditor-${fieldsLayout}`}
-                        editorMetadata={{ ...editorMetadata, fieldsLayout }}
-                        initialData={initialData}
-                        onChange={changeHandler}
-                        throttleChange={throttleChange}
-                        changeInterval={changeInterval}
-                        dataSourceStates={dataSourceStates}
-                        componentRegistry={componentRegistry}
+            <FormEditor
+              key={`formEditor-${fieldsLayout}`}
+              editorMetadata={{ ...editorMetadata, fieldsLayout }}
+              initialData={initialData}
+              onChange={changeHandler}
+              throttleChange={throttleChange}
+              changeInterval={changeInterval}
+              dataSourceStates={dataSourceStates}
+              componentRegistry={componentRegistry}
             />
           </div>
           {showStatePreview ? (

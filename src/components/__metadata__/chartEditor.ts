@@ -26,10 +26,10 @@ export const chartEditorMetadata: EditorMetadata<VegaLiteSpec> = {
                 { value: 'tick', label: 'Tick' },
                 { value: 'rect', label: 'Rectangle' },
                 { value: 'rule', label: 'Rule' },
-                { value: 'text', label: 'Text' }
-              ]
-            }
-          ]
+                { value: 'text', label: 'Text' },
+              ],
+            },
+          ],
         },
         {
           name: 'xField',
@@ -38,9 +38,9 @@ export const chartEditorMetadata: EditorMetadata<VegaLiteSpec> = {
             {
               name: 'xField',
               type: 'text',
-              label: 'X Field'
-            }
-          ]
+              label: 'X Field',
+            },
+          ],
         },
         {
           name: 'xType',
@@ -54,10 +54,10 @@ export const chartEditorMetadata: EditorMetadata<VegaLiteSpec> = {
                 { value: 'quantitative', label: 'Quantitative' },
                 { value: 'ordinal', label: 'Ordinal' },
                 { value: 'nominal', label: 'Nominal' },
-                { value: 'temporal', label: 'Temporal' }
-              ]
-            }
-          ]
+                { value: 'temporal', label: 'Temporal' },
+              ],
+            },
+          ],
         },
         {
           name: 'yField',
@@ -66,9 +66,9 @@ export const chartEditorMetadata: EditorMetadata<VegaLiteSpec> = {
             {
               name: 'yField',
               type: 'text',
-              label: 'Y Field'
-            }
-          ]
+              label: 'Y Field',
+            },
+          ],
         },
         {
           name: 'yType',
@@ -82,13 +82,13 @@ export const chartEditorMetadata: EditorMetadata<VegaLiteSpec> = {
                 { value: 'quantitative', label: 'Quantitative' },
                 { value: 'ordinal', label: 'Ordinal' },
                 { value: 'nominal', label: 'Nominal' },
-                { value: 'temporal', label: 'Temporal' }
-              ]
-            }
-          ]
-        }
-      ]
-    }
+                { value: 'temporal', label: 'Temporal' },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
   reducersMap: {
     // chartForm: {
@@ -123,5 +123,5 @@ export const chartEditorMetadata: EditorMetadata<VegaLiteSpec> = {
     //     }
     //   } as VegaLiteSpec)
     //}
-  }
+  },
 };

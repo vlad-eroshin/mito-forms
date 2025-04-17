@@ -9,7 +9,7 @@ import type {
   ListEditorMetadata,
   ParamsMap,
   ParamValue,
-  RecordsArray
+  RecordsArray,
 } from '../../types';
 import uuidByString from 'uuid-by-string';
 
@@ -35,7 +35,7 @@ export const fetchJsonPath = (data: object, jsonPath?: string): object | Defined
   }
   const fetchedData = JSONPath({
     json: data,
-    path: jsonPath
+    path: jsonPath,
   });
   if (fetchedData) {
     if (Array.isArray(fetchedData)) {
@@ -72,9 +72,7 @@ export const getInitialFieldSetData = (
         const valueJsonPath = extractJsonPathString(fieldConf.value);
         const rawValue =
           fetchJsonPath(inputData as object, valueJsonPath) || inputData[fieldConf.name];
-        fetchedValue = !isNullOrUndefined(rawValue)
-          ? rawValue
-          : fieldConf.default;
+        fetchedValue = !isNullOrUndefined(rawValue) ? rawValue : fieldConf.default;
       } else {
         const rawValue = inputData[fieldConf.name];
 
@@ -82,9 +80,7 @@ export const getInitialFieldSetData = (
           ? rawValue
           : fieldConf.value || fieldConf.default;
       }
-      if (
-        isJsonPathExp(fieldConf.options)
-      ) {
+      if (isJsonPathExp(fieldConf.options)) {
         const matchRes = (fieldConf.options as string).match(RX_JSON_PATH) as string[];
         const optionsRes =
           fetchJsonPath(inputData as object, matchRes[1]) ||
@@ -177,7 +173,7 @@ export const buildCheckedValues = (values: ParamValue | undefined | null): strin
     return [];
   }
   if (Array.isArray(values)) {
-    return values.length > 0 ? values.join(',').split(',') : values as string [];
+    return values.length > 0 ? values.join(',').split(',') : (values as string[]);
   } else {
     const trimmedVal = `${values}`.trim();
     return trimmedVal ? `${trimmedVal}`.trim().split(',') : [];
@@ -196,19 +192,19 @@ export const convertInputOptions = (
   checkedValues?: (string | number)[]
 ): InputOption[] => {
   const convertedOptions = options
-    ? options.map((opt) => {
-      const rawOpt: InputOption =
-        typeof opt === 'string'
-          ? { label: opt as string, value: opt as string }
-          : (opt as InputOption);
+    ? options.map(opt => {
+        const rawOpt: InputOption =
+          typeof opt === 'string'
+            ? { label: opt as string, value: opt as string }
+            : (opt as InputOption);
 
-      return {
-        ...rawOpt,
-        checked: !!(checkedValues && checkedValues.indexOf(`${rawOpt.value}`) >= 0),
-        params: rawOpt.params || {},
-        disabled: !!rawOpt.disabled
-      };
-    })
+        return {
+          ...rawOpt,
+          checked: !!(checkedValues && checkedValues.indexOf(`${rawOpt.value}`) >= 0),
+          params: rawOpt.params || {},
+          disabled: !!rawOpt.disabled,
+        };
+      })
     : [];
   return convertedOptions;
 };
@@ -237,7 +233,6 @@ export const retrieveInputOptions = (
     return rawOptions;
   }
 };
-
 
 export function getFieldId(fieldConfig: InputField, fieldIndex?: number) {
   return `${fieldConfig.type}-${fieldConfig.name}-${fieldIndex || 0}`;

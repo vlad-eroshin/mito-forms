@@ -1,12 +1,12 @@
 /** @type { import('@storybook/react-webpack5').StorybookConfig } */
 const config = {
-  'stories': [
+  stories: [
     '../stories/**/*.mdx',
     '../stories/**/*.stories.@(js|jsx|mjs|ts|tsx)',
     '../src/**/*.mdx',
-    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'
+    '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)',
   ],
-  'addons': [
+  addons: [
     '@storybook/addon-webpack5-compiler-swc',
     '@storybook/addon-essentials',
     '@storybook/addon-onboarding',
@@ -27,11 +27,11 @@ const config = {
                 options: {
                   modules: {
                     auto: true,
-                    localIdentName: '[name]__[local]--[hash:base64:5]'
-                  }
-                }
-              }
-            ]
+                    localIdentName: '[name]__[local]--[hash:base64:5]',
+                  },
+                },
+              },
+            ],
           },
           // Replaces any existing Sass rules with given rules
           {
@@ -41,19 +41,18 @@ const config = {
               'css-loader',
               {
                 loader: 'sass-loader',
-                options: { implementation: require.resolve('sass') }
-              }
-            ]
-          }
-        ]
-      }
-    }
-
+                options: { implementation: require.resolve('sass') },
+              },
+            ],
+          },
+        ],
+      },
+    },
   ],
-  'framework': {
-    'name': '@storybook/react-webpack5',
-    'options': {}
-  }
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {},
+  },
 };
 
 export default config;

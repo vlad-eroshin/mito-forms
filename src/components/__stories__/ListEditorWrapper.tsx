@@ -5,7 +5,7 @@ import { ListEditor } from '../ListEditor/ListEditor';
 import { IntlProvider } from 'react-intl';
 import { BULMA_REGISTRY } from '../impl/bulma';
 
-export const ListEditorWrapper: React.FunctionComponent<ListInputProps> = (props) => {
+export const ListEditorWrapper: React.FunctionComponent<ListInputProps> = props => {
   const contextVal = useMemo(
     () => ({
       dataSources: {},
@@ -13,8 +13,8 @@ export const ListEditorWrapper: React.FunctionComponent<ListInputProps> = (props
       componentRegistry: BULMA_REGISTRY,
       editorState: {
         formStates: {},
-        editorResult: {}
-      }
+        editorResult: {},
+      },
     }),
     []
   );

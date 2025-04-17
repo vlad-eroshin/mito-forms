@@ -31,19 +31,18 @@ const BULMA_INPUTS: InputFieldRegistry = {
   switch: SwitchField,
   text: TextField,
   textbox: TextArea,
-  fileUpload: FileUpload
+  fileUpload: FileUpload,
 };
-
 
 const BULMA_UTIL_COMPONENTS: UtilityComponentRegistry = {
   loading: LoadingIndicator,
   block: props => <div className={`box ${props.className}`}>{props.children}</div>,
   tabbedSection: TabbedSection,
   fieldset: BulmaFieldset,
-  deleteRowButton: DeleteRowButton
+  deleteRowButton: DeleteRowButton,
 };
 
 export const BULMA_REGISTRY: ComponentRegistry = {
   utilityComponents: BULMA_UTIL_COMPONENTS,
-  inputFields: BULMA_INPUTS
+  inputFields: BULMA_INPUTS,
 };

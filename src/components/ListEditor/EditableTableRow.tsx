@@ -14,17 +14,17 @@ type EditableRowProps = {
 };
 
 export const EditableRow: React.FunctionComponent<EditableRowProps> = ({
-                                                                         onDelete,
-                                                                         values,
-                                                                         fields,
-                                                                         onChange,
-                                                                         rowIndex,
-                                                                         showFieldLabels = true
-                                                                       }) => {
+  onDelete,
+  values,
+  fields,
+  onChange,
+  rowIndex,
+  showFieldLabels = true,
+}) => {
   const DeleteRowButton = useUtilComponent<DeleteRowButtonProps>('deleteRowButton');
   return (
     <tr>
-      {fields.map((field) => {
+      {fields.map(field => {
         const options = retrieveInputOptions(field, values);
         return (
           <td key={generateReactKey('list-item', field.name)}>
@@ -35,7 +35,6 @@ export const EditableRow: React.FunctionComponent<EditableRowProps> = ({
               value={values ? values[field.name] : null}
               options={options}
               onChange={onChange}
-
               fieldIndex={rowIndex}
             />
           </td>

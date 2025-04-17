@@ -5,20 +5,18 @@ import { convertInputOptions, getFieldId } from '../../../utils';
 import { BulmaField } from './BulmaField';
 import { ButtonSelector } from './ButtonSelector/ButtonSelector';
 
-export const ButtonSelectorField: FunctionComponent<FormInputFieldProps> = (props) => {
-  const {
-    config,
-    onChange,
-    value,
-    options
-  } = props;
+export const ButtonSelectorField: FunctionComponent<FormInputFieldProps> = props => {
+  const { config, onChange, value, options } = props;
   const fieldConfig = config as InputField;
-  const handleChange = useCallback((value: string | number) => {
-    if (onChange) {
-      onChange({ [fieldConfig.name]: value });
-    }
-  }, [onChange]);
-  const convertedOptions = options ? convertInputOptions(options, [value as (string | number)]) : [];
+  const handleChange = useCallback(
+    (value: string | number) => {
+      if (onChange) {
+        onChange({ [fieldConfig.name]: value });
+      }
+    },
+    [onChange]
+  );
+  const convertedOptions = options ? convertInputOptions(options, [value as string | number]) : [];
   const inputId = getFieldId(config);
   return (
     <BulmaField
@@ -26,7 +24,12 @@ export const ButtonSelectorField: FunctionComponent<FormInputFieldProps> = (prop
       id={inputId}
       config={fieldConfig}
       control={
-        <ButtonSelector value={value as string | number} options={convertedOptions} onChange={handleChange} />
+        <ButtonSelector
+          value={value as string | number}
+          options={convertedOptions}
+          onChange={handleChange}
+        />
       }
-    />);
+    />
+  );
 };

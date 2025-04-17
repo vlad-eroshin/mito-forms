@@ -9,7 +9,7 @@ export const useOptionsChangeHandler = (
   return useCallback(
     (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
       const valueSelected = e.target.value;
-      const selectedOpt = options.find((opt) => `${opt.value}` === `${valueSelected}`);
+      const selectedOpt = options.find(opt => `${opt.value}` === `${valueSelected}`);
       if (onChange && selectedOpt) {
         onChange({ [config.name]: selectedOpt.value });
       }

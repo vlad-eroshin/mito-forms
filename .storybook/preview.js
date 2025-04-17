@@ -6,19 +6,19 @@ const preview = {
     controls: {
       matchers: {
         color: /(background|color)$/i,
-        date: /Date$/i
-      }
-    }
+        date: /Date$/i,
+      },
+    },
   },
   decorators: [
     withThemeByDataAttribute({
       themes: {
         light: 'light',
-        dark: 'dark'
+        dark: 'dark',
       },
-      defaultTheme: 'light'
-    })
-  ]
+      defaultTheme: 'light',
+    }),
+  ],
 };
 
 export default preview;

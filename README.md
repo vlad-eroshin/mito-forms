@@ -72,12 +72,14 @@ function App() {
 ### Setup
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/vlad-eroshin/mito-forms.git
 cd mito-forms
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 # or
@@ -126,5 +128,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Bulma](https://bulma.io/) - CSS framework
 - [React](https://reactjs.org/) - JavaScript library
 - [Storybook](https://storybook.js.org/) - UI component explorer
-
-

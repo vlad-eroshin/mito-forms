@@ -1,14 +1,14 @@
-import {ChangeEvent, useCallback, useMemo} from 'react';
-import {InputField, InputOption, ParamsMap} from "../../types";
+import { ChangeEvent, useCallback, useMemo } from 'react';
+import { InputField, InputOption, ParamsMap } from '../../types';
 
 export const useChecklistHandler = (
   config: InputField,
   options: InputOption[],
-  onChange?: (paramsMap: ParamsMap) => void,
+  onChange?: (paramsMap: ParamsMap) => void
 ) => {
   const checkedOptionsMap: { [key: string]: boolean | undefined } = useMemo(() => {
     const result: { [key: string]: boolean | undefined } = {};
-    options.forEach((opt) => {
+    options.forEach(opt => {
       result[`${opt.value}`] = opt.checked;
     });
     return result;
@@ -20,11 +20,11 @@ export const useChecklistHandler = (
       checkedOptionsMap[optId] = event.target.checked;
       if (onChange) {
         const result = options
-          .filter((opt) => checkedOptionsMap[`${opt.value}`])
-          .map((opt) => opt.value);
+          .filter(opt => checkedOptionsMap[`${opt.value}`])
+          .map(opt => opt.value);
         onChange({ [config.name]: result });
       }
     },
-    [checkedOptionsMap, config.name, onChange, options],
+    [checkedOptionsMap, config.name, onChange, options]
   );
 };

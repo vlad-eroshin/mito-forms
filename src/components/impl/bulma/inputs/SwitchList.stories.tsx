@@ -1,12 +1,11 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { SwitchList } from './SwitchList';
 
-
 const meta: Meta<typeof SwitchList> = {
   title: 'Bulma/Inputs/Switch List',
   component: SwitchList,
   decorators: [],
-  parameters: {}
+  parameters: {},
 };
 export default meta;
 
@@ -24,8 +23,8 @@ export const Basic: Story = {
         { value: '2', label: 'Option two' },
         { value: '3', label: 'Option three' },
         { value: '4', label: 'Option four' },
-        { value: '5', label: 'Option five' }
-      ]
+        { value: '5', label: 'Option five' },
+      ],
     },
     value: ['1', '3'],
     options: [
@@ -33,10 +32,10 @@ export const Basic: Story = {
       { value: '2', label: 'Option two' },
       { value: '3', label: 'Option three' },
       { value: '4', label: 'Option four' },
-      { value: '5', label: 'Option five' }
+      { value: '5', label: 'Option five' },
     ],
-    onChange: (paramsMap) => {
+    onChange: paramsMap => {
       alert(paramsMap);
-    }
-  }
+    },
+  },
 };

@@ -13,7 +13,7 @@ import type {
 import { getFieldValues } from './utils/fieldUtils';
 
 export type EditorReducerAction<T> = {
-  type: 'replace'|'formChange';
+  type: 'replace' | 'formChange';
   payload: FormChangePayload<T> | EditorStateReplacePayload<T>;
 };
 /**
@@ -24,7 +24,7 @@ export type EditorReducerAction<T> = {
  */
 export function editorStateReducer<T>(
   editorState: EditorState<T>,
-  action: EditorReducerAction<T>,
+  action: EditorReducerAction<T>
 ): EditorState<T> {
   const newEditorState: EditorState<T> = { ...editorState };
   switch (action.type) {
@@ -38,17 +38,17 @@ export function editorStateReducer<T>(
         };
         newEditorState.editorResult = updateEditorData<T>(
           editorState.editorResult,
-          formChangePayload,
+          formChangePayload
         );
       } else {
         newEditorState.editorResult = updateEditorData<T>(
           editorState.editorResult,
           formChangePayload,
-          reducersMap,
+          reducersMap
         );
         newEditorState.formStates = buildFormStatesFromData<T>(
           formChangePayload.editorMetadata,
-          newEditorState.editorResult,
+          newEditorState.editorResult
         );
       }
       newEditorState.isValid = formChangePayload.isValid;
@@ -86,7 +86,7 @@ export function editorStateReducer<T>(
 const updateEditorData = <T = object>(
   editorData: T,
   formChangePayload: FormChangePayload<T>,
-  editorReducersMap?: ReducersMap<T>,
+  editorReducersMap?: ReducersMap<T>
 ): T => {
   const reducerMap = editorReducersMap;
   const formId = formChangePayload.formId;
@@ -94,11 +94,11 @@ const updateEditorData = <T = object>(
 
   const formReducers = reducerMap ? reducerMap[formId] : undefined;
   const editorMetadata = formChangePayload.editorMetadata;
-  const formMetadata = editorMetadata.forms.find((form) => form.id === formId);
+  const formMetadata = editorMetadata.forms.find(form => form.id === formId);
   if (!formMetadata) {
     throw `Form not found: ${formId}`;
   }
-  const fieldsetMetadata = formMetadata.fieldSets.find((fs) => fs.name === fieldSetName);
+  const fieldsetMetadata = formMetadata.fieldSets.find(fs => fs.name === fieldSetName);
   const fieldSetReducer = formReducers?.[fieldSetName];
   if (fieldsetMetadata && fieldSetReducer) {
     const formData = (formChangePayload.data[fieldSetName] as ParamsMap).data;
@@ -108,12 +108,12 @@ const updateEditorData = <T = object>(
           ? (fieldSetReducer as FieldSetReducer<T>)(
               editorData,
               formData as ParamsMap,
-              formChangePayload.contextParams,
+              formChangePayload.contextParams
             )
           : (fieldSetReducer as FieldSetRecordsReducer<T>)(
               editorData,
               formData as RecordsArray,
-              formChangePayload.contextParams,
+              formChangePayload.contextParams
             );
       return editorResult;
     } catch (error: unknown) {
@@ -141,12 +141,12 @@ const updateEditorData = <T = object>(
  */
 export const buildFormStatesFromData = <T = object>(
   editorMetadata: EditorMetadata<T>,
-  editorData: T,
+  editorData: T
 ): { [key: string]: FormDataState } => {
   const result: { [key: string]: FormDataState } = {};
-  editorMetadata.forms.forEach((form) => {
+  editorMetadata.forms.forEach(form => {
     result[form.id] = {};
-    form.fieldSets.forEach((fieldSet) => {
+    form.fieldSets.forEach(fieldSet => {
       const fieldSetData = getFieldValues(editorData as ParamsMap, fieldSet);
       result[form.id][fieldSet.name] = { data: fieldSetData };
     });

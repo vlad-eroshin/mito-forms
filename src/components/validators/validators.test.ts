@@ -4,7 +4,7 @@ describe('validator tests', () => {
   it('number validator', () => {
     const validatorFunction = getValidatorFunction('number', {
       name: 'fieldName',
-      type: 'select'
+      type: 'select',
     });
     expect(validatorFunction('5000')).toBe(true);
     expect(validatorFunction('500000000')).toBe(true);
@@ -16,7 +16,7 @@ describe('validator tests', () => {
       name: 'fieldName',
       type: 'select',
       minValue: -5,
-      maxValue: 100000
+      maxValue: 100000,
     });
 
     expect(validatorFunction('5000')).toBe(true);
@@ -30,7 +30,7 @@ describe('validator tests', () => {
   it('string validator', () => {
     const validatorFunction = getValidatorFunction('string', {
       name: 'fieldName',
-      type: 'select'
+      type: 'select',
     });
 
     expect(validatorFunction('5000')).toBe(true);
@@ -40,7 +40,7 @@ describe('validator tests', () => {
   it('emailMultiline', () => {
     const validatorFunction = getValidatorFunction('emailMultiline', {
       name: 'fieldName',
-      type: 'select'
+      type: 'select',
     });
 
     expect(validatorFunction('abcdef')).toBe('"abcdef" is not a valid email');
@@ -54,7 +54,7 @@ describe('validator tests', () => {
       },
       {
         name: 'fieldName',
-        type: 'select'
+        type: 'select',
       }
     );
 

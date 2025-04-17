@@ -5,6 +5,7 @@ import 'bulma/bulma.scss';
 import './ButtonSelector.scss';
 import * as faIcons from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { IconProp } from '@fortawesome/fontawesome';
 
 export type ButtonSize = 'small' | 'medium' | 'large';
 
@@ -16,11 +17,11 @@ export type ButtonSelectorProps = {
 };
 
 export const ButtonSelector: React.FunctionComponent<ButtonSelectorProps> = ({
-                                                                               onChange,
-                                                                               options,
-                                                                               value,
-                                                                               buttonSize = 'default'
-                                                                             }) => {
+  onChange,
+  options,
+  value,
+  buttonSize = 'default',
+}) => {
   const convertedOptions = options ? convertInputOptions(options, [`${value}`]) : [];
 
   const handleClick = useCallback(
@@ -48,28 +49,32 @@ export const ButtonSelector: React.FunctionComponent<ButtonSelectorProps> = ({
       {convertedOptions.map((opt, index) => {
         const icon = opt.params?.icon as string | undefined;
         const isSelected = opt.checked;
+        const faIcon = faIcons[icon as keyof typeof faIcons] as unknown as IconProp
         const buttonClasses = [
           'button',
           getButtonSizeClass(),
           isSelected ? 'is-primary' : 'is-light',
-          isSelected ? 'is-selected' : ''
-        ].filter(Boolean).join(' ');
+          isSelected ? 'is-selected' : '',
+        ]
+          .filter(Boolean)
+          .join(' ');
 
         return (
-
-          <button key={generateReactKey(opt.value as string, opt.label)}
-                  data-testid={`buttonOpt-${opt.value}-${index}`}
-                  className={buttonClasses}
-                  disabled={isSelected}
-                  onClick={!isSelected ? () => handleClick(opt.value as string | number) : undefined}
+          <button
+            key={generateReactKey(opt.value as string, opt.label)}
+            data-testid={`buttonOpt-${opt.value}-${index}`}
+            className={buttonClasses}
+            disabled={isSelected}
+            onClick={!isSelected ? () => handleClick(opt.value as string | number) : undefined}
           >
             {icon && (
-              // @ts-ignore
-              <><FontAwesomeIcon icon={faIcons[icon]} />&nbsp;</>
+              <>
+                <FontAwesomeIcon icon={faIcon} />
+                &nbsp;
+              </>
             )}
             <span>{opt.label}</span>
           </button>
-
         );
       })}
     </div>

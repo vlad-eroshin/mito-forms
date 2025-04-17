@@ -7,12 +7,12 @@ export const refreshStaticDatasource = (
 ): Promise<DataSourceState> => {
   const staticAction: StaticAction = config.action as StaticAction;
   const data = staticAction.staticData;
-  return new Promise<DataSourceState>((resolve) => {
+  return new Promise<DataSourceState>(resolve => {
     resolve({
       id: config.id,
       status: DataStatus.Loaded,
       resultFormat: config.resultFormat,
-      data
+      data,
     });
   });
 };

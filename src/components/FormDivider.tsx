@@ -1,6 +1,6 @@
 import type { FormDividerConfig } from '../types';
 import './FormDivider.scss';
-import React, {FunctionComponent} from "react";
+import React, { FunctionComponent } from 'react';
 
 export type FormDividerProps = {
   config: FormDividerConfig;

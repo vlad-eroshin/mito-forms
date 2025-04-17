@@ -15,45 +15,48 @@ export const staticTextEditor: EditorMetadata = {
             {
               type: 'text',
               name: 'label',
-              label: 'Label'
+              label: 'Label',
             },
             {
               type: 'text',
               name: 'text',
-              label: 'Value'
-            }
-          ]
-        }
-      ]
-    }
+              label: 'Value',
+            },
+          ],
+        },
+      ],
+    },
   ],
   reducersMap: {
     widgetParams: {
-      widgetParams: (editorData: { widgetParams: unknown; }, fieldSetData: { label: string; text: string; }) => {
+      widgetParams: (
+        editorData: { widgetParams: unknown },
+        fieldSetData: { label: string; text: string }
+      ) => {
         const setLabel = (label: string) => {
-          return function(data: { widgetParams: unknown; }) {
+          return function (data: { widgetParams: unknown }) {
             return {
               ...data,
               widgetParams: {
-                ...data.widgetParams as object,
-                label
-              }
+                ...(data.widgetParams as object),
+                label,
+              },
             };
           };
         };
         const setText = (text: string) => {
-          return function(data: { widgetParams: unknown; }) {
+          return function (data: { widgetParams: unknown }) {
             return {
               ...data,
               widgetParams: {
-                ...data.widgetParams as object,
-                text
-              }
+                ...(data.widgetParams as object),
+                text,
+              },
             };
           };
         };
         return R.compose(setLabel(fieldSetData.label), setText(fieldSetData.text))(editorData);
-      }
-    }
-  }
+      },
+    },
+  },
 };

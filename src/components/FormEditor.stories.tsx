@@ -4,17 +4,15 @@ import type { FormEditorStoryProps } from './__stories__/FormEditorStory';
 import { FormEditorStory } from './__stories__/FormEditorStory';
 import { BULMA_REGISTRY } from './impl/bulma';
 
-
 const meta: Meta<typeof FormEditorStory> = {
   title: 'Form Editor',
   component: FormEditorStory,
   decorators: [],
-  parameters: {}
+  parameters: {},
 };
 export default meta;
 
 type Story = StoryObj<typeof FormEditorStory>;
-
 
 const AllFieldTypesEditor: FormEditorStoryProps = {
   editorMetadata: {
@@ -33,25 +31,25 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
                 type: 'staticText',
                 name: 'staticText',
                 label: 'Static Text',
-                value: 'Some Text'
+                value: 'Some Text',
               },
               {
                 type: 'text',
                 name: 'text',
                 label: 'Text Input',
-                value: 'Some Text'
+                value: 'Some Text',
               },
               {
-                ...TestInputFieldsConfigsMap['password']
+                ...TestInputFieldsConfigsMap['password'],
               },
               {
-                ...TestInputFieldsConfigsMap['checkbox']
+                ...TestInputFieldsConfigsMap['checkbox'],
               },
               {
-                ...TestInputFieldsConfigsMap['switchList']
+                ...TestInputFieldsConfigsMap['switchList'],
               },
               {
-                ...TestInputFieldsConfigsMap['buttonSelector']
+                ...TestInputFieldsConfigsMap['buttonSelector'],
               },
               {
                 type: 'select',
@@ -60,9 +58,9 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
                 options: [
                   { label: 'Option 1', value: 1 },
                   { label: 'Option 2', value: 2 },
-                  { label: 'Option 3', value: 3 }
+                  { label: 'Option 3', value: 3 },
                 ],
-                value: 1
+                value: 1,
               },
               {
                 type: 'checkList',
@@ -71,15 +69,15 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
                 options: [
                   { label: 'Option One', value: 1 },
                   { label: 'Option Two', value: 2 },
-                  { label: 'Option Three', value: 3 }
+                  { label: 'Option Three', value: 3 },
                 ],
-                value: [1, 3]
+                value: [1, 3],
               },
               {
                 type: 'switch',
                 name: 'switch',
                 label: 'Switch ON or OFF',
-                value: true
+                value: true,
               },
               {
                 type: 'radio',
@@ -88,73 +86,73 @@ const AllFieldTypesEditor: FormEditorStoryProps = {
                 options: [
                   { label: 'Option 1', value: 1 },
                   { label: 'Option 2', value: 2 },
-                  { label: 'Option 3', value: 3 }
+                  { label: 'Option 3', value: 3 },
                 ],
-                value: 1
+                value: 1,
               },
               {
                 type: 'textbox',
                 name: 'textBox',
-                label: 'Text Box'
+                label: 'Text Box',
               },
               {
                 type: 'fileUpload',
                 name: 'fileUpload',
-                label: 'Upload File'
+                label: 'Upload File',
               },
               {
                 name: 'ProgressBar',
-                ...TestInputFieldsConfigsMap['progress']
+                ...TestInputFieldsConfigsMap['progress'],
               },
               {
                 name: 'optionSwitch',
-                ...TestInputFieldsConfigsMap['switch']
+                ...TestInputFieldsConfigsMap['switch'],
               },
               {
                 type: 'staticText',
                 name: 'dividerSolid',
-                value: 'Divider Solid (default)'
+                value: 'Divider Solid (default)',
               },
               {
-                type: 'divider'
+                type: 'divider',
               },
               {
                 type: 'staticText',
                 name: 'dividerDashed',
-                value: 'Divider Dashed'
+                value: 'Divider Dashed',
               },
               { type: 'divider', style: 'dashed' },
               {
                 type: 'staticText',
                 name: 'dividerDotted',
-                value: 'Divider Dotted'
+                value: 'Divider Dotted',
               },
               { type: 'divider', style: 'dotted' },
               {
                 type: 'staticText',
                 name: 'dividerRounded',
-                value: 'Divider Rounded'
+                value: 'Divider Rounded',
               },
               { type: 'divider', style: 'rounded' },
               {
                 type: 'staticText',
                 name: 'dividerDouble',
-                value: 'Divider Double'
+                value: 'Divider Double',
               },
-              { type: 'divider', style: 'double' }
-            ]
-          }
-        ]
-      }
+              { type: 'divider', style: 'double' },
+            ],
+          },
+        ],
+      },
     ],
     reducersMap: {},
-    activeForm: ''
+    activeForm: '',
   },
   throttleChange: false,
   initialData: {},
-  componentRegistry: BULMA_REGISTRY
+  componentRegistry: BULMA_REGISTRY,
 };
 
 export const AllFieldTypes: Story = {
-  args: AllFieldTypesEditor
+  args: AllFieldTypesEditor,
 };

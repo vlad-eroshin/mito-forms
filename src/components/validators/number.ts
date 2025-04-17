@@ -24,7 +24,10 @@ export const validateNumberField = (value: string | null, min?: number, max?: nu
   return true;
 };
 
-export const validateRequiredField = (value: unknown, errorMessage?: string): boolean | string[] => {
+export const validateRequiredField = (
+  value: unknown,
+  errorMessage?: string
+): boolean | string[] => {
   if (typeof value === 'boolean') {
     return true;
   } else if (!value) {

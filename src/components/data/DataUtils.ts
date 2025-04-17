@@ -8,7 +8,7 @@ import type {
   DefaultDataTypes,
   DefinedDataValue,
   ParamsMap,
-  ParamValue
+  ParamValue,
 } from '../../types';
 import { ConditionTypeEnum } from '../../types';
 import { fetchJsonPath } from '../utils';
@@ -66,7 +66,7 @@ export const evaluateLogicInContext = (
 ) => {
   if (Array.isArray(condition)) {
     // In the meantime expressions are all 'AND' maybe TODO: in the future support 'OR'
-    const falseExpressions = (condition as ConditionInfo[]).filter((singleCondition) => {
+    const falseExpressions = (condition as ConditionInfo[]).filter(singleCondition => {
       return !evaluateConditionInContext(singleCondition, contextData);
     });
     return falseExpressions.length === 0;
@@ -106,9 +106,9 @@ export const dataSourceHasRequiredParams = (dataSource: DataSourceConfig, params
     const dsParams: ParamsMap = {
       ...dataSource.action.params,
       ...(dataSource.action as ApiCallAction).urlParams,
-      ...params
+      ...params,
     };
-    const notDefinedParams = dataSource.action.requiredParams.filter((param) => !dsParams[param]);
+    const notDefinedParams = dataSource.action.requiredParams.filter(param => !dsParams[param]);
     return notDefinedParams.length === 0;
   }
   return true;

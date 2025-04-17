@@ -6,7 +6,7 @@ import type {
   EditorMetadata,
   FormChangePayload,
   FormDataState,
-  ParamsMap
+  ParamsMap,
 } from '../types';
 import EditorContext from './EditorContext';
 import './FormEditor.scss';
@@ -65,15 +65,15 @@ export type FormEditorProps<T = object> = {
 };
 
 export function FormEditor<T>({
-                                editorMetadata,
-                                initialData,
-                                onChange,
-                                dataSourceStates,
-                                throttleChange,
-                                changeInterval = 1000,
-                                componentRegistry,
-                                contextParams
-                              }: FormEditorProps<T>) {
+  editorMetadata,
+  initialData,
+  onChange,
+  dataSourceStates,
+  throttleChange,
+  changeInterval = 1000,
+  componentRegistry,
+  contextParams,
+}: FormEditorProps<T>) {
   const statesOfForms = buildFormStatesFromData<T>(editorMetadata, initialData);
   const { isValid, message: validatorMessage = undefined } = editorMetadata.resultValidator
     ? editorMetadata.resultValidator(initialData)
@@ -83,7 +83,7 @@ export function FormEditor<T>({
     editorResult: initialData,
     formStates: statesOfForms,
     isValid,
-    validatorMessage
+    validatorMessage,
   });
   // Change time out is used for throtling changes - to minimize frequency of how often onChange handler is invoked
   const [changeTimeout, setChangeTimeout] = useState<NodeJS.Timeout | undefined>(undefined);
@@ -94,15 +94,19 @@ export function FormEditor<T>({
       componentRegistry,
       editorState,
       contextParams,
-      fieldsLayout: editorMetadata.fieldsLayout || 'compact'
+      fieldsLayout: editorMetadata.fieldsLayout || 'compact',
     }),
     [dataSourceStates, editorState, componentRegistry, contextParams]
   );
-  const LoadingComponent =
-    componentRegistry.utilityComponents.loading;
+  const LoadingComponent = componentRegistry.utilityComponents.loading;
   //Handler for certain form change
   const handleFormChange = useCallback(
-    (freshFormData: FormDataState, formName: string, fieldSetName: string, isFormValid?: boolean) => {
+    (
+      freshFormData: FormDataState,
+      formName: string,
+      fieldSetName: string,
+      isFormValid?: boolean
+    ) => {
       const hasReducers =
         editorMetadata.reducersMap && Object.keys(editorMetadata.reducersMap).length > 0;
       const changePayload: FormChangePayload<T> = {
@@ -112,11 +116,11 @@ export function FormEditor<T>({
         isValid: isFormValid,
         editorMetadata,
         editorReducersMap: hasReducers ? editorMetadata.reducersMap : undefined,
-        contextParams: editorContextData.contextParams
+        contextParams: editorContextData.contextParams,
       };
       dispatchStateAction({
         type: 'formChange',
-        payload: changePayload
+        payload: changePayload,
       });
     },
     [editorMetadata, editorContextData]

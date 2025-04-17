@@ -11,7 +11,7 @@ describe('FormEditor: getFieldValues', () => {
   it('test initial fields data', () => {
     const fieldValues = getFieldValues(
       TEST_INPUT_OBJECT,
-      BASIC_FIELDSET as FieldSetMetadata,
+      BASIC_FIELDSET as FieldSetMetadata
     ) as ParamsMap;
     expect(fieldValues.label).toBe('Label Text');
     expect(fieldValues.value).toBe('Value Text');
@@ -19,7 +19,7 @@ describe('FormEditor: getFieldValues', () => {
   it('test initial field values: no json path', () => {
     const fieldValues = getFieldValues(
       TEST_INPUT_OBJECT,
-      TEST_FIELDSET_NO_PATH as FieldSetMetadata,
+      TEST_FIELDSET_NO_PATH as FieldSetMetadata
     ) as ParamsMap;
     expect(fieldValues.funcValue).toBe(10);
     expect(fieldValues.jsonPathValue).toBe('textValue123');
@@ -29,7 +29,7 @@ describe('FormEditor: getFieldValues', () => {
   it('test initial field values: json path', () => {
     const fieldValues = getFieldValues(
       TEST_INPUT_OBJECT,
-      TEST_FIELDSET_WITH_PATH as FieldSetMetadata,
+      TEST_FIELDSET_WITH_PATH as FieldSetMetadata
     ) as ParamsMap;
     expect(fieldValues.funcValue).toBe(12);
     expect(fieldValues.jsonPathValue).toBe('Text Value');

@@ -244,7 +244,6 @@ export type EditorState<T = object> = {
    * Validation Message
    */
   validatorMessage?: string | undefined;
-
 };
 
 /**
@@ -300,11 +299,11 @@ export type LoadingComponentProps = {
   className?: string;
   loadingText?: string;
   size?: 'small' | 'medium' | 'large';
-}
+};
 export type BlockComponentProps = {
   className?: string;
-  children?: ReactElement | ReactElement [];
-}
+  children?: ReactElement | ReactElement[];
+};
 
 export type FieldsetProps = {
   legend?: string;
@@ -313,18 +312,18 @@ export type FieldsetProps = {
   collapsed?: boolean;
   onCollapse?: () => void;
   layout?: FieldsLayout;
-}
+};
 
 export type DeleteRowButtonProps = {
   text?: string;
   showIcon?: boolean;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-}
+};
 
 export type ComponentRegistry = {
   inputFields: InputFieldRegistry;
   utilityComponents: UtilityComponentRegistry;
-}
+};
 
 export type UtilityComponentRegistry = {
   loading: FunctionComponent<LoadingComponentProps>;
@@ -332,7 +331,7 @@ export type UtilityComponentRegistry = {
   tabbedSection: FunctionComponent<TabbedSectionProps>;
   fieldset: FunctionComponent<FieldsetProps>;
   deleteRowButton: FunctionComponent<DeleteRowButtonProps>;
-}
+};
 
 export type EditorContextProps<T = object> = {
   dataSources: { [key: string]: DataSourceState };
@@ -348,18 +347,16 @@ export type TabProps = {
   disabled?: boolean;
   selected?: boolean;
   content: ReactNode;
-}
+};
 
 export type TabbedSectionProps = {
-  selected: string | number,
-  onTab: (tabId: string | number) => void,
-  tabs: (Omit<TabProps, 'onClick' | 'selected'>) []
-}
-
+  selected: string | number;
+  onTab: (tabId: string | number) => void;
+  tabs: Omit<TabProps, 'onClick' | 'selected'>[];
+};
 
 export type TabPanelProps = {
   children?: React.ReactNode;
   index: number;
   value: number | string;
-}
-
+};

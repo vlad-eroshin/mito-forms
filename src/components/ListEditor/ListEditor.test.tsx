@@ -12,32 +12,32 @@ const rowFieldset: FieldSetMetadata = {
     {
       label: 'Some Label',
       name: 'textValue',
-      type: 'text'
+      type: 'text',
     },
     {
       label: 'Another Label 123',
       name: 'selector',
       type: 'select',
-      options: ['Selector Value 1', 'Value 2']
+      options: ['Selector Value 1', 'Value 2'],
     },
     {
       label: '',
       name: 'staticText',
-      type: 'staticText'
+      type: 'staticText',
     },
     {
       label: '',
       name: 'tagKeyLabel',
-      type: 'staticText'
+      type: 'staticText',
     },
     {
       label: 'Tags Selector',
       name: 'tagsSelector',
       options: '{$.tagsSelector#options}',
       placeHolderText: 'Select Tag',
-      type: 'select'
-    }
-  ]
+      type: 'select',
+    },
+  ],
 };
 const testData = [
   {
@@ -46,15 +46,15 @@ const testData = [
     selector: 'Selector Value 1',
     'tagsSelector#options': ['tag1', 'tag2'],
     tagKeyLabel: 'TagKey1',
-    tagsSelector: 'tag2'
+    tagsSelector: 'tag2',
   },
   {
     staticText: 'Static Text Value 2',
     textValue: 'Text Value 2',
     selector: 'Selector Value 2',
     'tagsSelector#options': ['tag aa', 'tag bb'],
-    tagKeyLabel: 'TagKey1'
-  }
+    tagKeyLabel: 'TagKey1',
+  },
 ];
 
 describe('List Editor Tests', () => {

@@ -9,7 +9,7 @@ import type {
   InputField,
   InputOption,
   ParamsMap,
-  ParamValue
+  ParamValue,
 } from '../types';
 import { DataStatus } from '../types';
 import EditorContext from './EditorContext';
@@ -37,13 +37,13 @@ export type FieldSetUIProps = {
 type FieldValidationStates = { [key: string]: { isValid: boolean; validationErrors: string[] } };
 
 export function FormFieldset<T>({
-                                  config,
-                                  inputData,
-                                  onChange,
-                                  rowIndex = -1,
-                                  onRowDelete,
-                                  showFieldLabels = true
-                                }: FieldSetUIProps) {
+  config,
+  inputData,
+  onChange,
+  rowIndex = -1,
+  onRowDelete,
+  showFieldLabels = true,
+}: FieldSetUIProps) {
   const arrangeFields = config.arrangeFields || 'column';
   const [fieldsValidationState, setFieldValidationState] = useState<FieldValidationStates>({});
 
@@ -59,7 +59,7 @@ export function FormFieldset<T>({
   const [collapsed, setCollapsed] = useState<boolean>(!!config.collapsible && !!config.collapsed);
   const getVisibleFormFields = useCallback(
     (editorState: EditorState<T>) => {
-      return config.fields.filter((field) => {
+      return config.fields.filter(field => {
         if (field.type === 'divider') {
           return true;
         }
@@ -67,7 +67,7 @@ export function FormFieldset<T>({
           return evaluateLogicInContext(field.showIf, {
             ...inputData,
             ...editorState.formStates,
-            contextParams: editorContextData.contextParams
+            contextParams: editorContextData.contextParams,
           } as object);
         }
         return true;
@@ -75,7 +75,6 @@ export function FormFieldset<T>({
     },
     [config.fields, editorContextData.contextParams, inputData]
   );
-
 
   const isFieldSetValid = useCallback(
     (fieldsData: ParamsMap): boolean => {
@@ -92,7 +91,7 @@ export function FormFieldset<T>({
           if (validationRes !== true) {
             tmpValidationStates[field.name] = {
               isValid: false,
-              validationErrors: validationRes as string[]
+              validationErrors: validationRes as string[],
             };
             setFieldValidationState(tmpValidationStates);
             return false;
@@ -104,7 +103,7 @@ export function FormFieldset<T>({
           if (validationRes !== true) {
             tmpValidationStates[field.name] = {
               isValid: false,
-              validationErrors: validationRes as string[]
+              validationErrors: validationRes as string[],
             };
             setFieldValidationState(tmpValidationStates);
             return false;
@@ -125,7 +124,7 @@ export function FormFieldset<T>({
     (params: ParamsMap) => {
       const newFieldSetData = {
         ...fieldSetValues,
-        ...params
+        ...params,
       };
       if (onChange) {
         const fieldSetIsValid = isFieldSetValid(newFieldSetData);
@@ -143,13 +142,18 @@ export function FormFieldset<T>({
     return fields.map((field: InputField | FormDividerConfig, fieldIndex) => {
       let componentDataStatus: DataStatus = DataStatus.Loaded;
       if (field.type === 'divider') {
-        return <FormDivider key={generateReactKey('divider', `${fieldIndex}`)} config={field as FormDividerConfig} />;
+        return (
+          <FormDivider
+            key={generateReactKey('divider', `${fieldIndex}`)}
+            config={field as FormDividerConfig}
+          />
+        );
       }
 
       const options = retrieveInputOptions(field, inputData as object);
 
       const genericInputFieldConfig: ParamsMap = {
-        ...field
+        ...field,
       };
 
       genericInputFieldConfig['options'] = options as ParamValue;
@@ -197,18 +201,19 @@ export function FormFieldset<T>({
       onCollapse={handleCollapsExpand}
       legend={config.title}
       collapsible={config.collapsible}
-      collapsed={collapsed}>
-      {!collapsed && (
-        arrangeFields === 'column' ?
+      collapsed={collapsed}
+    >
+      {!collapsed &&
+        (arrangeFields === 'column' ? (
           <>{renderFields(visibleFormFields)}</>
-          :
+        ) : (
           <div className={'mf-row-layout'}>{renderFields(visibleFormFields)}</div>
-      )}
+        ))}
     </FieldsetCmp>
   ) : (
     <EditableRow
       rowIndex={rowIndex}
-      fields={visibleFormFields.filter((f) => f.type !== 'divider') as InputField[]}
+      fields={visibleFormFields.filter(f => f.type !== 'divider') as InputField[]}
       values={fieldSetValues as ParamsMap}
       onChange={handleFieldChange}
       onDelete={onRowDelete}

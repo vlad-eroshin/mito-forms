@@ -2,7 +2,6 @@ import type { InputField, ValidationFunctionType, ValidatorType } from '../../ty
 import { validateSimpleEmail } from './email';
 import { validateNumberField, validateRequiredField } from './number';
 
-
 export const getValidatorFunction = (
   typeOrFn: ValidatorType | ValidationFunctionType<string>,
   field?: InputField
@@ -13,7 +12,7 @@ export const getValidatorFunction = (
   const validatorType = typeOrFn as ValidatorType;
   switch (validatorType) {
     case 'required': {
-      return (value) => {
+      return value => {
         return validateRequiredField(value);
       };
     }

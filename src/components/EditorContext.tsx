@@ -1,18 +1,17 @@
 import { createContext } from 'react';
 import type { EditorContextProps } from '../types';
 
-
 const EditorContext = createContext<EditorContextProps>({
   dataSources: {},
   contextParams: {},
   componentRegistry: {
     inputFields: {},
-    utilityComponents: {}
+    utilityComponents: {},
   },
   editorState: {
     formStates: {},
-    editorResult: {}
-  }
+    editorResult: {},
+  },
 } as EditorContextProps<object>);
 
 export default EditorContext;

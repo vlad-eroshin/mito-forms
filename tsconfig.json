@@ -13,21 +13,10 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "paths": {
-      "*": [
-        "node_modules/*"
-      ],
-      "@assets/*": [
-        "./assets/*"
-      ]
+      "*": ["node_modules/*"],
+      "@assets/*": ["./assets/*"]
     },
-    "types": [
-      "@testing-library/jest-dom",
-      "@types/node"
-    ]
+    "types": ["@testing-library/jest-dom", "@types/node"]
   },
-  "include": [
-    "src/**/*",
-    "tools/**/*"
-  ]
+  "include": ["src/**/*", "tools/**/*"]
 }
-

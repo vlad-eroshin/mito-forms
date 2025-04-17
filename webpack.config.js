@@ -5,16 +5,15 @@ module.exports = {
   entry: './src/index.ts',
   output: {
     path: path.join(__dirname, '/dist'), // the bundle output path
-    filename: 'main.js' // the name of the bundle
+    filename: 'main.js', // the name of the bundle
   },
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.scsss']
+    extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.scsss'],
   },
   devServer: {
-    port: 3035 // you can change the port
+    port: 3035, // you can change the port
   },
   module: {
-
     rules: [
       {
         test: /\.s[ac]ss$/i,
@@ -24,20 +23,21 @@ module.exports = {
           // Translates CSS into CommonJS
           'css-loader',
           // Compiles Sass to CSS
-          'sass-loader'
-        ]
-      }, {
+          'sass-loader',
+        ],
+      },
+      {
         test: /\.(ts|tsx)$/, // .js and .jsx files
         exclude: /node_modules/,
         use: {
-          loader: 'ts-loader'
-        }
-      }
-    ]
+          loader: 'ts-loader',
+        },
+      },
+    ],
   },
   plugins: [
     // new HtmlWebpackPlugin({
     //   template: 'src/index.html' // to import index.html file inside index.js
     // })
-  ]
+  ],
 };

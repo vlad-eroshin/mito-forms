@@ -19,13 +19,12 @@ export type FormListProps = {
   activeForm: string;
 };
 
-
 export function FormsContainer<T>({
-                                    forms,
-                                    onFormChange,
-                                    displayAs = 'tabSet',
-                                    activeForm
-                                  }: FormListProps) {
+  forms,
+  onFormChange,
+  displayAs = 'tabSet',
+  activeForm,
+}: FormListProps) {
   const [activeTab, setActiveTab] = useState<string>(activeForm);
   const TabbedSection = useUtilComponent<TabbedSectionProps>('tabbedSection');
 
@@ -38,15 +37,16 @@ export function FormsContainer<T>({
         id: formConfig.id,
         label: formConfig.title,
         content: (
-          <InputForm<T> key={generateReactKey('configForm', formConfig.id)} config={formConfig}
-                        onChange={onFormChange} />
-        )
+          <InputForm<T>
+            key={generateReactKey('configForm', formConfig.id)}
+            config={formConfig}
+            onChange={onFormChange}
+          />
+        ),
       };
     });
 
-    return (
-      <TabbedSection selected={activeTab} onTab={handleSwitchTab} tabs={tabs} />
-    );
+    return <TabbedSection selected={activeTab} onTab={handleSwitchTab} tabs={tabs} />;
   } else {
     return (
       <>

@@ -87,7 +87,7 @@ export type DataTransformer = {
 export type TransformerFn = (
   currentData: DefaultDataTypes,
   transformer: DataTransformer,
-  originalData: DefaultDataTypes,
+  originalData: DefaultDataTypes
 ) => DefaultDataTypes;
 
 export type DataAccessor = {

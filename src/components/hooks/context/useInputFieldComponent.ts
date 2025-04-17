@@ -4,8 +4,12 @@ import EditorContext from '../../EditorContext';
 import type { FormInputFieldProps } from '../../FormInputField';
 import { UnsupportedInputComponent } from '../../UnsupportedInputComponent';
 
-export const useInputFieldComponent = (componentType: keyof InputFieldRegistry): React.FunctionComponent<FormInputFieldProps> => {
+export const useInputFieldComponent = (
+  componentType: keyof InputFieldRegistry
+): React.FunctionComponent<FormInputFieldProps> => {
   const editorContextData = useContext<EditorContextProps>(EditorContext);
 
-  return editorContextData.componentRegistry.inputFields[componentType] || UnsupportedInputComponent;
+  return (
+    editorContextData.componentRegistry.inputFields[componentType] || UnsupportedInputComponent
+  );
 };

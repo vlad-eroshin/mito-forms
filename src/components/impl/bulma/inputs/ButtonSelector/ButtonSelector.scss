@@ -2,43 +2,56 @@
 
 .button-selector-group {
   display: flex;
-  flex-direction: row;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: calc(theme.$spacing * 1px);
+  margin-bottom: calc(theme.$spacing * 1px);
+}
 
-  .control {
-    flex: 0 0 auto;
-    margin: 0 !important;
-    padding: 0 !important;
+.button-selector-control {
+  display: flex;
+  flex-direction: column;
+  gap: calc(theme.$spacing * 1px);
+  margin-bottom: calc(theme.$spacing * 1px);
+}
 
-    &:not(:last-child) {
-      margin-right: 0 !important;
-    }
+.button-selector-button {
+  flex: 1;
+  min-width: 0;
+  border: 1px solid theme.$borderColor;
+  background-color: white;
+  color: theme.$secondaryTextColor;
+  padding: calc(theme.$spacing * 1px) calc(theme.$spacing * 2px);
+  border-radius: theme.$controlRadius;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: theme.$fontSize;
+  font-family: theme.$fontFamily;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  &:hover {
+    background-color: theme.$staticColor;
   }
 
-  .button {
+  &.is-selected {
+    background-color: theme.$selectedBackgroundColor;
+    color: white;
+    border-color: theme.$selectedBackgroundColor;
+  }
+
+  &:first-child {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &:last-child {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  &:not(:first-child):not(:last-child) {
     border-radius: 0;
-    margin: 0 !important;
-    border-right-width: 0;
-
-    &.is-selected {
-      background-color: theme.$selectedBackgroundColor;
-      color: theme.$borderColor;
-      opacity: 1;
-      cursor: auto;
-    }
-
-    &:first-child {
-      border-top-left-radius: theme.$controlRadius;
-      border-bottom-left-radius: theme.$controlRadius;
-    }
-
-    &:last-child {
-      border-top-right-radius: theme.$controlRadius;
-      border-bottom-right-radius: theme.$controlRadius;
-    }
-
-    &:not(:first-child):not(:last-child) {
-      border-radius: 0px;
-    }
   }
 } 

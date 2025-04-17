@@ -17,15 +17,15 @@ export type ListInputProps = {
 };
 
 export const ListEditor: React.FC<ListInputProps> = ({
-                                                       rowFieldset,
-                                                       jsonPath,
-                                                       data,
-                                                       onChange,
-                                                       minItemsRequired = 0,
-                                                       showHeader = false,
-                                                       canDeleteRows,
-                                                       showBorders = false
-                                                     }) => {
+  rowFieldset,
+  jsonPath,
+  data,
+  onChange,
+  minItemsRequired = 0,
+  showHeader = false,
+  canDeleteRows,
+  showBorders = false,
+}) => {
   const [rowsData, setRowsData] = useState<RecordsArray>(
     (jsonPath ? fetchJsonPath(data, jsonPath) || [] : data) as RecordsArray
   );
@@ -63,40 +63,40 @@ export const ListEditor: React.FC<ListInputProps> = ({
     <table className={`${showBorders ? 'list-view borders' : 'list-view'}`}>
       {showHeader && (
         <thead>
-        <tr>
-          {(rowFieldset.fields as InputField[]).map((field: InputField) => {
-            return <th key={`list-header-cell-${field.name}`}>{field.label || field.name}</th>;
-          })}
-          {canDeleteRows ? (
-            <th>
-              <div aria-label="Actions" role="region">
-                &nbsp;
-              </div>
-            </th>
-          ) : (
-            <></>
-          )}
-        </tr>
+          <tr>
+            {(rowFieldset.fields as InputField[]).map((field: InputField) => {
+              return <th key={`list-header-cell-${field.name}`}>{field.label || field.name}</th>;
+            })}
+            {canDeleteRows ? (
+              <th>
+                <div aria-label="Actions" role="region">
+                  &nbsp;
+                </div>
+              </th>
+            ) : (
+              <></>
+            )}
+          </tr>
         </thead>
       )}
       <tbody>
-      {rowsData.map((itemData: ParamsMap | RecordsArray, i: number) => {
-        const fieldValues = getFieldValues(itemData, rowFieldset);
+        {rowsData.map((itemData: ParamsMap | RecordsArray, i: number) => {
+          const fieldValues = getFieldValues(itemData, rowFieldset);
 
-        return (
-          <FormFieldset
-            key={`list-item-row-${i}`}
-            config={{ ...rowFieldset, arrangeFields: 'tableRow' }}
-            showFieldLabels={!showHeader}
-            rowIndex={i}
-            inputData={fieldValues as ParamsMap}
-            onChange={(fieldsetValues: ParamsMap, isFieldsetValid) =>
-              isFieldsetValid && handleRowChange(i, fieldsetValues)
-            }
-            onRowDelete={canDeleteRows ? () => handleDelete(i) : undefined}
-          />
-        );
-      })}
+          return (
+            <FormFieldset
+              key={`list-item-row-${i}`}
+              config={{ ...rowFieldset, arrangeFields: 'tableRow' }}
+              showFieldLabels={!showHeader}
+              rowIndex={i}
+              inputData={fieldValues as ParamsMap}
+              onChange={(fieldsetValues: ParamsMap, isFieldsetValid) =>
+                isFieldsetValid && handleRowChange(i, fieldsetValues)
+              }
+              onRowDelete={canDeleteRows ? () => handleDelete(i) : undefined}
+            />
+          );
+        })}
       </tbody>
     </table>
   );

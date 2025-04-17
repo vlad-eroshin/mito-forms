@@ -18,8 +18,8 @@ const meta: Meta<typeof FormEditorStory> = {
   decorators: [],
   parameters: {},
   args: {
-    componentRegistry: BULMA_REGISTRY
-  }
+    componentRegistry: BULMA_REGISTRY,
+  },
 };
 export default meta;
 
@@ -29,27 +29,27 @@ export const Basic: Story = {
   args: {
     editorMetadata: {
       ...basicEditor,
-      reducersMap: {}
+      reducersMap: {},
     },
-    initialData: {}
-  }
+    initialData: {},
+  },
 };
 export const ThrottleChange: Story = {
   args: {
     editorMetadata: {
       ...basicEditor,
-      reducersMap: {}
+      reducersMap: {},
     },
     throttleChange: true,
-    initialData: {}
-  }
+    initialData: {},
+  },
 };
 
 export const TabbedLayout: Story = {
   args: {
     editorMetadata: tabbedLayout,
-    initialData: {}
-  }
+    initialData: {},
+  },
 };
 
 export const OnePageLayout: Story = {
@@ -58,44 +58,44 @@ export const OnePageLayout: Story = {
       ...tabbedLayout,
       forms: [
         { ...tabbedLayout.forms[0], showTitle: true },
-        { ...tabbedLayout.forms[1], showTitle: true }
+        { ...tabbedLayout.forms[1], showTitle: true },
       ],
-      displayAs: 'onePage'
+      displayAs: 'onePage',
     },
-    initialData: {}
-  }
+    initialData: {},
+  },
 };
 
 export const ConditionalDisplay: Story = {
   args: {
     editorMetadata: editorWithConditions,
-    initialData: {}
-  }
+    initialData: {},
+  },
 };
 
 export const WithReducer: Story = {
   args: {
     editorMetadata: staticTextEditor,
-    initialData: {}
-  }
+    initialData: {},
+  },
 };
 
 export const CollapsibleFieldsets: Story = {
   args: {
     editorMetadata: editorWithCollapsibleFieldsets,
-    initialData: {}
-  }
+    initialData: {},
+  },
 };
 
 export const ValuesFromJsonPath: Story = {
   args: {
     editorMetadata: editorWithJsonPath,
-    initialData: { ...INPUT_DATA }
-  }
+    initialData: { ...INPUT_DATA },
+  },
 };
 const missingFieldRegistry: unknown = {
   ...BULMA_REGISTRY.inputFields,
-  textbox: undefined
+  textbox: undefined,
 };
 export const UnsupportedComponent: Story = {
   args: {
@@ -113,27 +113,27 @@ export const UnsupportedComponent: Story = {
                   type: 'textbox',
                   name: 'textBox',
                   value: 'test',
-                  label: 'Unsupported field Type'
+                  label: 'Unsupported field Type',
                 },
                 {
                   type: 'text',
                   name: 'textInput',
                   value: 'Some Value',
-                  label: 'Some other field'
-                }
-              ]
-            }
-          ]
-        }
+                  label: 'Some other field',
+                },
+              ],
+            },
+          ],
+        },
       ],
-      reducersMap: {}
+      reducersMap: {},
     },
     componentRegistry: {
       ...BULMA_REGISTRY,
-      inputFields: missingFieldRegistry as InputFieldRegistry
+      inputFields: missingFieldRegistry as InputFieldRegistry,
     },
-    initialData: { ...INPUT_DATA }
-  }
+    initialData: { ...INPUT_DATA },
+  },
 };
 
 export const WithListEditor: Story = {
@@ -145,19 +145,19 @@ export const WithListEditor: Story = {
           widgetParams: (editorData: object, newData: ParamsMap) => {
             return {
               ...editorData,
-              ...newData
+              ...newData,
             };
-          }
+          },
         },
         listEditor: {
           list: (editorData: object, newData: ParamsMap) => {
             return {
               ...editorData,
-              listOfData: newData
+              listOfData: newData,
             };
-          }
-        }
-      }
+          },
+        },
+      },
     },
     initialData: {
       label: 'Label',
@@ -165,10 +165,10 @@ export const WithListEditor: Story = {
       listOfData: [
         { field: 'FIELD1', axisType: 'quant' },
         { field: 'FIELD2', axisType: 'temp' },
-        { field: 'FIELD3', axisType: 'ordinal' }
-      ]
-    }
-  }
+        { field: 'FIELD3', axisType: 'ordinal' },
+      ],
+    },
+  },
 };
 
 export const SwitchComponent: Story = {
@@ -196,9 +196,9 @@ export const SwitchComponent: Story = {
                     { label: 'Switch One', value: 'one' },
                     { label: 'Switch Two', value: 'two' },
                     { label: 'Switch Three', value: 'three' },
-                    { label: 'Switch Four', value: 'four' }
+                    { label: 'Switch Four', value: 'four' },
                   ],
-                  value: '{$.objectOfSomeKind.switchValues}'
+                  value: '{$.objectOfSomeKind.switchValues}',
                 },
                 {
                   type: 'checkbox',
@@ -208,47 +208,49 @@ export const SwitchComponent: Story = {
                     { label: 'Check One', value: 1 },
                     { label: 'Check Two', value: 2 },
                     { label: 'Check Three', value: 3 },
-                    { label: 'Check Four', value: 4 }
+                    { label: 'Check Four', value: 4 },
                   ],
-                  value: '{$.objectOfSomeKind.checkValues}'
-                }
-              ]
-            }
-          ]
-        }
+                  value: '{$.objectOfSomeKind.checkValues}',
+                },
+              ],
+            },
+          ],
+        },
       ],
       reducersMap: {
         form: {
-          fieldsetWithSwitchList: (editorData: { objectOfSomeKind: object; }, newData: {
-            switchList: string [], checkList: number[];
-          }, contextParams: any) => {
-
+          fieldsetWithSwitchList: (
+            editorData: { objectOfSomeKind: object },
+            newData: {
+              switchList: string[];
+              checkList: number[];
+            },
+            contextParams: any
+          ) => {
             return {
               ...editorData,
               objectOfSomeKind: {
                 ...editorData.objectOfSomeKind,
                 switchValues: newData.switchList,
-                checkValues: newData.checkList
-              }
+                checkValues: newData.checkList,
+              },
             };
-          }
-        }
-      }
+          },
+        },
+      },
     },
     initialData: {
       objectOfSomeKind: {
         switchValues: ['two', 'three'],
-        checkValues: [2, 4]
-      }
-
-    }
-  }
+        checkValues: [2, 4],
+      },
+    },
+  },
 };
 
 export const ChartEditor: Story = {
   args: {
     editorMetadata: chartEditorMetadata,
-    initialData: {}
-  }
+    initialData: {},
+  },
 };
-

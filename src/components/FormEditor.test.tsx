@@ -19,7 +19,7 @@ describe('Config Editor Tests', () => {
 
     const switchControl = screen.getByText('Show yes/no');
     expect(switchControl).toBeInTheDocument();
-//    expect(screen.getByTestId(`elementrow-text-oneMoreConditional`)).toBeVisible();
+    //    expect(screen.getByTestId(`elementrow-text-oneMoreConditional`)).toBeVisible();
 
     // switchControl.click();
     // const result = {

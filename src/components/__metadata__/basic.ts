@@ -14,7 +14,7 @@ export const basicEditor: EditorMetadata = {
               type: 'text',
               name: 'label',
               label: 'Label',
-              required: true
+              required: true,
             },
             {
               type: 'select',
@@ -23,13 +23,13 @@ export const basicEditor: EditorMetadata = {
               default: 1,
               options: [
                 { label: 'Option 1', value: 1 },
-                { label: 'Option 2', value: 2 }
-              ]
-            }
-          ]
-        }
-      ]
-    }
+                { label: 'Option 2', value: 2 },
+              ],
+            },
+          ],
+        },
+      ],
+    },
   ],
-  reducersMap: {}
+  reducersMap: {},
 };

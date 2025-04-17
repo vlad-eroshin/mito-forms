@@ -3,7 +3,6 @@
 @use "@fortawesome/fontawesome";
 @use "@fortawesome/fontawesome-svg-core";
 
-
 :root {
   --mf-border-color: #bbb;
   --mf-header-color: var(--bulma-card-header-color);
@@ -34,5 +33,21 @@ $fontSizeLarge: var(--mf-font-size-large);
 $controlRadius: var(--mf-control-radius);
 $selectedBackgroundColor: var(--mf-selected-bg-color);
 $staticColor: var(--mf-static-color);
-
 $spacing: var(--mf-spacing);
+
+// Export variables for use in other SCSS files
+:export {
+  fontFamily: $fontFamily;
+  borderColor: $borderColor;
+  headerColor: $headerColor;
+  secondaryTextColor: $secondaryTextColor;
+  inputErrorColor: $inputErrorColor;
+  fontSize: $fontSize;
+  fontSizeSmall: $fontSizeSmall;
+  fontSizeMedium: $fontSizeMedium;
+  fontSizeLarge: $fontSizeLarge;
+  controlRadius: $controlRadius;
+  selectedBackgroundColor: $selectedBackgroundColor;
+  staticColor: $staticColor;
+  spacing: $spacing;
+}

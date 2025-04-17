@@ -7,7 +7,7 @@ const meta: Meta<typeof ListEditorWrapper> = {
   title: 'Form Editor/List Editor',
   component: ListEditorWrapper,
   decorators: [],
-  parameters: {}
+  parameters: {},
 };
 export default meta;
 
@@ -32,32 +32,32 @@ export const Basic: Story = {
         {
           label: 'Some Label',
           name: 'textValue',
-          type: 'text'
+          type: 'text',
         },
         {
           label: 'Another Label 123',
           name: 'selector',
           type: 'select',
-          options: ['Selector Value 1', 'Value 2']
+          options: ['Selector Value 1', 'Value 2'],
         },
         {
           label: '',
           name: 'staticText',
-          type: 'staticText'
+          type: 'staticText',
         },
         {
           label: '',
           name: 'tagKeyLabel',
-          type: 'staticText'
+          type: 'staticText',
         },
         {
           label: 'Tags Selector',
           name: 'tagsSelector',
           options: '{$.tagsSelector#options}',
           placeHolderText: 'Select Tag',
-          type: 'select'
-        }
-      ]
+          type: 'select',
+        },
+      ],
     } as FieldSetMetadata,
     data: [
       {
@@ -66,17 +66,17 @@ export const Basic: Story = {
         selector: 'Selector Value 1',
         'tagsSelector#options': ['tag1', 'tag2'],
         tagKeyLabel: 'TagKey1',
-        tagsSelector: 'tag2'
+        tagsSelector: 'tag2',
       },
       {
         staticText: 'Static Text Value 2',
         textValue: 'Text Value 2',
         selector: 'Selector Value 2',
         'tagsSelector#options': ['tag aa', 'tag bb'],
-        tagKeyLabel: 'TagKey1'
-      }
-    ]
-  }
+        tagKeyLabel: 'TagKey1',
+      },
+    ],
+  },
 };
 
 export const WithBorder: Story = {
@@ -90,26 +90,26 @@ export const WithBorder: Story = {
         {
           label: 'Some Label',
           name: 'staticText',
-          type: 'text'
+          type: 'text',
         },
         {
           label: 'Another Label 123',
           name: 'selector',
-          type: 'staticText'
+          type: 'staticText',
         },
         {
           label: '',
           name: 'tagKeyLabel',
-          type: 'staticText'
+          type: 'staticText',
         },
         {
           label: 'Tags Selector',
           name: 'tagsSelector',
           options: '{$.tagsSelector#options}',
           placeHolderText: 'Select Tag',
-          type: 'select'
-        }
-      ]
+          type: 'select',
+        },
+      ],
     } as FieldSetMetadata,
     data: [
       {
@@ -117,16 +117,16 @@ export const WithBorder: Story = {
         selector: 'Selector Value 1',
         'tagsSelector#options': ['tag1', 'tag2'],
         tagKeyLabel: 'TagKey1',
-        tagsSelector: 'tag2'
+        tagsSelector: 'tag2',
       },
       {
         staticText: 'Static Text Value 2',
         selector: 'Selector Value 2',
         'tagsSelector#options': ['tag aa', 'tag bb'],
-        tagKeyLabel: 'TagKey1'
-      }
-    ]
-  }
+        tagKeyLabel: 'TagKey1',
+      },
+    ],
+  },
 };
 
 export const WithHeaders: Story = {
@@ -142,26 +142,26 @@ export const WithHeaders: Story = {
         {
           label: 'Some Label',
           name: 'staticText',
-          type: 'text'
+          type: 'text',
         },
         {
           label: 'Another Label 123',
           name: 'selector',
-          type: 'staticText'
+          type: 'staticText',
         },
         {
           label: '',
           name: 'tagKeyLabel',
-          type: 'staticText'
+          type: 'staticText',
         },
         {
           label: 'Tags Selector',
           name: 'tagsSelector',
           options: '{$.tagsSelector#options}',
           placeHolderText: 'Select Tag',
-          type: 'select'
-        }
-      ]
+          type: 'select',
+        },
+      ],
     } as FieldSetMetadata,
     data: [
       {
@@ -169,14 +169,14 @@ export const WithHeaders: Story = {
         selector: 'Selector Value 1',
         'tagsSelector#options': ['tag1', 'tag2'],
         tagKeyLabel: 'TagKey1',
-        tagsSelector: 'tag2'
+        tagsSelector: 'tag2',
       },
       {
         staticText: 'Static Text Value 2',
         selector: 'Selector Value 2',
         'tagsSelector#options': ['tag aa', 'tag bb'],
-        tagKeyLabel: 'TagKey1'
-      }
-    ]
-  }
+        tagKeyLabel: 'TagKey1',
+      },
+    ],
+  },
 };

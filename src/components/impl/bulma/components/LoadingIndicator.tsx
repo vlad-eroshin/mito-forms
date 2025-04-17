@@ -6,13 +6,15 @@ import './LoadingIndicator.scss';
 import { SizeProp } from '@fortawesome/fontawesome';
 
 export const LoadingIndicator: React.FunctionComponent<LoadingComponentProps> = ({
-                                                                                   className,
-                                                                                   loadingText,
-                                                                                   size = 'small'
-                                                                                 }) => {
+  className,
+  loadingText,
+  size = 'small',
+}) => {
   const iconSize: SizeProp = size === 'medium' ? '2x' : size === 'large' ? '3x' : '1x';
-  return <div className={className || 'mf-loading-indicator'}>
-    <FontAwesomeIcon className={'mf-loading-spinner'} size={iconSize}
-                     icon={faSpinner} />&nbsp;{loadingText}
-  </div>;
+  return (
+    <div className={className || 'mf-loading-indicator'}>
+      <FontAwesomeIcon className={'mf-loading-spinner'} size={iconSize} icon={faSpinner} />
+      &nbsp;{loadingText}
+    </div>
+  );
 };

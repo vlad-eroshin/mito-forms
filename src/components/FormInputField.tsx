@@ -6,7 +6,7 @@ import type {
   InputFieldType,
   InputOption,
   ParamsMap,
-  ParamValue
+  ParamValue,
 } from '../types';
 import './FormInputField.scss';
 import { useInputFieldComponent } from './hooks/context/useInputFieldComponent';
@@ -29,23 +29,32 @@ export type FormInputFieldProps = {
 };
 
 export function FormInputField<T>({
-                                    config,
-                                    value,
-                                    onChange,
-                                    options,
-                                    label,
-                                    status,
-                                    renderAsFormElement = true,
-                                    fieldIndex = 0,
-                                    isValid = true,
-                                    validationErrors,
-                                    fieldLayout
-                                  }: FormInputFieldProps) {
+  config,
+  value,
+  onChange,
+  options,
+  label,
+  status,
+  renderAsFormElement = true,
+  fieldIndex = 0,
+  isValid = true,
+  validationErrors,
+  fieldLayout,
+}: FormInputFieldProps) {
   const InputCMP = useInputFieldComponent(config.type as InputFieldType);
 
   return renderAsFormElement ? (
-    <InputCMP config={config} value={value} label={label} onChange={onChange} options={options} isValid={isValid}
-              validationErrors={validationErrors} fieldLayout={fieldLayout} fieldIndex={fieldIndex} />
+    <InputCMP
+      config={config}
+      value={value}
+      label={label}
+      onChange={onChange}
+      options={options}
+      isValid={isValid}
+      validationErrors={validationErrors}
+      fieldLayout={fieldLayout}
+      fieldIndex={fieldIndex}
+    />
   ) : (
     <InputCMP
       renderAsFormElement={false}
@@ -61,5 +70,3 @@ export function FormInputField<T>({
     />
   );
 }
-
-

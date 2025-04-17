@@ -5,7 +5,7 @@ import type {
   FormDataState,
   FormMetadata,
   ListEditorMetadata,
-  ParamsMap
+  ParamsMap,
 } from '../types';
 import EditorContext from './EditorContext';
 import { FormFieldset } from './FormFieldset';
@@ -35,11 +35,11 @@ export function InputForm<T>({ config, onChange, showTitle }: InputFormProps) {
   const getVisibleSets = useCallback(
     (editorFieldsState: object) => {
       //Filter out only visible fieldsets
-      return config.fieldSets.filter((fieldSetEntry) => {
+      return config.fieldSets.filter(fieldSetEntry => {
         if (fieldSetEntry?.showIf) {
           return evaluateLogicInContext(fieldSetEntry.showIf, {
             ...editorFieldsState,
-            $data: formState
+            $data: formState,
           });
         }
         return true;
@@ -61,9 +61,9 @@ export function InputForm<T>({ config, onChange, showTitle }: InputFormProps) {
         data: (fieldsetValuesEntry
           ? Array.isArray(fieldsetValuesEntry.data)
             ? [...(freshData as [])]
-            : { ...fieldsetValuesEntry.data as object, ...freshData }
+            : { ...(fieldsetValuesEntry.data as object), ...freshData }
           : freshData) as ParamsMap,
-        isValid: isFieldsetValid
+        isValid: isFieldsetValid,
       };
       onChange(newData, config.id, name, isFormValid(newData, isFieldsetValid));
     },
@@ -109,7 +109,7 @@ InputForm.displayName = 'InputForm';
 const isFormValid = (newData: FormDataState, valid?: boolean): boolean => {
   let k: keyof typeof newData;
   for (k in newData) {
-    valid = typeof newData[k].isValid !== 'undefined' ? newData[k].isValid as boolean : valid;
+    valid = typeof newData[k].isValid !== 'undefined' ? (newData[k].isValid as boolean) : valid;
     if (!valid) {
       return false;
     }

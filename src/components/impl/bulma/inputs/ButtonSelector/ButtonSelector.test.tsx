@@ -7,7 +7,7 @@ const optionsList = [
   { label: 'Opt 1', value: 1 },
   { label: 'Opt 2', value: 2 },
   { label: 'Opt 3', value: 3 },
-  { label: 'Opt 4', value: 4 }
+  { label: 'Opt 4', value: 4 },
 ];
 describe('Button Selector Tests', () => {
   it('test basic selector', () => {
