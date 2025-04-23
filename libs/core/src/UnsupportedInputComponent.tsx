@@ -1,5 +1,5 @@
 import React from 'react';
-import { FormInputFieldProps } from './FormInputField';
+import { FormInputFieldProps } from './types';
 
 export const UnsupportedInputComponent: React.FunctionComponent<
   Pick<FormInputFieldProps, 'config'>

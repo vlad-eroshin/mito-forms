@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react';
-import { FieldsetProps } from '../../../core/src/types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FieldsetProps } from '@mito-forms/core';
+import React, { useMemo } from 'react';
+
 import 'bulma/bulma.scss';
 
 export const BulmaFieldset: React.FC<FieldsetProps> = ({

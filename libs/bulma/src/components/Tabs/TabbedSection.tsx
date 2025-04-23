@@ -1,8 +1,8 @@
+import { generateReactKey, TabbedSectionProps } from '@mito-forms/core';
 import React, { FunctionComponent, useCallback, useMemo } from 'react';
-import { TabbedSectionProps } from '../../../../core/src/types';
-import { generateReactKey } from '../../../../core/src/utils';
-import { TabPanel } from './TabPanel';
+
 import { Tab } from './Tab';
+import { TabPanel } from './TabPanel';
 
 export const TabbedSection: FunctionComponent<TabbedSectionProps> = ({ selected, tabs, onTab }) => {
   const handleChange = useCallback((value: string | number, _event: unknown) => {

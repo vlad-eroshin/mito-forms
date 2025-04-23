@@ -1,9 +1,8 @@
-import React, { ChangeEvent, useCallback } from 'react';
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
-import { InputField } from '../../../core/src/types';
-import { getFieldId } from '../../../core/src/utils';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUpload } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FormInputFieldProps, getFieldId, InputField } from '@mito-forms/core';
+import React, { ChangeEvent, useCallback } from 'react';
+
 import 'bulma/bulma.scss';
 import { BulmaField } from './BulmaField';
 

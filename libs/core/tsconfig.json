@@ -1,22 +1,23 @@
+// libs/core/tsconfig.json
 {
+  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
-    "jsx": "react",
-    "allowJs": true,
-    "target": "ES2020",
-    "module": "ES6",
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "noImplicitAny": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "outDir": "dist",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "paths": {
-      "*": ["node_modules/*"],
-      "@assets/*": ["./assets/*"]
-    },
-    "types": ["@testing-library/jest-dom", "@types/node"]
+    "composite": true,
+    "rootDir": "src",
+    "outDir": "../../dist/core",
+    "tsBuildInfoFile": "../../dist/core/tsconfig.tsbuildinfo",
+    "declaration": true,
+    "declarationMap": true,
+    "types": [
+      "jest",
+      "node"
+    ]
   },
-  "include": ["src/**/*", "tools/**/*"]
+  "include": [
+    "src"
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ]
 }

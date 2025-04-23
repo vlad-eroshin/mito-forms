@@ -1,4 +1,4 @@
-import type { EditorMetadata } from '../types';
+import { EditorMetadata } from '@mito-forms/core';
 import * as R from 'ramda';
 
 export const staticTextEditor: EditorMetadata = {

@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { SwitchList } from './SwitchList';
 
 const meta: Meta<typeof SwitchList> = {

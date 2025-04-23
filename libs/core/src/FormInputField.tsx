@@ -1,32 +1,6 @@
 import React from 'react';
-import type {
-  DataStatus,
-  FieldsLayout,
-  InputField,
-  InputFieldType,
-  InputOption,
-  ParamsMap,
-  ParamValue,
-} from './types';
-import './FormInputField.scss';
+import type { FormInputFieldProps, InputFieldType } from './types';
 import { useInputFieldComponent } from './hooks/context/useInputFieldComponent';
-
-/**
- * Wrapper around most of the form input types supported.
- */
-export type FormInputFieldProps = {
-  config: InputField;
-  value: ParamValue;
-  onChange: (paramsMap: ParamsMap) => void;
-  label?: string;
-  options?: string[] | InputOption[] | undefined;
-  status?: DataStatus | undefined;
-  renderAsFormElement?: boolean;
-  fieldIndex?: number;
-  isValid?: boolean;
-  validationErrors?: string[];
-  fieldLayout?: FieldsLayout;
-};
 
 export function FormInputField<T>({
   config,

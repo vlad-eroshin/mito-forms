@@ -1,26 +1,25 @@
-import {
-  ComponentRegistry,
-  InputFieldRegistry,
-  UtilityComponentRegistry,
-} from '../../core/src/types';
-import { TextField } from './inputs/TextField';
+import { ComponentRegistry, InputFieldRegistry, UtilityComponentRegistry } from '@mito-forms/core';
 import React from 'react';
-import { TabbedSection } from './components/Tabs/TabbedSection';
-import { RadioList } from './inputs/RadioList';
-import { CheckList } from './inputs/CheckList';
-import { Selector } from './inputs/Selector';
-import { BulmaFieldset } from './inputs/BulmaFieldset';
-import { SwitchList } from './inputs/SwitchList';
-import { TextArea } from './inputs/TextArea';
-import { StaticText } from './inputs/StaticText';
-import { FileUpload } from './inputs/FileUpload';
-import { ButtonSelectorField } from './inputs/ButtonSelectorField';
-import { CheckBox } from './inputs/CheckBox';
-import { PasswordField } from './inputs/PasswordField';
-import { SwitchField } from './inputs/SwitchField';
-import { ProgressBar } from './inputs/ProgressBar';
+import '@fortawesome/fontawesome-free/css/all.min.css';
+import '@mito-forms/core/core.css';
+
 import { DeleteRowButton } from './components/DeleteRowButton';
 import { LoadingIndicator } from './components/LoadingIndicator';
+import { TabbedSection } from './components/Tabs/TabbedSection';
+import { BulmaFieldset } from './inputs/BulmaFieldset';
+import { ButtonSelectorField } from './inputs/ButtonSelectorField';
+import { CheckBox } from './inputs/CheckBox';
+import { CheckList } from './inputs/CheckList';
+import { FileUpload } from './inputs/FileUpload';
+import { PasswordField } from './inputs/PasswordField';
+import { ProgressBar } from './inputs/ProgressBar';
+import { RadioList } from './inputs/RadioList';
+import { Selector } from './inputs/Selector';
+import { StaticText } from './inputs/StaticText';
+import { SwitchField } from './inputs/SwitchField';
+import { SwitchList } from './inputs/SwitchList';
+import { TextArea } from './inputs/TextArea';
+import { TextField } from './inputs/TextField';
 
 const BULMA_INPUTS: InputFieldRegistry = {
   progress: ProgressBar,

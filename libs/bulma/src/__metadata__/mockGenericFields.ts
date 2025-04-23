@@ -1,4 +1,4 @@
-import type { InputField, InputFieldType } from '../types';
+import { InputField, InputFieldType } from '@mito-forms/core';
 
 export const TestInputFieldsConfigsMap: { [key in InputFieldType]: InputField | undefined } = {
   text: {

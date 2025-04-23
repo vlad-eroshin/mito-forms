@@ -1,8 +1,6 @@
+import { FormInputFieldProps, getFieldId, InputField, useChangeHandler } from '@mito-forms/core';
 import React from 'react';
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
-import { InputField } from '../../../core/src/types';
-import { useChangeHandler } from '../../../core/src/hooks';
-import { getFieldId } from '../../../core/src/utils';
+
 import 'bulma/bulma.scss';
 import { BulmaField } from './BulmaField';
 
@@ -22,7 +20,7 @@ export const TextField: React.FunctionComponent<FormInputFieldProps> = props => 
           className={`input mt-input-text-field ${!isValid ? 'is-danger' : ''}`}
           type="text"
           data-testid={inputId}
-          area-label={fieldConfig.label}
+          aria-label={fieldConfig.label}
           value={(value as string) ?? ''}
           placeholder={fieldConfig.placeHolderText ?? 'Place holder'}
           required={fieldConfig.required}

@@ -1,22 +1,12 @@
 {
-  "compilerOptions": {
-    "jsx": "react",
-    "allowJs": true,
-    "target": "ES2020",
-    "module": "ES6",
-    "skipLibCheck": true,
-    "esModuleInterop": true,
-    "noImplicitAny": true,
-    "sourceMap": true,
-    "baseUrl": ".",
-    "outDir": "dist",
-    "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "paths": {
-      "*": ["node_modules/*"],
-      "@assets/*": ["./assets/*"]
+  "files": [],
+  "references": [
+    {
+      "path": "libs/core"
     },
-    "types": ["@testing-library/jest-dom", "@types/node"]
-  },
-  "include": ["src/**/*", "tools/**/*"]
+    {
+      "path": "libs/bulma"
+    }
+  ],
+  "extends": "./tsconfig.base.json"
 }

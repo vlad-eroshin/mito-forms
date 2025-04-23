@@ -1,10 +1,9 @@
+import { FormInputFieldProps, getFieldId, InputField } from '@mito-forms/core';
 import React, { ChangeEvent, FunctionComponent, useCallback } from 'react';
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
-import { InputField } from '../../../core/src/types';
-import { getFieldId } from '../../../core/src/utils';
+
 import './SwitchInput.scss';
-import { SwitchInput } from './SwitchInput';
 import { BulmaField } from './BulmaField';
+import { SwitchInput } from './SwitchInput';
 
 export const SwitchField: FunctionComponent<FormInputFieldProps> = props => {
   const { config, onChange, value } = props;

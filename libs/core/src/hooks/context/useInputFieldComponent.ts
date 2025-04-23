@@ -1,7 +1,6 @@
-import { EditorContextProps, InputFieldRegistry } from '../../types';
+import { EditorContextProps, FormInputFieldProps, InputFieldRegistry } from '../../types';
 import { useContext } from 'react';
-import EditorContext from '../../EditorContext';
-import type { FormInputFieldProps } from '../../FormInputField';
+import { EditorContext } from '../../EditorContext';
 import { UnsupportedInputComponent } from '../../UnsupportedInputComponent';
 
 export const useInputFieldComponent = (

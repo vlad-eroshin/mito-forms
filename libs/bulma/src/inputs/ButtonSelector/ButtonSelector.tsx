@@ -1,6 +1,6 @@
+import { convertInputOptions, generateReactKey, InputOption } from '@mito-forms/core';
 import React, { useCallback } from 'react';
-import { convertInputOptions, generateReactKey } from '../../../../core/src/utils';
-import { InputOption } from '../../../../core/src/types';
+
 import 'bulma/bulma.scss';
 import './ButtonSelector.scss';
 import * as faIcons from '@fortawesome/free-solid-svg-icons';

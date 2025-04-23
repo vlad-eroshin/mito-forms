@@ -1,7 +1,7 @@
-import { LoadingComponentProps } from '../../../core/src/types';
-import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { LoadingComponentProps } from '@mito-forms/core';
+import React from 'react';
 import './LoadingIndicator.scss';
 import { SizeProp } from '@fortawesome/fontawesome';
 

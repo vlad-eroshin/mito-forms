@@ -1,7 +1,6 @@
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
+import { FormInputFieldProps, getFieldId, InputField } from '@mito-forms/core';
 import React from 'react';
-import { InputField } from '../../../core/src/types';
-import { getFieldId } from '../../../core/src/utils';
+
 import { BulmaField } from './BulmaField';
 
 export const ProgressBar: React.FunctionComponent<FormInputFieldProps> = props => {

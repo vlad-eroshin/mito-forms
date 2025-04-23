@@ -1,8 +1,7 @@
+import { FormInputFieldProps, getFieldId, InputField } from '@mito-forms/core';
 import React, { FunctionComponent, useCallback } from 'react';
-import { InputField } from '../../../core/src/types';
-import { getFieldId } from '../../../core/src/utils';
+
 import { BulmaField } from './BulmaField';
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
 
 export const CheckBox: FunctionComponent<FormInputFieldProps> = props => {
   const { config, value, fieldIndex, onChange } = props;

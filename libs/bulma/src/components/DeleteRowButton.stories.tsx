@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react';
+
 import { DeleteRowButton } from './DeleteRowButton';
 
 const meta: Meta<typeof DeleteRowButton> = {

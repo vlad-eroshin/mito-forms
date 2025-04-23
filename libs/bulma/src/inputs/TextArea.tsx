@@ -1,14 +1,6 @@
-// <div class="field">
-//     <label class="label">Message</label>
-//     <div class="control">
-//         <textarea class="textarea" placeholder="Textarea"></textarea>
-//     </div>
-// </div>
+import { FormInputFieldProps, getFieldId, InputField, useChangeHandler } from '@mito-forms/core';
 import React from 'react';
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
-import { InputField } from '../../../core/src/types';
-import { useChangeHandler } from '../../../core/src/hooks';
-import { getFieldId } from '../../../core/src/utils';
+
 import 'bulma/bulma.scss';
 import { BulmaField } from './BulmaField';
 

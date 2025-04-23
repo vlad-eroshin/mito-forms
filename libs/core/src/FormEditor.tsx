@@ -8,10 +8,9 @@ import type {
   FormDataState,
   ParamsMap,
 } from './types';
-import EditorContext from './EditorContext';
-import './FormEditor.scss';
 import { buildFormStatesFromData, editorStateReducer } from './FormEditorReducer';
 import { FormsContainer } from './FormsContainer';
+import { EditorContext } from './EditorContext';
 
 /**
  * Generic UI component for form editor UI that allows modification of any object that requires modification of JSON Objects

@@ -28,7 +28,7 @@ module.exports = {
       jsx: true,
     },
   },
-  plugins: ['react', 'react-hooks', '@typescript-eslint', 'unused-imports'],
+  plugins: ['react', 'react-hooks', '@typescript-eslint', 'unused-imports', 'import'],
   rules: {
     'react/react-in-jsx-scope': 'off',
     'react-hooks/rules-of-hooks': 'error',
@@ -42,6 +42,41 @@ module.exports = {
         varsIgnorePattern: '^_',
         args: 'after-used',
         argsIgnorePattern: '^_',
+      },
+    ],
+    'import/order': [
+      'warn',
+      {
+        groups: [['builtin', 'external'], ['internal'], ['parent', 'sibling', 'index']],
+        pathGroups: [
+          {
+            pattern: '../../../core',
+            group: 'external',
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['builtin'],
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+        'newlines-between': 'always',
+      },
+    ],
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: [
+          {
+            name: '../core',
+            message: "Use '@mito-forms/core' instead of relative paths",
+          },
+          {
+            name: '../../core',
+            message: "Use '@mito-forms/core' instead of relative paths",
+          },
+        ],
+        patterns: ['../core/*', '../../core/*', '../../../core/*'],
       },
     ],
     '@typescript-eslint/explicit-function-return-type': [

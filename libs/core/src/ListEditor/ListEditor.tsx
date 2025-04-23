@@ -2,7 +2,6 @@ import React, { useCallback, useState } from 'react';
 
 import { FormFieldset } from '../FormFieldset';
 import { fetchJsonPath, getFieldValues } from '../utils';
-import './ListEditor.scss';
 import { DataRecord, FieldSetMetadata, InputField, ParamsMap, RecordsArray } from '../types';
 
 export type ListInputProps = {

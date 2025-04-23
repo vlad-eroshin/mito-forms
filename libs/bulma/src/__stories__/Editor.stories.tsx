@@ -1,15 +1,16 @@
+import type { InputFieldRegistry, ParamsMap } from '@mito-forms/core';
+import { FormEditorStory } from '@mito-forms/core';
 import type { Meta, StoryObj } from '@storybook/react';
-import type { InputFieldRegistry, ParamsMap } from '../../../core/src/types';
-import INPUT_DATA from '../../../core/src/__data__/mockInputObject.json';
-import { basicEditor } from '../../../core/src/__metadata__/basic';
-import { editorWithCollapsibleFieldsets } from '../../../core/src/__metadata__/collapsibleFieldsets';
-import { editorWithConditions } from '../../../core/src/__metadata__/editorWithConditions';
-import { editorWithJsonPath } from '../../../core/src/__metadata__/jsonPathRetrieval';
-import { staticTextEditor } from '../../../core/src/__metadata__/staticText';
-import { tabbedLayout } from '../../../core/src/__metadata__/tabbedLayout';
-import { withListEditor } from '../../../core/src/__metadata__/withListEditor';
-import { FormEditorStory } from '../../../core/src/__stories__/FormEditorStory';
-import { chartEditorMetadata } from '../../../core/src/__metadata__/chartEditor';
+
+import INPUT_DATA from '../__data__/mockInputObject.json';
+import { basicEditor } from '../__metadata__/basic';
+import { chartEditorMetadata } from '../__metadata__/chartEditor';
+import { editorWithCollapsibleFieldsets } from '../__metadata__/collapsibleFieldsets';
+import { editorWithConditions } from '../__metadata__/editorWithConditions';
+import { editorWithJsonPath } from '../__metadata__/jsonPathRetrieval';
+import { staticTextEditor } from '../__metadata__/staticText';
+import { tabbedLayout } from '../__metadata__/tabbedLayout';
+import { withListEditor } from '../__metadata__/withListEditor';
 import { BULMA_REGISTRY } from '../index';
 
 const meta: Meta<typeof FormEditorStory> = {
@@ -224,8 +225,7 @@ export const SwitchComponent: Story = {
             newData: {
               switchList: string[];
               checkList: number[];
-            },
-            contextParams: any
+            }
           ) => {
             return {
               ...editorData,

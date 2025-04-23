@@ -1,8 +1,8 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, userEvent, within } from '@storybook/test';
+import React, { useState } from 'react';
 
 import { ButtonSelector, ButtonSelectorProps } from './ButtonSelector';
-import React, { useState } from 'react';
 
 const ButtonSelectorWrapper: React.FC<ButtonSelectorProps> = ({ value, options, buttonSize }) => {
   const [selValue, setSelValue] = useState(value);

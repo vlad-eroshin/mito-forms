@@ -1,5 +1,4 @@
-import type { EditorMetadata } from '../types';
-import { ConditionTypeEnum } from '../types';
+import { ConditionTypeEnum, EditorMetadata } from '@mito-forms/core';
 
 export const editorWithConditions = {
   displayAs: 'onePage',

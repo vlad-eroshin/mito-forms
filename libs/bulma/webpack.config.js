@@ -1,18 +1,18 @@
-const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
 
 module.exports = {
   entry: './src/index.tsx',
   output: {
-    path: path.join(__dirname, '/dist'), // the bundle output path
-    filename: 'main.js', // the name of the bundle
+    path: path.join(__dirname, '../../dist/bulma'), // the bundle output path
   },
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.css', '.scsss'],
+    alias: {
+      '@mito-forms/core': path.resolve(__dirname, '../../dist/core'),
+    },
   },
-  devServer: {
-    port: 3035, // you can change the port
-  },
+
   module: {
     rules: [
       {

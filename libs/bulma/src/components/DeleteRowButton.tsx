@@ -1,7 +1,7 @@
-import React from 'react';
-import { DeleteRowButtonProps } from '../../../core/src/types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faRemove } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { DeleteRowButtonProps } from '@mito-forms/core';
+import React from 'react';
 
 export const DeleteRowButton: React.FunctionComponent<DeleteRowButtonProps> = ({
   onClick,

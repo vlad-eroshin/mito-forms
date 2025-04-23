@@ -234,7 +234,7 @@ export const retrieveInputOptions = (
   }
 };
 
-export function getFieldId(fieldConfig: InputField, fieldIndex?: number) {
+export function getFieldId(fieldConfig: InputField, fieldIndex?: number): string {
   return `${fieldConfig.type}-${fieldConfig.name}-${fieldIndex || 0}`;
 }
 

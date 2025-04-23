@@ -1,16 +1,18 @@
-import React, { ChangeEvent, FunctionComponent, useCallback, useMemo } from 'react';
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
-import { InputField, InputOption } from '../../../core/src/types';
-import { useChecklistHandler } from '../../../core/src/hooks';
 import {
   buildCheckedValues,
   convertInputOptions,
+  FormInputFieldProps,
   generateReactKey,
   getFieldId,
-} from '../../../core/src/utils';
+  InputField,
+  InputOption,
+  useChecklistHandler,
+} from '@mito-forms/core';
+import React, { ChangeEvent, FunctionComponent, useCallback, useMemo } from 'react';
+
 import './SwitchInput.scss';
-import { SwitchInput } from './SwitchInput';
 import { BulmaField } from './BulmaField';
+import { SwitchInput } from './SwitchInput';
 
 export const SwitchList: FunctionComponent<FormInputFieldProps> = props => {
   const { config, onChange, value, options } = props;

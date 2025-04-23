@@ -7,7 +7,7 @@ import type {
   ListEditorMetadata,
   ParamsMap,
 } from './types';
-import EditorContext from './EditorContext';
+import { EditorContext } from './EditorContext';
 import { FormFieldset } from './FormFieldset';
 import { ListEditor } from './ListEditor/ListEditor';
 import { evaluateLogicInContext } from './data';

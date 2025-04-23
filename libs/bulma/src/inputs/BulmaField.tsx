@@ -1,6 +1,7 @@
+import type { FormInputFieldProps } from '@mito-forms/core';
+import { generateReactKey, getFieldId } from '@mito-forms/core';
 import React, { FunctionComponent, ReactElement } from 'react';
-import { generateReactKey, getFieldId } from '../../../core/src/utils';
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
+
 import './BulmaField.scss';
 
 type BulmaFieldProps = FormInputFieldProps & {

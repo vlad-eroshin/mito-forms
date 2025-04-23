@@ -1,4 +1,4 @@
-import type { EditorMetadata } from '../types';
+import { EditorMetadata } from '@mito-forms/core';
 
 export const withListEditor: EditorMetadata = {
   activeForm: 'widgetParams',

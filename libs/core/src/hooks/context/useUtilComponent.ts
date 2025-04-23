@@ -1,6 +1,6 @@
 import { EditorContextProps, UtilityComponentRegistry } from '../../types';
 import { FunctionComponent, useContext } from 'react';
-import EditorContext from '../../EditorContext';
+import { EditorContext } from '../../EditorContext';
 
 export const useUtilComponent = <PropType>(
   componentType: keyof UtilityComponentRegistry

@@ -1,4 +1,8 @@
 /** @type { import('@storybook/react-webpack5').StorybookConfig } */
+const path = require('path');
+
+const fontawesomeDir = path.dirname(require.resolve('@fortawesome/fontawesome-free/package.json'));
+
 const config = {
   stories: [
     '../src/**/*.mdx',
@@ -8,6 +12,7 @@ const config = {
     '@storybook/addon-webpack5-compiler-swc',
     '@storybook/addon-essentials',
     '@storybook/addon-onboarding',
+    '@storybook/addon-styling-webpack',
     '@chromatic-com/storybook',
     '@storybook/addon-interactions',
     '@storybook/addon-themes',
@@ -15,7 +20,6 @@ const config = {
       name: '@storybook/addon-styling-webpack',
       options: {
         rules: [
-          // Replaces existing CSS rules to support CSS Modules
           {
             test: /\.css$/,
             use: [
@@ -31,7 +35,6 @@ const config = {
               }
             ]
           },
-          // Replaces any existing Sass rules with given rules
           {
             test: /\.s[ac]ss$/i,
             use: [
@@ -39,7 +42,7 @@ const config = {
               'css-loader',
               {
                 loader: 'sass-loader',
-                options: { implementation: require.resolve('sass') }
+                options: { implementation: require('sass') }
               }
             ]
           }
@@ -50,6 +53,32 @@ const config = {
   framework: {
     name: '@storybook/react-webpack5',
     options: {}
+  },
+  webpackFinal: async (config) => {
+    config.resolve = {
+      ...config.resolve,
+      modules: [
+        ...(config.resolve.modules || []),
+        path.resolve(__dirname, '../node_modules')
+      ],
+      alias: {
+        ...(config.resolve.alias || {}),
+        '@fortawesome/fontawesome-free': fontawesomeDir,
+        '@fortawesome/fontawesome-free/webfonts': path.join(fontawesomeDir, 'webfonts'),
+        '@mito-forms/core': path.resolve(__dirname, '../../../dist/core')
+      }
+    };
+
+    // Add rule for font files
+    config.module.rules.push({
+      test: /\.(woff2?|ttf|eot|svg)$/,
+      type: 'asset/resource',
+      generator: {
+        filename: 'fonts/[name][ext]'
+      }
+    });
+
+    return config;
   }
 };
 

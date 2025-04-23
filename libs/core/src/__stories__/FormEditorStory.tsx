@@ -3,7 +3,6 @@ import React, { useCallback, useState } from 'react';
 import type { EditorMetadata, FieldsLayout } from '../types';
 import type { FormEditorProps } from '../FormEditor';
 import { FormEditor } from '../FormEditor';
-import './FormEditorStory.scss';
 import { IntlProvider } from 'react-intl';
 
 export type FormEditorStoryProps = Omit<FormEditorProps, 'onChange'> & {

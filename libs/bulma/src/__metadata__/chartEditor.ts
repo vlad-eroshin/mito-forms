@@ -1,4 +1,4 @@
-import { EditorMetadata } from '../types';
+import { EditorMetadata } from '@mito-forms/core';
 
 export type VegaLiteSpec = object;
 

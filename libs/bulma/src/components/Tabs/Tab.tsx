@@ -1,5 +1,5 @@
+import { TabProps } from '@mito-forms/core';
 import React, { FunctionComponent, MouseEvent, useCallback } from 'react';
-import { TabProps } from '../../../../core/src/types';
 
 type TabPropsExt = Omit<TabProps, 'content'> & {
   onTab: (id: string, event: MouseEvent) => void;

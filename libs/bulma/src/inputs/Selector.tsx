@@ -1,8 +1,14 @@
+import {
+  convertInputOptions,
+  FormInputFieldProps,
+  generateReactKey,
+  getFieldId,
+  InputField,
+  InputOption,
+  useOptionsChangeHandler,
+} from '@mito-forms/core';
 import React, { FunctionComponent } from 'react';
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
-import { InputField, InputOption } from '../../../core/src/types';
-import { useOptionsChangeHandler } from '../../../core/src/hooks';
-import { convertInputOptions, generateReactKey, getFieldId } from '../../../core/src/utils';
+
 import { BulmaField } from './BulmaField';
 
 export const Selector: FunctionComponent<FormInputFieldProps> = props => {

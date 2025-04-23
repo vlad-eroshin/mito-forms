@@ -1,7 +1,8 @@
+import { FieldSetMetadata } from '@mito-forms/core';
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from '@storybook/test';
+
 import { ListEditorWrapper } from '../__stories__/ListEditorWrapper';
-import { FieldSetMetadata } from '../types';
 
 const meta: Meta<typeof ListEditorWrapper> = {
   title: 'Form Editor/List Editor',

@@ -1,7 +1,8 @@
+import { TabbedSectionProps } from '@mito-forms/core';
 import type { Meta, StoryObj } from '@storybook/react';
-import { TabbedSection } from './TabbedSection';
 import React, { FunctionComponent, useState } from 'react';
-import { TabbedSectionProps } from '../../../../core/src/types';
+
+import { TabbedSection } from './TabbedSection';
 
 const TabbsWrapper: FunctionComponent<TabbedSectionProps> = props => {
   const [selectedTab, setSelectedTab] = useState<string | number>(props.selected);

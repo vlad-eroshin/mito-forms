@@ -1,13 +1,14 @@
-import React, { FunctionComponent, useMemo } from 'react';
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
-import { InputField } from '../../../core/src/types';
-import { useChecklistHandler } from '../../../core/src/hooks';
 import {
   buildCheckedValues,
   convertInputOptions,
+  FormInputFieldProps,
   generateReactKey,
   getFieldId,
-} from '../../../core/src/utils';
+  InputField,
+  useChecklistHandler,
+} from '@mito-forms/core';
+import React, { FunctionComponent, useMemo } from 'react';
+
 import { BulmaField } from './BulmaField';
 
 export const CheckList: FunctionComponent<FormInputFieldProps> = props => {

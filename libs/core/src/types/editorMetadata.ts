@@ -1,6 +1,5 @@
-import type { FormInputFieldProps } from '../FormInputField';
 import type { ConditionInfo, ParamsMap, ParamValue, RecordsArray } from './common';
-import type { DataSourceBinding, DataSourceConfig, DataSourceState } from './dataSource';
+import { DataSourceBinding, DataSourceConfig, DataSourceState, DataStatus } from './dataSource';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 export type ValidationFunctionType<T> = (value: ParamValue) => boolean | T | T[];
@@ -359,4 +358,21 @@ export type TabPanelProps = {
   children?: React.ReactNode;
   index: number;
   value: number | string;
+};
+
+/**
+ * Wrapper around most of the form input types supported.
+ */
+export type FormInputFieldProps = {
+  config: InputField;
+  value: ParamValue;
+  onChange: (paramsMap: ParamsMap) => void;
+  label?: string;
+  options?: string[] | InputOption[] | undefined;
+  status?: DataStatus | undefined;
+  renderAsFormElement?: boolean;
+  fieldIndex?: number;
+  isValid?: boolean;
+  validationErrors?: string[];
+  fieldLayout?: FieldsLayout;
 };

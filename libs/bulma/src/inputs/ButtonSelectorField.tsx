@@ -1,7 +1,6 @@
+import { convertInputOptions, FormInputFieldProps, getFieldId, InputField } from '@mito-forms/core';
 import React, { FunctionComponent, useCallback } from 'react';
-import { FormInputFieldProps } from '../../../core/src/FormInputField';
-import { InputField } from '../../../core/src/types';
-import { convertInputOptions, getFieldId } from '../../../core/src/utils';
+
 import { BulmaField } from './BulmaField';
 import { ButtonSelector } from './ButtonSelector/ButtonSelector';
 

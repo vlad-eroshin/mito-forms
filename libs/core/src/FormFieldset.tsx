@@ -12,8 +12,7 @@ import type {
   ParamValue,
 } from './types';
 import { DataStatus } from './types';
-import EditorContext from './EditorContext';
-import './FormFieldset.scss';
+import { EditorContext } from './EditorContext';
 import { FormDivider } from './FormDivider';
 import { FormInputField } from './FormInputField';
 import { EditableRow } from './ListEditor/EditableTableRow';
