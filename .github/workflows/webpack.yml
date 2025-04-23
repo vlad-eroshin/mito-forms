@@ -15,23 +15,24 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
-      - name: Setup PNPM
-        uses: pnpm/action-setup@v2
+      - name: Set up PNPM
+        uses: pnpm/action-setup@v2.2.4
         with:
-          version: 10
+          version: 8
 
-      - name: Check PNPM version
+      - name: Check PNPM version (debug step)
         run: pnpm --version
 
-      - name: Install dependencies and build
+      - name: Install and build
         run: |
           pnpm install
           pnpm turbo run build
