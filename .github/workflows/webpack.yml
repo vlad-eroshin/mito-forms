@@ -21,8 +21,14 @@ jobs:
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
+        cache: 'pnpm'
 
-    - name: Build
+    - name: Setup PNPM
+      uses: pnpm/action-setup@v2
+      with:
+        version: 8 # or whatever PNPM version you prefer
+
+    - name: Install dependencies and build
       run: |
         pnpm install
         pnpm turbo run build
