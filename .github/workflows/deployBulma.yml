@@ -1,0 +1,32 @@
+name: Deploy Storybook to GitHub Pages
+
+on:
+  push:
+    branches: [main]  # or your default branch
+  workflow_dispatch:  # optional: allow manual trigger
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+
+      - name: Install PNPM
+        run: npm install -g pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build Storybook
+        run: pnpm run storybook:build --filter=@mito-forms/bulma
+
+      - name: Deploy to GitHub Pages
+        run: pnpm run storybook:deploy --filter=@mito-forms/bulma
