@@ -49,8 +49,8 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0)
       '@mito-forms/core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: ^0.1.0-beta
+        version: 0.1.0-beta(typescript@5.8.3)
       bulma:
         specifier: ^1.0.3
         version: 1.0.4
@@ -875,6 +875,9 @@ packages:
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
+
+  '@mito-forms/core@0.1.0-beta':
+    resolution: {integrity: sha512-bcSEwOL+KlKvSxaHUoMNDmo5UX/rlBYEePNw/B8b5LOZze2NMLpLzf5e1+VM42LZ9/GlvONlGisZ1wb4SbmDBw==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -4942,6 +4945,19 @@ snapshots:
       '@types/mdx': 2.0.13
       '@types/react': 19.1.2
       react: 19.1.0
+
+  '@mito-forms/core@0.1.0-beta(typescript@5.8.3)':
+    dependencies:
+      '@fortawesome/fontawesome-svg-core': 6.7.2
+      '@fortawesome/free-solid-svg-icons': 6.7.2
+      jsonpath-plus: 10.3.0
+      ramda: 0.30.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      react-intl: 7.1.6(react@19.1.0)(typescript@5.8.3)
+      uuid-by-string: 4.0.0
+    transitivePeerDependencies:
+      - typescript
 
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
