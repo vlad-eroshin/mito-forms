@@ -1,13 +1,21 @@
-name: Deploy Storybook to GitHub Pages
+name: Deploy Bulma Storybook
 
 on:
   push:
     branches: [main]  # or your default branch
+    paths:
+      - 'libs/bulma/**'
+      - '.github/workflows/deploy-bulma-storybook.yml'
   workflow_dispatch:  # optional: allow manual trigger
 
 jobs:
-  deploy:
+  deploy-bulma-storybook:
     runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: libs/bulma
+
     strategy:
       matrix:
         node-version: [18.x]
@@ -31,8 +39,15 @@ jobs:
       - name: Check PNPM version (debug step)
         run: pnpm --version
 
+      - name: Install deps (from root)
+        run: pnpm install
+        working-directory: ${{ github.workspace }}
+
       - name: Build Storybook
         run: pnpm run storybook:build --filter=@mito-forms/bulma
 
       - name: Deploy to GitHub Pages
         run: pnpm run storybook:deploy --filter=@mito-forms/bulma
+
+
+
