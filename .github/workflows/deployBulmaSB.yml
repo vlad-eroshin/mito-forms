@@ -2,7 +2,9 @@ name: Deploy Bulma Storybook
 
 on:
   push:
-    branches: [main]  # or your default branch
+    branches: [ main ]  # or your default branch
+    tags:
+      - 'bulma-storybook'
     paths:
       - 'libs/bulma/**'
       - 'libs/core/**'
@@ -19,8 +21,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x]
-        
+        node-version: [ 18.x ]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -40,6 +42,11 @@ jobs:
       - name: Check PNPM version (debug step)
         run: pnpm --version
 
+      - name: Update dependency to published version
+        run: |
+          CORE_VERSION=$(node -p "require('../../libs/core/package.json').version")
+          sed -i.bak "s/\"@mito-forms\/core\": \"workspace:\*\"/\"@mito-forms\/core\": \"^$CORE_VERSION\"/" libs/bulma/package.json
+
       - name: Install deps (from root)
         run: pnpm install
         working-directory: ${{ github.workspace }}
@@ -48,6 +55,8 @@ jobs:
         run: pnpm turbo run build --filter=@mito-forms/bulma...
 
       - name: Build Storybook for Bulma
+        env:
+          CI: true
         run: pnpm --filter=@mito-forms/bulma run storybook:build
 
       - name: Deploy to GitHub Pages

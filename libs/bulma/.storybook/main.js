@@ -64,11 +64,16 @@ const config = {
       alias: {
         ...(config.resolve.alias || {}),
         '@fortawesome/fontawesome-free': fontawesomeDir,
-        '@fortawesome/fontawesome-free/webfonts': path.join(fontawesomeDir, 'webfonts'),
-        '@mito-forms/core': path.resolve(__dirname, '../../../dist/core')
+        '@fortawesome/fontawesome-free/webfonts': path.join(fontawesomeDir, 'webfonts')
       }
     };
-
+    if (process.env.CI) {
+      // Replace alias only in CI
+      config.resolve.alias['@mito-forms/core'] = require.resolve('@mito-forms/core');
+    } else {
+      // Use local path for local dev
+      config.resolve.alias['@mito-forms/core'] = path.resolve(__dirname, '../../../dist/core');
+    }
     // Add rule for font files
     config.module.rules.push({
       test: /\.(woff2?|ttf|eot|svg)$/,
