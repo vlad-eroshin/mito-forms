@@ -44,10 +44,10 @@ jobs:
         working-directory: ${{ github.workspace }}
 
       - name: Build Storybook
-        run: pnpm run storybook:build --filter=@mito-forms/bulma
+        run: pnpm run storybook:build
 
       - name: Deploy to GitHub Pages
-        run: pnpm run storybook:deploy --filter=@mito-forms/bulma
+        run: pnpm run storybook:deploy
 
 
 
