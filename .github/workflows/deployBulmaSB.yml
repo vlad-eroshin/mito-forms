@@ -45,7 +45,7 @@ jobs:
       - name: Update dependency to published version
         run: |
           CORE_VERSION=$(node -p "require('../../libs/core/package.json').version")
-          sed -i.bak "s/\"@mito-forms\/core\": \"workspace:\*\"/\"@mito-forms\/core\": \"^$CORE_VERSION\"/" libs/bulma/package.json
+          sed -i.bak "s/\"@mito-forms\/core\": \"workspace:\*\"/\"@mito-forms\/core\": \"^$CORE_VERSION\"/" ./package.json
 
       - name: Install deps (from root)
         run: pnpm install
