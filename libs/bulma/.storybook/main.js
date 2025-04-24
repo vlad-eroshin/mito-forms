@@ -68,10 +68,7 @@ const config = {
       }
     };
     console.log('CI mode:', process.env.CI);
-    if (process.env.CI) {
-      // Replace alias only in CI
-      config.resolve.alias['@mito-forms/core'] = require.resolve('@mito-forms/core');
-    } else {
+    if (!process.env.CI) {
       // Use local path for local dev
       config.resolve.alias['@mito-forms/core'] = path.resolve(__dirname, '../../../dist/core');
     }
