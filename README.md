@@ -81,19 +81,17 @@ cd mito-forms
 2. Install dependencies:
 
 ```bash
-npm install
-# or
-yarn install
+pnpm install
 ```
 
 ### Available Scripts
 
-- `npm run dev` - Start development server
-- `npm run build` - Build for production
-- `npm run test` - Run tests
-- `npm run storybook` - Start Storybook
-- `npm run lint` - Run ESLint
-- `npm run format` - Format code with Prettier
+- `pnpm run dev` - Start development server
+- `pnpm run build` - Build for production
+- `pnpm run test` - Run tests
+- `pnpm run storybook` - Start Storybook
+- `pnpm run lint` - Run ESLint
+- `pnpm run format` - Format code with Prettier
 
 ### Project Structure
 
