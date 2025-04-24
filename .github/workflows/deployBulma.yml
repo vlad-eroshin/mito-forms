@@ -5,6 +5,7 @@ on:
     branches: [main]  # or your default branch
     paths:
       - 'libs/bulma/**'
+      - 'libs/core/**'
       - '.github/workflows/deploy-bulma-storybook.yml'
   workflow_dispatch:  # optional: allow manual trigger
 
@@ -43,11 +44,13 @@ jobs:
         run: pnpm install
         working-directory: ${{ github.workspace }}
 
-      - name: Build Storybook
-        run: pnpm run storybook:build
+      - name: Build Bulma and dependencies (via Turbo)
+        run: pnpm turbo run build --filter=@mito-forms/bulma...
+
+      - name: Build Storybook for Bulma
+        run: pnpm --filter=@mito-forms/bulma run storybook:build
 
       - name: Deploy to GitHub Pages
-        run: pnpm run storybook:deploy
-
+        run: pnpm --filter=@mito-forms/bulma run storybook:deploy
 
 
