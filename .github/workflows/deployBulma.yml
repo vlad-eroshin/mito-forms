@@ -8,22 +8,28 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node-version: [18.x]
+        
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10.8.1
+          run_install: false
+
+      - name: Install Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 18
+          node-version: ${{ matrix.node-version }}
           cache: 'pnpm'
 
-      - name: Install PNPM
-        run: npm install -g pnpm
-
-      - name: Install dependencies
-        run: pnpm install
+      - name: Check PNPM version (debug step)
+        run: pnpm --version
 
       - name: Build Storybook
         run: pnpm run storybook:build --filter=@mito-forms/bulma
