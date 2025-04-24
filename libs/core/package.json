@@ -1,6 +1,6 @@
 {
   "name": "@mito-forms/core",
-  "version": "1.0.0",
+  "version": "0.1.0-beta",
   "description": "Declarative Forms",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -14,7 +14,11 @@
     "lint": "eslint ./src --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "eslint ./src --ext .ts,.tsx,.js,.jsx --fix",
     "format": "prettier './**/*.{js,jsx,ts,tsx,css,md,json}' --write",
-    "clean": "rm -rf dist node_modules package-lock.json && echo '✅ Project cleaned. Run npm install or yarn install.'"
+    "clean": "rm -rf dist node_modules package-lock.json && echo '✅ Project cleaned. Run npm install or yarn install.'",
+    "publish:core": "pnpm publish --access public"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "author": "Vladislav Eroshin",
   "license": "MIT",
