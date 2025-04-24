@@ -6,8 +6,7 @@
   "scripts": {
     "test": "jest",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "storybook build  -o storybook-static",
-    "storybook:deploy": "storybook-to-ghpages",
+    "storybook:build": "storybook build",
     "build": "tsc --build && sass --load-path=../../node_modules src ../../dist/bulma --no-source-map",
     "dev": "webpack serve --mode development",
     "package": "npm pack",
@@ -15,9 +14,6 @@
     "lint:fix": "eslint ./src --ext .ts,.tsx,.js,.jsx --fix",
     "format": "prettier './**/*.{js,jsx,ts,tsx,css,md,json}' --write",
     "clean": "rm -rf dist node_modules package-lock.json && echo '✅ Project cleaned. Run npm install or yarn install.'"
-  },
-  "storybook-to-ghpages": {
-    "branch": "gh-pages"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
