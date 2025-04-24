@@ -67,6 +67,7 @@ const config = {
         '@fortawesome/fontawesome-free/webfonts': path.join(fontawesomeDir, 'webfonts')
       }
     };
+    console.log('CI mode:', process.env.CI);
     if (process.env.CI) {
       // Replace alias only in CI
       config.resolve.alias['@mito-forms/core'] = require.resolve('@mito-forms/core');
