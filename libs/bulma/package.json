@@ -15,11 +15,15 @@
     "lint:fix": "eslint ./src --ext .ts,.tsx,.js,.jsx --fix",
     "format": "prettier './**/*.{js,jsx,ts,tsx,css,md,json}' --write",
     "clean": "rm -rf dist node_modules package-lock.json && echo '✅ Project cleaned. Run npm install or yarn install.'",
-    "publish:bulma": "pnpm publish --access public"
+    "build:beforePublish": "tsc --project ./tsconfig.json --outDir ./dist",
+    "publish:bulma": "pnpm run build:beforePublish && pnpm publish --access public"
   },
   "publishConfig": {
     "access": "public"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
