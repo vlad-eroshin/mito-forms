@@ -61,7 +61,7 @@ jobs:
       - name: Configure Git identity for deploy
         run: |
           git config --global user.email "vlad.eroshin@gmail.com"
-          git config --global user.name "Mito Forms CI"
+          git config --global user.name "vlad-eroshin"
           
       - name: Deploy to GitHub Pages
         run: pnpm run storybook:deploy
