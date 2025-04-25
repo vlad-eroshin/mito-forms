@@ -64,7 +64,8 @@ jobs:
           git config --global user.name "vlad-eroshin"
           
       - name: Debug GitHub token (mask-safe)
-        run: echo "Using token: ${GITHUB_TOKEN:0:4}***"
+        run: |
+          echo "Using token: ${GITHUB_TOKEN:0:4} ***"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     
