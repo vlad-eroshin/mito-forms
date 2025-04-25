@@ -55,9 +55,11 @@ jobs:
       - name: Build Storybook for Bulma
         env:
           CI: true
-        run: pnpm --filter=@mito-forms/bulma run storybook:build
+        run: pnpm run storybook:build
+        working-directory: libs/bulma
 
       - name: Deploy to GitHub Pages
-        run: pnpm --filter=@mito-forms/bulma run storybook:deploy
+        run: pnpm run storybook:deploy
+        working-directory: libs/bulma
 
 
