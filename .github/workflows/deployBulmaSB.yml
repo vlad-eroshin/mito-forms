@@ -63,6 +63,10 @@ jobs:
           git config --global user.email "vlad.eroshin@gmail.com"
           git config --global user.name "vlad-eroshin"
           
+      - name: Use GitHub token for push access
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          
       - name: Deploy to GitHub Pages
         run: pnpm run storybook:deploy
         working-directory: libs/bulma
