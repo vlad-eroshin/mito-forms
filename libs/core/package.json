@@ -1,6 +1,6 @@
 {
   "name": "@mito-forms/core",
-  "version": "0.1.0-beta",
+  "version": "0.1.0-beta-1",
   "description": "Declarative Forms",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,7 +15,8 @@
     "lint:fix": "eslint ./src --ext .ts,.tsx,.js,.jsx --fix",
     "format": "prettier './**/*.{js,jsx,ts,tsx,css,md,json}' --write",
     "clean": "rm -rf dist node_modules package-lock.json && echo '✅ Project cleaned. Run npm install or yarn install.'",
-    "publish:core": "pnpm publish --access public"
+    "build:beforePublish": "tsc --project ./tsconfig.json --outDir ./dist && sass --no-source-map --style=compressed src/core-styles.scss dist/core.css",
+    "publish:core": "pnpm run build:beforePublish && pnpm publish --access public"
   },
   "publishConfig": {
     "access": "public"
@@ -31,6 +32,9 @@
     "./core.css": "./dist/core/core.css",
     "./*": "./dist/*"
   },
+  "files": [
+    "dist"
+  ],
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/free-solid-svg-icons": "^6.7.2",

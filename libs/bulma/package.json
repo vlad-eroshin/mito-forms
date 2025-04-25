@@ -1,6 +1,6 @@
 {
   "name": "@mito-forms/bulma",
-  "version": "0.1.0-beta",
+  "version": "0.1.0-beta-1",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -23,7 +23,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@mito-forms/core": "^0.1.0-beta",
+    "@mito-forms/core": "^0.1.0-beta-1",
     "bulma": "^1.0.3",
     "react-intl": "7.1.6"
   },
