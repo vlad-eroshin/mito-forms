@@ -72,7 +72,7 @@ const config = {
       // Use local path for local dev
       config.resolve.alias['@mito-forms/core'] = path.resolve(__dirname, '../../../dist/core');
     } else {
-      config.output.publicPath = '/mito-forms/storybook/bulma/';
+      config.output.publicPath = './';
     }
     // Add rule for font files
     config.module.rules.push({
