@@ -8,7 +8,7 @@
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build -o storybook-static",
     "storybook:prepare-deploy": "mkdir -p .deploy/storybook/bulma && cp -r storybook-static/* .deploy/storybook/bulma",
-    "storybook:deploy": "pnpm run storybook:prepare-deploy && gh-pages -d .deploy"
+    "storybook:deploy": "pnpm run storybook:prepare-deploy && gh-pages -d .deploy",
     "build": "tsc --build && sass --load-path=../../node_modules src ../../dist/bulma --no-source-map",
     "dev": "webpack serve --mode development",
     "package": "npm pack",
