@@ -48,13 +48,6 @@ jobs:
           echo "CORE_VERSION=$CORE_VERSION"
           sed -i.bak "s/\"@mito-forms\/core\": \"workspace:\*\"/\"@mito-forms\/core\": \"^$CORE_VERSION\"/" ./package.json
 
-      - name: Install deps (from root)
-        run: pnpm install
-        working-directory: ${{ github.workspace }}
-
-      - name: Build Bulma and dependencies (via Turbo)
-        run: pnpm turbo run build --filter=@mito-forms/bulma...
-        
       - name: Install Bulma's dependencies
         run: pnpm install
         working-directory: libs/bulma
