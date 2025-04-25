@@ -14,7 +14,7 @@ import { withListEditor } from '../__metadata__/withListEditor';
 import { BULMA_REGISTRY } from '../index';
 
 const meta: Meta<typeof FormEditorStory> = {
-  title: 'Bulma/Form Editor - Usage',
+  title: 'Bulma Form Editor',
   component: FormEditorStory,
   decorators: [],
   parameters: {},
