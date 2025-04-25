@@ -49,8 +49,8 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0)
       '@mito-forms/core':
-        specifier: ^0.1.0-beta-1
-        version: 0.1.0-beta-1(typescript@5.8.3)
+        specifier: ^0.1.0-beta-2
+        version: 0.1.0-beta-2(typescript@5.8.3)
       bulma:
         specifier: ^1.0.3
         version: 1.0.4
@@ -876,8 +876,8 @@ packages:
       '@types/react': '>=16'
       react: '>=16'
 
-  '@mito-forms/core@0.1.0-beta-1':
-    resolution: {integrity: sha512-bIjl6LrtWIRk9LzXFbdcNcw3kLON8nKj4YoNuFwrQEHfroiAhNmsfzwlMU/TONWIl10Zza/GyuipjgXof+dS2w==}
+  '@mito-forms/core@0.1.0-beta-2':
+    resolution: {integrity: sha512-88AagoOQSKmbdCus06V64uEQhHKMe/BXyyw3wow/LzbXnGlILr1sHInIqrAsxq+suJsJPwfcgde57M0YDwryAA==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -4946,7 +4946,7 @@ snapshots:
       '@types/react': 19.1.2
       react: 19.1.0
 
-  '@mito-forms/core@0.1.0-beta-1(typescript@5.8.3)':
+  '@mito-forms/core@0.1.0-beta-2(typescript@5.8.3)':
     dependencies:
       '@fortawesome/fontawesome-svg-core': 6.7.2
       '@fortawesome/free-solid-svg-icons': 6.7.2
