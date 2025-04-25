@@ -1,0 +1,80 @@
+name: Deploy Bulma Storybook
+
+on:
+  push:
+    branches: [ main ]  # or your default branch
+    tags:
+      - 'bulma-storybook'
+    paths:
+      - 'libs/bulma/**'
+      - 'libs/core/**'
+      - '.github/workflows/deploy-bulma-storybook.yml'
+  workflow_dispatch:  # optional: allow manual trigger
+
+jobs:
+  deploy-bulma-storybook:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: libs/bulma
+
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          version: 10.8.1
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'pnpm'
+
+      - name: Check PNPM version (debug step)
+        run: pnpm --version
+
+      - name: Update dependency to published version
+        run: |
+          CORE_VERSION=$(node -p "require('../../libs/core/package.json').version")
+          echo "CORE_VERSION=$CORE_VERSION"
+          sed -i.bak "s/\"@mito-forms\/core\": \"workspace:\*\"/\"@mito-forms\/core\": \"^$CORE_VERSION\"/" ./package.json
+
+      - name: Install Bulma's dependencies
+        run: pnpm install
+        working-directory: libs/bulma
+  
+      - name: Build Storybook for Bulma
+        env:
+          CI: true
+        run: pnpm run storybook:build
+        working-directory: libs/bulma
+        
+      - name: Configure Git identity for deploy
+        run: |
+          git config --global user.email "vlad.eroshin@gmail.com"
+          git config --global user.name "vlad-eroshin"
+          
+      - name: Debug GitHub token (mask-safe)
+        run: |
+          echo "Using token: ${GITHUB_TOKEN:0:4} ***"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    
+      - name: Use GitHub token for push access
+        run: |
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
+          
+      - name: Deploy to GitHub Pages
+        run: pnpm run storybook:deploy
+        working-directory: libs/bulma
+
+

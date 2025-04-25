@@ -1,0 +1,10 @@
+node_modules
+.DS_Store
+.idea/
+.turbo/
+libs/bulma/.turbo/
+libs/core/.turbo/
+mito-forms.iml
+package-lock.json
+**/dist
+**/storybook-static

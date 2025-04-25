@@ -1,0 +1,11 @@
+src/
+node_modules/
+tsconfig.json
+*.test.ts
+*.stories.ts
+jest.config.js
+jest.setup.js
+__*__
+stories/
+*.iml
+.*
