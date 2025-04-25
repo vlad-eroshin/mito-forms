@@ -2,16 +2,16 @@ import type { InputFieldRegistry, ParamsMap } from '@mito-forms/core';
 import { FormEditorStory } from '@mito-forms/core';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import INPUT_DATA from '../__data__/mockInputObject.json';
-import { basicEditor } from '../__metadata__/basic';
-import { chartEditorMetadata } from '../__metadata__/chartEditor';
-import { editorWithCollapsibleFieldsets } from '../__metadata__/collapsibleFieldsets';
-import { editorWithConditions } from '../__metadata__/editorWithConditions';
-import { editorWithJsonPath } from '../__metadata__/jsonPathRetrieval';
-import { staticTextEditor } from '../__metadata__/staticText';
-import { tabbedLayout } from '../__metadata__/tabbedLayout';
-import { withListEditor } from '../__metadata__/withListEditor';
-import { BULMA_REGISTRY } from '../index';
+import INPUT_DATA from './__data__/mockInputObject.json';
+import { basicEditor } from './__metadata__/basic';
+import { chartEditorMetadata } from './__metadata__/chartEditor';
+import { editorWithCollapsibleFieldsets } from './__metadata__/collapsibleFieldsets';
+import { editorWithConditions } from './__metadata__/editorWithConditions';
+import { editorWithJsonPath } from './__metadata__/jsonPathRetrieval';
+import { staticTextEditor } from './__metadata__/staticText';
+import { tabbedLayout } from './__metadata__/tabbedLayout';
+import { withListEditor } from './__metadata__/withListEditor';
+import { BULMA_REGISTRY } from './index';
 
 const meta: Meta<typeof FormEditorStory> = {
   title: 'Bulma Form Editor',
