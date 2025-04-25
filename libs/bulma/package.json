@@ -7,7 +7,7 @@
     "test": "jest",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build -o storybook-static",
-    "storybook:deploy": "gh-pages -d storybook-static",
+    "storybook:deploy": "gh-pages -d storybook-static -D storybook/bulma",
     "build": "tsc --build && sass --load-path=../../node_modules src ../../dist/bulma --no-source-map",
     "dev": "webpack serve --mode development",
     "package": "npm pack",
