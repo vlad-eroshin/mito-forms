@@ -54,7 +54,11 @@ jobs:
 
       - name: Build Bulma and dependencies (via Turbo)
         run: pnpm turbo run build --filter=@mito-forms/bulma...
-
+        
+      - name: Install Bulma's dependencies
+        run: pnpm install
+        working-directory: libs/bulma
+  
       - name: Build Storybook for Bulma
         env:
           CI: true
