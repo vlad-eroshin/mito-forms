@@ -71,9 +71,10 @@ const config = {
     if (!process.env.CI) {
       // Use local path for local dev
       config.resolve.alias['@mito-forms/core'] = path.resolve(__dirname, '../../../dist/core');
-    } else {
-      config.output.publicPath = './';
     }
+    // else {
+    //   config.output.publicPath = './';
+    // }
     // Add rule for font files
     config.module.rules.push({
       test: /\.(woff2?|ttf|eot|svg)$/,
