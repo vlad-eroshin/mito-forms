@@ -94,7 +94,7 @@ Make sure the core package is built first if you modify it.
 
 ## Dependencies
 
-- [jmespath](https://www.npmjs.com/package/jmespath) — Used for evaluating dynamic field visibility conditions.
+- [jmespath](https://www.npmjs.com/package/jmespath) — Used for evaluating dynamic field visibility conditions and for accessing data in the input objects.
 
 ## Future Plans
 
