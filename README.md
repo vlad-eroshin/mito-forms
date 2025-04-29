@@ -1,128 +1,107 @@
 [![Mito Forms CI](https://github.com/vlad-eroshin/mito-forms/actions/workflows/webpack.yml/badge.svg)](https://github.com/vlad-eroshin/mito-forms/actions/workflows/webpack.yml)
 
-# Mito Forms - Declarative Form Framework
+# Mito Forms (WORK IN PROGRESS)
 
-Mito Forms is a powerful React-based framework for building form editors declaratively. Define your form UI in JSON and let Mito Forms handle the state management and data capture. Perfect for complex forms and configuration interfaces.
+Mito Forms is a lightweight, modular, and extensible form state management library.
+It provides a declarative, JSON-driven approach to building forms with dynamic behavior across different UI frameworks.
 
-## Features
+## Project Structure
 
-- 🎨 **Declarative Form Definition**: Define your forms using JSON configuration
-- 🔄 **Dynamic Field Visibility**: Show/hide fields based on user input
-- 🗺️ **JSON Path Support**: Easily work with complex nested data structures
-- 🎯 **Two-way Data Binding**: Seamlessly read and write to source objects
-- 🎭 **UI Framework Agnostic**: Works with any design system (default support for Bulma)
-- 🌐 **Internationalization**: Built-in support for multiple languages
-- 🧪 **Comprehensive Testing**: Full test coverage with Jest and React Testing Library
-- 📚 **Storybook Documentation**: Interactive component documentation
+Mito Forms is organized as a modular monorepo:
 
-## Installation
+- `libs/core/` — Core form state management engine (framework-agnostic)
+- `libs/bulma/` — Bulma CSS framework implementation (custom fields and components)
 
-```bash
-npm install mito-forms
-# or
-yarn add mito-forms
-```
+More UI framework adapters (e.g., Material-UI, Bootstrap) may be added in the future.
 
-## Quick Start
+## Key Features
 
-```typescript
-import { FormEditor } from 'mito-forms';
+- **Declarative Forms:** Define forms as JSON schemas.
+- **Dynamic Field Visibility:** Show or hide fields dynamically based on form state.
+- **Custom Components:** Easily integrate with different UI frameworks.
+- **Minimal Dependencies:** Focused on keeping the core library lightweight.
 
-const formConfig = {
-  id: 'user-form',
-  title: 'User Profile',
-  fields: [
-    {
-      name: 'username',
-      type: 'text',
-      label: 'Username',
-      required: true
-    },
-    {
-      name: 'email',
-      type: 'email',
-      label: 'Email',
-      required: true
-    }
-  ]
-};
+## Dynamic Field Logic
 
-function App() {
-  const handleChange = (data) => {
-    console.log('Form data:', data);
-  };
+Mito Forms uses **JMESPath** expressions to control field visibility and dynamic behavior.
 
-  return (
-    <FormEditor
-      editorMetadata={formConfig}
-      initialData={{}}
-      onChange={handleChange}
-    />
-  );
+### How it works
+
+- Each field can have an optional `render` or `disabled`.
+- The condition must be written inside `!{<path>}` using a **JMESPath** expression.
+- At runtime, Mito Forms evaluates the JMESPath expression against the current form state and other contextual objects (
+  `_STATE`, `_CONTEXT`, and current fieldset field values).
+
+If the evaluated result is truthy (non-empty array, true value, non-null), the field will be shown or enabled.
+
+### Example
+
+Only show field if `color` selected is `blue`
+
+```json
+{
+  "name": "favoriteColor",
+  ........................
+  "render": "!{_STATE.Form1.fieldset2.data.color == `blue`}"
 }
 ```
 
-## Development
+Disable field if user indicated that he has a car
 
-### Prerequisites
+```json
+{
+  "name": "makeOfTheCar",
+  ........................
+  "disable": "!{_STATE.Form1.fieldset2.data.userHasNoCar}"
+}
+```
 
-- Node.js (v14 or higher)
-- npm or yarn
+### Expression Rules
 
-### Setup
+- Expressions must start and end with `{}`.
+- Inside the braces `{}`, you must use **JMESPath** syntax.
+- String comparisons must use backticks \` in JMESPath.
+- Array filtering and projections are fully supported.
 
-1. Clone the repository:
+### Resources
+
+- [JMESPath Tutorial](https://jmespath.org/tutorial.html)
+- [JMESPath Examples](https://jmespath.org/examples.html)
+
+## Building the Project
+
+To build all Mito Forms packages (core and UI libraries):
 
 ```bash
-git clone https://github.com/vlad-eroshin/mito-forms.git
-cd mito-forms
+pnpm run build
 ```
 
-2. Install dependencies:
+This will:
+
+- Build `libs/core`
+- Build `libs/bulma`
+
+### Developing locally
+
+You can start a Storybook server for the Bulma package:
 
 ```bash
-pnpm install
+cd libs/bulma
+pnpm run storybook
 ```
 
-### Available Scripts
+Make sure the core package is built first if you modify it.
 
-- `pnpm run dev` - Start development server
-- `pnpm run build` - Build for production
-- `pnpm run test` - Run tests
-- `pnpm run storybook` - Start Storybook
-- `pnpm run lint` - Run ESLint
-- `pnpm run format` - Format code with Prettier
+## Dependencies
 
-### Project Structure
+- [jmespath](https://www.npmjs.com/package/jmespath) — Used for evaluating dynamic field visibility conditions.
 
-```
-src/
-├── components/     # React components
-├── types/         # TypeScript type definitions
-├── utils/         # Utility functions
-└── index.ts       # Main entry point
-```
+## Future Plans
 
-## Contributing
+- Support for additional UI frameworks (Material UI, Bootstrap, etc.)
+- Dynamic field validation rules
+- More powerful form layout options
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+---
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Author
-
-- **Vladislav Eroshin** - [GitHub](https://github.com/vlad-eroshin)
-
-## Acknowledgments
-
-- [Bulma](https://bulma.io/) - CSS framework
-- [React](https://reactjs.org/) - JavaScript library
-- [Storybook](https://storybook.js.org/) - UI component explorer
+Built with focus on modularity, lightness, and developer experience.
