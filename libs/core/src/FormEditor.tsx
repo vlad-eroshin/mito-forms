@@ -1,9 +1,18 @@
-import React, { useCallback, useEffect, useMemo, useReducer, useState } from 'react';
+import React, {
+  Ref,
+  useCallback,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useReducer,
+  useRef,
+} from 'react';
 import type {
   ComponentRegistry,
   DataSourceState,
   EditorContextProps,
   EditorMetadata,
+  EditorStateReplacePayload,
   FormChangePayload,
   FormDataState,
   ParamsMap,
@@ -11,6 +20,10 @@ import type {
 import { buildFormStatesFromData, editorStateReducer } from './FormEditorReducer';
 import { FormsContainer } from './FormsContainer';
 import { EditorContext } from './EditorContext';
+
+export interface EditorActiveApi<T = object> {
+  setData: (newData: T) => void;
+}
 
 /**
  * Generic UI component for form editor UI that allows modification of any object that requires modification of JSON Objects
@@ -61,6 +74,8 @@ export type FormEditorProps<T = object> = {
    * Additional Context Params
    */
   contextParams?: ParamsMap;
+
+  editorRef?: Ref<EditorActiveApi<T>>;
 };
 
 export function FormEditor<T>({
@@ -72,6 +87,7 @@ export function FormEditor<T>({
   changeInterval = 1000,
   componentRegistry,
   contextParams,
+  editorRef,
 }: FormEditorProps<T>) {
   const statesOfForms = buildFormStatesFromData<T>(editorMetadata, initialData);
   const { isValid, message: validatorMessage = undefined } = editorMetadata.resultValidator
@@ -85,7 +101,25 @@ export function FormEditor<T>({
     validatorMessage,
   });
   // Change time out is used for throtling changes - to minimize frequency of how often onChange handler is invoked
-  const [changeTimeout, setChangeTimeout] = useState<NodeJS.Timeout | undefined>(undefined);
+  //const [changeTimeout, setChangeTimeout] = useState<NodeJS.Timeout | undefined>(undefined);
+  const changeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
+
+  useImperativeHandle(editorRef, () => {
+    return {
+      setData: (newData: T) => {
+        const payload: EditorStateReplacePayload<T> = {
+          data: {
+            formStates: buildFormStatesFromData<T>(editorMetadata, newData),
+            editorResult: newData,
+          },
+        };
+        dispatchStateAction({
+          payload: payload,
+          type: 'replace',
+        });
+      },
+    };
+  });
   // Editor context Data stores data source state and editor state
   const editorContextData: EditorContextProps<T> = useMemo(
     () => ({
@@ -130,7 +164,7 @@ export function FormEditor<T>({
       console.log('Editor will submit changes in: ', `${changeInterval}Ms`);
       const newTimeout = setTimeout(() => {
         console.log('Editor submitted Changes.');
-        setChangeTimeout(undefined);
+        changeTimeoutRef.current = undefined;
         onChange(editorResult, true);
       }, changeInterval);
 
@@ -151,11 +185,10 @@ export function FormEditor<T>({
       return;
     }
     if (throttleChange) {
-      if (changeTimeout) {
-        clearTimeout(changeTimeout);
+      if (changeTimeoutRef.current) {
+        clearTimeout(changeTimeoutRef.current);
       }
-      const timeout = scheduleOnChange(editorResult);
-      setChangeTimeout(timeout);
+      changeTimeoutRef.current = scheduleOnChange(editorResult);
     } else {
       onChange(editorResult, isFormValid, editorState.validatorMessage);
     }
@@ -169,7 +202,7 @@ export function FormEditor<T>({
   return (
     <div className="config-editor">
       <div className="editor-status">
-        {changeTimeout && (
+        {changeTimeoutRef.current && (
           <div className="info">
             <LoadingComponent loadingText={'Applying changes...'} />
           </div>
@@ -177,8 +210,8 @@ export function FormEditor<T>({
       </div>
       <EditorContext.Provider value={editorContextData as EditorContextProps}>
         <FormsContainer
-          displayAs={editorMetadata.displayAs}
-          activeForm={editorMetadata.activeForm || ''}
+          displayAs={editorMetadata.displayAs || 'onePage'}
+          activeForm={editorMetadata.activeForm || editorMetadata.forms[0]?.id}
           forms={editorMetadata.forms}
           onFormChange={handleFormChange}
         />
@@ -186,5 +219,3 @@ export function FormEditor<T>({
     </div>
   );
 }
-
-FormEditor.displayName = 'FormEditor';

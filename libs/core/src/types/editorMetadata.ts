@@ -198,6 +198,7 @@ export type InputField = {
   minValue?: number;
   maxValue?: number;
   multiSelect?: boolean;
+  customProps?: ParamsMap;
 };
 
 export type InputOption = {
