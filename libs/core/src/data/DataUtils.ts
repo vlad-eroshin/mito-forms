@@ -7,11 +7,12 @@ import type {
   DataValue,
   DefaultDataTypes,
   DefinedDataValue,
+  ExpressionContext,
   ParamsMap,
   ParamValue,
 } from '../types';
 import { ConditionTypeEnum } from '../types';
-import { fetchJsonPath } from '../utils';
+import { checkJsonPath, extractJsonPathString, fetchJsonPath, isJsonPathExp } from '../utils';
 import { resolveAccessor } from './accessor';
 
 //import { transformData } from './transformer';
@@ -60,22 +61,31 @@ export const evaluateLogicCondition = (
   }
 };
 
-export const evaluateLogicInContext = (
-  condition: ConditionInfo | ConditionInfo[],
-  contextData: object
-) => {
-  if (Array.isArray(condition)) {
-    // In the meantime expressions are all 'AND' maybe TODO: in the future support 'OR'
-    const falseExpressions = (condition as ConditionInfo[]).filter(singleCondition => {
-      return !evaluateConditionInContext(singleCondition, contextData);
-    });
-    return falseExpressions.length === 0;
+/**
+ * Evaluates logic
+ *
+ * @param expression
+ * @param contextData
+ */
+export const evaluateLogicInContext = <T>(
+  expression: boolean | string,
+  contextData: ExpressionContext
+): boolean => {
+  if (typeof expression === 'boolean') {
+    return expression;
+  }
+  if (isJsonPathExp(expression)) {
+    const jsonPath = extractJsonPathString(expression);
+    return checkJsonPath(contextData, jsonPath);
   } else {
-    return evaluateConditionInContext(condition as ConditionInfo, contextData);
+    return !!expression;
   }
 };
 
-const evaluateConditionInContext = (condition: ConditionInfo, contextData: object) => {
+export const evaluateConditionInContext = (
+  condition: ConditionInfo,
+  contextData: ExpressionContext
+): boolean => {
   const valueField = condition.value; // Treating value as JSON PATH
   const value = fetchJsonPath(contextData as object, valueField as string);
   if (

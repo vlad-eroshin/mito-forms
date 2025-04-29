@@ -65,16 +65,18 @@ export const BulmaField: FunctionComponent<BulmaFieldProps> = ({
         )}
       </div>
       <div className={'field-body'}>
-        <div className={`control mf-center ${!isValid ? ' mf-invalid-field' : ''}`}>{control}</div>
-        {config.helpText && <p className={'help'}>{config.helpText}</p>}
-        {validationErrors?.length > 0 && (
-          <p className={'help is-danger'}>
-            {validationErrors.map(m => {
-              const key = generateReactKey(config.name, m);
-              return <span key={key}>{m}</span>;
-            })}
-          </p>
-        )}
+        <div className={`control mf-center ${!isValid ? ' mf-invalid-field' : ''}`}>
+          {control}
+          {config.helpText && <p className={'help'}>{config.helpText}</p>}
+          {validationErrors?.length > 0 && (
+            <p className={'help is-danger'}>
+              {validationErrors.map(m => {
+                const key = generateReactKey(config.name, m);
+                return <span key={key}>{m}</span>;
+              })}
+            </p>
+          )}
+        </div>
       </div>
     </div>
   );

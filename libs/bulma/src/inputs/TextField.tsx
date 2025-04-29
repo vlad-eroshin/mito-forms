@@ -25,6 +25,7 @@ export const TextField: React.FunctionComponent<FormInputFieldProps> = props => 
           placeholder={fieldConfig.placeHolderText ?? 'Place holder'}
           required={fieldConfig.required}
           onChange={handleChange}
+          disabled={config.disabled}
         />
       }
       validationErrors={validationErrors}

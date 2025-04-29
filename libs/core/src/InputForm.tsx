@@ -1,17 +1,15 @@
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback } from 'react';
 import type {
-  EditorContextProps,
   FieldSetMetadata,
   FormDataState,
   FormMetadata,
   ListEditorMetadata,
   ParamsMap,
 } from './types';
-import { EditorContext } from './EditorContext';
 import { FormFieldset } from './FormFieldset';
-import { ListEditor } from './ListEditor/ListEditor';
-import { evaluateLogicInContext } from './data';
+import { ListEditor } from './ListEditor';
 import { generateReactKey } from './utils';
+import { useFormState } from './hooks/useFormState';
 
 /**
  *  Input form  (think about it one input form)
@@ -27,35 +25,14 @@ export type InputFormProps = {
   ) => void;
 };
 
-export function InputForm<T>({ config, onChange, showTitle }: InputFormProps) {
-  const editorContextData = useContext<EditorContextProps>(EditorContext);
-  const editorState = editorContextData.editorState;
-  const formState: FormDataState = editorState.formStates[config.id];
+export function InputForm<T>({ config, onChange, showTitle }: InputFormProps): React.ReactElement {
+  const { getFieldsetState, formState, getVisibleFieldSets } = useFormState(config);
 
-  const getVisibleSets = useCallback(
-    (editorFieldsState: object) => {
-      //Filter out only visible fieldsets
-      return config.fieldSets.filter(fieldSetEntry => {
-        if (fieldSetEntry?.showIf) {
-          return evaluateLogicInContext(fieldSetEntry.showIf, {
-            ...editorFieldsState,
-            $data: formState,
-          });
-        }
-        return true;
-      });
-    },
-    [config.fieldSets, formState]
-  );
-
-  const visibleFieldSets = useMemo(
-    () => getVisibleSets(editorState.formStates),
-    [editorState.formStates, getVisibleSets]
-  );
+  const visibleFieldSets = getVisibleFieldSets();
 
   const handleFieldsetChange = useCallback(
     (freshData: ParamsMap | ParamsMap[], name: string, isFieldsetValid: boolean) => {
-      const fieldsetValuesEntry = formState[name];
+      const fieldsetValuesEntry = getFieldsetState(name);
       const newData: FormDataState = { ...formState };
       newData[name] = {
         data: (fieldsetValuesEntry
@@ -103,8 +80,6 @@ export function InputForm<T>({ config, onChange, showTitle }: InputFormProps) {
     </>
   );
 }
-
-InputForm.displayName = 'InputForm';
 
 const isFormValid = (newData: FormDataState, valid?: boolean): boolean => {
   let k: keyof typeof newData;

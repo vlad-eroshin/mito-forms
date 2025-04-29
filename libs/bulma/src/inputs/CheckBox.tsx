@@ -28,6 +28,7 @@ export const CheckBox: FunctionComponent<FormInputFieldProps> = props => {
           name={fieldConfig.name}
           checked={value as boolean}
           onChange={handleChange}
+          disabled={config.disabled}
         />
       }
     />

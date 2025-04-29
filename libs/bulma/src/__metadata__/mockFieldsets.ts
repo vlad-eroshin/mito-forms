@@ -1,6 +1,8 @@
-export const BASIC_FIELDSET = {
+import { FieldSetMetadata } from '@mito-forms/core';
+
+export const BASIC_FIELDSET: FieldSetMetadata = {
   name: 'testFieldSet',
-  jsonPath: '$.path.to.fieldsetData',
+  jsonPath: 'path.to.fieldsetData',
   fields: [
     {
       type: 'text',
@@ -15,7 +17,7 @@ export const BASIC_FIELDSET = {
   ],
 };
 
-export const TEST_FIELDSET_NO_PATH = {
+export const TEST_FIELDSET_NO_PATH: FieldSetMetadata = {
   name: 'testFieldSet',
   fields: [
     {
@@ -30,7 +32,7 @@ export const TEST_FIELDSET_NO_PATH = {
       type: 'text',
       name: 'jsonPathValue',
       label: 'Json Path Value',
-      value: '{$.other.textValue}',
+      value: '!{other.textValue}',
     },
     {
       type: 'text',
@@ -47,9 +49,9 @@ export const TEST_FIELDSET_NO_PATH = {
   ],
 };
 
-export const TEST_FIELDSET_WITH_PATH = {
+export const TEST_FIELDSET_WITH_PATH: FieldSetMetadata = {
   name: 'testFieldSet',
-  jsonPath: '$.otherPath',
+  jsonPath: 'otherPath',
   fields: [
     {
       type: 'text',
@@ -63,7 +65,7 @@ export const TEST_FIELDSET_WITH_PATH = {
       type: 'text',
       name: 'jsonPathValue',
       label: 'Json Path Value',
-      value: '{$.to.values.textValue}',
+      value: '!{to.values.textValue}',
     },
     {
       type: 'text',

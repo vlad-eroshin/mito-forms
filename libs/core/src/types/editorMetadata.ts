@@ -1,5 +1,5 @@
-import type { ConditionInfo, ParamsMap, ParamValue, RecordsArray } from './common';
-import { DataSourceBinding, DataSourceConfig, DataSourceState, DataStatus } from './dataSource';
+import type { ParamsMap, ParamValue, RecordsArray } from './common';
+import { DataSourceBinding, DataSourceConfig, DataStatus } from './dataSource';
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 export type ValidationFunctionType<T> = (value: ParamValue) => boolean | T | T[];
@@ -81,6 +81,7 @@ export type ReducersMap<T> = {
 export type FormDividerConfig = {
   type: 'divider';
   style?: 'solid' | 'dashed' | 'dotted' | 'rounded' | 'double';
+  render?: boolean | string;
 };
 /**
  * Fieldset is intended to describe a group of fields.
@@ -111,7 +112,12 @@ export type FieldSetMetadata = {
   /**
    * Intended to be used for conditional display. For example if some field has certain value display this fieldset.
    */
-  showIf?: ConditionInfo | ConditionInfo[];
+  render?: boolean | string;
+
+  /**
+   * TODO: not implemented yet need to implement it
+   */
+  disabled?: boolean | string;
   /**
    * allows collapse expand fieldset.
    */
@@ -188,7 +194,7 @@ export type InputField = {
   value?: ParamValue | InputOption | ValueAccessorFn; // Can also be JSON path expression specified as {$.path.of.some.kind}
   dataBindings?: DataSourceBinding[];
   validator?: ValidatorType | ValidationFunctionType<string>;
-  showIf?: ConditionInfo | ConditionInfo[];
+  render?: boolean | string;
   minValue?: number;
   maxValue?: number;
   multiSelect?: boolean;
@@ -210,84 +216,11 @@ export type ListEditorMetadata = {
   label?: string;
   jsonPath?: string;
   addButtonLabel?: string;
-  showIf?: ConditionInfo | ConditionInfo[];
+  render?: boolean | string;
 };
 
 export type FieldSetEntry = (FieldSetMetadata | ListEditorMetadata) & {
   type?: 'fieldSet' | 'fieldSetList';
-};
-
-type FieldsetDataEntry = {
-  data: ParamsMap | RecordsArray;
-  isValid?: boolean;
-  isHidden?: boolean;
-};
-
-export type FormDataState = { [key: string]: FieldsetDataEntry };
-
-export type EditorState<T = object> = {
-  /**
-   * Form data information conforms to the hierarchy of the inputs from the editor metadata
-   */
-  formStates: { [key: string]: FormDataState };
-  /**
-   * Editor result
-   */
-  editorResult: T;
-  /**
-   * Is all input provided valid
-   */
-  isValid?: boolean | undefined;
-
-  /**
-   * Validation Message
-   */
-  validatorMessage?: string | undefined;
-};
-
-/**
- * Form Change payload for the editor state action.
- * Used to update editor state with new inputs provided by the user in UI.
- */
-export type FormChangePayload<T = object> = {
-  /**
-   * form Id that captured the change
-   */
-  formId: string;
-  /**
-   * Field set name that captured the change in the form.
-   */
-  fieldSetName: string;
-
-  /**
-   * Data from field values for each fieldset in the form:
-   *  {
-   *    [fieldsetName]: {map of field set values}
-   *  }
-   */
-  data: FormDataState;
-  /**
-   * Editor metadata. Because state reducer is an
-   * independent function we need to somehow access editor metadata.
-   */
-  editorMetadata: EditorMetadata<T>;
-  /**
-   * Reducers map (from editor metadata)
-   */
-  editorReducersMap?: ReducersMap<T> | undefined;
-  /**
-   * Are all input values are valid in the current form
-   */
-  isValid?: boolean;
-
-  /**
-   * Optional Context Params that maybe passed down to fieldset reducers
-   */
-  contextParams?: { [key: string]: unknown } | undefined;
-};
-
-export type EditorStateReplacePayload<T = object> = {
-  data: EditorState<T>;
 };
 
 export type InputFieldRegistry = {
@@ -330,14 +263,6 @@ export type UtilityComponentRegistry = {
   tabbedSection: FunctionComponent<TabbedSectionProps>;
   fieldset: FunctionComponent<FieldsetProps>;
   deleteRowButton: FunctionComponent<DeleteRowButtonProps>;
-};
-
-export type EditorContextProps<T = object> = {
-  dataSources: { [key: string]: DataSourceState };
-  componentRegistry: ComponentRegistry;
-  editorState: EditorState<T>;
-  contextParams?: { [key: string]: unknown } | undefined; // Context params that maybe necessary in reducers
-  fieldsLayout?: FieldsLayout;
 };
 
 export type TabProps = {

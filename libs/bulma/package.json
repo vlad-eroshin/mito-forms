@@ -28,7 +28,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@mito-forms/core": "^0.1.0-beta-2",
+    "@mito-forms/core": "workspace:*",
     "bulma": "^1.0.3",
     "react-intl": "7.1.6"
   },

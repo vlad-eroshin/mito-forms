@@ -36,6 +36,7 @@ export const RadioList: FunctionComponent<FormInputFieldProps> = props => {
                   id={optId}
                   name={config.name}
                   onChange={handleChange}
+                  disabled={config.disabled || opt.disabled}
                 />
                 &nbsp;{opt.label}
               </label>

@@ -26,7 +26,12 @@ export const Selector: FunctionComponent<FormInputFieldProps> = props => {
       fieldIndex={fieldIndex}
       control={
         <div className={'select'}>
-          <select className={'mf-select'} id={inputId} onChange={handleChange}>
+          <select
+            className={'mf-select'}
+            id={inputId}
+            onChange={handleChange}
+            disabled={config.disabled}
+          >
             {convertedOptions.map(opt => {
               const optId = generateReactKey(config.name, opt.label);
               return (

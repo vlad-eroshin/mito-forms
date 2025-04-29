@@ -2,7 +2,6 @@ export type DataRecord = { [key: string]: DataCellValue };
 export type ParamValue = string | number | boolean | object | object[] | null;
 export type DataCellValue = ParamValue;
 export type ParamsMap = { [key: string]: ParamValue };
-export type FieldValues = { [key: string]: ParamValue | File };
 
 export enum DataType {
   String,

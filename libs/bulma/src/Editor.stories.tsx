@@ -14,7 +14,7 @@ import { withListEditor } from './__metadata__/withListEditor';
 import { BULMA_REGISTRY } from './index';
 
 const meta: Meta<typeof FormEditorStory> = {
-  title: 'Bulma Form Editor',
+  title: 'BULMA/FORM EDITOR',
   component: FormEditorStory,
   decorators: [],
   parameters: {},
@@ -57,6 +57,7 @@ export const OnePageLayout: Story = {
   args: {
     editorMetadata: {
       ...tabbedLayout,
+
       forms: [
         { ...tabbedLayout.forms[0], showTitle: true },
         { ...tabbedLayout.forms[1], showTitle: true },
@@ -199,7 +200,7 @@ export const SwitchComponent: Story = {
                     { label: 'Switch Three', value: 'three' },
                     { label: 'Switch Four', value: 'four' },
                   ],
-                  value: '{$.objectOfSomeKind.switchValues}',
+                  value: '!{objectOfSomeKind.switchValues}',
                 },
                 {
                   type: 'checkbox',
@@ -211,7 +212,7 @@ export const SwitchComponent: Story = {
                     { label: 'Check Three', value: 3 },
                     { label: 'Check Four', value: 4 },
                   ],
-                  value: '{$.objectOfSomeKind.checkValues}',
+                  value: '!{objectOfSomeKind.checkValues}',
                 },
               ],
             },

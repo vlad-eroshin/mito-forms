@@ -35,6 +35,7 @@ export const FileUpload: React.FunctionComponent<FormInputFieldProps> = props =>
               type="file"
               name={fieldConfig.name}
               onChange={handleSelectFile}
+              disabled={config.disabled}
             />
             <span className="file-cta">
               <span className="file-icon">

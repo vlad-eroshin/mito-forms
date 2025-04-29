@@ -5,6 +5,7 @@ type SwitchInputProps = {
   name?: string;
   value?: string | boolean;
   checked?: boolean;
+  disabled?: boolean;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 };
 export const SwitchInput: FunctionComponent<SwitchInputProps> = ({
@@ -12,6 +13,7 @@ export const SwitchInput: FunctionComponent<SwitchInputProps> = ({
   name,
   value,
   onChange,
+  disabled,
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -35,6 +37,7 @@ export const SwitchInput: FunctionComponent<SwitchInputProps> = ({
         name={name}
         checked={checked}
         onChange={onChange}
+        disabled={disabled}
       />
       <span className="slider round" onClick={handleClick}></span>
     </div>

@@ -16,7 +16,6 @@ export const Basic: Story = {
   args: {
     checked: true,
     onChange: event => {
-      debugger;
       alert(`Switch is checked: ${event.target.checked}`);
     },
   },

@@ -37,6 +37,7 @@ export const CheckList: FunctionComponent<FormInputFieldProps> = props => {
                   name={config.name}
                   checked={checkedValues.includes(optValue)}
                   onChange={handleChange}
+                  disabled={config.disabled || opt.disabled}
                 />
                 &nbsp;<label htmlFor={optId}>{opt.label}</label>
               </div>

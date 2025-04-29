@@ -31,16 +31,19 @@ export const SwitchList: FunctionComponent<FormInputFieldProps> = props => {
           checked: `${value}`,
         },
       ];
-  const handleChange = hasOptions
-    ? useChecklistHandler(fieldConfig, convertedOptions as InputOption[], onChange)
-    : useCallback(
-        (event: ChangeEvent<HTMLInputElement>) => {
-          if (onChange) {
-            onChange({ [config.name]: event.target.checked });
-          }
-        },
-        [onChange, config]
-      );
+  const handleListChange = useChecklistHandler(
+    fieldConfig,
+    convertedOptions as InputOption[],
+    onChange
+  );
+  const handleSwitchChange = useCallback(
+    (event: ChangeEvent<HTMLInputElement>) => {
+      if (onChange) {
+        onChange({ [config.name]: event.target.checked });
+      }
+    },
+    [onChange, config]
+  );
   const inputId = getFieldId(config);
 
   return (
@@ -58,8 +61,9 @@ export const SwitchList: FunctionComponent<FormInputFieldProps> = props => {
                 <SwitchInput
                   name={strValue}
                   value={strValue}
-                  onChange={handleChange}
+                  onChange={hasOptions ? handleListChange : handleSwitchChange}
                   checked={checkedValues.includes(strValue)}
+                  disabled={config.disabled || opt.disabled}
                 />
                 &nbsp;{opt.label}
               </label>

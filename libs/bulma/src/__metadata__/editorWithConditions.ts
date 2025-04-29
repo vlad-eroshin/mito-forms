@@ -1,4 +1,4 @@
-import { ConditionTypeEnum, EditorMetadata } from '@mito-forms/core';
+import { EditorMetadata } from '@mito-forms/core';
 
 export const editorWithConditions = {
   displayAs: 'onePage',
@@ -29,6 +29,50 @@ export const editorWithConditions = {
                 },
               ],
             },
+            {
+              label: 'Switch value to Disable Field below',
+              name: 'switchList',
+              type: 'switchList',
+              default: '1',
+              options: [
+                {
+                  value: '1',
+                  label: 'Disable Text Field One',
+                },
+                {
+                  value: '2',
+                  label: 'Disable Text Field Two',
+                },
+                {
+                  value: '3',
+                  label: 'Disable Text Field Three',
+                },
+              ],
+            },
+            {
+              name: 'textInputD1',
+              type: 'text',
+              value: 'initialValue',
+              label: 'Text Field One',
+              required: true,
+              disabled: `!{_STATE.Form1.fieldset2.data.switchList.contains(@, '1')}`,
+            },
+            {
+              name: 'textInputD4',
+              type: 'text',
+              value: 'initialValue',
+              label: 'Text Field Two',
+              required: true,
+              disabled: `!{_STATE.Form1.fieldset2.data.switchList.contains(@, '2')}`,
+            },
+            {
+              name: 'textInputD3',
+              type: 'text',
+              value: 'initialValue',
+              label: 'Text Field Three',
+              required: true,
+              disabled: `!{_STATE.Form1.fieldset2.data.switchList.contains(@, '3')}`,
+            },
           ],
         },
         {
@@ -42,11 +86,7 @@ export const editorWithConditions = {
               value: 'initialValue',
               label: "Text input (shown only when 'option2' selected)",
               required: true,
-              showIf: {
-                value: '$.Form1.fieldset2.data.selector',
-                value2: '2',
-                type: ConditionTypeEnum.Equal,
-              },
+              render: `!{_STATE.Form1.fieldset2.data.selector=='2'}`,
             },
             {
               name: 'switchInput',
@@ -58,11 +98,7 @@ export const editorWithConditions = {
               name: 'oneMoreConditional',
               type: 'text',
               label: 'Test Label',
-              showIf: {
-                value: '$.Form1.fieldset1.data.switchInput',
-                value2: true,
-                type: ConditionTypeEnum.Equal,
-              },
+              render: '!{_STATE.Form1.fieldset1.data.switchInput}',
             },
             {
               name: 'showFieldset3',
@@ -76,11 +112,7 @@ export const editorWithConditions = {
           name: 'fieldset3',
           title: 'Fieldset Displayed when the Switch is on',
           showTitle: true,
-          showIf: {
-            value: '$.Form1.fieldset1.data.showFieldset3',
-            value2: true,
-            type: ConditionTypeEnum.Equal,
-          },
+          render: '!{_STATE.Form1.fieldset1.data.showFieldset3}',
           fields: [
             {
               label: 'Option Selector',
