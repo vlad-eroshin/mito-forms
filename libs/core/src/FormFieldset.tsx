@@ -1,25 +1,19 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { ReactElement, useCallback, useState } from 'react';
 import type {
-  DataSourceBinding,
-  EditorContextProps,
-  EditorState,
   FieldSetMetadata,
   FieldsetProps,
   FormDividerConfig,
   InputField,
   InputOption,
   ParamsMap,
-  ParamValue,
 } from './types';
-import { DataStatus } from './types';
-import { EditorContext } from './EditorContext';
 import { FormDivider } from './FormDivider';
 import { FormInputField } from './FormInputField';
 import { EditableRow } from './ListEditor/EditableTableRow';
-import { accessAndTransformData, evaluateLogicInContext } from './data';
-import { generateReactKey, retrieveInputOptions } from './utils';
+import { generateReactKey } from './utils';
 import { getValidatorFunction } from './validators';
 import { useUtilComponent } from './hooks';
+import { useFieldsetState } from './hooks/useFieldsetState';
 
 /**
  * Component representing fieldset UI.
@@ -42,38 +36,17 @@ export function FormFieldset<T>({
   rowIndex = -1,
   onRowDelete,
   showFieldLabels = true,
-}: FieldSetUIProps) {
+}: FieldSetUIProps): ReactElement {
   const arrangeFields = config.arrangeFields || 'column';
   const [fieldsValidationState, setFieldValidationState] = useState<FieldValidationStates>({});
 
-  const editorContextData = useContext<EditorContextProps>(EditorContext) as EditorContextProps<T>;
-  const fieldsLayout = config.fieldsLayout || editorContextData.fieldsLayout;
-  const dataSourceStates = editorContextData.dataSources;
-  const allEditorState = editorContextData.editorState;
   const fieldSetValues = inputData;
-  const [visibleFormFields, setVisibleFormFields] = useState<(InputField | FormDividerConfig)[]>(
-    []
-  );
   const FieldsetCmp = useUtilComponent<FieldsetProps>('fieldset');
   const [collapsed, setCollapsed] = useState<boolean>(!!config.collapsible && !!config.collapsed);
-  const getVisibleFormFields = useCallback(
-    (editorState: EditorState<T>) => {
-      return config.fields.filter(field => {
-        if (field.type === 'divider') {
-          return true;
-        }
-        if (field.showIf) {
-          return evaluateLogicInContext(field.showIf, {
-            ...inputData,
-            ...editorState.formStates,
-            contextParams: editorContextData.contextParams,
-          } as object);
-        }
-        return true;
-      });
-    },
-    [config.fields, editorContextData.contextParams, inputData]
-  );
+
+  const { getVisibleFields, populateFieldData, fieldsLayout } = useFieldsetState(config);
+
+  const visibleFormFields = getVisibleFields(inputData);
 
   const isFieldSetValid = useCallback(
     (fieldsData: ParamsMap): boolean => {
@@ -112,7 +85,7 @@ export function FormFieldset<T>({
       setFieldValidationState(tmpValidationStates);
       return true;
     },
-    [visibleFormFields, fieldsValidationState]
+    [visibleFormFields]
   );
 
   const handleCollapsExpand = useCallback(() => {
@@ -133,13 +106,8 @@ export function FormFieldset<T>({
     [fieldSetValues, isFieldSetValid, onChange]
   );
 
-  useEffect(() => {
-    setVisibleFormFields(getVisibleFormFields(editorContextData.editorState));
-  }, [inputData, config, allEditorState, getVisibleFormFields, editorContextData.editorState]);
-
   const renderFields = (fields: (InputField | FormDividerConfig)[]) => {
     return fields.map((field: InputField | FormDividerConfig, fieldIndex) => {
-      let componentDataStatus: DataStatus = DataStatus.Loaded;
       if (field.type === 'divider') {
         return (
           <FormDivider
@@ -148,35 +116,7 @@ export function FormFieldset<T>({
           />
         );
       }
-
-      const options = retrieveInputOptions(field, inputData as object);
-
-      const genericInputFieldConfig: ParamsMap = {
-        ...field,
-      };
-
-      genericInputFieldConfig['options'] = options as ParamValue;
-
-      let value = fieldSetValues ? fieldSetValues[field.name] : null;
-      if (field.dataBindings) {
-        field.dataBindings.forEach((dataBinding: DataSourceBinding) => {
-          const dataSourceState = dataSourceStates[dataBinding.datasourceId];
-          if (dataSourceState && dataSourceState.status === DataStatus.Loaded) {
-            const propData = accessAndTransformData(
-              dataSourceState.data,
-              dataBinding.accessor,
-              dataBinding.transformers
-            );
-            if (dataBinding.targetProperty === 'value') {
-              value = propData;
-            } else if (dataBinding.targetProperty) {
-              genericInputFieldConfig[dataBinding.targetProperty] = propData as object;
-            }
-          } else {
-            componentDataStatus = DataStatus.Loading;
-          }
-        });
-      }
+      const { fieldConfig, componentDataStatus, value } = populateFieldData(field, inputData);
       const validationResult = fieldsValidationState[field.name];
       const isValidField = validationResult ? validationResult.isValid : true;
       return (
@@ -184,8 +124,8 @@ export function FormFieldset<T>({
           key={generateReactKey(config.name, field.type, field.name)}
           value={value}
           label={field.label}
-          options={genericInputFieldConfig.options as InputOption[] | string[]}
-          config={genericInputFieldConfig as InputField}
+          options={fieldConfig.options as InputOption[] | string[]}
+          config={fieldConfig as InputField}
           onChange={handleFieldChange}
           status={componentDataStatus}
           isValid={isValidField}

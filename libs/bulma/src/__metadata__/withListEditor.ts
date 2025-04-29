@@ -30,7 +30,7 @@ export const withListEditor: EditorMetadata = {
       fieldSets: [
         {
           name: 'list',
-          jsonPath: '$.listOfData',
+          jsonPath: 'listOfData',
           type: 'fieldSetList',
           canDeleteOrAddRows: false,
           rowFieldset: {

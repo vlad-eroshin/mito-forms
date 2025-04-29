@@ -1,10 +1,17 @@
 import type { FieldSetMetadata, ParamsMap } from '../types';
 import TEST_INPUT_OBJECT from '../../../bulma/src/__data__/mockInputObject.json';
-import { convertInputOptions, getFieldValues } from './fieldUtils';
+import {
+  checkJsonPath,
+  convertInputOptions,
+  extractJsonPathString,
+  fetchJsonPath,
+  getFieldValues,
+  isJsonPathExp,
+} from './fieldUtils';
 
-export const BASIC_FIELDSET = {
+export const BASIC_FIELDSET: FieldSetMetadata = {
   name: 'testFieldSet',
-  jsonPath: '$.path.to.fieldsetData',
+  jsonPath: 'path.to.fieldsetData',
   fields: [
     {
       type: 'text',
@@ -19,7 +26,7 @@ export const BASIC_FIELDSET = {
   ],
 };
 
-export const TEST_FIELDSET_NO_PATH = {
+export const TEST_FIELDSET_NO_PATH: FieldSetMetadata = {
   name: 'testFieldSet',
   fields: [
     {
@@ -34,7 +41,7 @@ export const TEST_FIELDSET_NO_PATH = {
       type: 'text',
       name: 'jsonPathValue',
       label: 'Json Path Value',
-      value: '{$.other.textValue}',
+      value: '!{other.textValue}',
     },
     {
       type: 'text',
@@ -51,9 +58,9 @@ export const TEST_FIELDSET_NO_PATH = {
   ],
 };
 
-export const TEST_FIELDSET_WITH_PATH = {
+export const TEST_FIELDSET_WITH_PATH: FieldSetMetadata = {
   name: 'testFieldSet',
-  jsonPath: '$.otherPath',
+  jsonPath: 'otherPath',
   fields: [
     {
       type: 'text',
@@ -67,7 +74,7 @@ export const TEST_FIELDSET_WITH_PATH = {
       type: 'text',
       name: 'jsonPathValue',
       label: 'Json Path Value',
-      value: '{$.to.values.textValue}',
+      value: '!{to.values.textValue}',
     },
     {
       type: 'text',
@@ -83,6 +90,42 @@ export const TEST_FIELDSET_WITH_PATH = {
     },
   ],
 };
+
+describe('Field Utils: test is JMES path', () => {
+  it('test expression is JMES path', () => {
+    const result = isJsonPathExp('!{something}');
+    expect(result).toBe(true);
+  });
+  it('test extract expression from JMES path', () => {
+    const result = extractJsonPathString('!{something}');
+    expect(result).toBe('something');
+  });
+
+  it('test evaluate JMES path expression', () => {
+    const result = fetchJsonPath({ something: { a: 'b' } }, 'something');
+    expect(result).toEqual({ a: 'b' });
+  });
+  it('test if JMES path expression resolves to true', () => {
+    const result = checkJsonPath({ a: { something: true } }, `a.something`);
+    expect(result).toBe(true);
+  });
+  it('test if JMES path expression resolves to true with string value', () => {
+    const result = checkJsonPath({ a: { something: 'stringValue' } }, `a.something=='stringValue'`);
+    expect(result).toBe(true);
+  });
+  it('test if JMES path expression resolves to true with string value', () => {
+    const result = checkJsonPath(
+      { a: { something: 'stringValueBlah' } },
+      `a.something=='stringValue'`
+    );
+    expect(result).toBe(false);
+    const trueRes = checkJsonPath(
+      { a: { something: 'stringValueBlah' } },
+      `a.something!='stringValue'`
+    );
+    expect(trueRes).toBe(true);
+  });
+});
 
 describe('FormEditor: getFieldValues', () => {
   it('test initial fields data', () => {

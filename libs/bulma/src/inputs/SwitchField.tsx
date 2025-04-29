@@ -29,6 +29,7 @@ export const SwitchField: FunctionComponent<FormInputFieldProps> = props => {
           value={value as boolean}
           onChange={handleChange}
           checked={value as boolean}
+          disabled={config.disabled}
         />
       }
     />

@@ -5,7 +5,7 @@ import { expect, within } from '@storybook/test';
 import { ListEditorWrapper } from '../__stories__/ListEditorWrapper';
 
 const meta: Meta<typeof ListEditorWrapper> = {
-  title: 'Form Editor/List Editor',
+  title: 'BULMA/List Editor',
   component: ListEditorWrapper,
   decorators: [],
   parameters: {},
@@ -54,7 +54,7 @@ export const Basic: Story = {
         {
           label: 'Tags Selector',
           name: 'tagsSelector',
-          options: '{$.tagsSelector#options}',
+          options: '!{tagsSelector__options}',
           placeHolderText: 'Select Tag',
           type: 'select',
         },
@@ -65,7 +65,7 @@ export const Basic: Story = {
         staticText: 'Static Text Value 1',
         textValue: 'Text Value 1',
         selector: 'Selector Value 1',
-        'tagsSelector#options': ['tag1', 'tag2'],
+        tagsSelector__options: ['tag1', 'tag2'],
         tagKeyLabel: 'TagKey1',
         tagsSelector: 'tag2',
       },
@@ -73,7 +73,7 @@ export const Basic: Story = {
         staticText: 'Static Text Value 2',
         textValue: 'Text Value 2',
         selector: 'Selector Value 2',
-        'tagsSelector#options': ['tag aa', 'tag bb'],
+        tagsSelector__options: ['tag aa', 'tag bb'],
         tagKeyLabel: 'TagKey1',
       },
     ],
@@ -106,7 +106,7 @@ export const WithBorder: Story = {
         {
           label: 'Tags Selector',
           name: 'tagsSelector',
-          options: '{$.tagsSelector#options}',
+          options: '!{tagsSelector__options}',
           placeHolderText: 'Select Tag',
           type: 'select',
         },
@@ -116,14 +116,14 @@ export const WithBorder: Story = {
       {
         staticText: 'Static Text Value 1',
         selector: 'Selector Value 1',
-        'tagsSelector#options': ['tag1', 'tag2'],
+        tagsSelector__options: ['tag1', 'tag2'],
         tagKeyLabel: 'TagKey1',
         tagsSelector: 'tag2',
       },
       {
         staticText: 'Static Text Value 2',
         selector: 'Selector Value 2',
-        'tagsSelector#options': ['tag aa', 'tag bb'],
+        tagsSelector__options: ['tag aa', 'tag bb'],
         tagKeyLabel: 'TagKey1',
       },
     ],
@@ -158,7 +158,7 @@ export const WithHeaders: Story = {
         {
           label: 'Tags Selector',
           name: 'tagsSelector',
-          options: '{$.tagsSelector#options}',
+          options: '!{tagsSelector__options}',
           placeHolderText: 'Select Tag',
           type: 'select',
         },
@@ -168,14 +168,14 @@ export const WithHeaders: Story = {
       {
         staticText: 'Static Text Value 1',
         selector: 'Selector Value 1',
-        'tagsSelector#options': ['tag1', 'tag2'],
+        tagsSelector__options: ['tag1', 'tag2'],
         tagKeyLabel: 'TagKey1',
         tagsSelector: 'tag2',
       },
       {
         staticText: 'Static Text Value 2',
         selector: 'Selector Value 2',
-        'tagsSelector#options': ['tag aa', 'tag bb'],
+        tagsSelector__options: ['tag aa', 'tag bb'],
         tagKeyLabel: 'TagKey1',
       },
     ],

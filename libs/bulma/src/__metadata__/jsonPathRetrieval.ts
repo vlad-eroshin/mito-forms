@@ -11,7 +11,7 @@ export const editorWithJsonPath: EditorMetadata = {
         {
           title: 'Path to fieldset data ($.path.to.fieldsetData)',
           name: 'jsonPathFieldset',
-          jsonPath: '$.path.to.fieldsetData',
+          jsonPath: 'path.to.fieldsetData',
           showTitle: true,
           fields: [
             {
@@ -34,23 +34,23 @@ export const editorWithJsonPath: EditorMetadata = {
             {
               type: 'staticText',
               label: 'Access numeric value',
-              helpText: `$.other.numericValue1`,
+              helpText: `other.numericValue1`,
               name: 'numericValue',
-              value: '{$.other.numericValue1}',
+              value: '!{other.numericValue1}',
             },
             {
               type: 'text',
               label: 'Text Value',
-              helpText: 'Json path $.other.textValue',
+              helpText: 'Json path other.textValue',
               name: 'textValue',
-              value: '{$.other.textValue}',
+              value: '!{other.textValue}',
             },
             {
               type: 'select',
               name: 'selector',
               label: 'Selector ',
               helpText: 'Retrieves options from $.someData.to.listOfOptions',
-              options: '{$.someData.to.listOfOptions}',
+              options: '!{someData.to.listOfOptions}',
               value: 1,
             },
             {
@@ -58,7 +58,7 @@ export const editorWithJsonPath: EditorMetadata = {
               name: 'checkboxList',
               label: 'Check List',
               helpText: 'Options loaded from $.someData.to.listOfOptions',
-              options: '{$.someData.to.listOfOptions}',
+              options: '!{someData.to.listOfOptions}',
               value: 1,
             },
             {
@@ -66,7 +66,7 @@ export const editorWithJsonPath: EditorMetadata = {
               name: 'radioList',
               label: 'Radio buttons',
               helpText: 'Retrieves options from ($.someData.to.listOfOptions)',
-              options: '{$.someData.to.listOfOptions}',
+              options: '!{someData.to.listOfOptions}',
               value: 1,
             },
             {
@@ -74,7 +74,7 @@ export const editorWithJsonPath: EditorMetadata = {
               name: 'switchList',
               label: 'Switch List',
               helpText: 'Retrieves options from ($.someData.to.switchListOfOptions)',
-              options: '{$.someData.to.switchListOfOptions}',
+              options: '!{someData.to.switchListOfOptions}',
               value: 1,
             },
           ],

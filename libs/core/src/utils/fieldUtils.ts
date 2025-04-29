@@ -1,9 +1,10 @@
-import { JSONPath } from 'jsonpath-plus';
-import type {
+import {
   DataRecord,
   DefinedDataValue,
+  ExpressionContext,
   FieldSetEntry,
   FieldSetMetadata,
+  FormDataState,
   InputField,
   InputOption,
   ListEditorMetadata,
@@ -11,13 +12,8 @@ import type {
   ParamValue,
   RecordsArray,
 } from '../types';
+import * as JME from 'jmespath';
 import uuidByString from 'uuid-by-string';
-
-/**
- * This expression matches strings like `{$.json.path}` this is used because there is a need to pickup list of options
- * from data passed to the editors.
- */
-export const RX_JSON_PATH = /^\{(\$(\.(\w|[a-zA-Z-9\\#])+)+)\}$/u;
 
 export function isNullOrUndefined(value: unknown): boolean {
   return value === null || value === undefined;
@@ -33,10 +29,7 @@ export const fetchJsonPath = (data: object, jsonPath?: string): object | Defined
   if (!jsonPath) {
     return data;
   }
-  const fetchedData = JSONPath({
-    json: data,
-    path: jsonPath,
-  });
+  const fetchedData = JME.search(data, jsonPath);
   if (fetchedData) {
     if (Array.isArray(fetchedData)) {
       if (fetchedData.length === 1) {
@@ -51,6 +44,20 @@ export const fetchJsonPath = (data: object, jsonPath?: string): object | Defined
   } else {
     return '';
   }
+};
+
+/**
+ * Checks if the specified data exist in the context data
+ *
+ * @param contextData
+ * @param jsonPath
+ */
+export const checkJsonPath = (contextData: object, jsonPath: string): boolean => {
+  const fetchedData = JME.search(contextData, jsonPath);
+  if (Array.isArray(fetchedData)) {
+    return fetchedData.length > 0;
+  }
+  return fetchedData;
 };
 
 export const getInitialFieldSetData = (
@@ -81,12 +88,15 @@ export const getInitialFieldSetData = (
           : fieldConf.value || fieldConf.default;
       }
       if (isJsonPathExp(fieldConf.options)) {
-        const matchRes = (fieldConf.options as string).match(RX_JSON_PATH) as string[];
+        const jsonPath = extractJsonPathString(fieldConf.options);
         const optionsRes =
-          fetchJsonPath(inputData as object, matchRes[1]) ||
-          fetchJsonPath(inputData as object, `${fieldConf.name}#options`);
-        const options = optionsRes ? (Array.isArray(optionsRes) ? optionsRes : [optionsRes]) : [];
-        fieldValues[`${fieldConf.name}#options`] = options;
+          fetchJsonPath(inputData as object, jsonPath) ||
+          fetchJsonPath(inputData as object, `${fieldConf.name}__options`);
+        fieldValues[`${fieldConf.name}__options`] = optionsRes
+          ? Array.isArray(optionsRes)
+            ? optionsRes
+            : [optionsRes]
+          : [];
       }
     } else {
       fetchedValue = fieldConf.value || fieldConf.default;
@@ -134,29 +144,31 @@ export const getFieldValues = (
 };
 
 /**
- * Check if expr is the string in the following format '{$.<sonPathstring>}' example: {$.tagsSelector#options}
+ * Check if expr is the string in the following format '!{$.<sonPathstring>}' example: {$.tagsSelector__options}
  * @param expr input string
  * @returns true if the input value is JSON path expression
  */
-export const isJsonPathExp = (expr: unknown) => {
-  return expr && typeof expr === 'string' && RX_JSON_PATH.test(expr);
+export const isJsonPathExp = (expr: unknown): boolean => {
+  if (typeof expr !== 'string') {
+    return false;
+  }
+  const exprStr = expr as string;
+  return exprStr && exprStr.startsWith('!{') && exprStr.endsWith('}');
 };
 
 /**
- * From the input string in the format '{$.<sonPathstring>}' example: {$.tagsSelector#options}. extract only
+ * From the input string in the format '{$.<sonPathstring>}' example: {$.tagsSelector__options}. extract only
  * json path option of it -> $.tagsSelector#option
  *
  * @param expr input string
  * @returns json path string or undefined
  */
-export const extractJsonPathString = (expr: unknown) => {
+export const extractJsonPathString = (expr: unknown): string => {
   if (!isJsonPathExp(expr)) {
     return undefined;
   }
   const strExpr = expr as string;
-  const matchRes = strExpr.match(RX_JSON_PATH) as string[];
-
-  return matchRes.length > 1 ? matchRes[1] : undefined;
+  return strExpr.substring(2, strExpr.length - 1);
 };
 
 /**
@@ -222,7 +234,7 @@ export const retrieveInputOptions = (
   if (field.options && isJsonPathExp(field.options)) {
     const optionsJsonPath = extractJsonPathString(field.options);
     const optionsRes =
-      fetchJsonPath(data, optionsJsonPath) || fetchJsonPath(data, `${field.name}#options`);
+      fetchJsonPath(data, optionsJsonPath) || fetchJsonPath(data, `${field.name}__options`);
     rawOptions = optionsRes ? (Array.isArray(optionsRes) ? optionsRes : [optionsRes]) : [];
   } else {
     rawOptions = field.options;
@@ -245,4 +257,23 @@ export function getFieldId(fieldConfig: InputField, fieldIndex?: number): string
  */
 export function generateReactKey(...seedValues: string[]): string {
   return uuidByString(seedValues.join('-'));
+}
+
+/**
+ * Creates Expression Context
+ *
+ * @param state
+ * @param context
+ * @param additionalData
+ */
+export function buildExpressionContext(
+  state: { [key: string]: FormDataState },
+  context: ParamsMap,
+  additionalData?: ParamsMap
+): ExpressionContext {
+  return {
+    ...(additionalData || {}),
+    _CONTEXT: context,
+    _STATE: state,
+  };
 }

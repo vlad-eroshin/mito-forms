@@ -20,11 +20,12 @@ export const PasswordField: React.FunctionComponent<FormInputFieldProps> = props
           className={`input mt-input-text-field ${!isValid ? 'is-danger' : ''}`}
           type="password"
           data-testid={inputId}
-          area-label={fieldConfig.label}
+          aria-label={fieldConfig.label}
           value={(value as string) ?? ''}
           placeholder={fieldConfig.placeHolderText ?? 'Place holder'}
           required={fieldConfig.required}
           onChange={handleChange}
+          disabled={config.disabled}
         />
       }
       validationErrors={validationErrors}

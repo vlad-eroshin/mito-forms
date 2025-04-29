@@ -19,11 +19,12 @@ export const TextArea: React.FunctionComponent<FormInputFieldProps> = props => {
           id={inputId}
           className="input mt-input-text-field"
           data-testid={inputId}
-          area-label={fieldConfig.label}
+          aria-label={fieldConfig.label}
           value={(value as string) ?? ''}
           placeholder={fieldConfig.placeHolderText}
           required={fieldConfig.required}
           onChange={handleChange}
+          disabled={config.disabled}
         />
       }
       validationErrors={validationErrors}

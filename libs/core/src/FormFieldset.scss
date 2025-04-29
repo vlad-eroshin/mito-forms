@@ -24,8 +24,10 @@
   }
 
   .mf-legend {
+    display: flex;
+    align-items: center;
     font-weight: bolder;
-    font-size: variables.$fontSizeMedium;
+    font-size: variables.$fontSize;
   }
 
   .mf-title {
@@ -54,9 +56,9 @@
   }
 
   label {
-    font-size: variables.$fontSize;
+    font-size: variables.$fontSizeSmall !important;
     margin-bottom: var(--mf-spacing);
-    font-weight: var(--bulma-weight-normal);
+    font-weight: var(--bulma-weight-semibold);
   }
 
   > div {
