@@ -25,6 +25,8 @@ export const TextArea: React.FunctionComponent<FormInputFieldProps> = props => {
           required={fieldConfig.required}
           onChange={handleChange}
           disabled={config.disabled}
+          rows={config.customProps?.rows as number}
+          cols={config.customProps?.cols as number}
         />
       }
       validationErrors={validationErrors}

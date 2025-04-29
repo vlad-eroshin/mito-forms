@@ -25,7 +25,11 @@ export type InputFormProps = {
   ) => void;
 };
 
-export function InputForm<T>({ config, onChange, showTitle }: InputFormProps): React.ReactElement {
+export function InputForm<T>({
+  config,
+  onChange,
+  showTitle = true,
+}: InputFormProps): React.ReactElement {
   const { getFieldsetState, formState, getVisibleFieldSets } = useFormState(config);
 
   const visibleFieldSets = getVisibleFieldSets();
@@ -49,7 +53,7 @@ export function InputForm<T>({ config, onChange, showTitle }: InputFormProps): R
 
   return (
     <>
-      {showTitle ? <h2>{config.title}</h2> : <></>}
+      {showTitle && config.title ? <h2>{config.title}</h2> : <></>}
       {visibleFieldSets.map((fieldSetEntry, i) => {
         const fieldSetData = formState[fieldSetEntry.name];
         if (fieldSetEntry.type === 'fieldSetList') {

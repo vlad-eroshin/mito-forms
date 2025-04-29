@@ -4,17 +4,21 @@
       padding-bottom: 10px;
     }
   }
+
   .story-container {
     display: flex;
     flex-direction: row;
     column-gap: 5px;
+
     .editor-preview {
-      padding: 3px;
+      padding: 8px;
     }
+
     .editor-state-preview {
-      height: 450px;
+      height: 100%;
       width: 40%;
-      padding: 3px;
+      padding: 8px;
+
       textarea {
         height: 80%;
         width: 100%;
