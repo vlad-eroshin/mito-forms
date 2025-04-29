@@ -1,4 +1,4 @@
-[![Mito Forms CI](https://github.com/vlad-eroshin/mito-forms/actions/workflows/webpack.yml/badge.svg)](https://github.com/vlad-eroshin/mito-forms/actions/workflows/webpack.yml)
+[![Mito Forms CI](https://github.com/vlad-eroshin/mito-forms/actions/workflows/devBuild.yml/badge.svg)](https://github.com/vlad-eroshin/mito-forms/actions/workflows/devBuild.yml)
 
 # Mito Forms (WORK IN PROGRESS)
 
