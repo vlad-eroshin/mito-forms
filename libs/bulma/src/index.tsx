@@ -8,6 +8,7 @@ import { AddRowButton } from './components/AddRowButton';
 import { DeleteRowButton } from './components/DeleteRowButton';
 import { LoadingIndicator } from './components/LoadingIndicator';
 import { TabbedSection } from './components/Tabs/TabbedSection';
+import { BulmaFieldLayout } from './inputs/BulmaFieldLayout';
 import { BulmaFieldset } from './inputs/BulmaFieldset';
 import { ButtonSelectorField } from './inputs/ButtonSelectorField';
 import { CheckBox } from './inputs/CheckBox';
@@ -40,6 +41,7 @@ const BULMA_INPUTS: InputFieldRegistry = {
 };
 
 const BULMA_UTIL_COMPONENTS: UtilityComponentRegistry = {
+  inputFieldLayout: BulmaFieldLayout,
   addRowButton: AddRowButton,
   loading: LoadingIndicator,
   block: props => <div className={`box ${props.className}`}>{props.children}</div>,

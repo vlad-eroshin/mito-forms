@@ -51,6 +51,16 @@ export type ComponentRegistry = {
   utilityComponents: UtilityComponentRegistry;
 };
 
+export type InputFieldLayoutProps = {
+  id: string;
+  label?: string;
+  controlElement: ReactElement;
+  infoElement?: ReactElement;
+  required?: boolean;
+  fieldLayout?: FieldsLayout;
+  isValid: boolean;
+};
+
 export type UtilityComponentRegistry = {
   loading: FunctionComponent<LoadingComponentProps>;
   block: FunctionComponent<BlockComponentProps>;
@@ -58,6 +68,7 @@ export type UtilityComponentRegistry = {
   fieldset: FunctionComponent<FieldsetProps>;
   deleteRowButton: FunctionComponent<UtilityButtonProps>;
   addRowButton: FunctionComponent<UtilityButtonProps>;
+  inputFieldLayout: FunctionComponent<InputFieldLayoutProps>;
 };
 
 export type InputFieldRegistry = {

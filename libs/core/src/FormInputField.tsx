@@ -28,6 +28,7 @@ export function FormInputField<T>({
       validationErrors={validationErrors}
       fieldLayout={fieldLayout}
       fieldIndex={fieldIndex}
+      status={status}
     />
   ) : (
     <InputCMP

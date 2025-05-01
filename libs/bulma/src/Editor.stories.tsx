@@ -1,11 +1,16 @@
-import type { InputFieldRegistry, ParamsMap } from '@mito-forms/core';
-import { FormEditorStory } from '@mito-forms/core';
+import {
+  DataStatus,
+  FormEditorStory,
+  InputFieldRegistry,
+  ParamsMap,
+  ResultFormat,
+} from '@mito-forms/core';
 import type { Meta, StoryObj } from '@storybook/react';
 
 import INPUT_DATA from './__data__/mockInputObject.json';
 import { basicEditor } from './__metadata__/basic';
-import { chartEditorMetadata } from './__metadata__/chartEditor';
 import { editorWithCollapsibleFieldsets } from './__metadata__/collapsibleFieldsets';
+import { dataSourceUsage } from './__metadata__/dataSourceUsage';
 import { editorWithConditions } from './__metadata__/editorWithConditions';
 import { editorWithJsonPath } from './__metadata__/jsonPathRetrieval';
 import { staticTextEditor } from './__metadata__/staticText';
@@ -152,6 +157,12 @@ export const WithListEditor: Story = {
           },
         },
         listEditor: {
+          fieldset1: (editorData: object, newData: ParamsMap) => {
+            return {
+              ...editorData,
+              fieldset1: newData,
+            };
+          },
           list: (editorData: object, newData: ParamsMap) => {
             return {
               ...editorData,
@@ -249,9 +260,55 @@ export const SwitchComponent: Story = {
   },
 };
 
-export const ChartEditor: Story = {
+export const DataSourceUsage: Story = {
   args: {
-    editorMetadata: chartEditorMetadata,
+    editorMetadata: dataSourceUsage,
     initialData: {},
+    delayDataSource: { selectorOptions: 5000, switchList: 2000, radioList: 3000 },
+    dataSourceStates: {
+      selectorOptions: {
+        resultFormat: ResultFormat.RecordsArray,
+        data: [
+          { label: 'Option 1', value: 1 },
+          { label: 'Option 2', value: 2 },
+          { label: 'Option 3', value: 3 },
+          { label: 'Option 4', value: 4 },
+          { label: 'Option 5', value: 5 },
+          { label: 'Option 6', value: 6 },
+          { label: 'Option 7', value: 7 },
+          { label: 'Option 8', value: 8 },
+          { label: 'Option 9', value: 9 },
+          { label: 'Option 10', value: 10 },
+        ],
+        id: 'selectorOptions',
+        status: DataStatus.Loading,
+      },
+      switchList: {
+        resultFormat: ResultFormat.RecordsArray,
+        data: [
+          { label: 'Switch 1', value: 1 },
+          { label: 'Switch 2', value: 2 },
+          { label: 'Switch 3', value: 3 },
+          { label: 'Switch 4', value: 4 },
+          { label: 'Switch 5', value: 5 },
+          { label: 'Switch 6', value: 6 },
+          { label: 'Switch 7', value: 7 },
+        ],
+        id: 'switchList',
+        status: DataStatus.Loading,
+      },
+      radioList: {
+        resultFormat: ResultFormat.RecordsArray,
+        data: [
+          { label: 'Radio Option 1', value: 1 },
+          { label: 'Radio Option 2', value: 2 },
+          { label: 'Radio Option 3', value: 3 },
+          { label: 'Radio Option 4', value: 4 },
+          { label: 'Radio Option 5', value: 5 },
+        ],
+        id: 'radioList',
+        status: DataStatus.Loading,
+      },
+    },
   },
 };

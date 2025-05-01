@@ -3,6 +3,7 @@ import type {
   FieldSetMetadata,
   FormDataState,
   FormMetadata,
+  InputFieldLayoutProps,
   ListEditorMetadata,
   ParamsMap,
 } from './types';
@@ -11,6 +12,8 @@ import { ListEditor } from './ListEditor';
 import { generateReactKey } from './utils';
 import { useFormState } from './hooks/useFormState';
 import { useEditorMetadata } from './hooks/useEditorMetadata';
+import { useUtilComponent } from './hooks';
+import { useFieldsLayout } from './hooks/useFieldsLayout';
 
 /**
  *  Input form  (think about it one input form)
@@ -33,7 +36,9 @@ export function InputForm<T>({
 }: InputFormProps): React.ReactElement {
   const { getFieldsetState, formState, getVisibleFieldSets } = useFormState(config);
   const editorMetadata = useEditorMetadata();
+  const fieldsLayout = useFieldsLayout();
   const visibleFieldSets = getVisibleFieldSets();
+  const FieldLayoutCmp = useUtilComponent<InputFieldLayoutProps>('inputFieldLayout');
 
   const handleFieldsetChange = useCallback(
     (freshData: ParamsMap | ParamsMap[], name: string, isFieldsetValid: boolean) => {
@@ -61,20 +66,30 @@ export function InputForm<T>({
         const fieldSetData = formState[fieldSetEntry.name];
         if (fieldSetEntry.type === 'fieldSetList') {
           const listEditorConfig = fieldSetEntry as ListEditorMetadata;
+          const id = generateReactKey(config.id, listEditorConfig.name);
           return (
-            <ListEditor
-              name={fieldSetEntry.name}
-              key={generateReactKey(config.id, fieldSetEntry.name, fieldSetEntry.type as string)}
-              rowFieldset={listEditorConfig.rowFieldset}
-              data={(fieldSetData.data as ParamsMap) || []}
-              canDeleteRows={listEditorConfig.canDeleteRows}
-              onChange={(newData, isValid) =>
-                handleFieldsetChange(newData, fieldSetEntry.name, isValid)
-              }
-              showHeader={listEditorConfig.showHeader}
-              showBorders={listEditorConfig.showBorders}
-              canAddRows={listEditorConfig.canAddRows}
-            />
+            <fieldset key={id} className={'mf-fieldset'}>
+              <FieldLayoutCmp
+                id={id}
+                label={listEditorConfig.label}
+                fieldLayout={fieldsLayout}
+                controlElement={
+                  <ListEditor
+                    name={fieldSetEntry.name}
+                    rowFieldset={listEditorConfig.rowFieldset}
+                    data={(fieldSetData.data as ParamsMap) || []}
+                    canDeleteRows={listEditorConfig.canDeleteRows}
+                    onChange={(newData, isValid) =>
+                      handleFieldsetChange(newData, fieldSetEntry.name, isValid)
+                    }
+                    showHeader={listEditorConfig.showHeader}
+                    showBorders={listEditorConfig.showBorders}
+                    canAddRows={listEditorConfig.canAddRows}
+                  />
+                }
+                isValid={false}
+              />
+            </fieldset>
           );
         } else
           return (
