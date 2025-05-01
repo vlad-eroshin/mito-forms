@@ -10,6 +10,7 @@ import { FormFieldset } from './FormFieldset';
 import { ListEditor } from './ListEditor';
 import { generateReactKey } from './utils';
 import { useFormState } from './hooks/useFormState';
+import { useEditorMetadata } from './hooks/useEditorMetadata';
 
 /**
  *  Input form  (think about it one input form)
@@ -31,7 +32,7 @@ export function InputForm<T>({
   showTitle = true,
 }: InputFormProps): React.ReactElement {
   const { getFieldsetState, formState, getVisibleFieldSets } = useFormState(config);
-
+  const editorMetadata = useEditorMetadata();
   const visibleFieldSets = getVisibleFieldSets();
 
   const handleFieldsetChange = useCallback(
@@ -48,12 +49,14 @@ export function InputForm<T>({
       };
       onChange(newData, config.id, name, isFormValid(newData, isFieldsetValid));
     },
-    [formState, onChange, config.id]
+    [getFieldsetState, formState, onChange, config.id]
   );
+
+  const isShowTitle = editorMetadata.displayAs === 'tabSet' ? false : showTitle && config.title;
 
   return (
     <>
-      {showTitle && config.title ? <h2>{config.title}</h2> : <></>}
+      {isShowTitle ? <h2>{config.title}</h2> : <></>}
       {visibleFieldSets.map((fieldSetEntry, i) => {
         const fieldSetData = formState[fieldSetEntry.name];
         if (fieldSetEntry.type === 'fieldSetList') {
@@ -75,8 +78,8 @@ export function InputForm<T>({
               key={generateReactKey(config.id, fieldSetEntry.name, fieldSetEntry.type as string)}
               config={fieldSetEntry as FieldSetMetadata}
               inputData={(fieldSetData.data as ParamsMap) || {}}
-              onChange={(newfieldSetData, isValid) =>
-                handleFieldsetChange(newfieldSetData, fieldSetEntry.name, isValid)
+              onChange={(newFieldSetData, isValid) =>
+                handleFieldsetChange(newFieldSetData, fieldSetEntry.name, isValid)
               }
             />
           );

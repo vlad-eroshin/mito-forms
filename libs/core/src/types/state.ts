@@ -82,6 +82,7 @@ export type EditorContextProps<T = object> = {
   dataSources: { [key: string]: DataSourceState };
   componentRegistry: ComponentRegistry;
   editorState: EditorState<T>;
+  editorMetadata: EditorMetadata<T>;
   contextParams?: { [key: string]: unknown } | undefined; // Context params that maybe necessary in reducers
   fieldsLayout?: FieldsLayout;
 };

@@ -70,7 +70,7 @@ export const getInitialFieldSetData = (
       //Skip Divider field as it is not interractive
       return;
     }
-    let fetchedValue;
+    let fetchedValue: ParamValue;
     if (inputData) {
       if (typeof fieldConf.value === 'function') {
         const rawValue = fieldConf.value(inputData);
@@ -99,7 +99,11 @@ export const getInitialFieldSetData = (
           : [];
       }
     } else {
-      fetchedValue = fieldConf.value || fieldConf.default;
+      if (isJsonPathExp(fieldConf.value)) {
+        fetchedValue = fieldConf.default; // input data is not defined
+      } else {
+        fetchedValue = fieldConf.value || fieldConf.default;
+      }
     }
     if (!isNullOrUndefined(fetchedValue)) {
       fieldValues[fieldConf.name] = fetchedValue;
@@ -169,6 +173,19 @@ export const extractJsonPathString = (expr: unknown): string => {
   }
   const strExpr = expr as string;
   return strExpr.substring(2, strExpr.length - 1);
+};
+
+/**
+ * Fetches value given by json path or json path expression !{<path>}
+ *
+ * @param contextData
+ * @param exprOrJsonPath json path or json path expression !{<path>}
+ */
+export const fetchJsonPathValue = (contextData: object, exprOrJsonPath: unknown): ParamValue => {
+  const jsonPath = isJsonPathExp(exprOrJsonPath)
+    ? extractJsonPathString(exprOrJsonPath)
+    : (exprOrJsonPath as string);
+  return fetchJsonPath(contextData, jsonPath);
 };
 
 /**

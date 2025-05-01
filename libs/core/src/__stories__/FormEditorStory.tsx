@@ -31,6 +31,7 @@ const STORY_FORM: EditorMetadata<PreviewResult> = {
     {
       id: 'preview',
       title: 'Result Preview',
+      showTitle: true,
       fieldSets: [
         {
           name: 'mainFieldset',
@@ -40,6 +41,7 @@ const STORY_FORM: EditorMetadata<PreviewResult> = {
               name: 'fieldsLayout',
               default: 'compact',
               value: '!{fieldsLayout}',
+              label: 'Fields Layout',
               options: [
                 { label: 'Compact', value: 'compact' },
                 { label: 'Two Columns', value: 'twoColumn' },
@@ -48,6 +50,7 @@ const STORY_FORM: EditorMetadata<PreviewResult> = {
             {
               type: 'textbox',
               name: 'resultPreview',
+              label: 'Editor result',
               value: '!{resultPreview}',
               customProps: {
                 rows: 15,
@@ -94,7 +97,7 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
     <IntlProvider locale="en" messages={{}}>
       <div className="config-editor-story">
         <div className="story-container">
-          <div className="editor-preview" style={{ width: '60%' }}>
+          <div className="editor-preview box" style={{ width: '60%' }}>
             <FormEditor
               key={`formEditor-${fieldsLayout}`}
               editorMetadata={{ ...editorMetadata, fieldsLayout }}
@@ -107,7 +110,7 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
             />
           </div>
 
-          <div className="editor-state-preview box has-background-grey-lighter">
+          <div className="editor-state-preview box has-background-white-ter">
             <FormEditor<PreviewResult>
               editorRef={editorRef}
               editorMetadata={STORY_FORM}

@@ -126,6 +126,7 @@ export function FormEditor<T>({
       dataSources: dataSourceStates || {},
       componentRegistry,
       editorState,
+      editorMetadata,
       contextParams,
       fieldsLayout: editorMetadata.fieldsLayout || 'compact',
     }),
