@@ -2,6 +2,8 @@ import { FieldSetMetadata } from '@mito-forms/core';
 import type { Meta, StoryObj } from '@storybook/react';
 import { expect, within } from '@storybook/test';
 
+import '../bulma-theme.scss';
+
 import { ListEditorWrapper } from '../__stories__/ListEditorWrapper';
 
 const meta: Meta<typeof ListEditorWrapper> = {
@@ -159,6 +161,67 @@ export const WithHeaders: Story = {
           label: 'Tags Selector',
           name: 'tagsSelector',
           options: '!{tagsSelector__options}',
+          placeHolderText: 'Select Tag',
+          type: 'select',
+        },
+      ],
+    } as FieldSetMetadata,
+    data: [
+      {
+        staticText: 'Static Text Value 1',
+        selector: 'Selector Value 1',
+        tagsSelector__options: ['tag1', 'tag2'],
+        tagKeyLabel: 'TagKey1',
+        tagsSelector: 'tag2',
+      },
+      {
+        staticText: 'Static Text Value 2',
+        selector: 'Selector Value 2',
+        tagsSelector__options: ['tag aa', 'tag bb'],
+        tagKeyLabel: 'TagKey1',
+      },
+    ],
+  },
+};
+
+export const WithAddButton: Story = {
+  args: {
+    showBorders: true,
+    canDeleteRows: true,
+    showHeader: true,
+    canAddRows: true,
+    rowFieldset: {
+      name: 'testFieldSet',
+      fieldLayout: 'compact',
+      arrangeFields: 'row',
+      fields: [
+        {
+          label: 'Text Input',
+          name: 'inputText',
+          type: 'text',
+        },
+        {
+          label: 'Another Label 123',
+          name: 'selector',
+          type: 'staticText',
+          default: '',
+        },
+        {
+          label: '',
+          name: 'tagKeyLabel',
+          type: 'staticText',
+          default: '',
+        },
+        {
+          label: 'Options Selector',
+          name: 'optSelector',
+          default: 1,
+          options: [
+            { value: 1, label: 'Option 1' },
+            { value: 2, label: 'Option 2' },
+            { value: 3, label: 'Option 3' },
+            { value: 4, label: 'Option 4' },
+          ],
           placeHolderText: 'Select Tag',
           type: 'select',
         },

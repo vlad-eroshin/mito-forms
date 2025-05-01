@@ -4,3 +4,4 @@ export * from './dataSource';
 export * from './editorMetadata';
 export * from './state';
 export * from './expressions';
+export * from './registry';

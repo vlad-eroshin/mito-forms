@@ -2,6 +2,7 @@ import { EditorMetadata } from '@mito-forms/core';
 
 export const withListEditor: EditorMetadata = {
   activeForm: 'widgetParams',
+  displayAs: 'tabSet',
   forms: [
     {
       id: 'widgetParams',
@@ -32,7 +33,8 @@ export const withListEditor: EditorMetadata = {
           name: 'list',
           jsonPath: 'listOfData',
           type: 'fieldSetList',
-          canDeleteOrAddRows: false,
+          canDeleteRows: true,
+          showHeader: true,
           rowFieldset: {
             name: 'testListEditor',
             fields: [

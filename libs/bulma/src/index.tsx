@@ -1,8 +1,10 @@
 import { ComponentRegistry, InputFieldRegistry, UtilityComponentRegistry } from '@mito-forms/core';
 import React from 'react';
 import '@fortawesome/fontawesome-free/css/all.min.css';
+import './bulma-theme.scss';
 import '@mito-forms/core/core.css';
 
+import { AddRowButton } from './components/AddRowButton';
 import { DeleteRowButton } from './components/DeleteRowButton';
 import { LoadingIndicator } from './components/LoadingIndicator';
 import { TabbedSection } from './components/Tabs/TabbedSection';
@@ -38,6 +40,7 @@ const BULMA_INPUTS: InputFieldRegistry = {
 };
 
 const BULMA_UTIL_COMPONENTS: UtilityComponentRegistry = {
+  addRowButton: AddRowButton,
   loading: LoadingIndicator,
   block: props => <div className={`box ${props.className}`}>{props.children}</div>,
   tabbedSection: TabbedSection,

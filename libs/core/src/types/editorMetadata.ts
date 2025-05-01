@@ -1,6 +1,5 @@
 import type { ParamsMap, ParamValue, RecordsArray } from './common';
 import { DataSourceBinding, DataSourceConfig, DataStatus } from './dataSource';
-import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 
 export type ValidationFunctionType<T> = (value: ParamValue) => boolean | T | T[];
 
@@ -212,78 +211,19 @@ export type InputOption = {
 export type ListEditorMetadata = {
   name: string;
   rowFieldset: FieldSetMetadata;
-  canDeleteOrAddRows?: boolean;
+  canDeleteRows?: boolean;
+  canAddRows?: boolean;
   minItemsRequired?: number;
   label?: string;
   jsonPath?: string;
   addButtonLabel?: string;
   render?: boolean | string;
+  showHeader?: boolean;
+  showBorders?: boolean;
 };
 
 export type FieldSetEntry = (FieldSetMetadata | ListEditorMetadata) & {
   type?: 'fieldSet' | 'fieldSetList';
-};
-
-export type InputFieldRegistry = {
-  [key in InputFieldType]: React.FunctionComponent<FormInputFieldProps>;
-};
-
-export type LoadingComponentProps = {
-  className?: string;
-  loadingText?: string;
-  size?: 'small' | 'medium' | 'large';
-};
-export type BlockComponentProps = {
-  className?: string;
-  children?: ReactElement | ReactElement[];
-};
-
-export type FieldsetProps = {
-  legend?: string;
-  children: React.ReactNode;
-  collapsible?: boolean;
-  collapsed?: boolean;
-  onCollapse?: () => void;
-  layout?: FieldsLayout;
-};
-
-export type DeleteRowButtonProps = {
-  text?: string;
-  showIcon?: boolean;
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-};
-
-export type ComponentRegistry = {
-  inputFields: InputFieldRegistry;
-  utilityComponents: UtilityComponentRegistry;
-};
-
-export type UtilityComponentRegistry = {
-  loading: FunctionComponent<LoadingComponentProps>;
-  block: FunctionComponent<BlockComponentProps>;
-  tabbedSection: FunctionComponent<TabbedSectionProps>;
-  fieldset: FunctionComponent<FieldsetProps>;
-  deleteRowButton: FunctionComponent<DeleteRowButtonProps>;
-};
-
-export type TabProps = {
-  id: string;
-  label: string;
-  disabled?: boolean;
-  selected?: boolean;
-  content: ReactNode;
-};
-
-export type TabbedSectionProps = {
-  selected: string | number;
-  onTab: (tabId: string | number) => void;
-  tabs: Omit<TabProps, 'onClick' | 'selected'>[];
-};
-
-export type TabPanelProps = {
-  children?: React.ReactNode;
-  index: number;
-  value: number | string;
 };
 
 /**

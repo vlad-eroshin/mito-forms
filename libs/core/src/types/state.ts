@@ -1,7 +1,8 @@
 import { ParamsMap, ParamValue, RecordsArray } from './common';
 
 import { DataSourceState } from './dataSource';
-import { ComponentRegistry, EditorMetadata, FieldsLayout, ReducersMap } from './editorMetadata';
+import { EditorMetadata, FieldsLayout, ReducersMap } from './editorMetadata';
+import { ComponentRegistry } from './registry';
 
 export type FieldValues = { [key: string]: ParamValue | File };
 

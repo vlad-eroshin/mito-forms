@@ -63,13 +63,17 @@ export function InputForm<T>({
           const listEditorConfig = fieldSetEntry as ListEditorMetadata;
           return (
             <ListEditor
+              name={fieldSetEntry.name}
               key={generateReactKey(config.id, fieldSetEntry.name, fieldSetEntry.type as string)}
               rowFieldset={listEditorConfig.rowFieldset}
               data={(fieldSetData.data as ParamsMap) || []}
-              canDeleteRows={listEditorConfig.canDeleteOrAddRows}
+              canDeleteRows={listEditorConfig.canDeleteRows}
               onChange={(newData, isValid) =>
                 handleFieldsetChange(newData, fieldSetEntry.name, isValid)
               }
+              showHeader={listEditorConfig.showHeader}
+              showBorders={listEditorConfig.showBorders}
+              canAddRows={listEditorConfig.canAddRows}
             />
           );
         } else

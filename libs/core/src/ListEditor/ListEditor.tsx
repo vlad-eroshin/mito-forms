@@ -1,18 +1,20 @@
-import React, { useCallback, useState } from 'react';
+import React, { ReactElement, useCallback, useState } from 'react';
 
 import { FormFieldset } from '../FormFieldset';
-import { fetchJsonPath, getFieldValues } from '../utils';
-import { DataRecord, FieldSetMetadata, InputField, ParamsMap, RecordsArray } from '../types';
+import { buildEmptyRecordFromFields, fetchJsonPath, getFieldValues } from '../utils';
+import {
+  DataRecord,
+  InputField,
+  ListEditorMetadata,
+  ParamsMap,
+  RecordsArray,
+  UtilityButtonProps,
+} from '../types';
+import { useUtilComponent } from '../hooks';
 
-export type ListInputProps = {
-  rowFieldset: FieldSetMetadata;
+export type ListInputProps = ListEditorMetadata & {
   data: object;
-  jsonPath?: string;
-  showHeader?: boolean;
-  canDeleteRows?: boolean | undefined;
-  showBorders?: boolean;
   onChange?: (data: RecordsArray, isValid: boolean) => void;
-  minItemsRequired?: number;
 };
 
 export const ListEditor: React.FC<ListInputProps> = ({
@@ -22,9 +24,10 @@ export const ListEditor: React.FC<ListInputProps> = ({
   onChange,
   minItemsRequired = 0,
   showHeader = false,
-  canDeleteRows,
+  canDeleteRows = false,
+  canAddRows = false,
   showBorders = false,
-}) => {
+}): ReactElement => {
   const [rowsData, setRowsData] = useState<RecordsArray>(
     (jsonPath ? fetchJsonPath(data, jsonPath) || [] : data) as RecordsArray
   );
@@ -35,6 +38,17 @@ export const ListEditor: React.FC<ListInputProps> = ({
     },
     [minItemsRequired]
   );
+  const AddRowButton = useUtilComponent<UtilityButtonProps>('addRowButton');
+
+  const handleAddListItem = useCallback(() => {
+    const newRows = [
+      ...rowsData,
+      buildEmptyRecordFromFields(
+        rowFieldset.fields.filter(f => f.type !== 'divider') as InputField[]
+      ),
+    ];
+    setRowsData(newRows);
+  }, [rowsData]);
 
   const handleRowChange = useCallback(
     (rowIndex: number, record: DataRecord) => {
@@ -81,7 +95,6 @@ export const ListEditor: React.FC<ListInputProps> = ({
       <tbody>
         {rowsData.map((itemData: ParamsMap | RecordsArray, i: number) => {
           const fieldValues = getFieldValues(itemData, rowFieldset);
-
           return (
             <FormFieldset
               key={`list-item-row-${i}`}
@@ -96,6 +109,16 @@ export const ListEditor: React.FC<ListInputProps> = ({
             />
           );
         })}
+        {canAddRows && (
+          <tr className={'footer-row'}>
+            <td
+              colSpan={rowFieldset.fields.length + (canDeleteRows ? 1 : 0)}
+              className={'control-cell'}
+            >
+              <AddRowButton showIcon={true} onClick={handleAddListItem} />
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );

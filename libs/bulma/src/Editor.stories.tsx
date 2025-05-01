@@ -165,9 +165,9 @@ export const WithListEditor: Story = {
       label: 'Label',
       text: 'Text',
       listOfData: [
-        { field: 'FIELD1', axisType: 'quant' },
-        { field: 'FIELD2', axisType: 'temp' },
-        { field: 'FIELD3', axisType: 'ordinal' },
+        { field: 'Speed', axisType: 'quant' },
+        { field: 'Date', axisType: 'temp' },
+        { field: 'Color', axisType: 'ordinal' },
       ],
     },
   },

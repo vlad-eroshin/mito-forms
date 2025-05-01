@@ -294,3 +294,16 @@ export function buildExpressionContext(
     _STATE: state,
   };
 }
+
+export function buildEmptyRecordFromFields(fields: InputField[]): DataRecord {
+  const result: DataRecord = {};
+  fields.forEach(field => {
+    if (field.default) {
+      result[field.name] = field.default;
+      // if (field.type === 'select') {
+      //   result[`${field.name}__options`] = field.options && isJsonPathExp(field.options);
+      // }
+    }
+  });
+  return result;
+}

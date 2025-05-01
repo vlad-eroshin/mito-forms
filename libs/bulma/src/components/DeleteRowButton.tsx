@@ -1,16 +1,9 @@
-import { faRemove } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { DeleteRowButtonProps } from '@mito-forms/core';
+import { UtilityButtonProps } from '@mito-forms/core';
 import React from 'react';
 
-export const DeleteRowButton: React.FunctionComponent<DeleteRowButtonProps> = ({
-  onClick,
-  text,
-  showIcon = true,
-}) => {
+export const DeleteRowButton: React.FunctionComponent<UtilityButtonProps> = ({ onClick, text }) => {
   return (
-    <button onClick={onClick}>
-      {showIcon ? <FontAwesomeIcon icon={faRemove} /> : <></>}
+    <button onClick={onClick} className={'delete'}>
       {text}
     </button>
   );
