@@ -1,7 +1,7 @@
 import { FormInputField } from '../FormInputField';
 import { generateReactKey, retrieveInputOptions } from '../utils';
 import React from 'react';
-import { DataRecord, DeleteRowButtonProps, InputField, ParamsMap } from '../types';
+import { DataRecord, UtilityButtonProps, InputField, ParamsMap } from '../types';
 import { useUtilComponent } from '../hooks';
 
 type EditableRowProps = {
@@ -21,7 +21,7 @@ export const EditableRow: React.FunctionComponent<EditableRowProps> = ({
   rowIndex,
   showFieldLabels = true,
 }) => {
-  const DeleteRowButton = useUtilComponent<DeleteRowButtonProps>('deleteRowButton');
+  const DeleteRowButton = useUtilComponent<UtilityButtonProps>('deleteRowButton');
   return (
     <tr>
       {fields.map(field => {

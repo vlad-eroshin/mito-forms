@@ -1,9 +1,10 @@
 @use "bulma/sass/base";
 @use "bulma/sass/themes";
+@use "bulma/sass/form/shared";
 
 :root {
   --mf-border-color: #bbb;
-  --mf-header-color: var(--bulma-card-header-color);
+  --mf-header-color: #878d9a;
   --mf-secondary-text-color: var(--bulma-tabs-link-color);
   --mf-input-error-color: var(--bulma-danger);
   --mf-font-size-small: var(--bulma-size-small);
@@ -17,6 +18,9 @@
   --mf-control-radius: var(--bulma-control-radius);
   --mf-selected-bg-color: var(--bulma-link);
   --mf-static-color: var(--bulma-button-static-background-color);
+  --mf-table-header-bg: var(--bulma-background-active);
+  --mf-table-header-color: var(--bulma-button-active-color);
+  --mf-table-border-color: var(--bulma-input-border-color);
 }
 
 $fontFamily: var(--mf-font-family);
@@ -32,6 +36,9 @@ $controlRadius: var(--mf-control-radius);
 $selectedBackgroundColor: var(--mf-selected-bg-color);
 $staticColor: var(--mf-static-color);
 $spacing: var(--mf-spacing);
+$tableHeaderBgColor: var(--bulma-button-static-background-color);
+$tableHeaderColor: var(--mf-table-header-color);
+$tableHeaderBorderColor: var(--mf-table-border-color);
 
 // Export variables for use in other SCSS files
 :export {

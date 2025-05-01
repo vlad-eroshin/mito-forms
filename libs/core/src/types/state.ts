@@ -1,7 +1,8 @@
 import { ParamsMap, ParamValue, RecordsArray } from './common';
 
 import { DataSourceState } from './dataSource';
-import { ComponentRegistry, EditorMetadata, FieldsLayout, ReducersMap } from './editorMetadata';
+import { EditorMetadata, FieldsLayout, ReducersMap } from './editorMetadata';
+import { ComponentRegistry } from './registry';
 
 export type FieldValues = { [key: string]: ParamValue | File };
 
@@ -82,6 +83,7 @@ export type EditorContextProps<T = object> = {
   dataSources: { [key: string]: DataSourceState };
   componentRegistry: ComponentRegistry;
   editorState: EditorState<T>;
+  editorMetadata: EditorMetadata<T>;
   contextParams?: { [key: string]: unknown } | undefined; // Context params that maybe necessary in reducers
   fieldsLayout?: FieldsLayout;
 };

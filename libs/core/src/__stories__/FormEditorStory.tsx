@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
-import React, { useCallback, useRef, useState } from 'react';
-import type { EditorMetadata, FieldsLayout, ParamsMap } from '../types';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { DataStatus, EditorMetadata, FieldsLayout, ParamsMap } from '../types';
 import { EditorActiveApi, FormEditor, FormEditorProps } from '../FormEditor';
 import { IntlProvider } from 'react-intl';
 
@@ -9,6 +9,7 @@ export type FormEditorStoryProps = Omit<FormEditorProps, 'onChange'> & {
   metadataName?: string;
   inputDataMap?: { [key: string]: object };
   activeData?: string;
+  delayDataSource?: { [key: string]: number };
 };
 
 type PreviewResult = {
@@ -31,6 +32,7 @@ const STORY_FORM: EditorMetadata<PreviewResult> = {
     {
       id: 'preview',
       title: 'Result Preview',
+      showTitle: true,
       fieldSets: [
         {
           name: 'mainFieldset',
@@ -40,6 +42,7 @@ const STORY_FORM: EditorMetadata<PreviewResult> = {
               name: 'fieldsLayout',
               default: 'compact',
               value: '!{fieldsLayout}',
+              label: 'Fields Layout',
               options: [
                 { label: 'Compact', value: 'compact' },
                 { label: 'Two Columns', value: 'twoColumn' },
@@ -48,6 +51,7 @@ const STORY_FORM: EditorMetadata<PreviewResult> = {
             {
               type: 'textbox',
               name: 'resultPreview',
+              label: 'Editor result',
               value: '!{resultPreview}',
               customProps: {
                 rows: 15,
@@ -67,9 +71,13 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
   componentRegistry,
   throttleChange,
   changeInterval,
+  delayDataSource = {},
 }) => {
   const [editorResult, setEditorResult] = useState<object>(initialData);
   const [fieldsLayout, setFieldsLayout] = useState<FieldsLayout>('compact');
+  const dsStates = useRef(dataSourceStates);
+
+  const [dataSources, setDataSources] = useState(dsStates.current);
 
   const editorRef: React.Ref<EditorActiveApi> = useRef<EditorActiveApi>(null);
 
@@ -83,9 +91,21 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
     },
     [fieldsLayout]
   );
-  // const handleLayoutChange = useCallback((event: React.ChangeEvent<HTMLSelectElement>) => {
-  //   setFieldsLayout(event.target.value as FieldsLayout);
-  // }, []);
+
+  useEffect(() => {
+    Object.keys(delayDataSource).forEach(k => {
+      if (dsStates.current[k].status == DataStatus.Loaded) {
+        return;
+      }
+      const dsDelay = delayDataSource[k];
+      setTimeout(() => {
+        const dsState = dsStates.current[k];
+        dsState.status = DataStatus.Loaded;
+        setDataSources({ ...dsStates.current });
+      }, dsDelay);
+    });
+  }, [delayDataSource]);
+
   const handleStoryFormChange = useCallback((result: PreviewResult) => {
     setFieldsLayout(result.fieldsLayout as FieldsLayout);
   }, []);
@@ -94,7 +114,7 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
     <IntlProvider locale="en" messages={{}}>
       <div className="config-editor-story">
         <div className="story-container">
-          <div className="editor-preview" style={{ width: '60%' }}>
+          <div className="editor-preview box" style={{ width: '60%' }}>
             <FormEditor
               key={`formEditor-${fieldsLayout}`}
               editorMetadata={{ ...editorMetadata, fieldsLayout }}
@@ -102,12 +122,12 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
               onChange={changeHandler}
               throttleChange={throttleChange}
               changeInterval={changeInterval}
-              dataSourceStates={dataSourceStates}
+              dataSourceStates={dataSources}
               componentRegistry={componentRegistry}
             />
           </div>
 
-          <div className="editor-state-preview box has-background-grey-lighter">
+          <div className="editor-state-preview box has-background-white-ter">
             <FormEditor<PreviewResult>
               editorRef={editorRef}
               editorMetadata={STORY_FORM}

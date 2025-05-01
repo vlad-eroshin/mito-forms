@@ -1,7 +1,7 @@
 import { EditorMetadata } from '@mito-forms/core';
 
 export const basicEditor: EditorMetadata = {
-  activeForm: 'form1',
+  displayAs: 'tabSet',
   forms: [
     {
       id: 'form1',

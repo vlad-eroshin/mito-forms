@@ -2,7 +2,7 @@ import { faAngleDown, faAngleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FieldsetProps } from '@mito-forms/core';
 import React, { useMemo } from 'react';
-
+import './BulmaFieldset.scss';
 import 'bulma/bulma.scss';
 
 export const BulmaFieldset: React.FC<FieldsetProps> = ({

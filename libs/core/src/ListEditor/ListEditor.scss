@@ -1,10 +1,16 @@
-@use '../variables.scss';
 
 .list-view {
-  th {
-    padding: 8px;
-    text-align: left;
-    background-color: var(--nav-bg);
+  font-family: var(--mf-font-family), Inter;
+
+  thead {
+    background-color: var(--mf-table-header-bg);
+    th {
+      padding: 8px;
+      text-align: left;
+      color: var(--mf-table-header-color);
+      text-transform: uppercase;
+      font-weight: normal;
+    }
   }
 
   td {
@@ -14,11 +20,9 @@
 
   &.borders {
     border-collapse: collapse;
-
     td,
     th {
-      font-family: var(--mf-font-family);
-      border: 1px solid variables.$borderColor;
+      border-bottom: 1px solid var(--mf-table-border-color);
       padding: 8px;
     }
   }
@@ -26,6 +30,7 @@
   tr.footer-row {
     td {
       border: none;
+      text-align: right;
     }
   }
 }

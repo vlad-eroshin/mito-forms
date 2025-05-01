@@ -6,7 +6,7 @@
 
 :root {
   --mf-border-color: #bbb;
-  --mf-header-color: var(--bulma-card-header-color);
+  --mf-header-color: #878d9a;
   --mf-secondary-text-color: var(--bulma-tabs-link-color);
   --mf-input-error-color: var(--bulma-danger);
   --mf-font-size-small: var(--bulma-size-small);
@@ -34,5 +34,8 @@ $fontSizeLarge: var(--mf-font-size-large);
 $controlRadius: var(--mf-control-radius);
 $selectedBackgroundColor: var(--mf-selected-bg-color);
 $staticColor: var(--mf-static-color);
+//$tableHeaderBgColor: var(--mf-table-header-bg);
+//$tableHeaderColor: var(--mf-table-header-color);
+//$tableHeaderBorderColor: var(--mf-table-border-color);
 
 $spacing: var(--mf-spacing);

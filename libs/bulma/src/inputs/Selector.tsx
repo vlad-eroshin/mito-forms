@@ -31,6 +31,7 @@ export const Selector: FunctionComponent<FormInputFieldProps> = props => {
             id={inputId}
             onChange={handleChange}
             disabled={config.disabled}
+            value={value as string}
           >
             {convertedOptions.map(opt => {
               const optId = generateReactKey(config.name, opt.label);

@@ -6,7 +6,7 @@ export const staticTextEditor: EditorMetadata = {
   forms: [
     {
       id: 'widgetParams',
-      title: 'Static Text',
+      title: 'Form with Reducer',
       fieldSets: [
         {
           name: 'widgetParams',
@@ -16,11 +16,13 @@ export const staticTextEditor: EditorMetadata = {
               type: 'text',
               name: 'label',
               label: 'Label',
+              value: '!{widgetParams.widgetParams.data.label}',
             },
             {
               type: 'text',
               name: 'text',
               label: 'Value',
+              value: '!{widgetParams.widgetParams.data.text}',
             },
           ],
         },

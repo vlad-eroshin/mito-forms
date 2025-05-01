@@ -8,16 +8,16 @@
   .story-container {
     display: flex;
     flex-direction: row;
-    column-gap: 5px;
+    column-gap: 1.5rem;
 
     .editor-preview {
-      padding: 8px;
+      padding: 1.5rem;
     }
 
     .editor-state-preview {
       height: 100%;
       width: 40%;
-      padding: 8px;
+      padding: 1.5rem;
 
       textarea {
         height: 80%;
