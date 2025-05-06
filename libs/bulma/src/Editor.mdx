@@ -1,0 +1,33 @@
+import { Canvas, Meta } from '@storybook/blocks';
+ 
+import * as EditorStories from './Editor.stories';
+ 
+<Meta of={EditorStories} />
+# Form Editor Usage Documentation
+The form editor is a component that allows you build forms declaratively using metadata only - no React code necessary.
+
+
+## Basic Editor
+This is a basic editor with a text field and selector component.
+
+<Canvas of={EditorStories.Basic} />
+
+## Simple layout (one page layout)
+The one page layout puts all the forms and fieldsets in a single page. This is useful for simple editors with few fields.
+<Canvas of={EditorStories.OnePageLayout} />
+
+## Tabbed layout
+Tabbed layout can be used to create a more complex editor.
+
+<Canvas of={EditorStories.TabbedLayout} />
+
+
+## Conditional Attributes
+The conditional attributes allow you to set the attributes of a field based on the value of another field. This is useful for creating dynamic forms that change based on user input.
+
+<Canvas of={EditorStories.ConditionalAttributes} />
+
+## Fieldset Reducers
+Fieldset reducers provide controlled way to apply changes to the result.
+
+<Canvas of={EditorStories.WithReducer} />

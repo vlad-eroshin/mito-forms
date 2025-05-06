@@ -40,6 +40,7 @@ export const Basic: Story = {
     initialData: {},
   },
 };
+
 export const ThrottleChange: Story = {
   args: {
     editorMetadata: {
@@ -73,7 +74,7 @@ export const OnePageLayout: Story = {
   },
 };
 
-export const ConditionalDisplay: Story = {
+export const ConditionalAttributes: Story = {
   args: {
     editorMetadata: editorWithConditions,
     initialData: {},

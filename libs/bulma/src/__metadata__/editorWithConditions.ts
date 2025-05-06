@@ -6,7 +6,6 @@ export const editorWithConditions = {
   forms: [
     {
       id: 'Form1',
-      title: 'Form with conditional input Fields and FieldSets',
       fieldSets: [
         {
           name: 'fieldset2',
