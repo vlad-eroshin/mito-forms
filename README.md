@@ -1,5 +1,7 @@
 [![Mito Forms CI](https://github.com/vlad-eroshin/mito-forms/actions/workflows/devBuild.yml/badge.svg)](https://github.com/vlad-eroshin/mito-forms/actions/workflows/devBuild.yml)
 
+[![Bulma Storybook](https://github.com/vlad-eroshin/mito-forms/actions/workflows/deployBulmaSB.yml/badge.svg)](https://github.com/vlad-eroshin/mito-forms/actions/workflows/deployBulmaSB.yml)
+
 # Mito Forms (WORK IN PROGRESS)
 
 Mito Forms is a lightweight, modular, and extensible form state management library.
