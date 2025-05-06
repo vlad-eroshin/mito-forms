@@ -73,6 +73,13 @@ jobs:
       - name: Build package
         run: pnpm --filter @mito-forms/${{ matrix.package }} build
 
+      - name: Configure npm
+        working-directory: libs/${{ matrix.package }}
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
+          echo "registry=https://registry.npmjs.org/" >> .npmrc
+          echo "always-auth=true" >> .npmrc
+
       - name: Publish Core to npm
         working-directory: libs/${{ matrix.package }}
         run: pnpm publish:core --access public --no-git-checks
