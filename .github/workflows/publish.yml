@@ -61,7 +61,7 @@ jobs:
           git add libs/core/package.json
           git commit -m "chore: bump core version to ${GITHUB_REF#refs/tags/core-v}"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push origin HEAD:veroshin/publish-beta-2
+          git push origin HEAD:main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -70,6 +70,6 @@ jobs:
 
       - name: Publish to npm
         working-directory: libs/${{ matrix.package }}
-        run: pnpm publish --access public
+        run: pnpm publish --access public --no-git-checks
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
