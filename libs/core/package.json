@@ -1,6 +1,6 @@
 {
   "name": "@mito-forms/core",
-  "version": "0.2.18-beta",
+  "version": "0.2.20-beta",
   "description": "Declarative Forms",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
