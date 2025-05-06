@@ -3,7 +3,7 @@ name: Deploy Bulma Storybook
 on:
   push:
     tags:
-      - 'bulma-storybook-update'
+      - 'bulma-storybook-v*'
     paths:
       - 'libs/bulma/**'
       - 'libs/core/**'
