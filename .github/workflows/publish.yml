@@ -9,6 +9,9 @@ on:
 permissions:
   contents: write
 
+env:
+  NPM_TOKEN: ${{ secrets.NPMJS_TOKEN }}
+
 jobs:
   publish:
     runs-on: ubuntu-latest
