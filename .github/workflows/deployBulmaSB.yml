@@ -48,7 +48,7 @@ jobs:
           sed -i.bak "s/\"@mito-forms\/core\": \"workspace:\*\"/\"@mito-forms\/core\": \"^$CORE_VERSION\"/" ./package.json
 
       - name: Install Bulma's dependencies
-        run: pnpm install
+        run: pnpm install --no-frozen-lockfile
         working-directory: libs/bulma
   
       - name: Build Storybook for Bulma
