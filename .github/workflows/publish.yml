@@ -39,9 +39,9 @@ jobs:
 
       - name: Bump version for core package
         if: matrix.package == 'core'
+        working-directory: libs/core
         run: |
           VERSION=${GITHUB_REF#refs/tags/core-v}
-          cd libs/core
           pnpm version $VERSION --no-git-tag-version
 
       - name: Commit version bump
