@@ -6,6 +6,9 @@ on:
       - 'core-v*'
       - 'bulma-v*'
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
@@ -14,7 +17,6 @@ jobs:
         node-version: [ 18.x ]
         package:
           - core
-          - bulma
 
     steps:
       - name: Checkout repo
@@ -34,6 +36,22 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+
+      - name: Bump version for core package
+        if: matrix.package == 'core'
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/core-v}
+          cd libs/core
+          npm version $VERSION --no-git-tag-version
+
+      - name: Commit version bump
+        if: matrix.package == 'core'
+        run: |
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'github-actions@github.com'
+          git add libs/core/package.json
+          git commit -m "chore: bump core version to ${GITHUB_REF#refs/tags/core-v}"
+          git push origin HEAD:main
 
       - name: Build package
         run: pnpm --filter @mito-forms/${{ matrix.package }} build
