@@ -55,7 +55,7 @@ jobs:
           git add libs/core/package.json
           git commit -m "chore: bump core version to ${GITHUB_REF#refs/tags/core-v}"
           git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git
-          git push origin HEAD:main
+          git push origin HEAD:${{ github.ref_name }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
