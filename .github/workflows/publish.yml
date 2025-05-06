@@ -42,7 +42,7 @@ jobs:
         run: |
           VERSION=${GITHUB_REF#refs/tags/core-v}
           cd libs/core
-          npm version $VERSION --no-git-tag-version
+          pnpm version $VERSION --no-git-tag-version
 
       - name: Commit version bump
         if: matrix.package == 'core'
@@ -58,6 +58,6 @@ jobs:
 
       - name: Publish to npm
         working-directory: libs/${{ matrix.package }}
-        run: npm publish
+        run: pnpm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
