@@ -35,6 +35,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Install dependencies
+        working-directory: libs/core
         run: pnpm install
 
       - name: Bump version for core package
