@@ -7,6 +7,30 @@ It provides a declarative, JSON-driven approach to building forms with dynamic b
 
 [Usage Examples Storybook](https://vlad-eroshin.github.io/mito-forms/storybook/bulma)
 
+## What Makes it Different 
+
+- Lightweight by Design: Mito Forms avoids the bloat common in many form libraries. Its minimal core keeps your bundle size small and performance snappy.
+
+- UI-Agnostic Core: Core logic is decoupled from any UI framework, enabling seamless integration with design systems like Material UI, Bulma, Bootstrap, or even custom components.
+
+- Framework-Agnostic State Handling: It does not rely on Redux, Zustand, Recoil. This makes Mito Forms highly portable across different app architectures.
+
+- Composable and Declarative API: Developers can define forms using schema-based configuration while maintaining the flexibility to extend or override behavior as needed.
+
+- Modular Architecture: Core logic, UI adapters, and features like validation or conditional logic are packaged independently—so you only import what you need.
+
+- Ideal for Adaptive UI and AI-Driven Interfaces: Mito Forms is well-suited for adaptive user interfaces, where form fields change dynamically based on context, user input, or AI-generated schemas.
+
+- Adaptable to Custom Form Engines: With no opinionated rendering model, it's a natural fit for use cases like dynamic page builders, low-code platforms, and smart form generation pipelines.
+
+- First-Class TypeScript Support: Built in TypeScript with strong types, it provides full type-safety, auto-completion, and schema validation support in modern code editors.
+
+- Storybook-Friendly: Easily test and preview forms in isolation. Mito Forms works well with Storybook for component-driven development.
+
+- Extensible by Design: Clean plugin architecture allows you to introduce custom field types, advanced validation, conditional logic, or layout behaviors with minimal friction.
+
+- Great for Both Static and Dynamic Forms: Whether you’re building a fixed layout form or generating fields at runtime, Mito Forms handles both use cases gracefully.
+
 ## Project Structure
 
 Mito Forms is organized as a modular monorepo:
