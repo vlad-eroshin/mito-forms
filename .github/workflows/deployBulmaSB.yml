@@ -2,9 +2,8 @@ name: Deploy Bulma Storybook
 
 on:
   push:
-    branches: [ main ]  # or your default branch
     tags:
-      - 'bulma-storybook'
+      - 'bulma-storybook-update'
     paths:
       - 'libs/bulma/**'
       - 'libs/core/**'
