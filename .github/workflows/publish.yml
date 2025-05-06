@@ -43,7 +43,7 @@ jobs:
         working-directory: libs/core
         run: |
           VERSION=${GITHUB_REF#refs/tags/core-v}
-          pnpm version $VERSION --no-git-tag-version --ignore-workspace-root-check
+          jq --arg version "$VERSION" '.version = $version' package.json > package.json.tmp && mv package.json.tmp package.json
 
       - name: Commit version bump
         if: matrix.package == 'core'
