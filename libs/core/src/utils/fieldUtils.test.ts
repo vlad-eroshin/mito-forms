@@ -5,7 +5,7 @@ import {
   convertInputOptions,
   extractJsonPathString,
   fetchJsonPath,
-  getFieldValues,
+  getFieldsetData,
   isJsonPathExp,
 } from './fieldUtils';
 
@@ -129,7 +129,7 @@ describe('Field Utils: test is JMES path', () => {
 
 describe('FormEditor: getFieldValues', () => {
   it('test initial fields data', () => {
-    const fieldValues = getFieldValues(
+    const fieldValues = getFieldsetData(
       TEST_INPUT_OBJECT,
       BASIC_FIELDSET as FieldSetMetadata
     ) as ParamsMap;
@@ -137,7 +137,7 @@ describe('FormEditor: getFieldValues', () => {
     expect(fieldValues.value).toBe('Value Text');
   });
   it('test initial field values: no json path', () => {
-    const fieldValues = getFieldValues(
+    const fieldValues = getFieldsetData(
       TEST_INPUT_OBJECT,
       TEST_FIELDSET_NO_PATH as FieldSetMetadata
     ) as ParamsMap;
@@ -147,7 +147,7 @@ describe('FormEditor: getFieldValues', () => {
     expect(fieldValues.defaultValue).toBe('Default Value');
   });
   it('test initial field values: json path', () => {
-    const fieldValues = getFieldValues(
+    const fieldValues = getFieldsetData(
       TEST_INPUT_OBJECT,
       TEST_FIELDSET_WITH_PATH as FieldSetMetadata
     ) as ParamsMap;

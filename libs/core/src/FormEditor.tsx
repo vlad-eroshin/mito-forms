@@ -17,9 +17,10 @@ import type {
   FormDataState,
   ParamsMap,
 } from './types';
-import { buildFormStatesFromData, editorStateReducer } from './FormEditorReducer';
+import { editorStateReducer } from './FormEditorReducer';
 import { FormsContainer } from './FormsContainer';
 import { EditorContext } from './EditorContext';
+import { buildFormStatesFromData } from './utils';
 
 export interface EditorActiveApi<T = object> {
   setData: (newData: T) => void;

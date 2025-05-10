@@ -1,6 +1,7 @@
 import {
   DataRecord,
   DefinedDataValue,
+  type EditorMetadata,
   ExpressionContext,
   FieldSetEntry,
   FieldSetMetadata,
@@ -117,7 +118,7 @@ export const getInitialFieldSetData = (
  * @param inputData
  * @param fieldSetEntry
  */
-export const getFieldValues = (
+export const getFieldsetData = (
   inputData: ParamsMap | RecordsArray,
   fieldSetEntry: FieldSetEntry
 ): ParamsMap | RecordsArray => {
@@ -307,3 +308,44 @@ export function buildEmptyRecordFromFields(fields: InputField[]): DataRecord {
   });
   return result;
 }
+
+/**
+ * Updates state from the passed input data for the editor.
+ * Editor metadata how the data should be populated for each field and fieldset
+ *
+ * 1. Form Data retrieval :
+ *    - if no jsonPath specified for the form data for the form will be editorData.
+ *    - if jsonPath specified in the config first we perform lookup to that jsonPath
+ *      and then pass what was retrieved is used as the Form Data.
+ *
+ * 2. Fieldset Data: Editor retrieves fieldset Data as following
+ *    - by default fieldset data receives formData as an input refer to (1 above).
+ *    - If jsonPath was provided then data is retrieved by that jsonPath from the containing form data.
+ * 3. Field value Retrieval:
+ *    - by default field value is retrieved from the editInput data by field name. Assuming no containing fieldset
+ *      or form have jsonpath specified data for field is being lookced up in editorInput data object.
+ *    - if value of the field is jsonPath expression (Example !{<path>}) then data is retrieved
+ *      from that path in fieldset data.
+ *
+ *
+ * @param editorMetadata
+ * @param editorData
+ */
+export const buildFormStatesFromData = <T = object>(
+  editorMetadata: EditorMetadata<T>,
+  editorData: T
+): { [key: string]: FormDataState } => {
+  const result: { [key: string]: FormDataState } = {};
+  editorMetadata.forms.forEach(form => {
+    const formData: ParamsMap = (
+      form.jsonPath ? fetchJsonPath(editorData as ParamsMap, form.jsonPath) : editorData
+    ) as ParamsMap;
+
+    result[form.id] = {};
+    form.fieldSets.forEach(fieldSet => {
+      const fieldSetData = getFieldsetData(formData, fieldSet);
+      result[form.id][fieldSet.name] = { data: fieldSetData };
+    });
+  });
+  return result;
+};

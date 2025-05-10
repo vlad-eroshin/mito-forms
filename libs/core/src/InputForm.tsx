@@ -63,7 +63,7 @@ export function InputForm<T>({
     <>
       {isShowTitle ? <h2>{config.title}</h2> : <></>}
       {visibleFieldSets.map((fieldSetEntry, i) => {
-        const fieldSetData = formState[fieldSetEntry.name];
+        const fieldSetData = formState ? formState[fieldSetEntry.name] : { data: {} };
         if (fieldSetEntry.type === 'fieldSetList') {
           const listEditorConfig = fieldSetEntry as ListEditorMetadata;
           const id = generateReactKey(config.id, listEditorConfig.name);

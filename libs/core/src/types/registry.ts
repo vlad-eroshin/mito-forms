@@ -1,5 +1,5 @@
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
-import { FormInputFieldProps, InputFieldType, FieldsLayout } from '@mito-forms/core';
+import { FormInputFieldProps, InputFieldType, FieldsLayout } from './editorMetadata';
 
 export type LoadingComponentProps = {
   className?: string;

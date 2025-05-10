@@ -49,8 +49,8 @@ importers:
         specifier: ^0.2.2
         version: 0.2.2(@fortawesome/fontawesome-svg-core@6.7.2)(react@19.1.0)
       '@mito-forms/core':
-        specifier: workspace:*
-        version: link:../core
+        specifier: ^0.2.21-beta
+        version: 0.2.21-beta(typescript@5.8.3)
       bulma:
         specifier: ^1.0.3
         version: 1.0.4
@@ -866,6 +866,9 @@ packages:
     peerDependencies:
       '@types/react': '>=16'
       react: '>=16'
+
+  '@mito-forms/core@0.2.21-beta':
+    resolution: {integrity: sha512-FvrRN7cgeBbO/qGF7e9VeASUXWC7q5qpzxlY1vyg+UvxHRn9IjjwFLkRTCS3HaBpfqdbP+53FIQH4wP13TOy2A==}
 
   '@nodelib/fs.scandir@2.1.5':
     resolution: {integrity: sha512-vq24Bq3ym5HEQm2NKCr3yXDwjc7vTsEThRDnkp2DK9p1uqLR+DHurm/NOTo0KG7HYHU7eppKZj3MyqYuMBf62g==}
@@ -4924,6 +4927,19 @@ snapshots:
       '@types/react': 19.1.2
       react: 19.1.0
 
+  '@mito-forms/core@0.2.21-beta(typescript@5.8.3)':
+    dependencies:
+      '@fortawesome/fontawesome-svg-core': 6.7.2
+      '@fortawesome/free-solid-svg-icons': 6.7.2
+      jmespath: 0.16.0
+      ramda: 0.30.1
+      react: 19.1.0
+      react-dom: 19.1.0(react@19.1.0)
+      react-intl: 7.1.6(react@19.1.0)(typescript@5.8.3)
+      uuid-by-string: 4.0.0
+    transitivePeerDependencies:
+      - typescript
+
   '@nodelib/fs.scandir@2.1.5':
     dependencies:
       '@nodelib/fs.stat': 2.0.5
@@ -5746,17 +5762,17 @@ snapshots:
 
   '@webpack-cli/configtest@3.0.1(webpack-cli@6.0.1)(webpack@5.99.6)':
     dependencies:
-      webpack: 5.99.6(@swc/core@1.11.21)(esbuild@0.25.2)(webpack-cli@6.0.1)
+      webpack: 5.99.6(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.99.6)
 
   '@webpack-cli/info@3.0.1(webpack-cli@6.0.1)(webpack@5.99.6)':
     dependencies:
-      webpack: 5.99.6(@swc/core@1.11.21)(esbuild@0.25.2)(webpack-cli@6.0.1)
+      webpack: 5.99.6(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.99.6)
 
   '@webpack-cli/serve@3.0.1(webpack-cli@6.0.1)(webpack@5.99.6)':
     dependencies:
-      webpack: 5.99.6(@swc/core@1.11.21)(esbuild@0.25.2)(webpack-cli@6.0.1)
+      webpack: 5.99.6(webpack-cli@6.0.1)
       webpack-cli: 6.0.1(webpack@5.99.6)
 
   '@xtuc/ieee754@1.2.0': {}
@@ -6209,7 +6225,7 @@ snapshots:
       postcss-value-parser: 4.2.0
       semver: 7.7.1
     optionalDependencies:
-      webpack: 5.99.6(@swc/core@1.11.21)(esbuild@0.25.2)(webpack-cli@6.0.1)
+      webpack: 5.99.6(webpack-cli@6.0.1)
 
   css-select@4.3.0:
     dependencies:
@@ -8276,7 +8292,7 @@ snapshots:
       neo-async: 2.6.2
     optionalDependencies:
       sass: 1.86.3
-      webpack: 5.99.6(@swc/core@1.11.21)(esbuild@0.25.2)(webpack-cli@6.0.1)
+      webpack: 5.99.6(webpack-cli@6.0.1)
 
   sass@1.86.3:
     dependencies:
@@ -8500,7 +8516,7 @@ snapshots:
 
   style-loader@4.0.0(webpack@5.99.6):
     dependencies:
-      webpack: 5.99.6(@swc/core@1.11.21)(esbuild@0.25.2)(webpack-cli@6.0.1)
+      webpack: 5.99.6(webpack-cli@6.0.1)
 
   supports-color@7.2.0:
     dependencies:
@@ -8625,7 +8641,7 @@ snapshots:
       semver: 7.7.1
       source-map: 0.7.4
       typescript: 5.8.3
-      webpack: 5.99.6(@swc/core@1.11.21)(esbuild@0.25.2)(webpack-cli@6.0.1)
+      webpack: 5.99.6(webpack-cli@6.0.1)
 
   ts-toolbelt@9.6.0: {}
 
@@ -8816,7 +8832,7 @@ snapshots:
       import-local: 3.2.0
       interpret: 3.1.1
       rechoir: 0.8.0
-      webpack: 5.99.6(@swc/core@1.11.21)(esbuild@0.25.2)(webpack-cli@6.0.1)
+      webpack: 5.99.6(webpack-cli@6.0.1)
       webpack-merge: 6.0.1
 
   webpack-dev-middleware@6.1.3(webpack@5.99.6):

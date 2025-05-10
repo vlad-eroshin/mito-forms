@@ -1,8 +1,6 @@
 import {
-  buildExpressionContext,
   type DataSourceBinding,
   DataStatus,
-  EditorContext,
   EditorContextProps,
   FieldSetMetadata,
   FieldsLayout,
@@ -10,10 +8,11 @@ import {
   InputField,
   type ParamsMap,
   type ParamValue,
-  retrieveInputOptions,
-} from '@mito-forms/core';
+} from '../types';
 import { useCallback, useContext, useMemo } from 'react';
 import { accessAndTransformData, evaluateLogicInContext } from '../data';
+import { EditorContext } from '../EditorContext';
+import { buildExpressionContext, retrieveInputOptions } from '../utils';
 
 export function useFieldsetState(config: FieldSetMetadata): {
   getVisibleFields: (fieldsData: ParamsMap) => (InputField | FormDividerConfig)[];
