@@ -169,10 +169,9 @@ describe('FormEditor', () => {
     );
 
     const field1 = screen.getByLabelText('Field 1*');
-    
     // First enter some text
     fireEvent.change(field1, { target: { value: 'test value' } });
-    
+
     // Verify the value was set
     expect(field1).toHaveValue('test value');
 
