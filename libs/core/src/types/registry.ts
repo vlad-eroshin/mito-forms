@@ -1,5 +1,11 @@
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
-import { FormInputFieldProps, InputFieldType, FieldsLayout } from './editorMetadata';
+import {
+  FormInputFieldProps,
+  InputFieldType,
+  FieldsLayout,
+  FormMetadata,
+  ListEditorMetadata,
+} from './editorMetadata';
 
 export type LoadingComponentProps = {
   className?: string;
@@ -46,10 +52,19 @@ export type TabPanelProps = {
   value: number | string;
 };
 
-export type ComponentRegistry = {
+export interface DecoratorRegistry {
+  defaultFieldDecorator: React.FunctionComponent<FormInputFieldProps>;
+  defaultFieldsetDecorator: React.FunctionComponent<FieldsetProps>;
+  defaultFormDecorator: React.FunctionComponent<FormMetadata>;
+  defaultListEditorDecorator: React.FunctionComponent<ListEditorMetadata>;
+  [key: string]: React.FunctionComponent;
+}
+
+export interface ComponentRegistry {
   inputFields: InputFieldRegistry;
   utilityComponents: UtilityComponentRegistry;
-};
+  decorators?: DecoratorRegistry;
+}
 
 export type InputFieldLayoutProps = {
   id: string;

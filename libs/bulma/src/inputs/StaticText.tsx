@@ -2,7 +2,7 @@ import { FormInputFieldProps, getFieldId, InputField } from '@mito-forms/core';
 import React from 'react';
 
 import 'bulma/bulma.scss';
-import { BulmaField } from './BulmaField';
+import { BulmaField } from '../decorators/BulmaField';
 
 export const StaticText: React.FunctionComponent<FormInputFieldProps> = props => {
   const { config, value, fieldIndex } = props;

@@ -11,8 +11,8 @@ import {
 import React, { ChangeEvent, FunctionComponent, useCallback, useMemo } from 'react';
 
 import './SwitchInput.scss';
-import { BulmaField } from './BulmaField';
 import { SwitchInput } from './SwitchInput';
+import { BulmaField } from '../decorators/BulmaField';
 
 export const SwitchList: FunctionComponent<FormInputFieldProps> = props => {
   const { config, onChange, value, options } = props;

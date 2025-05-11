@@ -5,17 +5,12 @@ import { buildEmptyRecordFromFields, fetchJsonPath, getFieldsetData } from '../u
 import {
   DataRecord,
   InputField,
-  ListEditorMetadata,
+  ListInputProps,
   ParamsMap,
   RecordsArray,
   UtilityButtonProps,
 } from '../types';
 import { useUtilComponent } from '../hooks';
-
-export type ListInputProps = ListEditorMetadata & {
-  data: object;
-  onChange?: (data: RecordsArray, isValid: boolean) => void;
-};
 
 export const ListEditor: React.FC<ListInputProps> = ({
   rowFieldset,

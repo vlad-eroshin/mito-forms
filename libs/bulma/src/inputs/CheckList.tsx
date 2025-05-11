@@ -9,7 +9,7 @@ import {
 } from '@mito-forms/core';
 import React, { FunctionComponent, useMemo } from 'react';
 
-import { BulmaField } from './BulmaField';
+import { BulmaField } from '../decorators/BulmaField';
 
 export const CheckList: FunctionComponent<FormInputFieldProps> = props => {
   const { config, onChange, value, options } = props;

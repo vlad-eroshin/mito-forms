@@ -242,3 +242,8 @@ export type FormInputFieldProps = {
   validationErrors?: string[];
   fieldLayout?: FieldsLayout;
 };
+
+export type ListInputProps = ListEditorMetadata & {
+  data: object;
+  onChange?: (data: RecordsArray, isValid: boolean) => void;
+};

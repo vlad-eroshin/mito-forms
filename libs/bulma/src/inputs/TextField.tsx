@@ -2,7 +2,7 @@ import { FormInputFieldProps, getFieldId, InputField, useChangeHandler } from '@
 import React from 'react';
 
 import 'bulma/bulma.scss';
-import { BulmaField } from './BulmaField';
+import { BulmaField } from '../decorators/BulmaField';
 
 export const TextField: React.FunctionComponent<FormInputFieldProps> = props => {
   const { config, onChange, value, fieldIndex, isValid = true, validationErrors } = props;

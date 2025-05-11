@@ -9,7 +9,7 @@ import {
 } from '@mito-forms/core';
 import React, { FunctionComponent } from 'react';
 
-import { BulmaField } from './BulmaField';
+import { BulmaField } from '../decorators/BulmaField';
 import './Selector.scss';
 
 export const RadioList: FunctionComponent<FormInputFieldProps> = props => {
