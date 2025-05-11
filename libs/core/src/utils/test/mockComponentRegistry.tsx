@@ -52,7 +52,7 @@ export const createMockComponentRegistry = (): ComponentRegistry => {
             <input
               type="text"
               id={props.config.name}
-              value={props.value as string}
+              value={props.value as string || ''}
               onChange={e => props.onChange({ [props.config.name]: e.target.value })}
             />
           }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen, fireEvent, render } from '@testing-library/react';
+import { screen, fireEvent, render, waitFor } from '@testing-library/react';
 import { FormEditor } from './FormEditor';
 import { EditorMetadata } from './types';
 import { createMockComponentRegistry } from './utils/test/mockComponentRegistry';
@@ -152,11 +152,55 @@ describe('FormEditor', () => {
   //   const field1 = screen.getByLabelText('Field 1*');
   //   fireEvent.change(field1, { target: { value: 'test value' } });
   //
-  //   await waitFor(
-  //     () => {
-  //       return expect(screen.findByText('Loading...')).toBeInTheDocument();
-  //     },
-  //     { timeout: 2000 }
-  //   );
+  //   await waitFor(() => expect(screen.findByText('Loading...')).toBeInTheDocument(), {
+  //     timeout: 2000,
+  //   });
   // });
+
+  it('shows validation error when required field is cleared', async () => {
+    const handleChange = jest.fn();
+    render(
+      <FormEditor
+        editorMetadata={mockMetadata}
+        initialData={{}}
+        onChange={handleChange}
+        componentRegistry={mockComponentRegistry}
+      />
+    );
+
+    const field1 = screen.getByLabelText('Field 1*');
+    
+    // First enter some text
+    fireEvent.change(field1, { target: { value: 'test value' } });
+    
+    // Verify the value was set
+    expect(field1).toHaveValue('test value');
+
+    // Then delete it
+    fireEvent.change(field1, { target: { value: '' } });
+
+    // Verify the field is empty
+    expect(field1).toHaveValue('');
+
+    // Wait for validation error to appear and form state to update
+    await waitFor(() => {
+      expect(handleChange).toHaveBeenCalledWith(
+        expect.objectContaining({
+          form1: {
+            fieldset1: {
+              data: {
+                field1: '',
+              },
+              isValid: false,
+            },
+          },
+        }),
+        false,
+        undefined
+      );
+    });
+
+    // Verify error state is shown
+    expect(screen.getByText('Error')).toBeInTheDocument();
+  });
 });
