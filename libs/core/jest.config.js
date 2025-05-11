@@ -1,11 +1,6 @@
-const path = require('path');
-
 module.exports = {
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.js'],
-  transformIgnorePatterns: [
-    '<rootDir>/node_modules/(?!jsonpath-plus)', // 👈 allow transforming this ESM dependency
-  ],
   transform: {
     '^.+\\.(ts|tsx)$': [
       'ts-jest',
@@ -16,8 +11,17 @@ module.exports = {
     ],
   },
   moduleNameMapper: {
-    // This forces node-style resolution to avoid ESM conflicts
-    '^jsonpath-plus$': path.join(__dirname, '/node_modules/jsonpath-plus/dist/index-node-cjs.cjs'),
     '\\.(css|scss|sass)$': 'identity-obj-proxy',
+  },
+  testMatch: ['<rootDir>/src/**/*.test.(ts|tsx)'],
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node'],
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.stories.{ts,tsx}', '!src/**/*.d.ts'],
+  coverageThreshold: {
+    global: {
+      // branches: 60,
+      // functions: 60,
+      lines: 60,
+      statements: 60,
+    },
   },
 };

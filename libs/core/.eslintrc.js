@@ -52,5 +52,12 @@ module.exports = {
       },
     ],
     'no-console': ['warn', { allow: ['warn', 'error'] }],
+    'no-restricted-imports': [
+      'error',
+      {
+        paths: ['@mito-forms/core'],
+        patterns: ['@mito-forms/core/*'],
+      },
+    ],
   },
 };

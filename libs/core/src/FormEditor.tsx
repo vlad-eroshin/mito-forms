@@ -12,14 +12,16 @@ import type {
   DataSourceState,
   EditorContextProps,
   EditorMetadata,
+  EditorState,
   EditorStateReplacePayload,
   FormChangePayload,
   FormDataState,
   ParamsMap,
 } from './types';
-import { buildFormStatesFromData, editorStateReducer } from './FormEditorReducer';
+import { editorStateReducer } from './FormEditorReducer';
 import { FormsContainer } from './FormsContainer';
 import { EditorContext } from './EditorContext';
+import { buildFormStatesFromData } from './utils';
 
 export interface EditorActiveApi<T = object> {
   setData: (newData: T) => void;
@@ -89,17 +91,23 @@ export function FormEditor<T>({
   contextParams,
   editorRef,
 }: FormEditorProps<T>) {
-  const statesOfForms = buildFormStatesFromData<T>(editorMetadata, initialData);
   const { isValid, message: validatorMessage = undefined } = editorMetadata.resultValidator
     ? editorMetadata.resultValidator(initialData)
     : { isValid: true };
-  const [editorState, dispatchStateAction] = useReducer(editorStateReducer, {
-    //build initial state from the provided input
-    editorResult: initialData,
-    formStates: statesOfForms,
-    isValid,
-    validatorMessage,
-  });
+  const [editorState, dispatchStateAction] = useReducer(
+    editorStateReducer,
+    {
+      //build initial state from the provided input
+      editorResult: initialData as T,
+      formStates: {},
+      isValid,
+      validatorMessage,
+    },
+    (initialState: EditorState<T>) => ({
+      ...initialState,
+      formStates: buildFormStatesFromData<T>(editorMetadata, initialData),
+    })
+  );
   // Change time out is used for throtling changes - to minimize frequency of how often onChange handler is invoked
   //const [changeTimeout, setChangeTimeout] = useState<NodeJS.Timeout | undefined>(undefined);
   const changeTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined);
@@ -130,7 +138,7 @@ export function FormEditor<T>({
       contextParams,
       fieldsLayout: editorMetadata.fieldsLayout || 'compact',
     }),
-    [dataSourceStates, editorState, componentRegistry, contextParams]
+    [dataSourceStates, componentRegistry, editorState, editorMetadata, contextParams]
   );
   const LoadingComponent = componentRegistry.utilityComponents.loading;
   //Handler for certain form change

@@ -4,7 +4,9 @@
     "module": "CommonJS",
     "noEmit": true,
     "types": [
-      "jest"
+      "jest",
+      "@testing-library/jest-dom",
+      "node"
     ]
   }
 }

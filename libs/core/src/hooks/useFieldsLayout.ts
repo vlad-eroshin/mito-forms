@@ -1,4 +1,5 @@
-import { EditorContext, EditorContextProps, FieldsLayout } from '@mito-forms/core';
+import { EditorContext } from '../EditorContext';
+import { EditorContextProps, FieldsLayout } from '../types';
 import { useContext, useMemo } from 'react';
 
 export const useFieldsLayout = (): FieldsLayout => {

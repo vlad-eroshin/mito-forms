@@ -1,5 +1,4 @@
 import type {
-  EditorMetadata,
   EditorState,
   EditorStateReplacePayload,
   FieldSetRecordsReducer,
@@ -10,7 +9,7 @@ import type {
   RecordsArray,
   ReducersMap,
 } from './types';
-import { getFieldValues } from './utils/fieldUtils';
+import { buildFormStatesFromData } from './utils/fieldUtils';
 
 export type EditorReducerAction<T> = {
   type: 'replace' | 'formChange';
@@ -131,26 +130,4 @@ const updateEditorData = <T = object>(
 
     return newEditorData as T;
   }
-};
-
-/**
- * Updates state from the passed input data for the editor.
- * Editor metadata how the data should be populated for each field and fieldset
- *
- * @param editorMetadata
- * @param editorData
- */
-export const buildFormStatesFromData = <T = object>(
-  editorMetadata: EditorMetadata<T>,
-  editorData: T
-): { [key: string]: FormDataState } => {
-  const result: { [key: string]: FormDataState } = {};
-  editorMetadata.forms.forEach(form => {
-    result[form.id] = {};
-    form.fieldSets.forEach(fieldSet => {
-      const fieldSetData = getFieldValues(editorData as ParamsMap, fieldSet);
-      result[form.id][fieldSet.name] = { data: fieldSetData };
-    });
-  });
-  return result;
 };

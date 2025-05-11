@@ -47,6 +47,7 @@ export function FormFieldset<T>({
   const { getVisibleFields, populateFieldData, fieldsLayout } = useFieldsetState(config);
 
   const visibleFormFields = getVisibleFields(inputData);
+  const showTitle = config.showTitle !== undefined ? config.showTitle : true;
 
   const isFieldSetValid = useCallback(
     (fieldsData: ParamsMap): boolean => {
@@ -138,7 +139,7 @@ export function FormFieldset<T>({
   return arrangeFields !== 'tableRow' ? (
     <FieldsetCmp
       onCollapse={handleCollapsExpand}
-      legend={config.title}
+      legend={showTitle ? config.title : undefined}
       collapsible={config.collapsible}
       collapsed={collapsed}
     >

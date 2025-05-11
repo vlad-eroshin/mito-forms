@@ -1,5 +1,6 @@
 import {
   DataStatus,
+  EditorMetadata,
   FormEditorStory,
   InputFieldRegistry,
   ParamsMap,
@@ -37,6 +38,62 @@ export const Basic: Story = {
       ...basicEditor,
       reducersMap: {},
     },
+    initialData: {},
+  },
+};
+
+const mockMetadata: EditorMetadata = {
+  displayAs: 'tabSet',
+  activeForm: 'form1',
+  forms: [
+    {
+      id: 'form1',
+      title: 'Form 1',
+      fieldSets: [
+        {
+          name: 'fieldset1',
+          title: 'Fieldset 1',
+          fields: [
+            {
+              type: 'text',
+              name: 'field1',
+              label: 'Field 1',
+              required: true,
+            },
+          ],
+        },
+      ],
+    },
+    {
+      id: 'form2',
+      title: 'Form 2',
+      fieldSets: [
+        {
+          name: 'fieldset2',
+          title: 'Fieldset 2',
+          fields: [
+            {
+              type: 'text',
+              name: 'field2',
+              label: 'Field 2',
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  reducersMap: {},
+};
+
+export const BasicForTestsTabs: Story = {
+  args: {
+    editorMetadata: mockMetadata,
+    initialData: {},
+  },
+};
+export const BasicForTestsPage: Story = {
+  args: {
+    editorMetadata: { ...mockMetadata, displayAs: 'onePage' },
     initialData: {},
   },
 };

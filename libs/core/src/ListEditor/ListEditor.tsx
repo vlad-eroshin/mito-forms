@@ -1,7 +1,7 @@
 import React, { ReactElement, useCallback, useState } from 'react';
 
 import { FormFieldset } from '../FormFieldset';
-import { buildEmptyRecordFromFields, fetchJsonPath, getFieldValues } from '../utils';
+import { buildEmptyRecordFromFields, fetchJsonPath, getFieldsetData } from '../utils';
 import {
   DataRecord,
   InputField,
@@ -94,7 +94,7 @@ export const ListEditor: React.FC<ListInputProps> = ({
       )}
       <tbody>
         {rowsData.map((itemData: ParamsMap | RecordsArray, i: number) => {
-          const fieldValues = getFieldValues(itemData, rowFieldset);
+          const fieldValues = getFieldsetData(itemData, rowFieldset);
           return (
             <FormFieldset
               key={`list-item-row-${i}`}

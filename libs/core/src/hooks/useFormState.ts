@@ -1,14 +1,14 @@
 import {
-  buildExpressionContext,
-  EditorContext,
   EditorContextProps,
   FieldSetEntry,
   FormDataState,
   FormMetadata,
   ParamsMap,
-} from '@mito-forms/core';
+} from '../types';
 import { useCallback, useContext, useMemo } from 'react';
 import { evaluateLogicInContext } from '../data';
+import { EditorContext } from '../EditorContext';
+import { buildExpressionContext } from '../utils';
 
 export const useFormState = (
   formConfig: FormMetadata
@@ -23,7 +23,7 @@ export const useFormState = (
 
   const getFieldsetState = useCallback(
     (fieldsetName: string) => {
-      return formState[fieldsetName];
+      return formState ? formState[fieldsetName] : {};
     },
     [formState]
   );
