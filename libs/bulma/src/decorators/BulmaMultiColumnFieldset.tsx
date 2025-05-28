@@ -5,13 +5,15 @@ import React, { useMemo } from 'react';
 import './BulmaFieldset.scss';
 import 'bulma/bulma.scss';
 
-export const BulmaFieldset: React.FC<FieldsetProps> = ({
+export const BulmaMultiColumnFieldset: React.FC<FieldsetProps> = ({
   legend,
   children,
   collapsible,
   collapsed,
   onCollapse,
+  config,
 }) => {
+  const nCols = config?.customProps?.columns || 2;
   const trigger = useMemo(() => {
     return collapsible ? (
       <a onClick={onCollapse} className="icon">
@@ -34,7 +36,9 @@ export const BulmaFieldset: React.FC<FieldsetProps> = ({
           {legend}
         </legend>
       )}
-      {!collapsed && <div className="fieldset-content">{children}</div>}
+      <div className={`fieldset-content fixed-grid has-${nCols}-cols`}>
+        <div className="grid">{children}</div>
+      </div>
     </fieldset>
   );
 };

@@ -5,6 +5,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest",
+    "sb": "storybook",
     "storybook": "storybook dev -p 6006",
     "storybook:build": "storybook build -o storybook-static",
     "storybook:prepare-deploy": "mkdir -p .deploy/storybook/bulma && cp -r storybook-static/* .deploy/storybook/bulma",
@@ -28,7 +29,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.7.2",
     "@fortawesome/react-fontawesome": "^0.2.2",
-    "@mito-forms/core": "^0.2.21-beta",
+    "@mito-forms/core": "workspace:*",
     "bulma": "^1.0.3",
     "react-intl": "7.1.6"
   },

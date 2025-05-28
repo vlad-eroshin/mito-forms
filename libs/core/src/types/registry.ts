@@ -1,11 +1,14 @@
 import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 import {
-  FormInputFieldProps,
-  InputFieldType,
+  FieldSetMetadata,
   FieldsLayout,
+  FormInputFieldProps,
   FormMetadata,
+  InputFieldType,
   ListEditorMetadata,
 } from './editorMetadata';
+import { DataStatus } from './dataSource';
+import type { ParamsMap } from './common';
 
 export type LoadingComponentProps = {
   className?: string;
@@ -18,12 +21,17 @@ export type BlockComponentProps = {
 };
 
 export type FieldsetProps = {
+  children: ReactElement | ReactElement[];
   legend?: string;
-  children: React.ReactNode;
+  config?: FieldSetMetadata;
   collapsible?: boolean;
   collapsed?: boolean;
   onCollapse?: () => void;
   layout?: FieldsLayout;
+  showLabels?: boolean;
+  rowIndex?: number;
+  onRowDelete?: (() => void) | undefined;
+  onFieldChange?: (params: ParamsMap) => void; //handleFieldChange
 };
 
 export type UtilityButtonProps = {
@@ -53,37 +61,46 @@ export type TabPanelProps = {
 };
 
 export interface DecoratorRegistry {
-  defaultFieldDecorator: React.FunctionComponent<FormInputFieldProps>;
+  defaultFieldDecorator: React.FunctionComponent<InputFieldLayoutProps>;
   defaultFieldsetDecorator: React.FunctionComponent<FieldsetProps>;
   defaultFormDecorator: React.FunctionComponent<FormMetadata>;
   defaultListEditorDecorator: React.FunctionComponent<ListEditorMetadata>;
-  [key: string]: React.FunctionComponent;
+  defaultListItemDecorator: React.FunctionComponent<unknown>;
+  defaultListHeaderDecorator: React.FunctionComponent<unknown>;
+  customDecorators: { [key: string]: React.FunctionComponent };
 }
 
 export interface ComponentRegistry {
   inputFields: InputFieldRegistry;
   utilityComponents: UtilityComponentRegistry;
   decorators?: DecoratorRegistry;
+  getFieldDecorator: (decoratorName: string) => React.FunctionComponent<InputFieldLayoutProps>;
+  getFieldsetDecorator: (decoratorName: string) => React.FunctionComponent<FieldsetProps>;
+  getFormDecorator: (decoratorName: string) => React.FunctionComponent<FormMetadata>;
+  getListEditorDecorator: (decoratorName: string) => React.FunctionComponent<ListEditorMetadata>;
+  getListItemDecorator: (decoratorName: string) => React.FunctionComponent<unknown>;
+  getListHeaderDecorator: (decoratorName: string) => React.FunctionComponent<unknown>;
 }
 
 export type InputFieldLayoutProps = {
   id: string;
   label?: string;
   controlElement: ReactElement;
-  infoElement?: ReactElement;
+  helpText?: string;
   required?: boolean;
   fieldLayout?: FieldsLayout;
   isValid: boolean;
+  validationErrors?: string[];
+  status?: DataStatus | undefined;
+  customProps?: ParamsMap;
 };
 
 export type UtilityComponentRegistry = {
   loading: FunctionComponent<LoadingComponentProps>;
   block: FunctionComponent<BlockComponentProps>;
   tabbedSection: FunctionComponent<TabbedSectionProps>;
-  fieldset: FunctionComponent<FieldsetProps>;
   deleteRowButton: FunctionComponent<UtilityButtonProps>;
   addRowButton: FunctionComponent<UtilityButtonProps>;
-  inputFieldLayout: FunctionComponent<InputFieldLayoutProps>;
 };
 
 export type InputFieldRegistry = {

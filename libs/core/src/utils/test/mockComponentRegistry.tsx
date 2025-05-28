@@ -1,12 +1,15 @@
 import React from 'react';
 import type {
-  ComponentRegistry,
-  InputFieldRegistry,
-  UtilityComponentRegistry,
-  FormInputFieldProps,
   BlockComponentProps,
+  ComponentRegistry,
   FieldsetProps,
+  FormInputFieldProps,
+  FormMetadata,
   InputFieldLayoutProps,
+  InputFieldRegistry,
+  InputOption,
+  ListEditorMetadata,
+  UtilityComponentRegistry,
 } from '../../types';
 import { MockTabsetComponent } from './mockTabsetComponent';
 
@@ -52,7 +55,7 @@ export const createMockComponentRegistry = (): ComponentRegistry => {
             <input
               type="text"
               id={props.config.name}
-              value={props.value as string || ''}
+              value={(props.value as string) || ''}
               onChange={e => props.onChange({ [props.config.name]: e.target.value })}
             />
           }
@@ -111,8 +114,8 @@ export const createMockComponentRegistry = (): ComponentRegistry => {
               value={props.value as string}
               onChange={e => props.onChange({ [props.config.name]: e.target.value })}
             >
-              {props.options?.map((option: any) => (
-                <option key={option.value} value={option.value}>
+              {(props.options as InputOption[])?.map(option => (
+                <option key={option.value as string} value={option.value as string}>
                   {option.label}
                 </option>
               ))}
@@ -205,5 +208,27 @@ export const createMockComponentRegistry = (): ComponentRegistry => {
   return {
     inputFields,
     utilityComponents,
+    getFieldDecorator: function (
+      decoratorName: string
+    ): React.FunctionComponent<InputFieldLayoutProps> {
+      throw new Error('Function not implemented.');
+    },
+    getFieldsetDecorator: function (decoratorName: string): React.FunctionComponent<FieldsetProps> {
+      throw new Error('Function not implemented.');
+    },
+    getFormDecorator: function (decoratorName: string): React.FunctionComponent<FormMetadata> {
+      throw new Error('Function not implemented.');
+    },
+    getListEditorDecorator: function (
+      decoratorName: string
+    ): React.FunctionComponent<ListEditorMetadata> {
+      throw new Error('Function not implemented.');
+    },
+    getListItemDecorator: function (decoratorName: string): React.FunctionComponent<unknown> {
+      throw new Error('Function not implemented.');
+    },
+    getListHeaderDecorator: function (decoratorName: string): React.FunctionComponent<unknown> {
+      throw new Error('Function not implemented.');
+    },
   };
 };

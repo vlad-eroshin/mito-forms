@@ -1,5 +1,5 @@
 import { EditorContextProps, FormInputFieldProps, InputFieldRegistry } from '../../types';
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 import { EditorContext } from '../../EditorContext';
 import { UnsupportedInputComponent } from '../../UnsupportedInputComponent';
 
@@ -8,7 +8,10 @@ export const useInputFieldComponent = (
 ): React.FunctionComponent<FormInputFieldProps> => {
   const editorContextData = useContext<EditorContextProps>(EditorContext);
 
-  return (
-    editorContextData.componentRegistry.inputFields[componentType] || UnsupportedInputComponent
+  const componentRegistry = useMemo(
+    () => editorContextData.componentRegistry,
+    [editorContextData.componentRegistry]
   );
+
+  return componentRegistry.inputFields[componentType] || UnsupportedInputComponent;
 };

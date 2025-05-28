@@ -1,4 +1,5 @@
 export * from './FormEditor';
+export * from './FormInputField';
 export * from './hooks';
 export * from './types';
 export * from './utils';

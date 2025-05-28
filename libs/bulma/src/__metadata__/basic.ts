@@ -12,9 +12,21 @@ export const basicEditor: EditorMetadata = {
           fields: [
             {
               type: 'text',
-              name: 'label',
-              label: 'Label',
+              name: 'username',
+              label: 'User Name',
               required: true,
+              customProps: {
+                leftIcon: 'faUser',
+              },
+            },
+            {
+              type: 'password',
+              name: 'password',
+              label: 'Password',
+              required: true,
+              customProps: {
+                leftIcon: 'faKey',
+              },
             },
             {
               type: 'select',
@@ -25,6 +37,9 @@ export const basicEditor: EditorMetadata = {
                 { label: 'Option 1', value: 1 },
                 { label: 'Option 2', value: 2 },
               ],
+              customProps: {
+                leftIcon: 'faHome',
+              },
             },
           ],
         },
