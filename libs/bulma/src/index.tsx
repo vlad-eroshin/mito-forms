@@ -15,6 +15,7 @@ import '@mito-forms/core/core.css';
 
 import { AddRowButton } from './components/AddRowButton';
 import { DeleteRowButton } from './components/DeleteRowButton';
+import { FormDivider } from './components/FormDivider';
 import { LoadingIndicator } from './components/LoadingIndicator';
 import { TabbedSection } from './components/Tabs/TabbedSection';
 import { BulmaCompactField, BulmaHorizontalField } from './decorators';
@@ -57,6 +58,7 @@ const BULMA_UTIL_COMPONENTS: UtilityComponentRegistry = {
   block: props => <div className={`box ${props.className}`}>{props.children}</div>,
   tabbedSection: TabbedSection,
   deleteRowButton: DeleteRowButton,
+  divider: FormDivider,
 };
 
 export const BULMA_DECORATOR_REGISTRY: DecoratorRegistry = {

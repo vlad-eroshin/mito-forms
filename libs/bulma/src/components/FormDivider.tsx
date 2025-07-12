@@ -1,9 +1,6 @@
-import type { FormDividerConfig } from './types';
+import { FormDividerProps } from '@mito-forms/core';
 import React, { FunctionComponent } from 'react';
 
-export type FormDividerProps = {
-  config: FormDividerConfig;
-};
 export const FormDivider: FunctionComponent<FormDividerProps> = ({ config }) => {
   if (config.render === false) {
     return null;

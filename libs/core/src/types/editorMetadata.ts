@@ -268,3 +268,7 @@ export type ListInputProps = ListEditorMetadata & {
   data: object;
   onChange?: (data: RecordsArray, isValid: boolean) => void;
 };
+
+export type FormDividerProps = {
+  config: FormDividerConfig;
+};

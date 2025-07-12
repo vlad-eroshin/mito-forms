@@ -2,15 +2,15 @@ import React, { ReactElement, useCallback, useState } from 'react';
 import type {
   FieldSetMetadata,
   FormDividerConfig,
+  FormDividerProps,
   InputField,
   InputOption,
   ParamsMap,
 } from './types';
-import { FormDivider } from './FormDivider';
 import { FormInputField } from './FormInputField';
 import { generateReactKey } from './utils';
 import { getValidatorFunction } from './validators';
-import { useDecorator } from './hooks';
+import { useDecorator, useUtilComponent } from './hooks';
 import { useFieldsetState } from './hooks/useFieldsetState';
 
 /**
@@ -42,6 +42,8 @@ export function FormFieldset<T>({
   const [collapsed, setCollapsed] = useState<boolean>(!!config.collapsible && !!config.collapsed);
 
   const { getVisibleFields, populateFieldData, fieldsLayout } = useFieldsetState(config);
+
+  const FormDivider = useUtilComponent<FormDividerProps>('divider');
 
   const visibleFormFields = getVisibleFields(inputData);
   const showTitle = config.showTitle !== undefined ? config.showTitle : true;
@@ -151,30 +153,6 @@ export function FormFieldset<T>({
       {renderFields(visibleFormFields)}
     </FieldSetDecorator>
   );
-  // return arrangeFields !== 'tableRow' ? (
-  //   <FieldsetCmp
-  //     onCollapse={handleCollapsExpand}
-  //     legend={showTitle ? config.title : undefined}
-  //     collapsible={config.collapsible}
-  //     collapsed={collapsed}
-  //   >
-  //     {!collapsed &&
-  //       (arrangeFields === 'column' ? (
-  //         <>{renderFields(visibleFormFields)}</>
-  //       ) : (
-  //         <div className={'mf-row-layout'}>{renderFields(visibleFormFields)}</div>
-  //       ))}
-  //   </FieldsetCmp>
-  // ) : (
-  //   <EditableRow
-  //     rowIndex={rowIndex}
-  //     fields={visibleFormFields.filter(f => f.type !== 'divider') as InputField[]}
-  //     values={fieldSetValues as ParamsMap}
-  //     onChange={handleFieldChange}
-  //     onDelete={onRowDelete}
-  //     showFieldLabels={showFieldLabels}
-  //   />
-  // );
 }
 
 function getFieldsetDecoratorName(arrangeFields: string): string {

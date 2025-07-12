@@ -2,6 +2,7 @@ import React, { FunctionComponent, ReactElement, ReactNode } from 'react';
 import {
   FieldSetMetadata,
   FieldsLayout,
+  FormDividerProps,
   FormInputFieldProps,
   FormMetadata,
   InputFieldType,
@@ -101,6 +102,7 @@ export type UtilityComponentRegistry = {
   tabbedSection: FunctionComponent<TabbedSectionProps>;
   deleteRowButton: FunctionComponent<UtilityButtonProps>;
   addRowButton: FunctionComponent<UtilityButtonProps>;
+  divider: FunctionComponent<FormDividerProps>;
 };
 
 export type InputFieldRegistry = {
