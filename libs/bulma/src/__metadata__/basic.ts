@@ -41,6 +41,19 @@ export const basicEditor: EditorMetadata = {
                 leftIcon: 'faHome',
               },
             },
+            {
+              type: 'buttonSelector',
+              name: 'buttonSelector',
+              label: 'Select Button Option',
+              default: 1,
+              options: [
+                { label: 'Option 1', value: 1 },
+                { label: 'Option 2', value: 2 },
+              ],
+              customProps: {
+                leftIcon: 'faHome',
+              },
+            },
           ],
         },
       ],

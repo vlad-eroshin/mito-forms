@@ -29,9 +29,9 @@ export const BulmaFieldset: React.FC<FieldsetProps> = ({
   return (
     <fieldset className={'mf-fieldset'}>
       {(legend || collapsible) && (
-        <legend className="mf-legend">
-          {trigger}
+        <legend className={`mf-legend ${collapsible ? 'collapsible' : ''}`}>
           {legend}
+          {trigger}
         </legend>
       )}
       {!collapsed && <div className="fieldset-content">{children}</div>}

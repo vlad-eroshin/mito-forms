@@ -26,7 +26,7 @@ export const BulmaHorizontalField: React.FunctionComponent<InputFieldLayoutProps
       </div>
       <div className={'field-body'}>
         <div
-          className={`control mf-center ${!isValid ? ' mf-invalid-field' : ''} ${leftIcon ? ' has-icons-left ' : ''} ${rightIcon ? ' has-icons-right ' : ''}`}
+          className={`control mf-center ${!isValid ? ' mf-invalid-field' : ''} ${leftIcon ? ' has-icons-left' : ''} ${rightIcon ? ' has-icons-right' : ''}`}
         >
           {controlElement}
           {helpText && <p className={'help'}>{helpText}</p>}

@@ -1,0 +1,14 @@
+.mf-fieldset .mf-legend {
+  font-weight: normal;
+  text-transform: uppercase;
+  flex-direction: row;
+  justify-content: space-between;
+  min-width: 15em;
+  padding: 8px;
+  border-radius: 4px;
+  margin-left: -8px;
+}
+.mf-fieldset .mf-legend.collapsible:hover {
+  cursor: pointer;
+  background-color: var(--bulma-scheme-main-ter);
+}

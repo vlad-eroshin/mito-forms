@@ -258,10 +258,9 @@ export const SwitchComponent: Story = {
               title: 'Some Fieldset Title',
               name: 'fieldsetWithSwitchList',
               showTitle: true,
-              fieldsLayout: 'twoColumn',
               fields: [
                 {
-                  type: 'switch',
+                  type: 'switchList',
                   name: 'switchList',
                   label: 'Switch List',
                   options: [
@@ -273,7 +272,7 @@ export const SwitchComponent: Story = {
                   value: '!{objectOfSomeKind.switchValues}',
                 },
                 {
-                  type: 'checkbox',
+                  type: 'checkList',
                   name: 'checkList',
                   label: 'Check List',
                   options: [
