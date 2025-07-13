@@ -7,10 +7,10 @@ import type {
   ParamsMap,
 } from './types';
 import { FormFieldset } from './FormFieldset';
-import { ListEditor } from './ListEditor';
 import { generateReactKey } from './utils';
 import { useFormState } from './hooks/useFormState';
 import { useEditorMetadata } from './hooks/useEditorMetadata';
+import { useDecorator } from './hooks';
 
 /**
  *  Input form  (think about it one input form)
@@ -34,6 +34,7 @@ export function InputForm<T>({
   const { getFieldsetState, formState, getVisibleFieldSets } = useFormState(config);
   const editorMetadata = useEditorMetadata();
   const visibleFieldSets = getVisibleFieldSets();
+  const { getListEditorDecorator } = useDecorator();
 
   const handleFieldsetChange = useCallback(
     (freshData: ParamsMap | ParamsMap[], name: string, isFieldsetValid: boolean) => {
@@ -55,13 +56,15 @@ export function InputForm<T>({
   const isShowTitle = editorMetadata.displayAs === 'tabSet' ? false : showTitle && config.title;
 
   return (
-    <>
+    <form>
       {isShowTitle ? <h2>{config.title}</h2> : <></>}
       {visibleFieldSets.map((fieldSetEntry, i) => {
         const fieldSetData = formState ? formState[fieldSetEntry.name] : { data: {} };
         if (fieldSetEntry.type === 'fieldSetList') {
           const listEditorConfig = fieldSetEntry as ListEditorMetadata;
           const id = generateReactKey(config.id, listEditorConfig.name);
+          const ListEditor = getListEditorDecorator(listEditorConfig.decorator || 'default');
+
           return (
             <fieldset key={id} className={'mf-fieldset'}>
               {listEditorConfig.label && <legend>{listEditorConfig.label}</legend>}
@@ -91,7 +94,7 @@ export function InputForm<T>({
             />
           );
       })}
-    </>
+    </form>
   );
 }
 

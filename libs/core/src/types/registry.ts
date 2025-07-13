@@ -6,7 +6,7 @@ import {
   FormInputFieldProps,
   FormMetadata,
   InputFieldType,
-  ListEditorMetadata,
+  ListInputProps,
 } from './editorMetadata';
 import { DataStatus } from './dataSource';
 import type { ParamsMap } from './common';
@@ -65,9 +65,7 @@ export interface DecoratorRegistry {
   defaultFieldDecorator: React.FunctionComponent<InputFieldLayoutProps>;
   defaultFieldsetDecorator: React.FunctionComponent<FieldsetProps>;
   defaultFormDecorator: React.FunctionComponent<FormMetadata>;
-  defaultListEditorDecorator: React.FunctionComponent<ListEditorMetadata>;
-  defaultListItemDecorator: React.FunctionComponent<unknown>;
-  defaultListHeaderDecorator: React.FunctionComponent<unknown>;
+  defaultListEditorDecorator: React.FunctionComponent<ListInputProps>;
   customDecorators: { [key: string]: React.FunctionComponent };
 }
 
@@ -78,9 +76,7 @@ export interface ComponentRegistry {
   getFieldDecorator: (decoratorName: string) => React.FunctionComponent<InputFieldLayoutProps>;
   getFieldsetDecorator: (decoratorName: string) => React.FunctionComponent<FieldsetProps>;
   getFormDecorator: (decoratorName: string) => React.FunctionComponent<FormMetadata>;
-  getListEditorDecorator: (decoratorName: string) => React.FunctionComponent<ListEditorMetadata>;
-  getListItemDecorator: (decoratorName: string) => React.FunctionComponent<unknown>;
-  getListHeaderDecorator: (decoratorName: string) => React.FunctionComponent<unknown>;
+  getListEditorDecorator: (decoratorName: string) => React.FunctionComponent<ListInputProps>;
 }
 
 export type InputFieldLayoutProps = {

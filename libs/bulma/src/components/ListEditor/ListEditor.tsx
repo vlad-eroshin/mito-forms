@@ -1,16 +1,17 @@
-import React, { ReactElement, useCallback, useState } from 'react';
-
-import { FormFieldset } from '../FormFieldset';
-import { buildEmptyRecordFromFields, fetchJsonPath, getFieldsetData } from '../utils';
 import {
+  buildEmptyRecordFromFields,
   DataRecord,
+  fetchJsonPath,
+  FormFieldset,
+  getFieldsetData,
   InputField,
   ListInputProps,
   ParamsMap,
   RecordsArray,
+  useUtilComponent,
   UtilityButtonProps,
-} from '../types';
-import { useUtilComponent } from '../hooks';
+} from '@mito-forms/core';
+import React, { ReactElement, useCallback, useState } from 'react';
 
 export const ListEditor: React.FC<ListInputProps> = ({
   rowFieldset,

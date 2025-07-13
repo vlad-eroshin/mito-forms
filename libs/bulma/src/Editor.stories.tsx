@@ -78,6 +78,15 @@ const mockMetadata: EditorMetadata = {
               name: 'field2',
               label: 'Field 2',
             },
+            {
+              type: 'divider',
+              style: 'dashed',
+            },
+            {
+              type: 'text',
+              name: 'field3',
+              label: 'Field 3',
+            },
           ],
         },
       ],

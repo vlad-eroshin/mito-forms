@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { DataStatus, EditorMetadata, FieldsLayout, ParamsMap } from '../types';
 import { EditorActiveApi, FormEditor, FormEditorProps } from '../FormEditor';
 import { IntlProvider } from 'react-intl';
+import './FormEditorStory.scss';
 
 export type FormEditorStoryProps = Omit<FormEditorProps, 'onChange'> & {
   editorMetadataMap?: { [key: string]: EditorMetadata };

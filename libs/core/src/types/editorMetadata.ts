@@ -240,6 +240,7 @@ export type ListEditorMetadata = {
   render?: boolean | string;
   showHeader?: boolean;
   showBorders?: boolean;
+  decorator?: string;
 };
 
 export type FieldSetEntry = (FieldSetMetadata | ListEditorMetadata) & {
