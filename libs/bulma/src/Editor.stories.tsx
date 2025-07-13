@@ -1,7 +1,6 @@
 import {
   DataStatus,
   EditorMetadata,
-  FormEditorStory,
   InputFieldRegistry,
   ParamsMap,
   ResultFormat,
@@ -18,6 +17,7 @@ import { multiColumnFieldset } from './__metadata__/multiColumnFieldset';
 import { staticTextEditor } from './__metadata__/staticText';
 import { tabbedLayout } from './__metadata__/tabbedLayout';
 import { withListEditor } from './__metadata__/withListEditor';
+import { FormEditorStory } from './__stories__/FormEditorStory';
 import { BULMA_REGISTRY } from './index';
 
 const meta: Meta<typeof FormEditorStory> = {

@@ -13,10 +13,7 @@ export const Tab: FunctionComponent<TabPropsExt> = ({ id, label, disabled, selec
     [onTab]
   );
   return (
-    <li
-      className={`mf-tab ${disabled ? 'disabled' : ''} ${selected ? 'is-active selected' : ''}`}
-      data-id={id}
-    >
+    <li className={`${disabled ? 'disabled' : ''} ${selected ? 'is-active' : ''}`} data-id={id}>
       <a onClick={handleTabClick}>
         <strong>{label}</strong>
       </a>

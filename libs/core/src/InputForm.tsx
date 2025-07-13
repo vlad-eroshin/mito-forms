@@ -56,45 +56,48 @@ export function InputForm<T>({
   const isShowTitle = editorMetadata.displayAs === 'tabSet' ? false : showTitle && config.title;
 
   return (
-    <form>
-      {isShowTitle ? <h2>{config.title}</h2> : <></>}
-      {visibleFieldSets.map((fieldSetEntry, i) => {
-        const fieldSetData = formState ? formState[fieldSetEntry.name] : { data: {} };
-        if (fieldSetEntry.type === 'fieldSetList') {
-          const listEditorConfig = fieldSetEntry as ListEditorMetadata;
-          const id = generateReactKey(config.id, listEditorConfig.name);
-          const ListEditor = getListEditorDecorator(listEditorConfig.decorator || 'default');
+    <>
+      <form>
+        {isShowTitle ? <h2>{config.title}</h2> : <></>}
+        {visibleFieldSets.map((fieldSetEntry, i) => {
+          const fieldSetData = formState ? formState[fieldSetEntry.name] : { data: {} };
+          if (fieldSetEntry.type === 'fieldSetList') {
+            const listEditorConfig = fieldSetEntry as ListEditorMetadata;
+            const id = generateReactKey(config.id, listEditorConfig.name);
+            const ListEditor = getListEditorDecorator(listEditorConfig.decorator || 'default');
 
-          return (
-            <fieldset key={id} className={'mf-fieldset'}>
-              {listEditorConfig.label && <legend>{listEditorConfig.label}</legend>}
-              <ListEditor
-                name={fieldSetEntry.name}
-                rowFieldset={listEditorConfig.rowFieldset}
-                data={(fieldSetData.data as ParamsMap) || []}
-                canDeleteRows={listEditorConfig.canDeleteRows}
-                onChange={(newData, isValid) =>
-                  handleFieldsetChange(newData, fieldSetEntry.name, isValid)
+            return (
+              <fieldset key={id} className={'mf-fieldset'}>
+                {listEditorConfig.label && <legend>{listEditorConfig.label}</legend>}
+                <ListEditor
+                  name={fieldSetEntry.name}
+                  rowFieldset={listEditorConfig.rowFieldset}
+                  data={(fieldSetData.data as ParamsMap) || []}
+                  canDeleteRows={listEditorConfig.canDeleteRows}
+                  onChange={(newData, isValid) =>
+                    handleFieldsetChange(newData, fieldSetEntry.name, isValid)
+                  }
+                  showHeader={listEditorConfig.showHeader}
+                  showBorders={listEditorConfig.showBorders}
+                  canAddRows={listEditorConfig.canAddRows}
+                />
+              </fieldset>
+            );
+          } else
+            return (
+              <FormFieldset<T>
+                key={generateReactKey(config.id, fieldSetEntry.name, fieldSetEntry.type as string)}
+                config={fieldSetEntry as FieldSetMetadata}
+                inputData={(fieldSetData.data as ParamsMap) || {}}
+                onChange={(newFieldSetData, isValid) =>
+                  handleFieldsetChange(newFieldSetData, fieldSetEntry.name, isValid)
                 }
-                showHeader={listEditorConfig.showHeader}
-                showBorders={listEditorConfig.showBorders}
-                canAddRows={listEditorConfig.canAddRows}
               />
-            </fieldset>
-          );
-        } else
-          return (
-            <FormFieldset<T>
-              key={generateReactKey(config.id, fieldSetEntry.name, fieldSetEntry.type as string)}
-              config={fieldSetEntry as FieldSetMetadata}
-              inputData={(fieldSetData.data as ParamsMap) || {}}
-              onChange={(newFieldSetData, isValid) =>
-                handleFieldsetChange(newFieldSetData, fieldSetEntry.name, isValid)
-              }
-            />
-          );
-      })}
-    </form>
+            );
+        })}
+      </form>
+      <br />
+    </>
   );
 }
 

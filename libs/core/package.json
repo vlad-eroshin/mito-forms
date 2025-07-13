@@ -10,14 +10,14 @@
     "test:debug": "node --inspect-brk ./node_modules/jest/bin/jest.js --runInBand",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "build": "tsc --build && sass --no-source-map --style=compressed src/core-styles.scss ../../dist/core/core.css",
+    "build": "tsc --build",
     "dev": "webpack serve --mode development",
     "package": "npm pack",
     "lint": "eslint ./src --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "eslint ./src --ext .ts,.tsx,.js,.jsx --fix",
     "format": "prettier './**/*.{js,jsx,ts,tsx,css,md,json}' --write",
     "clean": "rm -rf dist node_modules package-lock.json && echo '✅ Project cleaned. Run npm install or yarn install.'",
-    "build:beforePublish": "tsc --project ./tsconfig.json --outDir ./dist && sass --no-source-map --style=compressed src/core-styles.scss dist/core/core.css",
+    "build:beforePublish": "tsc --project ./tsconfig.json --outDir ./dist",
     "publish:core": "pnpm run build:beforePublish && pnpm publish --access public"
   },
   "publishConfig": {
@@ -31,7 +31,6 @@
       "require": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./core.css": "./dist/core/core.css",
     "./*": "./dist/*"
   },
   "files": [

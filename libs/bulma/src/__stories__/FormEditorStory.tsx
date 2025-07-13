@@ -1,9 +1,15 @@
 /* eslint-disable react/no-unused-prop-types */
+import {
+  DataStatus,
+  EditorActiveApi,
+  EditorMetadata,
+  FieldsLayout,
+  FormEditor,
+  FormEditorProps,
+  ParamsMap,
+} from '@mito-forms/core';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { DataStatus, EditorMetadata, FieldsLayout, ParamsMap } from '../types';
-import { EditorActiveApi, FormEditor, FormEditorProps } from '../FormEditor';
 import { IntlProvider } from 'react-intl';
-import './FormEditorStory.scss';
 
 export type FormEditorStoryProps = Omit<FormEditorProps, 'onChange'> & {
   editorMetadataMap?: { [key: string]: EditorMetadata };
@@ -113,9 +119,9 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
 
   return (
     <IntlProvider locale="en" messages={{}}>
-      <div className="config-editor-story">
-        <div className="story-container">
-          <div className="editor-preview box" style={{ width: '60%' }}>
+      <div className="config-editor-story content">
+        <div className="grid">
+          <div className="cell box is-col-span-2">
             <FormEditor
               key={`formEditor-${fieldsLayout}`}
               editorMetadata={{ ...editorMetadata, fieldsLayout }}
@@ -128,7 +134,7 @@ export const FormEditorStory: React.FunctionComponent<FormEditorStoryProps> = ({
             />
           </div>
 
-          <div className="editor-state-preview box has-background-white-ter">
+          <div className="cell box is-col-span-1 has-background-primary-light">
             <FormEditor<PreviewResult>
               editorRef={editorRef}
               editorMetadata={STORY_FORM}

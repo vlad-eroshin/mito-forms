@@ -11,7 +11,7 @@ export const TextArea: React.FunctionComponent<FormInputFieldProps> = props => {
   return (
     <textarea
       id={inputId}
-      className="input mt-input-text-field"
+      className="textarea"
       data-testid={inputId}
       aria-label={fieldConfig.label}
       value={(value as string) ?? ''}
