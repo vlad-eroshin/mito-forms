@@ -14,6 +14,7 @@ import { editorWithCollapsibleFieldsets } from './__metadata__/collapsibleFields
 import { dataSourceUsage } from './__metadata__/dataSourceUsage';
 import { editorWithConditions } from './__metadata__/editorWithConditions';
 import { editorWithJsonPath } from './__metadata__/jsonPathRetrieval';
+import { multiColumnFieldset } from './__metadata__/multiColumnFieldset';
 import { staticTextEditor } from './__metadata__/staticText';
 import { tabbedLayout } from './__metadata__/tabbedLayout';
 import { withListEditor } from './__metadata__/withListEditor';
@@ -76,6 +77,15 @@ const mockMetadata: EditorMetadata = {
               type: 'text',
               name: 'field2',
               label: 'Field 2',
+            },
+            {
+              type: 'divider',
+              style: 'dashed',
+            },
+            {
+              type: 'text',
+              name: 'field3',
+              label: 'Field 3',
             },
           ],
         },
@@ -257,10 +267,9 @@ export const SwitchComponent: Story = {
               title: 'Some Fieldset Title',
               name: 'fieldsetWithSwitchList',
               showTitle: true,
-              fieldsLayout: 'twoColumn',
               fields: [
                 {
-                  type: 'switch',
+                  type: 'switchList',
                   name: 'switchList',
                   label: 'Switch List',
                   options: [
@@ -272,7 +281,7 @@ export const SwitchComponent: Story = {
                   value: '!{objectOfSomeKind.switchValues}',
                 },
                 {
-                  type: 'checkbox',
+                  type: 'checkList',
                   name: 'checkList',
                   label: 'Check List',
                   options: [
@@ -368,5 +377,15 @@ export const DataSourceUsage: Story = {
         status: DataStatus.Loading,
       },
     },
+  },
+};
+
+export const CustomFieldsetDecorator: Story = {
+  args: {
+    editorMetadata: {
+      ...multiColumnFieldset,
+      reducersMap: {},
+    },
+    initialData: {},
   },
 };

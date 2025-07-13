@@ -1,18 +1,7 @@
-import { FormInputFieldProps, getFieldId, InputField } from '@mito-forms/core';
+import { FormInputFieldProps } from '@mito-forms/core';
 import React from 'react';
 
-import { BulmaField } from './BulmaField';
-
 export const ProgressBar: React.FunctionComponent<FormInputFieldProps> = props => {
-  const { config, value, fieldIndex } = props;
-  const fieldConfig = config as InputField;
-  const inputId = getFieldId(config, fieldIndex);
-  return (
-    <BulmaField
-      {...props}
-      id={inputId}
-      config={fieldConfig}
-      control={<progress className="progress is-link" value={value as number} max={100} />}
-    />
-  );
+  const { value } = props;
+  return <progress className="progress is-link" value={value as number} max={100} />;
 };

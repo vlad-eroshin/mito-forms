@@ -134,6 +134,17 @@ export type FieldSetMetadata = {
    * Data source binding for the fieldset.
    */
   dataSource?: DataSourceBinding;
+
+  /**
+   * Name of the component decorator to be used.
+   * This property is helpful, when for example want to use custom fieldset layout
+   */
+  fieldSetDecorator?: string;
+
+  /**
+   * Custom properties that can be used by the decorator
+   */
+  customProps?: ParamsMap;
 };
 
 /**
@@ -176,7 +187,8 @@ export type InputFieldType =
   | 'buttonSelector';
 
 /**
- * Metadata about individual field
+ * Metadata about individual input field and label for it
+ *
  */
 export type InputField = {
   name: string;
@@ -190,13 +202,21 @@ export type InputField = {
   isSelectable?: boolean;
   default?: ParamValue;
   disabled?: boolean;
-  value?: ParamValue | InputOption | ValueAccessorFn; // Can also be JSON path expression specified as {$.path.of.some.kind}
+  /**
+   * Can also be JSON path expression specified as {$.path.of.some.kind}
+   */
+  value?: ParamValue | InputOption | ValueAccessorFn;
   dataBindings?: DataSourceBinding[];
   validator?: ValidatorType | ValidationFunctionType<string>;
   render?: boolean | string;
   minValue?: number;
   maxValue?: number;
   multiSelect?: boolean;
+  /**
+   * Name of the component decorator to be used.
+   * This property is helpful, when want to use custom fieldset layout
+   */
+  fieldDecorator?: string;
   customProps?: ParamsMap;
 };
 
@@ -220,6 +240,7 @@ export type ListEditorMetadata = {
   render?: boolean | string;
   showHeader?: boolean;
   showBorders?: boolean;
+  decorator?: string;
 };
 
 export type FieldSetEntry = (FieldSetMetadata | ListEditorMetadata) & {
@@ -241,4 +262,14 @@ export type FormInputFieldProps = {
   isValid?: boolean;
   validationErrors?: string[];
   fieldLayout?: FieldsLayout;
+  fieldDecorator?: string;
+};
+
+export type ListInputProps = ListEditorMetadata & {
+  data: object;
+  onChange?: (data: RecordsArray, isValid: boolean) => void;
+};
+
+export type FormDividerProps = {
+  config: FormDividerConfig;
 };

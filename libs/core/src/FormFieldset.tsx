@@ -1,18 +1,16 @@
 import React, { ReactElement, useCallback, useState } from 'react';
 import type {
   FieldSetMetadata,
-  FieldsetProps,
   FormDividerConfig,
+  FormDividerProps,
   InputField,
   InputOption,
   ParamsMap,
 } from './types';
-import { FormDivider } from './FormDivider';
 import { FormInputField } from './FormInputField';
-import { EditableRow } from './ListEditor/EditableTableRow';
 import { generateReactKey } from './utils';
 import { getValidatorFunction } from './validators';
-import { useUtilComponent } from './hooks';
+import { useDecorator, useUtilComponent } from './hooks';
 import { useFieldsetState } from './hooks/useFieldsetState';
 
 /**
@@ -41,13 +39,19 @@ export function FormFieldset<T>({
   const [fieldsValidationState, setFieldValidationState] = useState<FieldValidationStates>({});
 
   const fieldSetValues = inputData;
-  const FieldsetCmp = useUtilComponent<FieldsetProps>('fieldset');
   const [collapsed, setCollapsed] = useState<boolean>(!!config.collapsible && !!config.collapsed);
 
   const { getVisibleFields, populateFieldData, fieldsLayout } = useFieldsetState(config);
 
+  const FormDivider = useUtilComponent<FormDividerProps>('divider');
+
   const visibleFormFields = getVisibleFields(inputData);
   const showTitle = config.showTitle !== undefined ? config.showTitle : true;
+
+  const { getFieldsetDecorator } = useDecorator();
+  const defaultDecoratorName = getFieldsetDecoratorName(arrangeFields);
+  const decoratorName = config.fieldSetDecorator || defaultDecoratorName;
+  const FieldSetDecorator = getFieldsetDecorator(decoratorName);
 
   const isFieldSetValid = useCallback(
     (fieldsData: ParamsMap): boolean => {
@@ -124,7 +128,7 @@ export function FormFieldset<T>({
         <FormInputField<T>
           key={generateReactKey(config.name, field.type, field.name)}
           value={value}
-          label={field.label}
+          label={showFieldLabels ? field.label : undefined}
           options={fieldConfig.options as InputOption[] | string[]}
           config={fieldConfig as InputField}
           onChange={handleFieldChange}
@@ -136,30 +140,30 @@ export function FormFieldset<T>({
       );
     });
   };
-  return arrangeFields !== 'tableRow' ? (
-    <FieldsetCmp
+  return (
+    <FieldSetDecorator
       onCollapse={handleCollapsExpand}
       legend={showTitle ? config.title : undefined}
       collapsible={config.collapsible}
       collapsed={collapsed}
-    >
-      {!collapsed &&
-        (arrangeFields === 'column' ? (
-          <>{renderFields(visibleFormFields)}</>
-        ) : (
-          <div className={'mf-row-layout'}>{renderFields(visibleFormFields)}</div>
-        ))}
-    </FieldsetCmp>
-  ) : (
-    <EditableRow
+      config={config}
+      onRowDelete={onRowDelete}
       rowIndex={rowIndex}
-      fields={visibleFormFields.filter(f => f.type !== 'divider') as InputField[]}
-      values={fieldSetValues as ParamsMap}
-      onChange={handleFieldChange}
-      onDelete={onRowDelete}
-      showFieldLabels={showFieldLabels}
-    />
+    >
+      {renderFields(visibleFormFields)}
+    </FieldSetDecorator>
   );
 }
 
-FormFieldset.displayName = 'FieldSetUI';
+function getFieldsetDecoratorName(arrangeFields: string): string {
+  switch (arrangeFields) {
+    case 'tableRow':
+      return 'tableRowFieldset';
+    case 'column':
+      return 'columnFieldset';
+    case 'row':
+      return 'rowFieldset';
+    default:
+      return 'columnFieldset';
+  }
+}

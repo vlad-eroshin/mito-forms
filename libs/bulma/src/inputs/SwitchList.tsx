@@ -11,7 +11,6 @@ import {
 import React, { ChangeEvent, FunctionComponent, useCallback, useMemo } from 'react';
 
 import './SwitchInput.scss';
-import { BulmaField } from './BulmaField';
 import { SwitchInput } from './SwitchInput';
 
 export const SwitchList: FunctionComponent<FormInputFieldProps> = props => {
@@ -47,30 +46,23 @@ export const SwitchList: FunctionComponent<FormInputFieldProps> = props => {
   const inputId = getFieldId(config);
 
   return (
-    <BulmaField
-      {...props}
-      id={inputId}
-      config={fieldConfig}
-      control={
-        <div className={'is-flex is-flex-direction-column'} id={inputId}>
-          {convertedOptions.map(opt => {
-            const optId = generateReactKey(config.name, opt.label);
-            const strValue = `${opt.value}`;
-            return (
-              <label key={`${config.name}-${strValue}`} className={'mf-switch'} htmlFor={optId}>
-                <SwitchInput
-                  name={strValue}
-                  value={strValue}
-                  onChange={hasOptions ? handleListChange : handleSwitchChange}
-                  checked={checkedValues.includes(strValue)}
-                  disabled={config.disabled || opt.disabled}
-                />
-                &nbsp;{opt.label}
-              </label>
-            );
-          })}
-        </div>
-      }
-    />
+    <div className={'is-flex is-flex-direction-column'} id={inputId}>
+      {convertedOptions.map(opt => {
+        const optId = generateReactKey(config.name, opt.label);
+        const strValue = `${opt.value}`;
+        return (
+          <label key={`${config.name}-${strValue}`} className={'mf-switch'} htmlFor={optId}>
+            <SwitchInput
+              name={strValue}
+              value={strValue}
+              onChange={hasOptions ? handleListChange : handleSwitchChange}
+              checked={checkedValues.includes(strValue)}
+              disabled={config.disabled || opt.disabled}
+            />
+            &nbsp;{opt.label}
+          </label>
+        );
+      })}
+    </div>
   );
 };

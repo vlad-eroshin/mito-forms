@@ -4,7 +4,6 @@ import { FormInputFieldProps, getFieldId, InputField } from '@mito-forms/core';
 import React, { ChangeEvent, useCallback } from 'react';
 
 import 'bulma/bulma.scss';
-import { BulmaField } from './BulmaField';
 
 export const FileUpload: React.FunctionComponent<FormInputFieldProps> = props => {
   const { config, value, fieldIndex, onChange } = props;
@@ -22,31 +21,24 @@ export const FileUpload: React.FunctionComponent<FormInputFieldProps> = props =>
   );
   const fileName = value && typeof value === 'object' ? (value as File).name : '';
   return (
-    <BulmaField
-      {...props}
-      id={inputId}
-      config={fieldConfig}
-      control={
-        <div className="file has-name">
-          <label className="file-label" htmlFor={inputId}>
-            <input
-              id={inputId}
-              className="file-input"
-              type="file"
-              name={fieldConfig.name}
-              onChange={handleSelectFile}
-              disabled={config.disabled}
-            />
-            <span className="file-cta">
-              <span className="file-icon">
-                <FontAwesomeIcon icon={faUpload} />
-              </span>
-              <span className="file-label">{fieldConfig.label}</span>
-            </span>
-            {value && <span className="file-name">{`${fileName || ''}`}</span>}
-          </label>
-        </div>
-      }
-    />
+    <div className="file has-name">
+      <label className="file-label" htmlFor={inputId}>
+        <input
+          id={inputId}
+          className="file-input"
+          type="file"
+          name={fieldConfig.name}
+          onChange={handleSelectFile}
+          disabled={config.disabled}
+        />
+        <span className="file-cta">
+          <span className="file-icon">
+            <FontAwesomeIcon icon={faUpload} />
+          </span>
+          <span className="file-label">{fieldConfig.label}</span>
+        </span>
+        {value && <span className="file-name">{`${fileName || ''}`}</span>}
+      </label>
+    </div>
   );
 };

@@ -1,21 +1,17 @@
-import React, { ReactElement, useCallback, useState } from 'react';
-
-import { FormFieldset } from '../FormFieldset';
-import { buildEmptyRecordFromFields, fetchJsonPath, getFieldsetData } from '../utils';
 import {
+  buildEmptyRecordFromFields,
   DataRecord,
+  fetchJsonPath,
+  FormFieldset,
+  getFieldsetData,
   InputField,
-  ListEditorMetadata,
+  ListInputProps,
   ParamsMap,
   RecordsArray,
+  useUtilComponent,
   UtilityButtonProps,
-} from '../types';
-import { useUtilComponent } from '../hooks';
-
-export type ListInputProps = ListEditorMetadata & {
-  data: object;
-  onChange?: (data: RecordsArray, isValid: boolean) => void;
-};
+} from '@mito-forms/core';
+import React, { ReactElement, useCallback, useState } from 'react';
 
 export const ListEditor: React.FC<ListInputProps> = ({
   rowFieldset,
@@ -98,7 +94,11 @@ export const ListEditor: React.FC<ListInputProps> = ({
           return (
             <FormFieldset
               key={`list-item-row-${i}`}
-              config={{ ...rowFieldset, arrangeFields: 'tableRow' }}
+              config={{
+                ...rowFieldset,
+                arrangeFields: 'tableRow',
+                fieldSetDecorator: 'tableRowFieldset',
+              }}
               showFieldLabels={!showHeader}
               rowIndex={i}
               inputData={fieldValues as ParamsMap}

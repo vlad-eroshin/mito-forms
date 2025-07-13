@@ -1,7 +1,6 @@
-import { convertInputOptions, FormInputFieldProps, getFieldId, InputField } from '@mito-forms/core';
+import { convertInputOptions, FormInputFieldProps, InputField } from '@mito-forms/core';
 import React, { FunctionComponent, useCallback } from 'react';
 
-import { BulmaField } from './BulmaField';
 import { ButtonSelector } from './ButtonSelector/ButtonSelector';
 
 export const ButtonSelectorField: FunctionComponent<FormInputFieldProps> = props => {
@@ -16,19 +15,11 @@ export const ButtonSelectorField: FunctionComponent<FormInputFieldProps> = props
     [onChange]
   );
   const convertedOptions = options ? convertInputOptions(options, [value as string | number]) : [];
-  const inputId = getFieldId(config);
   return (
-    <BulmaField
-      {...props}
-      id={inputId}
-      config={fieldConfig}
-      control={
-        <ButtonSelector
-          value={value as string | number}
-          options={convertedOptions}
-          onChange={handleChange}
-        />
-      }
+    <ButtonSelector
+      value={value as string | number}
+      options={convertedOptions}
+      onChange={handleChange}
     />
   );
 };
