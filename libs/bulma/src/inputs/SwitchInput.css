@@ -3140,6 +3140,11 @@ table th {
 }
 
 :root {
+  --bulma-size-small: 0.5rem;
+  --bulma-size-normal: 0.75rem;
+  --bulma-size-medium: 1rem;
+  --bulma-size-large: 1.25rem;
+  --bulma-content-heading-line-height: 1;
   --mf-border-color: #bbb;
   --mf-header-color: #878d9a;
   --mf-secondary-text-color: var(--bulma-tabs-link-color);

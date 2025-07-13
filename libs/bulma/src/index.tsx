@@ -72,6 +72,7 @@ export const BULMA_DECORATOR_REGISTRY: DecoratorRegistry = {
     horizontalJustifiedField: BulmaHorizontalField,
     multiColumnFieldset: BulmaMultiColumnFieldset,
     tableRowFieldset: BulmaTableRowFieldset,
+    columnFieldset: BulmaFieldset,
   },
 };
 
