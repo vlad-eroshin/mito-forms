@@ -4,12 +4,14 @@ import type {
   ComponentRegistry,
   DecoratorRegistry,
   FieldsetProps,
+  FormDividerProps,
   FormInputFieldProps,
   FormMetadata,
   InputFieldLayoutProps,
   InputFieldRegistry,
   InputOption,
   ListEditorMetadata,
+  ListInputProps,
   UtilityComponentRegistry,
 } from '../../types';
 import { MockTabsetComponent } from './mockTabsetComponent';
@@ -21,7 +23,7 @@ export const createMockComponentRegistry = (): ComponentRegistry => {
     label,
     controlElement,
     required,
-    isValid
+    isValid,
   }) => (
     <div>
       {label && (
@@ -43,6 +45,9 @@ export const createMockComponentRegistry = (): ComponentRegistry => {
     ),
     tabbedSection: MockTabsetComponent,
     deleteRowButton: () => <button>Delete Row</button>,
+    divider: ({ config }: FormDividerProps) => (
+      config.render !== false ? <hr className={`divider ${config.style || 'solid'}`} /> : null
+    ),
   };
 
   const decorators: DecoratorRegistry = {
@@ -54,9 +59,9 @@ export const createMockComponentRegistry = (): ComponentRegistry => {
       </fieldset>
     ),
     defaultFormDecorator: undefined,
-    defaultListEditorDecorator: undefined,
-    defaultListItemDecorator: undefined,
-    defaultListHeaderDecorator: undefined,
+    defaultListEditorDecorator: ({ data, onChange }: ListInputProps) => (
+      <div>Mock List Editor</div>
+    ),
     customDecorators: {
       compactField: MockFieldDecorator,
     },
@@ -166,24 +171,10 @@ export const createMockComponentRegistry = (): ComponentRegistry => {
     },
     getListEditorDecorator: function (
       decoratorName: string
-    ): React.FunctionComponent<ListEditorMetadata> {
+    ): React.FunctionComponent<ListInputProps> {
       const result = decorators.customDecorators[decoratorName];
       if (!result) {
         return decorators.defaultListEditorDecorator;
-      }
-      return result;
-    },
-    getListItemDecorator: function (decoratorName: string): React.FunctionComponent<unknown> {
-      const result = decorators.customDecorators[decoratorName];
-      if (!result) {
-        return decorators.defaultListItemDecorator;
-      }
-      return result;
-    },
-    getListHeaderDecorator: function (decoratorName: string): React.FunctionComponent<unknown> {
-      const result = decorators.customDecorators[decoratorName];
-      if (!result) {
-        return decorators.defaultListHeaderDecorator;
       }
       return result;
     },

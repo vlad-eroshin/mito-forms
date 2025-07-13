@@ -1,4 +1,5 @@
-import { EditorContext, EditorContextProps, ListEditor, ListInputProps } from '@mito-forms/core';
+import { EditorContext, EditorContextProps, ListInputProps } from '@mito-forms/core';
+import { ListEditor } from '../components/ListEditor/ListEditor';
 import React, { useMemo } from 'react';
 import { IntlProvider } from 'react-intl';
 
