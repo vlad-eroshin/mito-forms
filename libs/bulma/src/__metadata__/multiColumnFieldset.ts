@@ -23,7 +23,7 @@ export const multiColumnFieldset: EditorMetadata = {
               },
             },
             {
-              name: 'checkboxInput',
+              name: 'checkboxInput1',
               label: 'Select some option',
               type: 'checkList',
               options: [
@@ -34,13 +34,13 @@ export const multiColumnFieldset: EditorMetadata = {
             },
             {
               type: 'select',
-              name: 'optionsSelector',
+              name: 'optionsSelector1',
               value: 'opt1',
               label: 'Options Selector',
               options: [
                 { value: 'opt1', label: 'Selector Option One' },
                 { value: 'opt2', label: 'Selector Option Two' },
-                { value: 'opt3', label: 'Selector Option Two' },
+                { value: 'opt3', label: 'Selector Option Three' },
               ],
               customProps: {
                 leftIcon: 'faHouse',
