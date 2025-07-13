@@ -9,7 +9,7 @@
     "build": "turbo run build",
     "dev": "turbo run dev",
     "lint": "turbo run lint",
-    "clean": "rm -rf ./dist && rm -rf libs/core/dist && rm -rf libs/bulma/dist && rm -rf libs/material-ui/dist"
+    "clean": "rm -rf ./dist && rm -rf libs/core/dist && rm -rf libs/bulma/dist && rm -rf libs/shadcn/dist"
   },
   "packageManager": "pnpm@10.8.1",
   "devDependencies": {
