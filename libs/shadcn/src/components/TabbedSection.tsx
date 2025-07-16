@@ -1,19 +1,19 @@
 import React from 'react';
-import { Tabs, TabsList, TabsTrigger, TabsContent } from './ui/tabs';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
 import type { TabbedSectionProps } from '@mito-forms/core';
 
 export const TabbedSection: React.FunctionComponent<TabbedSectionProps> = ({
-  selected,
-  onTab,
-  tabs,
-}) => {
+                                                                             selected,
+                                                                             onTab,
+                                                                             tabs
+                                                                           }) => {
   return (
     <Tabs
       value={selected.toString()}
       onValueChange={(value) => onTab(value)}
       className="w-full"
     >
-      <TabsList className="grid w-full grid-cols-auto">
+      <TabsList>
         {tabs.map((tab) => (
           <TabsTrigger
             key={tab.id}

@@ -3,11 +3,11 @@ import { Textarea } from '../components/ui/textarea';
 import type { FormInputFieldProps } from '@mito-forms/core';
 
 export const TextArea: React.FunctionComponent<FormInputFieldProps> = ({
-  config,
-  value,
-  onChange,
-  isValid = true,
-}) => {
+                                                                         config,
+                                                                         value,
+                                                                         onChange,
+                                                                         isValid = true
+                                                                       }) => {
   return (
     <Textarea
       id={config.name}
@@ -16,7 +16,7 @@ export const TextArea: React.FunctionComponent<FormInputFieldProps> = ({
       placeholder={config.placeHolderText}
       disabled={config.disabled}
       className={!isValid ? 'border-destructive' : ''}
-      rows={4}
+      rows={config.customProps?.rows as number || 10}
     />
   );
 };

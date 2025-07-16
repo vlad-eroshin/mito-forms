@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { FormEditor } from '@mito-forms/core';
-import { createShadcnComponentRegistry } from '../registry';
+import { SHADCN_REGISTRY } from '../registry';
 
 const BasicFormComponent = () => {
-  const registry = createShadcnComponentRegistry();
+  const registry = SHADCN_REGISTRY;
 
   const editorMetadata = {
     forms: [

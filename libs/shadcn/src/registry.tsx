@@ -1,14 +1,14 @@
 import React from 'react';
 import type {
+  BlockComponentProps,
   ComponentRegistry,
   DecoratorRegistry,
-  InputFieldRegistry,
-  UtilityComponentRegistry,
-  BlockComponentProps,
-  InputFieldLayoutProps,
   FieldsetProps,
   FormMetadata,
+  InputFieldLayoutProps,
+  InputFieldRegistry,
   ListInputProps,
+  UtilityComponentRegistry
 } from '@mito-forms/core';
 
 // Import UI components
@@ -57,7 +57,7 @@ const inputFields: InputFieldRegistry = {
   staticText: StaticText,
   buttonSelector: ButtonSelector,
   checkList: () => <div>CheckList (Not implemented)</div>,
-  switchList: () => <div>SwitchList (Not implemented)</div>,
+  switchList: () => <div>SwitchList (Not implemented)</div>
 };
 
 // Create the utility components registry
@@ -67,7 +67,7 @@ const utilityComponents: UtilityComponentRegistry = {
   loading: LoadingIndicator,
   block: Block,
   tabbedSection: TabbedSection,
-  divider: FormDivider,
+  divider: FormDivider
 };
 
 // Create the decorators registry
@@ -78,43 +78,41 @@ const decorators: DecoratorRegistry = {
   defaultListEditorDecorator: ListEditor,
   customDecorators: {
     compactField: FieldDecorator,
-    tableRowFieldset: FieldsetDecorator,
-  },
+    tableRowFieldset: FieldsetDecorator
+  }
 };
 
 // Create the main component registry
-export const createShadcnComponentRegistry = (): ComponentRegistry => {
-  return {
-    inputFields,
-    utilityComponents,
-    decorators,
-    getFieldDecorator: (decoratorName: string): React.FunctionComponent<InputFieldLayoutProps> => {
-      const result = decorators.customDecorators[decoratorName];
-      if (!result) {
-        return decorators.defaultFieldDecorator;
-      }
-      return result;
-    },
-    getFieldsetDecorator: (decoratorName: string): React.FunctionComponent<FieldsetProps> => {
-      const result = decorators.customDecorators[decoratorName];
-      if (!result) {
-        return decorators.defaultFieldsetDecorator;
-      }
-      return result;
-    },
-    getFormDecorator: (decoratorName: string): React.FunctionComponent<FormMetadata> => {
-      const result = decorators.customDecorators[decoratorName];
-      if (!result) {
-        return decorators.defaultFormDecorator;
-      }
-      return result;
-    },
-    getListEditorDecorator: (decoratorName: string): React.FunctionComponent<ListInputProps> => {
-      const result = decorators.customDecorators[decoratorName];
-      if (!result) {
-        return decorators.defaultListEditorDecorator;
-      }
-      return result;
-    },
-  };
+export const SHADCN_REGISTRY: ComponentRegistry = {
+  inputFields,
+  utilityComponents,
+  decorators,
+  getFieldDecorator: (decoratorName: string): React.FunctionComponent<InputFieldLayoutProps> => {
+    const result = decorators.customDecorators[decoratorName];
+    if (!result) {
+      return decorators.defaultFieldDecorator;
+    }
+    return result;
+  },
+  getFieldsetDecorator: (decoratorName: string): React.FunctionComponent<FieldsetProps> => {
+    const result = decorators.customDecorators[decoratorName];
+    if (!result) {
+      return decorators.defaultFieldsetDecorator;
+    }
+    return result;
+  },
+  getFormDecorator: (decoratorName: string): React.FunctionComponent<FormMetadata> => {
+    const result = decorators.customDecorators[decoratorName];
+    if (!result) {
+      return decorators.defaultFormDecorator;
+    }
+    return result;
+  },
+  getListEditorDecorator: (decoratorName: string): React.FunctionComponent<ListInputProps> => {
+    const result = decorators.customDecorators[decoratorName];
+    if (!result) {
+      return decorators.defaultListEditorDecorator;
+    }
+    return result;
+  }
 };

@@ -2,22 +2,22 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { Button } from './button';
 
 const meta: Meta<typeof Button> = {
-  title: 'shadcn/Button',
+  title: 'shadcn/primitives/Button',
   component: Button,
   parameters: {
-    layout: 'centered',
+    layout: 'centered'
   },
   tags: ['autodocs'],
   argTypes: {
     variant: {
       control: { type: 'select' },
-      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link'],
+      options: ['default', 'destructive', 'outline', 'secondary', 'ghost', 'link']
     },
     size: {
       control: { type: 'select' },
-      options: ['default', 'sm', 'lg', 'icon'],
-    },
-  },
+      options: ['default', 'sm', 'lg', 'icon']
+    }
+  }
 };
 
 export default meta;
@@ -25,55 +25,55 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    children: 'Button',
-  },
+    children: 'Button'
+  }
 };
 
 export const Secondary: Story = {
   args: {
     variant: 'secondary',
-    children: 'Secondary',
-  },
+    children: 'Secondary'
+  }
 };
 
 export const Destructive: Story = {
   args: {
     variant: 'destructive',
-    children: 'Destructive',
-  },
+    children: 'Destructive'
+  }
 };
 
 export const Outline: Story = {
   args: {
     variant: 'outline',
-    children: 'Outline',
-  },
+    children: 'Outline'
+  }
 };
 
 export const Ghost: Story = {
   args: {
     variant: 'ghost',
-    children: 'Ghost',
-  },
+    children: 'Ghost'
+  }
 };
 
 export const Link: Story = {
   args: {
     variant: 'link',
-    children: 'Link',
-  },
+    children: 'Link'
+  }
 };
 
 export const Small: Story = {
   args: {
     size: 'sm',
-    children: 'Small',
-  },
+    children: 'Small'
+  }
 };
 
 export const Large: Story = {
   args: {
     size: 'lg',
-    children: 'Large',
-  },
+    children: 'Large'
+  }
 };
