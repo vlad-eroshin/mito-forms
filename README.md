@@ -151,7 +151,7 @@ Disable field if user indicated that he has a car
 {
   "name": "makeOfTheCar",
   ........................
-  "disable": "!{_STATE.Form1.fieldset2.data.userHasNoCar}"
+  "disabled": "!{_STATE.Form1.fieldset2.data.userHasNoCar}"
 }
 ```
 
