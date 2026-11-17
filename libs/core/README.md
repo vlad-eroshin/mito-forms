@@ -40,18 +40,6 @@ yarn add @mito-forms/core
 
 ---
 
-## Documentation
-
-| Section                            | Link          |
-|:-----------------------------------|:--------------|
-| Full API Reference                 | (coming soon) |
-| Building a Custom UI               | (coming soon) |
-| Adapters (React, Bulma, Bootstrap) | (coming soon) |
-
-(Documentation contributions welcome!)
-
----
-
 ## Contributing
 
 We welcome contributions to improve Mito Forms Core!  
