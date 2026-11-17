@@ -43,14 +43,9 @@ More components are being added to cover broader form needs.
 
 ---
 
-## Documentation
+## Related
 
-| Section            | Link                                                                               |
-|:-------------------|:-----------------------------------------------------------------------------------|
-| Full API Reference | (coming soon)                                                                      |
-| Mito Forms Core    | [@mito-forms/core](https://github.com/vlad-eroshin/mito-forms/tree/main/libs/core) |
-
-(Documentation contributions welcome!)
+- [@mito-forms/core](https://github.com/vlad-eroshin/mito-forms/tree/main/libs/core) — the runtime this adapter renders for.
 
 ---
 

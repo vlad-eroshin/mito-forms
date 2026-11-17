@@ -1,53 +1,126 @@
+# Mito Forms
+
+**Render React UI from declarative JSON metadata.**
+
 [![Mito Forms CI](https://github.com/vlad-eroshin/mito-forms/actions/workflows/devBuild.yml/badge.svg)](https://github.com/vlad-eroshin/mito-forms/actions/workflows/devBuild.yml)
+[![@mito-forms/core on npm](https://img.shields.io/npm/v/%40mito-forms%2Fcore?label=%40mito-forms%2Fcore)](https://www.npmjs.com/package/@mito-forms/core)
+[![@mito-forms/bulma on npm](https://img.shields.io/npm/v/%40mito-forms%2Fbulma?label=%40mito-forms%2Fbulma)](https://www.npmjs.com/package/@mito-forms/bulma)
 
-# Mito Forms (WORK IN PROGRESS)
+Mito Forms is a runtime that turns a declaration into a working UI. You describe forms, fieldsets, fields, their
+conditions, and their data sources as plain metadata; the runtime resolves each declared type to a component, manages
+state, and reports the edited result.
 
-Mito Forms is a lightweight, modular, and extensible form state management library.
-It provides a declarative, JSON-driven approach to building forms with dynamic behavior across different UI frameworks.
+Because the UI is data rather than hand-written JSX, it can be stored, versioned, sent from a server, or generated at
+runtime, and the same declaration renders with any component set you register.
 
-[Usage Examples Storybook](https://vlad-eroshin.github.io/mito-forms/storybook/bulma)
+## Quick look
 
-## What Makes it Different 
+<table>
+<tr>
+<th>Declaration</th>
+<th>Rendered UI</th>
+</tr>
+<tr>
+<td>
 
-- Lightweight by Design: Mito Forms avoids the bloat common in many form libraries. Its minimal core keeps your bundle size small and performance snappy.
+```ts
+import { EditorMetadata } from '@mito-forms/core';
 
-- UI-Agnostic Core: Core logic is decoupled from any UI framework, enabling seamless integration with design systems like Material UI, Bulma, Bootstrap, or even custom components.
+export const basicEditor: EditorMetadata = {
+  forms: [
+    {
+      id: 'form1',
+      title: 'Basic Form',
+      fieldSets: [
+        {
+          name: 'fieldset1',
+          fields: [
+            {
+              type: 'text',
+              name: 'username',
+              label: 'User Name',
+              required: true,
+              customProps: { leftIcon: 'faUser' },
+            },
+            {
+              type: 'password',
+              name: 'password',
+              label: 'Password',
+              required: true,
+              customProps: { leftIcon: 'faKey' },
+            },
+            {
+              type: 'select',
+              name: 'selector',
+              label: 'Select Option',
+              default: 1,
+              options: [
+                { label: 'Option 1', value: 1 },
+                { label: 'Option 2', value: 2 },
+              ],
+              customProps: { leftIcon: 'faHome' },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  reducersMap: {},
+};
+```
 
-- Framework-Agnostic State Handling: It does not rely on Redux, Zustand, Recoil. This makes Mito Forms highly portable across different app architectures.
+</td>
+<td>
 
-- Composable and Declarative API: Developers can define forms using schema-based configuration while maintaining the flexibility to extend or override behavior as needed.
+<img src="docs/quick-look.png" alt="The form rendered from the declaration: User Name, Password, and Select Option fields" width="440">
 
-- Modular Architecture: Core logic, UI adapters, and features like validation or conditional logic are packaged independently—so you only import what you need.
+</td>
+</tr>
+</table>
 
-- Ideal for Adaptive UI and AI-Driven Interfaces: Mito Forms is well-suited for adaptive user interfaces, where form fields change dynamically based on context, user input, or AI-generated schemas.
+More declarations and the UI they produce: [live Storybook](https://vlad-eroshin.github.io/mito-forms/storybook/bulma).
 
-- Adaptable to Custom Form Engines: With no opinionated rendering model, it's a natural fit for use cases like dynamic page builders, low-code platforms, and smart form generation pipelines.
+## Install
 
-- First-Class TypeScript Support: Built in TypeScript with strong types, it provides full type-safety, auto-completion, and schema validation support in modern code editors.
+```bash
+npm install @mito-forms/core @mito-forms/bulma
+```
 
-- Storybook-Friendly: Easily test and preview forms in isolation. Mito Forms works well with Storybook for component-driven development.
+Pass a declaration and a component registry to `FormEditor`:
 
-- Extensible by Design: Clean plugin architecture allows you to introduce custom field types, advanced validation, conditional logic, or layout behaviors with minimal friction.
+```tsx
+import { FormEditor } from '@mito-forms/core';
+import { BULMA_REGISTRY } from '@mito-forms/bulma';
 
-- Great for Both Static and Dynamic Forms: Whether you’re building a fixed layout form or generating fields at runtime, Mito Forms handles both use cases gracefully.
+<FormEditor
+  editorMetadata={basicEditor}
+  initialData={{}}
+  onChange={result => console.log(result)}
+  componentRegistry={BULMA_REGISTRY}
+/>;
+```
 
-## Project Structure
+## How it works
 
-Mito Forms is organized as a modular monorepo:
+- **Component registry.** A declared `type` (`text`, `select`, `switchList`, ...) is resolved to an implementation
+  through a `ComponentRegistry` ([`types/registry.ts`](libs/core/src/types/registry.ts)). The core ships no visual
+  components; swap the registry and the same declaration renders with a different UI kit.
+- **Expression layer.** Attributes such as `render` and `value` accept `!{...}` [JMESPath](https://jmespath.org/)
+  expressions, evaluated against live form state and context. See [Conditional logic](#conditional-logic).
+- **Data binding.** Fields declare `dataBindings` to named data sources, and accessors
+  ([`data/accessor`](libs/core/src/data/accessor)) pull values out of them by property or JSON path, so options and
+  values can come from an API instead of the declaration.
 
-- `libs/core/` — Core form state management engine (framework-agnostic)
-- `libs/bulma/` — Bulma CSS framework implementation (custom fields and components)
+What follows from that design:
 
-More UI framework adapters (e.g., Material-UI, Bootstrap) may be added in the future.
+- **Declarative.** Forms, tabs, fieldsets, list editors, and fields are plain data, fixed or generated at runtime.
+- **UI-kit agnostic.** Core logic is separate from rendering; adapters such as Bulma are independent packages.
+- **Self-contained state.** No Redux, Zustand, or Recoil; state lives in the editor, with reducers you can supply.
+- **Extensible.** Register custom field types, validators, and decorators for field, fieldset, and form layout.
+- **Typed.** Written in TypeScript; declarations are checked and auto-completed in the editor.
+- **Small.** Few runtime dependencies beyond React and JMESPath.
 
-## Key Features
-
-- **Declarative Forms:** Define forms as JSON schemas.
-- **Dynamic Field Visibility:** Show or hide fields dynamically based on form state.
-- **Custom Components:** Easily integrate with different UI frameworks.
-- **Minimal Dependencies:** Focused on keeping the core library lightweight.
-
-## Dynamic Field Logic
+## Conditional logic
 
 Mito Forms uses **JMESPath** expressions to control field visibility and dynamic behavior.
 
@@ -94,7 +167,14 @@ Disable field if user indicated that he has a car
 - [JMESPath Tutorial](https://jmespath.org/tutorial.html)
 - [JMESPath Examples](https://jmespath.org/examples.html)
 
-## Building the Project
+## Packages
+
+| Package                            | What it is                                                              |
+| :--------------------------------- | :---------------------------------------------------------------------- |
+| [`@mito-forms/core`](libs/core)    | UI-kit-agnostic runtime: registry, state, expressions, data binding     |
+| [`@mito-forms/bulma`](libs/bulma)  | [Bulma](https://bulma.io/) adapter: inputs, layouts, tabs, list editors |
+
+## Development
 
 To build all Mito Forms packages (core and UI libraries):
 
@@ -118,16 +198,12 @@ pnpm run storybook
 
 Make sure the core package is built first if you modify it.
 
-## Dependencies
-
-- [jmespath](https://www.npmjs.com/package/jmespath) — Used for evaluating dynamic field visibility conditions and for accessing data in the input objects.
-
-## Future Plans
+## Roadmap
 
 - Support for additional UI frameworks (Material UI, Bootstrap, etc.)
 - Dynamic field validation rules
 - More powerful form layout options
 
----
+## License
 
-Built with focus on modularity, lightness, and developer experience.
+[MIT](LICENSE) © [Vladislav Eroshin](https://github.com/vlad-eroshin)

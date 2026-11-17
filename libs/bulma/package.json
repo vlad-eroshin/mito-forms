@@ -1,6 +1,30 @@
 {
   "name": "@mito-forms/bulma",
   "version": "1.0.2-beta",
+  "description": "Bulma UI adapter for @mito-forms/core — prebuilt inputs, layouts, tabs, and list editors for declaration-driven forms.",
+  "keywords": [
+    "react",
+    "typescript",
+    "declarative-ui",
+    "server-driven-ui",
+    "json-schema",
+    "forms",
+    "form-builder",
+    "dynamic-forms",
+    "jmespath",
+    "bulma",
+    "mito-forms"
+  ],
+  "homepage": "https://github.com/vlad-eroshin/mito-forms/tree/main/libs/bulma#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vlad-eroshin/mito-forms.git",
+    "directory": "libs/bulma"
+  },
+  "bugs": {
+    "url": "https://github.com/vlad-eroshin/mito-forms/issues"
+  },
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

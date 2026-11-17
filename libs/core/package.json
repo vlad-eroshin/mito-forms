@@ -1,7 +1,30 @@
 {
   "name": "@mito-forms/core",
   "version": "0.2.23-beta",
-  "description": "Declarative Forms",
+  "description": "Framework-agnostic runtime that renders UI from declarative JSON metadata — component registry, conditional logic, and data binding.",
+  "keywords": [
+    "react",
+    "typescript",
+    "declarative-ui",
+    "server-driven-ui",
+    "json-schema",
+    "forms",
+    "form-builder",
+    "dynamic-forms",
+    "jmespath",
+    "component-registry",
+    "data-binding"
+  ],
+  "homepage": "https://github.com/vlad-eroshin/mito-forms/tree/main/libs/core#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vlad-eroshin/mito-forms.git",
+    "directory": "libs/core"
+  },
+  "bugs": {
+    "url": "https://github.com/vlad-eroshin/mito-forms/issues"
+  },
+  "license": "MIT",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -24,7 +47,6 @@
     "access": "public"
   },
   "author": "Vladislav Eroshin",
-  "license": "MIT",
   "exports": {
     ".": {
       "import": "./dist/index.js",
